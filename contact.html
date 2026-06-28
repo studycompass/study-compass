@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Study Compass — send us feedback, feature requests, bug reports, or premium product support questions. Plus a brief about-the-team section." />
+  <title>Contact &amp; About — Study Compass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://studycompass.example/contact.html" />
+
+    <!-- Open Graph (Facebook, Pinterest, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Study Compass" />
+    <meta property="og:title" content="Contact &amp; About — Study Compass" />
+    <meta property="og:description" content="Contact Study Compass — send us feedback, feature requests, bug reports, or premium product support questions. Plus a brief about-the-team section." />
+    <meta property="og:url" content="https://studycompass.example/contact.html" />
+    <meta property="og:image" content="https://studycompass.example/og-images/contact.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Contact &amp; About — Study Compass" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Contact &amp; About — Study Compass" />
+    <meta name="twitter:description" content="Contact Study Compass — send us feedback, feature requests, bug reports, or premium product support questions. Plus a brief about-the-team section." />
+    <meta name="twitter:image" content="https://studycompass.example/og-images/contact.png" />
+    <meta name="twitter:image:alt" content="Contact &amp; About — Study Compass" />
+
+    <!-- Pinterest rich pins (uses OG tags above; this explicitly enables) -->
+    <meta name="pinterest" content="nohover" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Study Compass home">🧭 Study Compass</a>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html#tools">Tools</a>
+        <a href="blog.html">Blog</a>
+        <a href="#">Premium Resources</a>
+        <a href="index.html#about">About</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="search-wrap" role="search">
+          <input type="search" id="globalSearch" class="search-input" placeholder="Search tools & articles…" aria-label="Search tools and articles" autocomplete="off" />
+          <span class="search-icon" aria-hidden="true">🔍</span>
+        </div>
+        <div class="theme-toggles" role="group" aria-label="Switch study theme">
+          <button class="theme-toggle-btn" data-theme="morning" title="Morning Focus" aria-label="Morning Focus theme">🌅</button>
+          <button class="theme-toggle-btn" data-theme="night" title="Night Study" aria-label="Night Study theme">🌙</button>
+          <button class="theme-toggle-btn" data-theme="library" title="Library Mode" aria-label="Library Mode theme">📚</button>
+          <button class="theme-toggle-btn" data-theme="nature" title="Nature Mode" aria-label="Nature Mode theme">🌿</button>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="index.html#tools">Tools</a>
+      <a href="blog.html">Blog</a>
+      <a href="#">Premium Resources</a>
+      <a href="index.html#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">We'd love to hear from you</span>
+          <h1 class="section-title">Contact Study Compass</h1>
+          <p class="section-subtitle">
+            Questions, feedback, feature requests, or premium product support — drop us a note
+            and we'll get back within 2 business days.
+          </p>
+        </div>
+
+        <div class="contact-layout">
+
+          <!-- ===== CONTACT FORM (Formspree-powered) ===== -->
+          <!--
+            INSTRUCTIONS:
+            1. Sign up free at https://formspree.io
+            2. Create a new form and copy your endpoint ID (looks like "xayznvqk")
+            3. Replace "YOUR_FORM_ID" in the action URL below with your ID.
+            That's it — Formspree will email submissions to your registered inbox.
+          -->
+          <form class="contact-form"
+                id="contactForm"
+                action="https://formspree.io/f/YOUR_FORM_ID"
+                method="POST">
+
+            <div class="form-field">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" required placeholder="Jane Doe" />
+            </div>
+
+            <div class="form-field">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" required placeholder="jane@example.com" />
+            </div>
+
+            <div class="form-field">
+              <label for="topic">What's this about?</label>
+              <select id="topic" name="topic" required>
+                <option value="">— Select a topic —</option>
+                <option value="bug-report">Bug report or broken tool</option>
+                <option value="feature-request">Feature request</option>
+                <option value="premium-support">Premium product support</option>
+                <option value="partnership">Partnership or press</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="message">Your message</label>
+              <textarea id="message" name="message" required placeholder="Tell us what's on your mind…"></textarea>
+            </div>
+
+            <!-- Honeypot field for spam protection (Formspree recommends this) -->
+            <input type="text" name="_gotcha" style="display:none !important;" tabindex="-1" autocomplete="off" />
+
+            <button type="submit" class="btn btn-primary btn-block">Send message ✉️</button>
+
+            <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+          </form>
+
+          <!-- ===== ABOUT + CONTACT CHANNELS ===== -->
+          <aside class="contact-aside">
+            <h3>About Study Compass</h3>
+            <p>
+              Study Compass is built by a small team of former students who got tired of
+              cluttered, ad-stuffed study websites. We wanted a calm, beautifully designed
+              space where any student — from high-school to grad school — could open a free
+              Pomodoro timer, generate a quiz from their notes, or build a clean essay outline
+              without signing up for anything.
+            </p>
+            <p>
+              Every tool here is crafted with focus in mind. We believe the right study
+              environment changes everything — which is why the whole site adapts to four cozy
+              themes (Morning, Night, Library, Nature) and remembers your favorite. Our premium
+              planners and trackers, available on Payhip, fund the free tools so they can stay
+              free forever.
+            </p>
+
+            <ul class="contact-channels">
+              <li>
+                <span class="channel-icon">⏱️</span>
+                <div>
+                  <strong>Tool &amp; bug reports</strong>
+                  <span>Use the form — pick "Bug report" so we can prioritize it.</span>
+                </div>
+              </li>
+              <li>
+                <span class="channel-icon">📦</span>
+                <div>
+                  <strong>Premium product support</strong>
+                  <span>Include your Payhip order ID for fastest help.</span>
+                </div>
+              </li>
+              <li>
+                <span class="channel-icon">🤝</span>
+                <div>
+                  <strong>Partnerships &amp; press</strong>
+                  <span>We typically reply within 1 business day.</span>
+                </div>
+              </li>
+              <li>
+                <span class="channel-icon">🔒</span>
+                <div>
+                  <strong>Privacy &amp; data requests</strong>
+                  <span>See our <a href="privacy.html">Privacy Policy</a> for your rights.</span>
+                </div>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">🧭 Study Compass</a>
+        <p>Navigate your academic journey with calm, focused tools.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <div>
+          <h4>Site</h4>
+          <a href="index.html#tools">Tools</a>
+          <a href="blog.html">Blog</a>
+          <a href="#">Premium Resources</a>
+          <a href="index.html#about">About</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="contact.html">Contact</a>
+          <a href="privacy.html#cookies">Cookie Policy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div class="container"><p>&copy; 2026 Study Compass. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script>
+    /* ----- AJAX submit for Formspree so the user stays on this page ----- */
+    /* Replaces the default form redirect with inline success/error states. */
+    window.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contactForm');
+      const status = document.getElementById('formStatus');
+      if (!form) return;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        status.className = 'form-status';
+        status.textContent = 'Sending…';
+        status.style.display = 'block';
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (response.ok) {
+            status.className = 'form-status is-success';
+            status.textContent = '✅ Thanks! Your message has been sent. We\'ll reply within 2 business days.';
+            form.reset();
+          } else {
+            const data = await response.json().catch(() => ({}));
+            status.className = 'form-status is-error';
+            status.textContent = data?.errors?.[0]?.message
+              ? '⚠️ ' + data.errors[0].message
+              : '⚠️ Something went wrong. Please email us directly.';
+          }
+        } catch (err) {
+          status.className = 'form-status is-error';
+          status.textContent = '⚠️ Network error. Please check your connection and try again.';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free Pomodoro Study Timer by Study Compass — 25-minute focus, 5-minute break. Plus the science of the Pomodoro technique, cognitive load theory, and evidence-based study breaks." />
+  <meta name="keywords" content="pomodoro timer, study timer, focus timer, pomodoro technique, cognitive load, study breaks, free study tools" />
+  <title>Pomodoro Study Timer — Free Focus Tool | Study Compass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://studycompass.example/timer.html" />
+
+    <!-- Open Graph (Facebook, Pinterest, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Study Compass" />
+    <meta property="og:title" content="Pomodoro Study Timer — Free Focus Tool | Study Compass" />
+    <meta property="og:description" content="Free Pomodoro Study Timer by Study Compass — 25-minute focus, 5-minute break. Plus the science of the Pomodoro technique, cognitive load theory, and evidence-based study breaks." />
+    <meta property="og:url" content="https://studycompass.example/timer.html" />
+    <meta property="og:image" content="https://studycompass.example/og-images/timer.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Pomodoro Study Timer — Free Focus Tool | Study Compass" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Pomodoro Study Timer — Free Focus Tool | Study Compass" />
+    <meta name="twitter:description" content="Free Pomodoro Study Timer by Study Compass — 25-minute focus, 5-minute break. Plus the science of the Pomodoro technique, cognitive load theory, and evidence-based study breaks." />
+    <meta name="twitter:image" content="https://studycompass.example/og-images/timer.png" />
+    <meta name="twitter:image:alt" content="Pomodoro Study Timer — Free Focus Tool | Study Compass" />
+
+    <!-- Pinterest rich pins (uses OG tags above; this explicitly enables) -->
+    <meta name="pinterest" content="nohover" />
+</head>
+<body>
+
+  <!-- SHARED HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Study Compass home">🧭 Study Compass</a>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html#tools">Tools</a>
+        <a href="blog.html">Blog</a>
+        <a href="#">Premium Resources</a>
+        <a href="index.html#about">About</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="search-wrap" role="search">
+          <input type="search" id="globalSearch" class="search-input" placeholder="Search tools & articles…" aria-label="Search tools and articles" autocomplete="off" />
+          <span class="search-icon" aria-hidden="true">🔍</span>
+        </div>
+        <div class="theme-toggles" role="group" aria-label="Switch study theme">
+          <button class="theme-toggle-btn" data-theme="morning" title="Morning Focus" aria-label="Morning Focus theme">🌅</button>
+          <button class="theme-toggle-btn" data-theme="night" title="Night Study" aria-label="Night Study theme">🌙</button>
+          <button class="theme-toggle-btn" data-theme="library" title="Library Mode" aria-label="Library Mode theme">📚</button>
+          <button class="theme-toggle-btn" data-theme="nature" title="Nature Mode" aria-label="Nature Mode theme">🌿</button>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="index.html#tools">Tools</a>
+      <a href="blog.html">Blog</a>
+      <a href="#">Premium Resources</a>
+      <a href="index.html#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Breadcrumb for SEO + UX -->
+    <div class="container" style="padding-top: 24px;">
+      <nav aria-label="Breadcrumb" style="font-size:0.85rem; color:var(--text-muted);">
+        <a href="index.html">Home</a> ›
+        <a href="index.html#tools">Tools</a> ›
+        <span style="color:var(--text-soft);">Pomodoro Study Timer</span>
+      </nav>
+    </div>
+
+    <section class="section" style="padding-top: 30px;">
+      <div class="container">
+        <div class="section-header" style="margin-bottom: 36px;">
+          <span class="section-eyebrow">Free Study Tool</span>
+          <h1 class="section-title">Pomodoro Study Timer</h1>
+          <p class="section-subtitle">
+            A calm, no-signup Pomodoro timer for focused study sessions. 25 minutes of work,
+            5 minutes of rest — repeated until your work is done.
+          </p>
+        </div>
+
+        <div class="tool-page-layout">
+
+          <!-- ===== MAIN COLUMN: tool + article ===== -->
+          <div class="tool-page-main">
+
+            <!-- Interactive tool -->
+            <div class="tool-interface" id="pomodoroTool">
+              <div class="timer-display" id="timerDisplay" aria-live="polite">25:00</div>
+              <div class="timer-mode" id="timerMode">Focus session</div>
+
+              <div class="timer-controls">
+                <button id="timerStart" class="btn btn-primary" aria-label="Start the timer">▶ Start</button>
+                <button id="timerPause" class="btn btn-ghost" aria-label="Pause the timer">⏸ Pause</button>
+                <button id="timerReset" class="btn btn-ghost" aria-label="Reset the timer">↺ Reset</button>
+              </div>
+
+              <div class="timer-meta">
+                <span>🔴 Sessions completed: <strong id="sessionsCompleted">0</strong></span>
+                <span style="margin-left: 20px;">🎯 Goal: <strong>4 sessions</strong></span>
+              </div>
+
+              <!-- Optional cycle customization -->
+              <details class="timer-settings" style="margin-top: 22px; font-size: 0.9rem; color: var(--text-soft);">
+                <summary style="cursor:pointer; font-weight: 600; color: var(--accent);">⚙ Customize your cycle</summary>
+                <div style="margin-top: 14px; display: flex; gap: 18px; flex-wrap: wrap; justify-content: center;">
+                  <label>
+                    Focus (min):
+                    <input type="number" id="focusMin" value="25" min="1" max="90" style="width:60px; padding:4px 8px; border:1.5px solid var(--border); border-radius:6px; background:var(--bg); color:var(--text);" />
+                  </label>
+                  <label>
+                    Break (min):
+                    <input type="number" id="breakMin" value="5" min="1" max="30" style="width:60px; padding:4px 8px; border:1.5px solid var(--border); border-radius:6px; background:var(--bg); color:var(--text);" />
+                  </label>
+                  <button id="applySettings" class="btn btn-ghost" style="padding:6px 14px; font-size:0.85rem;">Apply</button>
+                </div>
+              </details>
+            </div>
+
+            <!-- ===== SEO ARTICLE (800+ words) ===== -->
+            <article class="tool-article">
+
+              <h2>The Science of the Pomodoro Technique: Why 25-Minute Focus Sprints Actually Work</h2>
+
+              <p>
+                The Pomodoro Technique, developed by Italian entrepreneur Francesco Cirillo in
+                the late 1980s, is one of the most widely studied and recommended time-management
+                methods in academic settings. Its premise is simple: break your work into
+                short, focused intervals — traditionally 25 minutes — separated by brief rest
+                periods. Cirillo named the system after the tomato-shaped kitchen timer
+                ("pomodoro" is Italian for tomato) he used as a university student. Nearly four
+                decades later, the technique remains popular because it aligns surprisingly
+                well with how the human brain actually pays attention.
+              </p>
+
+              <p>
+                Research in cognitive psychology consistently shows that sustained attention
+                is not a steady state but a fluctuating resource. After roughly 20 to 30
+                minutes of concentrated effort on a single task, most learners experience a
+                measurable decline in vigilance, working-memory capacity, and reaction speed.
+                This phenomenon, sometimes called <em>vigilance decrement</em>, is not a sign
+                of laziness — it is a biological constraint built into the prefrontal cortex.
+                The Pomodoro Technique works precisely because it surrenders to this constraint
+                rather than fighting it, scheduling a reset before performance can collapse.
+              </p>
+
+              <h3>Cognitive Load Theory and Why Your Brain Needs Rest</h3>
+
+              <p>
+                To understand why the Pomodoro Technique is so effective, it helps to look at
+                <strong>Cognitive Load Theory</strong>, developed by educational psychologist
+                John Sweller in the 1980s. The theory distinguishes three types of cognitive
+                load: <em>intrinsic</em> load (the inherent difficulty of the material),
+                <em>extraneous</em> load (mental effort wasted on poor presentation or
+                distractions), and <em>germane</em> load (the productive effort of building
+                long-term memory structures). Your working memory can only hold a finite
+                amount of information at once — usually described as four to seven chunks.
+              </p>
+
+              <p>
+                When you study without breaks, all three types of load accumulate simultaneously.
+                Your working memory fills up, your ability to encode new information into
+                long-term memory declines, and you become increasingly vulnerable to
+                distractions. A 5-minute break in the Pomodoro cycle serves as a release
+                valve: it lets the working memory partially empty, allows the brain to begin
+                consolidating what you just learned, and restores the cognitive resources
+                needed for the next sprint. In functional MRI studies, brief rest periods
+                have been shown to reactivate the default mode network — a set of brain
+                regions involved in memory consolidation, creative problem-solving, and
+                self-reflection.
+              </p>
+
+              <h3>What Counts as a Real Study Break?</h3>
+
+              <p>
+                Not all breaks are created equal. The quality of your 5-minute rest is just as
+                important as the quality of your 25-minute focus block. The most restorative
+                breaks share three characteristics: they physically move you away from your
+                study surface, they shift sensory input away from screens and dense text, and
+                they avoid introducing new cognitive demands. Standing up, stretching, looking
+                out a window, drinking water, or doing a brief mindful breathing exercise all
+                qualify.
+              </p>
+
+              <p>
+                The worst kind of break — and the most common among modern students — is
+                scrolling a social media feed. While this technically feels like "not
+                working," it actually floods your working memory with new information, new
+                emotional stimuli, and new decision-making demands. After a 5-minute scroll,
+                your cognitive load is often higher than before the break, which makes the
+                next focus sprint significantly less effective. If you must use your phone
+                during a Pomodoro break, prefer a single, low-stimulus action: reply to one
+                message, glance at one photo, then put the phone down.
+              </p>
+
+              <h3>How to Use This Timer for Maximum Benefit</h3>
+
+              <p>
+                Before pressing <strong>Start</strong>, write down one specific task you intend
+                to complete in the next 25 minutes. Vague goals like "study chemistry" tend
+                to fragment attention; instead try "summarize chapter 4 of the chemistry
+                textbook" or "complete problems 1–8 from the problem set." When the timer
+                rings, stop immediately — even mid-sentence. Stepping away with the work
+                slightly unfinished creates a psychological "open loop" that makes it easier
+                to re-engage when the break ends.
+              </p>
+
+              <p>
+                The classic Pomodoro cycle calls for a longer 15-to-30-minute break after
+                every fourth focus session. This longer rest is essential: it gives your brain
+                time to fully consolidate what you have learned and prevents the gradual
+                fatigue that builds up across multiple short cycles. If you find that
+                25-minute sprints feel too short for your work — common during deep problem
+                sets or essay drafting — use the <strong>customize</strong> panel above the
+                article to experiment with 50/10 or 90/20 cycles. Track which cycle produces
+                the most sustainable focus over a full week, then make it your default.
+              </p>
+
+              <h3>Common Mistakes That Quietly Sabotage Your Sessions</h3>
+
+              <p>
+                The most common mistake is skipping breaks when you feel "in the zone."
+                Although tempting, this typically leads to a crash two to three hours later,
+                often followed by an inability to focus for the rest of the day. The second
+                mistake is multitasking during a focus block — even a single glance at a
+                notification can cost you up to 23 minutes of full re-engagement time,
+                according to research by Gloria Mark at UC Irvine. Treat each Pomodoro as an
+                uninterrupted single-task commitment. Turn on Do Not Disturb, close unrelated
+                tabs, and put your phone in another room if possible.
+              </p>
+
+              <p>
+                A third, subtler mistake is using the Pomodoro Technique as a procrastination
+                tool in disguise — spending 25 minutes "preparing to study" by reorganizing
+                notes, choosing the perfect playlist, or optimizing the timer settings. If
+                you catch yourself doing this, force the next session to begin with the most
+                concrete, lowest-friction action: open the textbook, read one paragraph, write
+                one sentence. Momentum will carry you through the rest.
+              </p>
+
+              <h3>Pairing the Pomodoro Technique With a Weekly Reset</h3>
+
+              <p>
+                Daily Pomodoro sprints are powerful, but they become transformative when paired
+                with a weekly review. Once a week — Sunday evening works well for most
+                students — sit down for 30 minutes and review how many focus sessions you
+                actually completed, which subjects benefited most, and where you got
+                derailed. Our <a href="https://payhip.com/lumos2maxima" target="_blank" rel="noopener nofollow">Student Reset Planner</a>
+                includes a built-in Pomodoro log, energy-level journal, and weekly reflection
+                prompts designed specifically for this purpose. Students who combine daily
+                Pomodoro practice with a weekly review consistently report higher focus
+                consistency and lower academic burnout than those using either technique alone.
+              </p>
+
+              <p>
+                Start with a single session today. Open the timer above, pick one task,
+                press Start, and let the next 25 minutes be the most focused block of your
+                week. Your future self — and your GPA — will thank you.
+              </p>
+
+            </article>
+          </div>
+
+          <!-- ===== SIDEBAR: premium promo + AdSense ===== -->
+          <aside class="tool-page-sidebar" aria-label="Premium resources and advertisements">
+
+            <div class="ad-slot" aria-label="Advertisement">
+              <span class="ad-label">Advertisement</span>
+              <!--
+                Replace with your AdSense code once approved:
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+              -->
+              <div class="ad-placeholder">AdSense block (300×250)</div>
+            </div>
+
+            <div class="sidebar-promo">
+              <h3>Premium Picks for Students</h3>
+              <ul class="promo-list">
+                <li>
+                  <span class="promo-icon">🧭</span>
+                  <div>
+                    <strong>The Student Reset Planner</strong>
+                    <p>Burned out? Reset your week in 30 minutes with a built-in Pomodoro log.</p>
+                    <a href="https://payhip.com/lumos2maxima" target="_blank" rel="noopener nofollow">Get on Payhip →</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="promo-icon">✅</span>
+                  <div>
+                    <strong>Digital Habit Trackers</strong>
+                    <p>Build focus, sleep &amp; study streaks that actually stick.</p>
+                    <a href="https://payhip.com/lumos2maxima" target="_blank" rel="noopener nofollow">Get on Payhip →</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="promo-icon">📊</span>
+                  <div>
+                    <strong>Sheets Budget &amp; Spending Tracker</strong>
+                    <p>Auto-categorized finance dashboard for students.</p>
+                    <a href="https://payhip.com/lumos2maxima" target="_blank" rel="noopener nofollow">Get on Payhip →</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="ad-slot" aria-label="Advertisement">
+              <span class="ad-label">Advertisement</span>
+              <div class="ad-placeholder">AdSense block (responsive)</div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">🧭 Study Compass</a>
+        <p>Navigate your academic journey with calm, focused tools.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <div>
+          <h4>Site</h4>
+          <a href="index.html#tools">Tools</a>
+          <a href="blog.html">Blog</a>
+          <a href="#">Premium Resources</a>
+          <a href="index.html#about">About</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="contact.html">Contact</a>
+          <a href="privacy.html#cookies">Cookie Policy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div class="container"><p>&copy; 2026 Study Compass. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script>
+    /* =========================================================
+       POMODORO TIMER — enhanced standalone logic for timer.html
+       (script.js also has a basic version for the index demo,
+       but this page overrides it with full features:
+       customizable cycle, mode labels, aria updates, beep.)
+       ========================================================= */
+    window.addEventListener('DOMContentLoaded', () => {
+      const display       = document.getElementById('timerDisplay');
+      const modeEl        = document.getElementById('timerMode');
+      const startBtn      = document.getElementById('timerStart');
+      const pauseBtn      = document.getElementById('timerPause');
+      const resetBtn      = document.getElementById('timerReset');
+      const sessionsEl    = document.getElementById('sessionsCompleted');
+      const focusInput    = document.getElementById('focusMin');
+      const breakInput    = document.getElementById('breakMin');
+      const applyBtn      = document.getElementById('applySettings');
+
+      let focusSeconds  = 25 * 60;
+      let breakSeconds  = 5  * 60;
+      let remaining     = focusSeconds;
+      let isFocusMode   = true;
+      let intervalId    = null;
+      let sessions      = 0;
+
+      // Update page title so a backgrounded tab also shows the countdown
+      const baseTitle = document.title;
+
+      function fmt(sec) {
+        const m = String(Math.floor(sec / 60)).padStart(2, '0');
+        const s = String(sec % 60).padStart(2, '0');
+        return `${m}:${s}`;
+      }
+
+      function render() {
+        display.textContent = fmt(remaining);
+        modeEl.textContent = isFocusMode ? '🎯 Focus session' : '☕ Break time';
+        document.title = `${fmt(remaining)} — ${isFocusMode ? 'Focus' : 'Break'} | Study Compass`;
+      }
+
+      // Lightweight browser beep using the Web Audio API (no audio file needed)
+      function beep() {
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.value = 880; // A5 — pleasant chime
+          gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.3, ctx.currentTime + 0.01);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.5);
+          osc.connect(gain).connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.5);
+        } catch (e) { /* audio not supported — silent fail */ }
+      }
+
+      function tick() {
+        if (remaining > 0) {
+          remaining--;
+          render();
+        } else {
+          // Phase complete
+          clearInterval(intervalId);
+          intervalId = null;
+          beep();
+
+          if (isFocusMode) {
+            sessions++;
+            sessionsEl.textContent = sessions;
+            isFocusMode = false;
+            remaining = breakSeconds;
+          } else {
+            isFocusMode = true;
+            remaining = focusSeconds;
+          }
+          render();
+          startBtn.textContent = '▶ Start';
+        }
+      }
+
+      startBtn.addEventListener('click', () => {
+        if (intervalId) return;
+        intervalId = setInterval(tick, 1000);
+        startBtn.textContent = '⏵ Running…';
+      });
+
+      pauseBtn.addEventListener('click', () => {
+        if (intervalId) {
+          clearInterval(intervalId);
+          intervalId = null;
+          startBtn.textContent = '▶ Resume';
+        }
+      });
+
+      resetBtn.addEventListener('click', () => {
+        if (intervalId) { clearInterval(intervalId); intervalId = null; }
+        isFocusMode = true;
+        remaining = focusSeconds;
+        sessions = 0;
+        sessionsEl.textContent = '0';
+        startBtn.textContent = '▶ Start';
+        document.title = baseTitle;
+        render();
+      });
+
+      applyBtn.addEventListener('click', () => {
+        const f = Math.max(1, Math.min(90, parseInt(focusInput.value, 10) || 25));
+        const b = Math.max(1, Math.min(30, parseInt(breakInput.value, 10) || 5));
+        focusInput.value = f;
+        breakInput.value = b;
+        focusSeconds = f * 60;
+        breakSeconds = b * 60;
+        if (intervalId) { clearInterval(intervalId); intervalId = null; startBtn.textContent = '▶ Start'; }
+        isFocusMode = true;
+        remaining = focusSeconds;
+        render();
+      });
+
+      render();
+    });
+  </script>
+</body>
+</html>

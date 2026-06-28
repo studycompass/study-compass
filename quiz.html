@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free Quiz Generator by Study Compass — paste your notes and instantly generate fill-in-the-blank questions, or build custom Q&A pairs. Take the quiz and get instant scoring." />
+  <meta name="keywords" content="quiz generator, study quiz, fill in the blank, self-test, retrieval practice, active recall, testing effect, free study tool, notes to quiz" />
+  <title>Quiz Generator — Turn Notes Into Quizzes | Study Compass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://studycompass.example/quiz.html" />
+
+    <!-- Open Graph (Facebook, Pinterest, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Study Compass" />
+    <meta property="og:title" content="Quiz Generator — Turn Notes Into Quizzes | Study Compass" />
+    <meta property="og:description" content="Free Quiz Generator by Study Compass — paste your notes and instantly generate fill-in-the-blank questions, or build custom Q&A pairs. Take the quiz and get instant scoring." />
+    <meta property="og:url" content="https://studycompass.example/quiz.html" />
+    <meta property="og:image" content="https://studycompass.example/og-images/quiz.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Quiz Generator — Turn Notes Into Quizzes | Study Compass" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Quiz Generator — Turn Notes Into Quizzes | Study Compass" />
+    <meta name="twitter:description" content="Free Quiz Generator by Study Compass — paste your notes and instantly generate fill-in-the-blank questions, or build custom Q&A pairs. Take the quiz and get instant scoring." />
+    <meta name="twitter:image" content="https://studycompass.example/og-images/quiz.png" />
+    <meta name="twitter:image:alt" content="Quiz Generator — Turn Notes Into Quizzes | Study Compass" />
+
+    <!-- Pinterest rich pins (uses OG tags above; this explicitly enables) -->
+    <meta name="pinterest" content="nohover" />
+</head>
+<body>
+
+  <!-- SHARED HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Study Compass home">🧭 Study Compass</a>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html#tools">Tools</a>
+        <a href="blog.html">Blog</a>
+        <a href="#">Premium Resources</a>
+        <a href="index.html#about">About</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="search-wrap" role="search">
+          <input type="search" id="globalSearch" class="search-input" placeholder="Search tools & articles…" aria-label="Search tools and articles" autocomplete="off" />
+          <span class="search-icon" aria-hidden="true">🔍</span>
+        </div>
+        <div class="theme-toggles" role="group" aria-label="Switch study theme">
+          <button class="theme-toggle-btn" data-theme="morning" title="Morning Focus" aria-label="Morning Focus theme">🌅</button>
+          <button class="theme-toggle-btn" data-theme="night" title="Night Study" aria-label="Night Study theme">🌙</button>
+          <button class="theme-toggle-btn" data-theme="library" title="Library Mode" aria-label="Library Mode theme">📚</button>
+          <button class="theme-toggle-btn" data-theme="nature" title="Nature Mode" aria-label="Nature Mode theme">🌿</button>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="index.html#tools">Tools</a>
+      <a href="blog.html">Blog</a>
+      <a href="#">Premium Resources</a>
+      <a href="index.html#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Breadcrumb for SEO + UX -->
+    <div class="container" style="padding-top: 24px;">
+      <nav aria-label="Breadcrumb" style="font-size:0.85rem; color:var(--text-muted);">
+        <a href="index.html">Home</a> ›
+        <a href="index.html#tools">Tools</a> ›
+        <span style="color:var(--text-soft);">Quiz Generator</span>
+      </nav>
+    </div>
+
+    <section class="section" style="padding-top: 30px;">
+      <div class="container">
+        <div class="section-header" style="margin-bottom: 36px;">
+          <span class="section-eyebrow">Free Study Tool</span>
+          <h1 class="section-title">Quiz Generator</h1>
+          <p class="section-subtitle">
+            Paste your study notes and instantly generate fill-in-the-blank questions —
+            or write your own. Then take the quiz and get instant scoring.
+          </p>
+        </div>
+
+        <div class="tool-page-layout">
+
+          <!-- ===== MAIN COLUMN: tool + article ===== -->
+          <div class="tool-page-main">
+
+            <!-- Interactive tool -->
+            <div class="tool-interface" id="quizTool">
+              <div class="quiz-app">
+
+                <!-- TABS -->
+                <div class="quiz-tabs" role="tablist" aria-label="Quiz Generator modes">
+                  <button class="quiz-tab is-active" data-tab="notes" role="tab" aria-selected="true">📋 From Notes</button>
+                  <button class="quiz-tab" data-tab="manual" role="tab" aria-selected="false">✏️ Manual</button>
+                  <button class="quiz-tab" data-tab="take" role="tab" aria-selected="false">🎯 Take Quiz</button>
+                </div>
+
+                <!-- PANEL 1: From Notes -->
+                <div class="quiz-panel is-active" data-panel="notes" role="tabpanel">
+                  <h3>Generate a quiz from your notes</h3>
+                  <p class="quiz-desc">Paste any class notes, textbook summary, or lecture transcript. The tool splits your text into sentences, finds the key terms, and builds fill-in-the-blank questions automatically.</p>
+
+                  <div class="quiz-field">
+                    <label for="notesInput">Your study notes</label>
+                    <textarea id="notesInput" placeholder="Paste your notes here. For best results, write in complete sentences: ‘The mitochondria is the powerhouse of the cell and produces ATP through cellular respiration.’"></textarea>
+                  </div>
+
+                  <div class="quiz-field">
+                    <label for="questionType">Question type</label>
+                    <select id="questionType">
+                      <option value="fill">Fill in the blank</option>
+                      <option value="extract">Key term extraction</option>
+                    </select>
+                  </div>
+
+                  <div class="quiz-actions">
+                    <button id="generateBtn" class="btn btn-primary">✨ Generate quiz</button>
+                    <button id="clearNotesBtn" class="btn btn-ghost">Clear notes</button>
+                  </div>
+                </div>
+
+                <!-- PANEL 2: Manual -->
+                <div class="quiz-panel" data-panel="manual" role="tabpanel">
+                  <h3>Build your own quiz</h3>
+                  <p class="quiz-desc">Hand-write questions and answers for full control. Perfect for definitions, conceptual questions, or math problems that don’t fit the fill-in-the-blank format. Questions added here appear in the same list as auto-generated ones.</p>
+
+                  <div class="quiz-actions">
+                    <button id="addQuestionBtn" class="btn btn-primary">＋ Add question</button>
+                    <button id="clearAllBtn" class="btn btn-ghost">🗑 Clear all questions</button>
+                  </div>
+                </div>
+
+                <!-- PANEL 3: Take Quiz -->
+                <div class="quiz-panel" data-panel="take" role="tabpanel">
+                  <h3>Take the quiz</h3>
+                  <p class="quiz-desc">Answer each question from memory, then submit for instant scoring. Answers are graded case-insensitively — spelling counts, capitalization does not.</p>
+
+                  <div class="quiz-take-progress">
+                    <span>Question <strong id="takeAnswered">0</strong> of <strong id="takeTotal">0</strong> answered</span>
+                    <span>Score: <strong id="takeScore">—</strong></span>
+                  </div>
+
+                  <div id="takeCards" aria-live="polite">
+                    <!-- .quiz-take-q cards injected here -->
+                  </div>
+
+                  <div class="quiz-actions" style="margin-top: 6px;">
+                    <button id="submitAnswersBtn" class="btn btn-primary">✓ Submit answers</button>
+                    <button id="retakeBtn" class="btn btn-ghost">↺ Retake quiz</button>
+                  </div>
+
+                  <div class="quiz-result" id="takeResult" style="display:none;">
+                    <div class="result-label">Your result</div>
+                    <div class="result-value">0%</div>
+                    <div class="result-detail">0/0 correct — 0%</div>
+                  </div>
+                </div>
+
+                <!-- SHARED QUESTION EDITOR (visible on Tab 1 & 2, hidden on Tab 3) -->
+                <div id="quizQuestionsWrap">
+                  <div class="quiz-questions" id="quizQuestions" aria-live="polite">
+                    <!-- .quiz-q-row rows injected here -->
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- ===== SEO ARTICLE (800+ words) ===== -->
+            <article class="tool-article">
+
+              <h2>Why Self-Testing Beats Re-Reading: The Science of Active Recall</h2>
+
+              <p>
+                Of all the study techniques students try — highlighting, re-reading,
+                summarizing, making flashcards, watching lectures twice — only one has
+                been consistently shown to dramatically improve long-term retention
+                with no extra study time. That technique is self-testing, also known
+                as retrieval practice or active recall. The premise is simple: instead
+                of putting information into your brain, you practice pulling it back
+                out. The free Quiz Generator on this page exists for exactly that
+                reason — to make self-testing effortless, even when you have nothing
+                but your own class notes.
+              </p>
+
+              <h3>The Testing Effect: Why Retrieval Beats Recognition</h3>
+
+              <p>
+                In a landmark 2006 study published in the journal
+                <em>Psychological Science</em>, cognitive psychologists Henry Roediger
+                and Jeffrey Karpicke asked students to study short educational
+                passages under different conditions. One group simply re-read the
+                passages. Another group re-read the passages and then took a test on
+                the material. A week later, the researchers brought everyone back for
+                a final assessment. The results stunned the field: students who had
+                taken a single test after reading remembered roughly 50% more of the
+                material than students who had spent the same time re-reading — even
+                though the re-readers felt they had learned more.
+              </p>
+
+              <p>
+                This phenomenon is now called the <strong>testing effect</strong>, and
+                it has been replicated in dozens of studies across age groups,
+                subjects, and difficulty levels. The act of retrieving information
+                from long-term memory — actually forcing your brain to reconstruct a
+                fact or a procedure — strengthens the neural pathways that hold that
+                information in a way that passive review simply cannot. Every time you
+                successfully recall something, you make that memory more durable and
+                more accessible in the future. Re-reading, by contrast, creates an
+                <em>illusion of fluency</em>: the material feels familiar, but
+                familiarity is not the same as knowing.
+              </p>
+
+              <h3>Recognition vs. Retrieval: A Critical Distinction</h3>
+
+              <p>
+                It is worth pausing to distinguish two different ways your brain can
+                encounter familiar material. <strong>Recognition</strong> happens when
+                you see the answer and confirm it is correct — for example, picking
+                the right option on a multiple-choice test. <strong>Retrieval</strong>
+                (also called recall) happens when you must produce the answer yourself
+                with no cues, as on a fill-in-the-blank question or a short-answer
+                exam. Recognition is much easier than retrieval because the brain only
+                has to match a pattern, not generate one.
+              </p>
+
+              <p>
+                This distinction matters because recognition lulls students into a
+                false sense of competence. You can stare at a flashcard and instantly
+                recognize the answer, then move on believing you have learned it —
+                only to freeze up on exam day when no such cue is provided.
+                Fill-in-the-blank questions, like the ones this Quiz Generator
+                produces from your notes, force true retrieval. They are harder,
+                slower, and more uncomfortable than multiple-choice questions, and
+                that is exactly why they work. The effort of retrieval is the active
+                ingredient that builds durable memory.
+              </p>
+
+              <h3>How to Write Quiz Questions That Actually Stick</h3>
+
+              <p>
+                Not every quiz question is equally effective. The best self-test
+                questions share three qualities: they are <em>atomic</em>,
+                <em>specific</em>, and <em>varied</em>. Atomic means each question
+                tests one and only one idea, so a wrong answer tells you exactly which
+                concept to review. Specific means the question has a single
+                unambiguous correct answer, not a vague “explain everything you know”
+                prompt. Varied means you mix question types and topics within a single
+                study session, an approach called <em>interleaving</em>, which has
+                been shown to roughly double long-term retention compared to blocked
+                practice.
+              </p>
+
+              <p>
+                When you use the “From Notes” tab above, the Quiz Generator
+                automatically breaks your notes into atomic fill-in-the-blank items by
+                pulling out key terms. If you prefer more control, the “Manual” tab
+                lets you write your own Q&amp;A pairs, which is especially useful for
+                conceptual questions, definitions, and math procedures that do not fit
+                the fill-in-the-blank format. Aim for a mix: use auto-generated blanks
+                to lock in vocabulary, then add a few hand-written conceptual
+                questions to test deeper understanding.
+              </p>
+
+              <h3>Why Your Own Notes Make the Best Quizzes</h3>
+
+              <p>
+                You might wonder why you should generate quizzes from your own notes
+                when pre-made flashcard decks and quiz apps already exist for almost
+                every subject. The answer lies in the principle of
+                <em>transfer-appropriate processing</em>: memory performs best when the
+                conditions at test time match the conditions at study time. Pre-made
+                decks are written in someone else’s words, organized around someone
+                else’s emphasis, and often skip the exact details your particular
+                professor stressed in lecture. Quizzes generated from your own notes
+                preserve your exact phrasing, your examples, and your instructor’s
+                priorities.
+              </p>
+
+              <p>
+                There is also a motivational benefit. When you generate a quiz from
+                notes you just took, the material feels fresh and personal. You are
+                not working through a generic deck of 500 cards that someone else
+                compiled — you are testing yourself on the specific ideas you found
+                important enough to write down. This small psychological shift makes
+                self-testing feel less like a chore and more like a continuation of
+                your own thinking, which is one of the strongest predictors of whether
+                a study habit actually sticks.
+              </p>
+
+              <h3>Common Self-Testing Mistakes to Avoid</h3>
+
+              <p>
+                The first and most common mistake is testing yourself too early,
+                before you have had a chance to encode the material at all.
+                Self-testing is a <em>reinforcement</em> technique, not a
+                first-exposure technique — if you test yourself on material you have
+                barely read, you will fail every question and learn nothing. Give
+                yourself at least one study pass through the material before quizzing.
+                The second mistake is only testing yourself on what you already know.
+                It feels good to ace a quiz, but easy questions teach you nothing.
+                Spend at least two-thirds of your self-testing time on the questions
+                you got wrong.
+              </p>
+
+              <p>
+                The third and most insidious mistake is failing to review your wrong
+                answers. A wrong answer is a diagnostic signal: it tells you exactly
+                where your mental model broke down. If you simply move on after seeing
+                “incorrect,” you have wasted the most valuable part of the exercise.
+                After each quiz, copy every wrong question into a separate review list
+                and re-test yourself on those items the next day, then again three
+                days later. This technique, called <em>spaced repetition of
+                errors</em>, is one of the fastest ways to convert weak knowledge into
+                strong knowledge.
+              </p>
+
+              <h3>Building a Self-Testing Habit That Lasts</h3>
+
+              <p>
+                Self-testing works only if you actually do it consistently. The
+                students who benefit most are not the ones who cram a single brutal
+                five-hour quiz session before finals — they are the ones who spend
+                fifteen minutes a day, every day, pulling information out of their own
+                heads. To make that habit stick, attach self-testing to an existing
+                routine: quiz yourself for ten minutes after lunch, or for fifteen
+                minutes before you start your evening homework. The Quiz Generator on
+                this page is designed to make that daily practice frictionless — paste
+                today’s notes, generate a ten-question quiz, and you have a study
+                session ready in under a minute.
+              </p>
+
+              <p>
+                If you want a more structured framework for building a daily
+                self-testing habit alongside your other study routines, the
+                <a href="index.html#premium">Student Reset Planner</a> includes a
+                weekly study review template, daily retrieval practice tracker, and
+                reflection prompts that pair naturally with this tool. Students who
+                combine a daily self-testing habit with a weekly review consistently
+                outperform peers who rely on either technique alone — and report
+                lower stress along the way. Start small today: paste a single page of
+                notes into the generator above, take the quiz, and notice how much
+                more solidly the material sticks after just one round of honest
+                retrieval.
+              </p>
+
+            </article>
+          </div>
+
+          <!-- ===== SIDEBAR: premium promo + AdSense ===== -->
+          <aside class="tool-page-sidebar" aria-label="Premium resources and advertisements">
+
+            <div class="ad-slot" aria-label="Advertisement">
+              <span class="ad-label">Advertisement</span>
+              <!--
+                Replace with your AdSense code once approved:
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+              -->
+              <div class="ad-placeholder">AdSense block (300×250)</div>
+            </div>
+
+            <div class="sidebar-promo">
+              <h3>Premium Picks for Students</h3>
+              <ul class="promo-list">
+                <li>
+                  <span class="promo-icon">🧭</span>
+                  <div>
+                    <strong>The Student Reset Planner</strong>
+                    <p>Burned out? Reset your week in 30 minutes with a built-in study review template.</p>
+                    <a href="index.html#premium">Learn more →</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="promo-icon">✅</span>
+                  <div>
+                    <strong>Digital Habit Trackers</strong>
+                    <p>Build focus, sleep &amp; study streaks that actually stick.</p>
+                    <a href="index.html#premium">Learn more →</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="promo-icon">📊</span>
+                  <div>
+                    <strong>Sheets Budget &amp; Spending Tracker</strong>
+                    <p>Auto-categorized finance dashboard for students.</p>
+                    <a href="index.html#premium">Learn more →</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="ad-slot" aria-label="Advertisement">
+              <span class="ad-label">Advertisement</span>
+              <div class="ad-placeholder">AdSense block (responsive)</div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">🧭 Study Compass</a>
+        <p>Navigate your academic journey with calm, focused tools.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <div>
+          <h4>Site</h4>
+          <a href="index.html#tools">Tools</a>
+          <a href="blog.html">Blog</a>
+          <a href="#">Premium Resources</a>
+          <a href="index.html#about">About</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="contact.html">Contact</a>
+          <a href="privacy.html#cookies">Cookie Policy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div class="container"><p>&copy; 2026 Study Compass. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script>
+    /* =========================================================
+       QUIZ GENERATOR — standalone logic for quiz.html
+       3-tab interface: From Notes | Manual | Take Quiz
+       A shared `questions` array backs all three tabs.
+       ========================================================= */
+    (function () {
+      'use strict';
+
+      // ---------- Shared state ----------
+      let questions = []; // [{ q: "...", a: "..." }, ...]
+
+      const STOP_WORDS = new Set([
+        'the','and','for','are','was','were','been','have','has','had','will',
+        'would','could','should','may','might','must','can','this','that',
+        'these','those','with','from','into','upon','about','between',
+        'through','during','before','after'
+      ]);
+
+      const MAX_QUESTIONS = 10;
+
+      // ---------- XSS-safe HTML helpers ----------
+      function escapeHtml(str) {
+        return String(str == null ? '' : str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function escapeRegex(str) {
+        return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      }
+
+      // ---------- Tab switching ----------
+      function switchTab(tabName) {
+        document.querySelectorAll('.quiz-tab').forEach(function (t) {
+          const active = t.dataset.tab === tabName;
+          t.classList.toggle('is-active', active);
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        document.querySelectorAll('.quiz-panel').forEach(function (p) {
+          p.classList.toggle('is-active', p.dataset.panel === tabName);
+        });
+
+        // The shared question editor lives outside the panels.
+        // Show it on From Notes + Manual, hide it on Take Quiz.
+        const wrap = document.getElementById('quizQuestionsWrap');
+        if (wrap) wrap.style.display = (tabName === 'take') ? 'none' : '';
+
+        if (tabName === 'take') {
+          takeQuiz();
+        }
+      }
+
+      // ---------- Render the shared question editor ----------
+      function renderQuestions() {
+        const container = document.getElementById('quizQuestions');
+        if (!container) return;
+
+        if (questions.length === 0) {
+          container.innerHTML =
+            '<div class="quiz-empty">No questions yet. Generate from your notes above, or switch to the Manual tab to add your own.</div>';
+          return;
+        }
+
+        let html = '';
+        for (let i = 0; i < questions.length; i++) {
+          html +=
+            '<div class="quiz-q-row">' +
+              '<input type="text" class="q-input" data-index="' + i + '" data-field="q" ' +
+                'value="' + escapeHtml(questions[i].q) + '" placeholder="Question" ' +
+                'aria-label="Question ' + (i + 1) + '" />' +
+              '<input type="text" class="q-input" data-index="' + i + '" data-field="a" ' +
+                'value="' + escapeHtml(questions[i].a) + '" placeholder="Answer" ' +
+                'aria-label="Answer for question ' + (i + 1) + '" />' +
+              '<button class="quiz-q-remove" data-index="' + i + '" ' +
+                'aria-label="Remove question ' + (i + 1) + '" title="Remove">✕</button>' +
+            '</div>';
+        }
+        container.innerHTML = html;
+      }
+
+      // ---------- Quiz generation algorithm ----------
+      function generateFromNotes() {
+        const notesEl = document.getElementById('notesInput');
+        const modeEl = document.getElementById('questionType');
+        const notes = (notesEl && notesEl.value ? notesEl.value : '').trim();
+        const mode = modeEl ? modeEl.value : 'fill';
+
+        if (!notes) {
+          alert('Please paste some notes first — the generator needs text to work with.');
+          return;
+        }
+
+        // Split into sentences on . ! ?
+        const sentences = notes
+          .split(/[.!?]+/)
+          .map(function (s) { return s.trim(); })
+          .filter(function (s) { return s.length > 0; });
+
+        const generated = [];
+
+        for (let s = 0; s < sentences.length && generated.length < MAX_QUESTIONS; s++) {
+          const sentence = sentences[s];
+
+          // Tokenize: split on whitespace, strip non-alphanumeric chars (keep apostrophes & hyphens)
+          const tokens = sentence
+            .split(/\s+/)
+            .map(function (w) {
+              return w.replace(/[^A-Za-z0-9'\-]/g, '');
+            })
+            .filter(function (w) {
+              return w.length > 5 && !STOP_WORDS.has(w.toLowerCase());
+            });
+
+          if (tokens.length === 0) continue;
+
+          // Pick 1–2 distinct key words from the sentence
+          const uniqueTokens = Array.from(new Set(tokens));
+          const pickCount = Math.min(uniqueTokens.length >= 4 ? 2 : 1, uniqueTokens.length, MAX_QUESTIONS - generated.length);
+
+          // Shuffle a copy and take the first pickCount
+          const shuffled = uniqueTokens.slice();
+          for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const tmp = shuffled[i]; shuffled[i] = shuffled[j]; shuffled[j] = tmp;
+          }
+          const picked = shuffled.slice(0, pickCount);
+
+          for (let k = 0; k < picked.length; k++) {
+            const key = picked[k];
+            let question, answer;
+
+            if (mode === 'extract') {
+              // Key term extraction: ask the student to identify the term in the sentence
+              question = 'Identify the key term in this sentence: “' + sentence + '”';
+              answer = key;
+            } else {
+              // Fill in the blank: replace the key word with a blank (case-insensitive, whole-word)
+              const re = new RegExp('\\b' + escapeRegex(key) + '\\b', 'i');
+              const blanked = sentence.replace(re, '_____');
+              // Only add if a replacement actually happened
+              if (blanked === sentence) continue;
+              question = blanked;
+              answer = key;
+            }
+
+            generated.push({ q: question, a: answer });
+            if (generated.length >= MAX_QUESTIONS) break;
+          }
+        }
+
+        if (generated.length === 0) {
+          alert('Could not generate questions from these notes. Try pasting more detailed sentences that include words longer than 5 letters (e.g. proper nouns, technical terms).');
+          return;
+        }
+
+        // Append to the shared questions array
+        for (let i = 0; i < generated.length; i++) {
+          questions.push(generated[i]);
+        }
+        renderQuestions();
+
+        // Light user feedback
+        const btn = document.getElementById('generateBtn');
+        if (btn) {
+          const original = btn.textContent;
+          btn.textContent = '✓ Added ' + generated.length + ' question' + (generated.length === 1 ? '' : 's');
+          setTimeout(function () { btn.textContent = original; }, 1800);
+        }
+      }
+
+      // ---------- Manual question management ----------
+      function addManualQuestion() {
+        questions.push({ q: '', a: '' });
+        renderQuestions();
+        // Focus the question field of the newly added row
+        const container = document.getElementById('quizQuestions');
+        if (container) {
+          const rows = container.querySelectorAll('.quiz-q-row');
+          const last = rows[rows.length - 1];
+          if (last) {
+            const qInput = last.querySelector('.q-input[data-field="q"]');
+            if (qInput) qInput.focus();
+          }
+        }
+      }
+
+      function removeQuestion(index) {
+        if (index < 0 || index >= questions.length) return;
+        questions.splice(index, 1);
+        renderQuestions();
+      }
+
+      function clearAllQuestions() {
+        if (questions.length === 0) return;
+        if (!confirm('Remove all ' + questions.length + ' question' + (questions.length === 1 ? '' : 's') + '? This cannot be undone.')) return;
+        questions = [];
+        renderQuestions();
+      }
+
+      function clearNotes() {
+        const notesEl = document.getElementById('notesInput');
+        if (notesEl) notesEl.value = '';
+      }
+
+      // ---------- Take quiz rendering ----------
+      function takeQuiz() {
+        const cardsContainer = document.getElementById('takeCards');
+        const totalEl = document.getElementById('takeTotal');
+        const answeredEl = document.getElementById('takeAnswered');
+        const scoreEl = document.getElementById('takeScore');
+        const resultEl = document.getElementById('takeResult');
+        if (!cardsContainer) return;
+
+        // Reset state
+        scoreEl.textContent = '—';
+        answeredEl.textContent = '0';
+        resultEl.style.display = 'none';
+
+        if (questions.length === 0) {
+          totalEl.textContent = '0';
+          cardsContainer.innerHTML =
+            '<div class="quiz-empty">No questions yet. Switch to the “From Notes” or “Manual” tab to add some, then come back here to take the quiz.</div>';
+          return;
+        }
+
+        totalEl.textContent = String(questions.length);
+
+        let html = '';
+        for (let i = 0; i < questions.length; i++) {
+          html +=
+            '<div class="quiz-take-q">' +
+              '<div class="q-label">Question ' + (i + 1) + '</div>' +
+              '<div class="q-text">' + escapeHtml(questions[i].q) + '</div>' +
+              '<input type="text" class="take-answer" data-index="' + i + '" ' +
+                'placeholder="Your answer…" aria-label="Answer for question ' + (i + 1) + '" autocomplete="off" />' +
+              '<div class="quiz-feedback" data-index="' + i + '"></div>' +
+            '</div>';
+        }
+        cardsContainer.innerHTML = html;
+      }
+
+      // ---------- Grading ----------
+      function gradeQuiz() {
+        if (questions.length === 0) {
+          alert('Add some questions first.');
+          return;
+        }
+        const inputs = document.querySelectorAll('#takeCards .take-answer');
+        let correct = 0;
+
+        for (let i = 0; i < inputs.length; i++) {
+          const input = inputs[i];
+          const idx = parseInt(input.dataset.index, 10);
+          const userAns = input.value.trim().toLowerCase();
+          const correctAns = String(questions[idx] ? questions[idx].a : '').trim().toLowerCase();
+          const feedback = document.querySelector('.quiz-feedback[data-index="' + idx + '"]');
+
+          input.classList.remove('is-correct', 'is-wrong');
+          if (feedback) feedback.classList.remove('is-visible', 'is-correct', 'is-wrong');
+
+          if (userAns !== '' && userAns === correctAns) {
+            input.classList.add('is-correct');
+            if (feedback) {
+              feedback.classList.add('is-visible', 'is-correct');
+              feedback.textContent = '✓ Correct!';
+            }
+            correct++;
+          } else {
+            input.classList.add('is-wrong');
+            if (feedback) {
+              feedback.classList.add('is-visible', 'is-wrong');
+              feedback.textContent = '✗ Correct answer: ' + (questions[idx] ? questions[idx].a : '');
+            }
+          }
+        }
+
+        const total = questions.length;
+        const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+        const scoreEl = document.getElementById('takeScore');
+        if (scoreEl) scoreEl.textContent = correct + '/' + total + ' — ' + pct + '%';
+
+        const resultEl = document.getElementById('takeResult');
+        if (resultEl) {
+          resultEl.style.display = 'block';
+          const valueEl = resultEl.querySelector('.result-value');
+          const detailEl = resultEl.querySelector('.result-detail');
+          if (valueEl) valueEl.textContent = pct + '%';
+          if (detailEl) detailEl.textContent = correct + '/' + total + ' correct — ' + pct + '%';
+        }
+      }
+
+      function retakeQuiz() {
+        const inputs = document.querySelectorAll('#takeCards .take-answer');
+        for (let i = 0; i < inputs.length; i++) {
+          inputs[i].value = '';
+          inputs[i].classList.remove('is-correct', 'is-wrong');
+        }
+        const feedbacks = document.querySelectorAll('#takeCards .quiz-feedback');
+        for (let i = 0; i < feedbacks.length; i++) {
+          feedbacks[i].classList.remove('is-visible', 'is-correct', 'is-wrong');
+          feedbacks[i].textContent = '';
+        }
+        const scoreEl = document.getElementById('takeScore');
+        if (scoreEl) scoreEl.textContent = '—';
+        const answeredEl = document.getElementById('takeAnswered');
+        if (answeredEl) answeredEl.textContent = '0';
+        const resultEl = document.getElementById('takeResult');
+        if (resultEl) resultEl.style.display = 'none';
+      }
+
+      // ---------- Update "answered" counter as user types ----------
+      function updateAnsweredCount() {
+        const inputs = document.querySelectorAll('#takeCards .take-answer');
+        let answered = 0;
+        for (let i = 0; i < inputs.length; i++) {
+          if (inputs[i].value.trim().length > 0) answered++;
+        }
+        const answeredEl = document.getElementById('takeAnswered');
+        if (answeredEl) answeredEl.textContent = String(answered);
+      }
+
+      // ---------- Wire up everything on DOM ready ----------
+      function init() {
+        // Tab clicks
+        const tabs = document.querySelectorAll('.quiz-tab');
+        for (let i = 0; i < tabs.length; i++) {
+          tabs[i].addEventListener('click', function () {
+            switchTab(this.dataset.tab);
+          });
+        }
+
+        // Action buttons
+        const genBtn = document.getElementById('generateBtn');
+        if (genBtn) genBtn.addEventListener('click', generateFromNotes);
+
+        const clearNotesBtn = document.getElementById('clearNotesBtn');
+        if (clearNotesBtn) clearNotesBtn.addEventListener('click', clearNotes);
+
+        const addBtn = document.getElementById('addQuestionBtn');
+        if (addBtn) addBtn.addEventListener('click', addManualQuestion);
+
+        const clearAllBtn = document.getElementById('clearAllBtn');
+        if (clearAllBtn) clearAllBtn.addEventListener('click', clearAllQuestions);
+
+        const submitBtn = document.getElementById('submitAnswersBtn');
+        if (submitBtn) submitBtn.addEventListener('click', gradeQuiz);
+
+        const retakeBtn = document.getElementById('retakeBtn');
+        if (retakeBtn) retakeBtn.addEventListener('click', retakeQuiz);
+
+        // Event delegation: shared question editor (edit + remove)
+        const questionsEl = document.getElementById('quizQuestions');
+        if (questionsEl) {
+          questionsEl.addEventListener('input', function (e) {
+            const input = e.target.closest('.q-input');
+            if (!input) return;
+            const idx = parseInt(input.dataset.index, 10);
+            const field = input.dataset.field;
+            if (questions[idx]) {
+              questions[idx][field] = input.value;
+            }
+          });
+          questionsEl.addEventListener('click', function (e) {
+            const btn = e.target.closest('.quiz-q-remove');
+            if (!btn) return;
+            const idx = parseInt(btn.dataset.index, 10);
+            removeQuestion(idx);
+          });
+        }
+
+        // Event delegation: take-quiz answered counter
+        const takeCards = document.getElementById('takeCards');
+        if (takeCards) {
+          takeCards.addEventListener('input', function (e) {
+            if (e.target.closest('.take-answer')) {
+              updateAnsweredCount();
+            }
+          });
+        }
+
+        // Initial render
+        renderQuestions();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

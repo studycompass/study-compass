@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free Homework Calculator by Study Compass — instantly compute percentages, class averages, and GPA. Plus a clear guide to how grade calculations actually work." />
+  <meta name="keywords" content="homework calculator, percentage calculator, grade calculator, GPA calculator, class average calculator, study tools, free grade calculator" />
+  <title>Homework Calculator — Percentages, Averages &amp; GPA | Study Compass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://studycompass.example/calculator.html" />
+
+    <!-- Open Graph (Facebook, Pinterest, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Study Compass" />
+    <meta property="og:title" content="Homework Calculator — Percentages, Averages &amp; GPA | Study Compass" />
+    <meta property="og:description" content="Free Homework Calculator by Study Compass — instantly compute percentages, class averages, and GPA. Plus a clear guide to how grade calculations actually work." />
+    <meta property="og:url" content="https://studycompass.example/calculator.html" />
+    <meta property="og:image" content="https://studycompass.example/og-images/calculator.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Homework Calculator — Percentages, Averages &amp; GPA | Study Compass" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Homework Calculator — Percentages, Averages &amp; GPA | Study Compass" />
+    <meta name="twitter:description" content="Free Homework Calculator by Study Compass — instantly compute percentages, class averages, and GPA. Plus a clear guide to how grade calculations actually work." />
+    <meta name="twitter:image" content="https://studycompass.example/og-images/calculator.png" />
+    <meta name="twitter:image:alt" content="Homework Calculator — Percentages, Averages &amp; GPA | Study Compass" />
+
+    <!-- Pinterest rich pins (uses OG tags above; this explicitly enables) -->
+    <meta name="pinterest" content="nohover" />
+</head>
+<body>
+
+  <!-- SHARED HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Study Compass home">🧭 Study Compass</a>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html#tools">Tools</a>
+        <a href="blog.html">Blog</a>
+        <a href="#">Premium Resources</a>
+        <a href="index.html#about">About</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="search-wrap" role="search">
+          <input type="search" id="globalSearch" class="search-input" placeholder="Search tools & articles…" aria-label="Search tools and articles" autocomplete="off" />
+          <span class="search-icon" aria-hidden="true">🔍</span>
+        </div>
+        <div class="theme-toggles" role="group" aria-label="Switch study theme">
+          <button class="theme-toggle-btn" data-theme="morning" title="Morning Focus" aria-label="Morning Focus theme">🌅</button>
+          <button class="theme-toggle-btn" data-theme="night" title="Night Study" aria-label="Night Study theme">🌙</button>
+          <button class="theme-toggle-btn" data-theme="library" title="Library Mode" aria-label="Library Mode theme">📚</button>
+          <button class="theme-toggle-btn" data-theme="nature" title="Nature Mode" aria-label="Nature Mode theme">🌿</button>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="index.html#tools">Tools</a>
+      <a href="blog.html">Blog</a>
+      <a href="#">Premium Resources</a>
+      <a href="index.html#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Breadcrumb for SEO + UX -->
+    <div class="container" style="padding-top: 24px;">
+      <nav aria-label="Breadcrumb" style="font-size:0.85rem; color:var(--text-muted);">
+        <a href="index.html">Home</a> ›
+        <a href="index.html#tools">Tools</a> ›
+        <span style="color:var(--text-soft);">Homework Calculator</span>
+      </nav>
+    </div>
+
+    <section class="section" style="padding-top: 30px;">
+      <div class="container">
+        <div class="section-header" style="margin-bottom: 36px;">
+          <span class="section-eyebrow">Free Study Tool</span>
+          <h1 class="section-title">Homework Calculator</h1>
+          <p class="section-subtitle">
+            Three instant calculators in one — percentages, class averages, and GPA.
+            No sign-up, no ads in the results, no fluff. Just the math.
+          </p>
+        </div>
+
+        <div class="tool-page-layout">
+
+          <!-- ===== MAIN COLUMN: tool + article ===== -->
+          <div class="tool-page-main">
+
+            <!-- Interactive tool -->
+            <div class="tool-interface" id="homeworkCalculator">
+              <div class="calc-app">
+
+                <!-- Tab switcher -->
+                <div class="calc-tabs" role="tablist" aria-label="Calculator mode">
+                  <button class="calc-tab is-active" role="tab" aria-selected="true" data-panel="panel-percentage">Percentage</button>
+                  <button class="calc-tab" role="tab" aria-selected="false" data-panel="panel-average">Average</button>
+                  <button class="calc-tab" role="tab" aria-selected="false" data-panel="panel-gpa">GPA</button>
+                </div>
+
+                <!-- ===== PANEL 1: PERCENTAGE ===== -->
+                <div class="calc-panel is-active" id="panel-percentage" role="tabpanel">
+                  <h3>Percentage Calculator</h3>
+                  <p class="calc-desc">Find what percentage you scored, or what score you need to hit a target percentage.</p>
+
+                  <div class="calc-row">
+                    <div class="calc-field">
+                      <label for="pctScore">Score earned</label>
+                      <input type="number" id="pctScore" placeholder="e.g. 42" step="any" inputmode="decimal" />
+                    </div>
+                    <div class="calc-field">
+                      <label for="pctTotal">Total possible</label>
+                      <input type="number" id="pctTotal" placeholder="e.g. 50" step="any" inputmode="decimal" />
+                    </div>
+                  </div>
+
+                  <div class="calc-actions">
+                    <button id="pctCalcBtn" class="btn btn-primary">Calculate</button>
+                    <button id="pctClearBtn" class="btn btn-ghost">Clear</button>
+                  </div>
+
+                  <div class="calc-result" id="pctResult" hidden aria-live="polite">
+                    <div class="result-label">Your percentage</div>
+                    <div class="result-value" id="pctValue">—</div>
+                    <div class="result-detail" id="pctDetail"></div>
+                  </div>
+                </div>
+
+                <!-- ===== PANEL 2: AVERAGE ===== -->
+                <div class="calc-panel" id="panel-average" role="tabpanel">
+                  <h3>Average Calculator</h3>
+                  <p class="calc-desc">Enter your scores (one per box) to compute the mean. Add as many as you need.</p>
+
+                  <div class="calc-field">
+                    <label for="avgScores">Scores (separated by commas, spaces, or new lines)</label>
+                    <textarea id="avgScores" rows="4" placeholder="e.g. 87, 92, 78, 95, 88" style="width:100%; padding:11px 14px; border:1.5px solid var(--border); border-radius:8px; background:var(--bg); color:var(--text); font-family:inherit; font-size:0.95rem; resize:vertical;"></textarea>
+                  </div>
+
+                  <div class="calc-actions">
+                    <button id="avgCalcBtn" class="btn btn-primary">Calculate average</button>
+                    <button id="avgClearBtn" class="btn btn-ghost">Clear</button>
+                  </div>
+
+                  <div class="calc-result" id="avgResult" hidden aria-live="polite">
+                    <div class="result-label">Average score</div>
+                    <div class="result-value" id="avgValue">—</div>
+                    <div class="result-detail" id="avgDetail"></div>
+                  </div>
+                </div>
+
+                <!-- ===== PANEL 3: GPA ===== -->
+                <div class="calc-panel" id="panel-gpa" role="tabpanel">
+                  <h3>GPA Calculator</h3>
+                  <p class="calc-desc">Enter each course, your letter grade, and credit hours. GPA updates instantly on the 4.0 scale.</p>
+
+                  <div class="gpa-rows" id="gpaRows" aria-live="polite"></div>
+
+                  <button id="gpaAddRow" class="gpa-add-row" type="button">+ Add another course</button>
+
+                  <div class="calc-actions" style="margin-top:18px;">
+                    <button id="gpaCalcBtn" class="btn btn-primary">Calculate GPA</button>
+                    <button id="gpaClearBtn" class="btn btn-ghost">Reset</button>
+                  </div>
+
+                  <p class="gpa-scale-note">
+                    A = 4.0 · A− = 3.7 · B+ = 3.3 · B = 3.0 · B− = 2.7 · C+ = 2.3 · C = 2.0 · C− = 1.7 · D = 1.0 · F = 0
+                  </p>
+
+                  <div class="calc-result" id="gpaResult" hidden aria-live="polite">
+                    <div class="result-label">Cumulative GPA (4.0 scale)</div>
+                    <div class="result-value" id="gpaValue">—</div>
+                    <div class="result-detail" id="gpaDetail"></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- ===== SEO ARTICLE (800+ words) ===== -->
+            <article class="tool-article">
+
+              <h2>How Grades Really Get Calculated: Percentages, Averages, and GPA Explained</h2>
+
+              <p>
+                Grades are the currency of school, but very few students are ever taught the actual
+                math behind them. We see a number on a transcript, accept it as fact, and move on —
+                until the day a final exam drops a B+ down to a B− and the difference costs a
+                scholarship, an internship offer, or graduate school admission. Understanding how
+                percentages, averages, and grade point averages are calculated is not a niche
+                academic curiosity; it is a practical life skill that helps you catch grading
+                errors, plan strategically for the rest of a semester, and reduce the low-grade
+                anxiety that haunts most students during exam season. This article walks through
+                the three calculations built into the calculator above, with worked examples you
+                can verify yourself.
+              </p>
+
+              <h3>How Percentages Work — and How to Run Them in Reverse</h3>
+
+              <p>
+                A percentage is simply a fraction expressed out of one hundred. To convert any
+                score to a percentage, divide the points you earned by the total points possible
+                and multiply by 100. If you scored 42 out of 50 on a quiz, the calculation is
+                (42 ÷ 50) × 100 = 84%. The multiplier of 100 is what rescales the fraction so
+                that a perfect score reads as 100 rather than 1.0. Once you internalize this,
+                you can perform rough percentage estimates in your head: a score in the low 80s
+                out of 100 is around 80%, while 9 out of 12 is about 75% because 9 ÷ 12 = 0.75.
+              </p>
+
+              <p>
+                The reverse calculation is just as useful and far less commonly taught. Suppose
+                your course syllabus says you need a 90% overall to keep an A−, and going into
+                the final you have an 87% average. The final exam is worth 30% of your grade.
+                To find the score you need, set up the equation: 0.90 = (0.87 × 0.70) + (X × 0.30).
+                Solving gives X = (0.90 − 0.609) ÷ 0.30 = 0.97, meaning you need at least a 97%
+                on the final. This kind of reverse math turns vague worry ("can I still get an
+                A?") into a concrete number you can either chase or accept. Run the same logic
+                through the percentage calculator above whenever a syllabus gives you a target.
+              </p>
+
+              <h3>Simple Averages vs. Weighted Averages</h3>
+
+              <p>
+                A simple average — also called the arithmetic mean — adds up a set of numbers and
+                divides by how many there are. If your quiz scores are 87, 92, 78, 95, and 88,
+                you sum them to 440 and divide by 5 to get an 88 average. The average calculator
+                above handles this instantly and also reports the count, the lowest score, the
+                highest score, and the total points, which are useful for spotting outliers in
+                your own performance. Simple averages are appropriate only when every item carries
+                equal weight, which is rarely true in a real syllabus.
+              </p>
+
+              <p>
+                A weighted average multiplies each value by a weight before summing, then divides
+                by the total of the weights. Consider a typical syllabus: homework 20%, quizzes
+                20%, midterm 25%, final 35%. If your averages in those categories are 95, 88, 82,
+                and 78, your weighted course grade is (95×0.20) + (88×0.20) + (82×0.25) + (78×0.35)
+                = 19.0 + 17.6 + 20.5 + 27.3 = 84.4%. Notice that the simple average of the four
+                category scores would be 85.75 — close, but not the same, because the final
+                carries more than twice the weight of homework. When grades matter for
+                scholarships or program admission, that 1.3-point gap is the difference between
+                a B and a B+. Always use the weighted average when your syllabus specifies
+                category weights, and never trust a simple average as a substitute.
+              </p>
+
+              <h3>GPA Math: Why Credit Hours Matter</h3>
+
+              <p>
+                Grade Point Average (GPA) is a weighted average where the weights are credit
+                hours. Each letter grade is converted to a number on the 4.0 scale — an A is 4.0,
+                a B+ is 3.3, a C is 2.0, and so on — and then each course's grade point is
+                multiplied by its credit hours. The products are summed and divided by the total
+                credit hours attempted. The GPA calculator above does this for you, but the
+                underlying math is worth understanding because it explains why a single bad grade
+                in a heavy course can sink your semester more than two bad grades in light ones.
+              </p>
+
+              <p>
+                Here is a worked example using the seed rows the calculator loads with by default.
+                Suppose you take three courses: a 3-credit course you earn an A in (3 × 4.0 = 12.0
+                grade points), a 4-credit course you earn a B+ in (4 × 3.3 = 13.2 grade points),
+                and a 3-credit course you earn a C in (3 × 2.0 = 6.0 grade points). Add the grade
+                points to get 31.2, add the credits to get 10, and divide: 31.2 ÷ 10 = 3.12.
+                Your semester GPA is 3.12 — a B average, even though two of the three grades were
+                a C or better, because the 4-credit B+ pulled the average up and the 3-credit C
+                pulled it down. If the B+ had instead been a 1-credit seminar, your GPA would
+                have dropped to 2.77. Credit hours are the lever, and they explain why students
+                should think carefully before slacking off in a heavy course.
+              </p>
+
+              <h3>Why You Should Calculate Your Own Grades</h3>
+
+              <p>
+                There are three reasons every student should run their own grade calculations
+                rather than waiting for the official transcript. First, teachers occasionally
+                make data-entry mistakes — a 92 entered as a 29, a category weight set to 0%
+                instead of 20%, a dropped-quiz policy that was never applied. If you have your
+                own calculation handy, you can spot and fix these errors within minutes instead
+                of discovering them at the end of the term when nothing can be done. Second,
+                knowing your standing throughout the semester lets you plan strategically —
+                deciding whether to retake a test, drop a course, or shift study time toward the
+                class where an A is still in reach. Third, the simple act of tracking your own
+                grades reduces anxiety by replacing vague dread with concrete numbers. Students
+                who know exactly where they stand report significantly less end-of-semester stress
+                than those who wait for the system to tell them.
+              </p>
+
+              <h3>Common Mistakes That Skew Grade Calculations</h3>
+
+              <p>
+                The most common mistake is forgetting credit hours when computing GPA, treating
+                every course as equal weight and arriving at a number that looks reasonable but is
+                mathematically wrong. A close second is mishandling plus/minus grades — many
+                students round a B+ up to a 3.5 or collapse a B− down to a 3.0, when in fact the
+                standard 4.0 scale assigns 3.3 and 2.7 respectively. Always check your school's
+                published scale, because some institutions use slightly different values (a few
+                give an A+ a 4.3, for instance) and a handful still use the older 5.0 scale for
+                honors courses.
+              </p>
+
+              <p>
+                A third mistake is mixing weighted and unweighted GPAs — for example, comparing
+                your unweighted 3.6 to a peer's weighted 4.2 and concluding they are vastly
+                ahead, when in reality the weighted number just reflects that they took more AP or
+                IB courses. A fourth, subtler mistake is including courses you withdrew from or
+                pass/fail courses that do not affect GPA; including zero-credit courses in the
+                denominator dilutes your real average and can mislead you about your standing.
+                When in doubt, pull your official transcript, identify which courses carry credit
+                hours and letter grades, and run only those through the GPA calculator. Getting
+                this right once will save you from a year of misinformed academic decisions.
+              </p>
+
+              <h3>Tracking Grades Across the Whole Semester</h3>
+
+              <p>
+                The calculator on this page handles the math, but staying on top of grades week
+                by week requires a system. Most students who succeed at this keep a simple
+                spreadsheet or planner where each assignment's score is logged the day it comes
+                back, with the category weight noted beside it. Once a week — Sunday evening is
+                ideal — they update their running average in every course and note which class
+                is closest to the next letter-grade boundary. This weekly cadence is what turns
+                a one-time grade calculation into a habit that actually shapes academic
+                outcomes.
+              </p>
+
+              <p>
+                If you want a structured place to do this, our <a href="index.html#premium">Student Reset Planner</a>
+                includes a grade-tracking template, weekly review prompts, and a goal-setting
+                framework designed specifically for students who want to stay ahead of their
+                grades instead of being surprised by them. Pair it with the calculators on this
+                page and you will have both the math and the system in one place — which is, in
+                the end, what separates students who worry about their grades from students who
+                actually improve them.
+              </p>
+
+            </article>
+          </div>
+
+          <!-- ===== SIDEBAR: premium promo + AdSense ===== -->
+          <aside class="tool-page-sidebar" aria-label="Premium resources and advertisements">
+
+            <div class="ad-slot" aria-label="Advertisement">
+              <span class="ad-label">Advertisement</span>
+              <!--
+                Replace with your AdSense code once approved:
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+              -->
+              <div class="ad-placeholder">AdSense block (300×250)</div>
+            </div>
+
+            <div class="sidebar-promo">
+              <h3>Premium Picks for Students</h3>
+              <ul class="promo-list">
+                <li>
+                  <span class="promo-icon">🧭</span>
+                  <div>
+                    <strong>The Student Reset Planner</strong>
+                    <p>Burned out? Reset your week in 30 minutes with a built-in grade tracker.</p>
+                    <a href="index.html#premium">Learn more →</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="promo-icon">✅</span>
+                  <div>
+                    <strong>Digital Habit Trackers</strong>
+                    <p>Build focus, sleep &amp; study streaks that actually stick.</p>
+                    <a href="index.html#premium">Learn more →</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="promo-icon">📊</span>
+                  <div>
+                    <strong>Sheets Budget &amp; Spending Tracker</strong>
+                    <p>Auto-categorized finance dashboard for students.</p>
+                    <a href="index.html#premium">Learn more →</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="ad-slot" aria-label="Advertisement">
+              <span class="ad-label">Advertisement</span>
+              <div class="ad-placeholder">AdSense block (responsive)</div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">🧭 Study Compass</a>
+        <p>Navigate your academic journey with calm, focused tools.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <div>
+          <h4>Site</h4>
+          <a href="index.html#tools">Tools</a>
+          <a href="blog.html">Blog</a>
+          <a href="#">Premium Resources</a>
+          <a href="index.html#about">About</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="contact.html">Contact</a>
+          <a href="privacy.html#cookies">Cookie Policy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div class="container"><p>&copy; 2026 Study Compass. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script>
+    /* =========================================================
+       HOMEWORK CALCULATOR — standalone logic for calculator.html
+       Tab switching + Percentage + Average + GPA (4.0 scale)
+       ========================================================= */
+    window.addEventListener('DOMContentLoaded', () => {
+
+      /* ---------- 1. TAB SWITCHING ---------- */
+      const tabs   = document.querySelectorAll('.calc-tab');
+      const panels = document.querySelectorAll('.calc-panel');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const target = tab.getAttribute('data-panel');
+          tabs.forEach(t => {
+            const active = (t === tab);
+            t.classList.toggle('is-active', active);
+            t.setAttribute('aria-selected', active ? 'true' : 'false');
+          });
+          panels.forEach(p => {
+            p.classList.toggle('is-active', p.id === target);
+          });
+        });
+      });
+
+      /* ---------- 2. LETTER GRADE LOOKUP ---------- */
+      const GRADE_POINTS = {
+        'A':  4.0,
+        'A-': 3.7,
+        'B+': 3.3,
+        'B':  3.0,
+        'B-': 2.7,
+        'C+': 2.3,
+        'C':  2.0,
+        'C-': 1.7,
+        'D':  1.0,
+        'F':  0.0
+      };
+
+      // Standard US 10-point letter-grade hint for percentage results
+      function letterForPercent(pct) {
+        if (pct >= 93) return 'A';
+        if (pct >= 90) return 'A−';
+        if (pct >= 87) return 'B+';
+        if (pct >= 83) return 'B';
+        if (pct >= 80) return 'B−';
+        if (pct >= 77) return 'C+';
+        if (pct >= 73) return 'C';
+        if (pct >= 70) return 'C−';
+        if (pct >= 60) return 'D';
+        return 'F';
+      }
+
+      /* ---------- 3. PERCENTAGE PANEL ---------- */
+      const pctScoreIn = document.getElementById('pctScore');
+      const pctTotalIn = document.getElementById('pctTotal');
+      const pctResult  = document.getElementById('pctResult');
+      const pctValue   = document.getElementById('pctValue');
+      const pctDetail  = document.getElementById('pctDetail');
+
+      document.getElementById('pctCalcBtn').addEventListener('click', () => {
+        const score = parseFloat(pctScoreIn.value);
+        const total = parseFloat(pctTotalIn.value);
+
+        if (Number.isNaN(score) || Number.isNaN(total)) {
+          pctValue.textContent = '—';
+          pctDetail.textContent = 'Please enter both a score and a total.';
+          pctResult.hidden = false;
+          return;
+        }
+        if (total <= 0) {
+          pctValue.textContent = '—';
+          pctDetail.textContent = 'Total possible must be greater than zero.';
+          pctResult.hidden = false;
+          return;
+        }
+
+        const pct = (score / total) * 100;
+        const letter = letterForPercent(pct);
+        pctValue.textContent = pct.toFixed(2) + '%';
+        pctDetail.textContent = `Letter grade hint: ${letter} · ${score} out of ${total} points`;
+        pctResult.hidden = false;
+      });
+
+      document.getElementById('pctClearBtn').addEventListener('click', () => {
+        pctScoreIn.value = '';
+        pctTotalIn.value = '';
+        pctValue.textContent = '—';
+        pctDetail.textContent = '';
+        pctResult.hidden = true;
+      });
+
+      /* ---------- 4. AVERAGE PANEL ---------- */
+      const avgScoresIn = document.getElementById('avgScores');
+      const avgResult   = document.getElementById('avgResult');
+      const avgValue    = document.getElementById('avgValue');
+      const avgDetail   = document.getElementById('avgDetail');
+
+      document.getElementById('avgCalcBtn').addEventListener('click', () => {
+        const raw = avgScoresIn.value.trim();
+        if (!raw) {
+          avgValue.textContent = '—';
+          avgDetail.textContent = 'Enter at least one score.';
+          avgResult.hidden = false;
+          return;
+        }
+
+        const parts = raw.split(/[\s,]+/).filter(Boolean);
+        const nums  = parts.map(p => parseFloat(p)).filter(n => !Number.isNaN(n));
+
+        if (nums.length === 0) {
+          avgValue.textContent = '—';
+          avgDetail.textContent = 'No valid numbers were found.';
+          avgResult.hidden = false;
+          return;
+        }
+
+        const total = nums.reduce((a, b) => a + b, 0);
+        const mean  = total / nums.length;
+        const min   = Math.min(...nums);
+        const max   = Math.max(...nums);
+
+        avgValue.textContent = mean.toFixed(2);
+        avgDetail.textContent =
+          `Based on ${nums.length} score${nums.length === 1 ? '' : 's'} · ` +
+          `low ${min} · high ${max} · total ${total}`;
+        avgResult.hidden = false;
+      });
+
+      document.getElementById('avgClearBtn').addEventListener('click', () => {
+        avgScoresIn.value = '';
+        avgValue.textContent = '—';
+        avgDetail.textContent = '';
+        avgResult.hidden = true;
+      });
+
+      /* ---------- 5. GPA PANEL ---------- */
+      const gpaRowsEl  = document.getElementById('gpaRows');
+      const gpaAddBtn  = document.getElementById('gpaAddRow');
+      const gpaResult  = document.getElementById('gpaResult');
+      const gpaValue   = document.getElementById('gpaValue');
+      const gpaDetail  = document.getElementById('gpaDetail');
+
+      const GRADE_OPTIONS = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D', 'F'];
+
+      function createGpaRow(name = '', grade = 'A', credits = 3) {
+        const row = document.createElement('div');
+        row.className = 'gpa-row';
+
+        // 1) Course name input — column 1 (1fr)
+        const nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.placeholder = 'Course name';
+        nameInput.value = name;
+        nameInput.setAttribute('aria-label', 'Course name');
+        row.appendChild(nameInput);
+
+        // 2) Grade select — column 2 (130px)
+        const gradeSelect = document.createElement('select');
+        gradeSelect.setAttribute('aria-label', 'Letter grade');
+        GRADE_OPTIONS.forEach(g => {
+          const opt = document.createElement('option');
+          opt.value = g;
+          opt.textContent = g;
+          if (g === grade) opt.selected = true;
+          gradeSelect.appendChild(opt);
+        });
+        row.appendChild(gradeSelect);
+
+        // 3) Credits + remove button — column 3 (auto)
+        //    Wrapped in a flex cell so both stay on the same grid track.
+        const creditsCell = document.createElement('div');
+        creditsCell.style.display = 'flex';
+        creditsCell.style.alignItems = 'center';
+        creditsCell.style.gap = '6px';
+
+        const creditsInput = document.createElement('input');
+        creditsInput.type = 'number';
+        creditsInput.min = '0';
+        creditsInput.step = '0.5';
+        creditsInput.value = credits;
+        creditsInput.style.width = '90px';
+        creditsInput.setAttribute('aria-label', 'Credit hours');
+        creditsCell.appendChild(creditsInput);
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'gpa-remove-btn';
+        removeBtn.textContent = '✕';
+        removeBtn.setAttribute('aria-label', 'Remove this course');
+        removeBtn.addEventListener('click', () => {
+          row.remove();
+          // Recompute on the fly so a visible result stays accurate.
+          if (!gpaResult.hidden) computeGpa();
+        });
+        creditsCell.appendChild(removeBtn);
+
+        row.appendChild(creditsCell);
+        gpaRowsEl.appendChild(row);
+        return row;
+      }
+
+      // Seed 3 rows on load
+      createGpaRow('Course 1', 'A',  3);
+      createGpaRow('Course 2', 'B+', 4);
+      createGpaRow('Course 3', 'C',  3);
+
+      gpaAddBtn.addEventListener('click', () => {
+        createGpaRow('', 'A', 3);
+      });
+
+      function computeGpa() {
+        const rows = gpaRowsEl.querySelectorAll('.gpa-row');
+        let totalPoints = 0;
+        let totalCredits = 0;
+        let skipped = 0;
+
+        rows.forEach(row => {
+          const selects = row.querySelectorAll('select');
+          const nums    = row.querySelectorAll('input[type="number"]');
+          if (selects.length === 0 || nums.length === 0) return;
+
+          const grade   = selects[0].value;
+          const credits = parseFloat(nums[0].value);
+
+          if (Number.isNaN(credits) || credits <= 0) {
+            skipped++;
+            return;
+          }
+          const pts = GRADE_POINTS[grade];
+          if (pts === undefined) { skipped++; return; }
+
+          totalPoints  += pts * credits;
+          totalCredits += credits;
+        });
+
+        if (totalCredits === 0) {
+          gpaValue.textContent = '—';
+          gpaDetail.textContent = 'Enter at least one course with credit hours greater than zero.';
+          gpaResult.hidden = false;
+          return;
+        }
+
+        const gpa = totalPoints / totalCredits;
+        gpaValue.textContent = gpa.toFixed(2);
+        const courseCount = rows.length - skipped;
+        gpaDetail.textContent =
+          `Across ${courseCount} course${courseCount === 1 ? '' : 's'} · ` +
+          `${totalCredits} credit hours · ${totalPoints.toFixed(1)} grade points` +
+          (skipped > 0 ? ` · ${skipped} skipped for invalid credits` : '');
+        gpaResult.hidden = false;
+      }
+
+      document.getElementById('gpaCalcBtn').addEventListener('click', computeGpa);
+
+      document.getElementById('gpaClearBtn').addEventListener('click', () => {
+        gpaRowsEl.innerHTML = '';
+        createGpaRow('Course 1', 'A',  3);
+        createGpaRow('Course 2', 'B+', 4);
+        createGpaRow('Course 3', 'C',  3);
+        gpaValue.textContent = '—';
+        gpaDetail.textContent = '';
+        gpaResult.hidden = true;
+      });
+    });
+  </script>
+</body>
+</html>
