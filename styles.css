@@ -83,10 +83,6 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  /* Emoji font stack — appended so emoji glyphs render as colorful icons on all platforms.
-     Browsers fall back through this list per-glyph: Apple Color Emoji on macOS/iOS,
-     Segoe UI Emoji on Windows, Noto Color Emoji on Linux/Android. */
-  --emoji-font-stack: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
   background-color: var(--bg);
   color: var(--text);
   line-height: 1.6;
@@ -100,13 +96,87 @@ a:hover { opacity: 0.75; }
 
 button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-h1, h2, h3, h4 {
-  line-height: 1.2;
-  font-weight: 700;
-  color: var(--text);
-  /* Emoji font stack so any emoji in headings render as colorful icons */
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
-}
+/* ---------- INLINE SVG ICON SIZING ----------
+   All icons are 24x24 viewBox SVGs (Lucide-style) with stroke="currentColor".
+   We size them per-context using parent container's font-size as a guide.
+   SVGs inherit color from parent via currentColor — zero font dependencies. */
+svg { display: inline-block; vertical-align: middle; flex-shrink: 0; }
+
+/* Logo (compass next to "Study Compass") */
+.logo svg { width: 1.1em; height: 1.1em; }
+
+/* Search icon inside search bar */
+.search-icon svg { width: 0.85em; height: 0.85em; }
+
+/* Theme toggle buttons in header */
+.theme-toggle-btn svg { width: 1.1em; height: 1.1em; }
+
+/* Welcome popup theme icons */
+.theme-icon svg { width: 1.8rem; height: 1.8rem; }
+
+/* Tool card icons */
+.tool-icon svg { width: 1.5rem; height: 1.5rem; }
+
+/* "More Tools Coming Soon" placeholder icon */
+.tool-card.is-placeholder .placeholder-icon svg { width: 2rem; height: 2rem; }
+
+/* Hero floating cards on homepage */
+.hero-card svg { width: 2.5rem; height: 2.5rem; }
+
+/* Premium card icons */
+.premium-icon svg { width: 2.4rem; height: 2.4rem; }
+
+/* Blog emoji badges on thumbnails and article heroes */
+.blog-featured-thumb .thumb-emoji-badge svg,
+.blog-article-hero .hero-emoji-badge svg { width: 1.6rem; height: 1.6rem; }
+.blog-thumb .thumb-emoji-badge svg { width: 1.2rem; height: 1.2rem; }
+
+/* Blog article meta icons (date, read time, author) */
+.blog-article-meta svg { width: 0.95em; height: 0.95em; }
+.blog-author-avatar svg { width: 1.3rem; height: 1.3rem; }
+
+/* Tool article meta icons (sessions, mode labels) */
+.timer-meta svg,
+.timer-mode svg,
+.planner-stat svg,
+.quiz-take-progress svg { width: 0.95em; height: 0.95em; }
+
+/* Buttons with icons (play, pause, reset, copy, etc.) */
+.btn svg { width: 1em; height: 1em; }
+
+/* Tab labels with icons */
+.calc-tab svg,
+.quiz-tab svg { width: 0.95em; height: 0.95em; }
+
+/* Headings with icons */
+h1 svg, h2 svg, h3 svg, h4 svg { width: 0.9em; height: 0.9em; }
+.section-eyebrow svg { width: 0.9em; height: 0.9em; }
+
+/* Inline icons in spans, labels, strong */
+span svg, label svg, strong svg { width: 0.95em; height: 0.95em; }
+
+/* Delete / close / remove buttons */
+.fc-delete-btn svg,
+.fc-clear-btn svg,
+.essay-paragraph-remove svg,
+.gpa-remove-btn svg,
+.quiz-q-remove svg,
+.planner-remove-btn svg,
+.task-chip .chip-delete svg,
+.fc-clear-btn svg { width: 0.85em; height: 0.85em; }
+
+/* Toast / status icons */
+.essay-copy-toast svg,
+.form-status svg { width: 1em; height: 1em; }
+
+/* Footer / contact / promo icons */
+.contact-channels .channel-icon svg,
+.promo-list .promo-icon svg { width: 1.3rem; height: 1.3rem; }
+
+/* Mobile menu hamburger */
+.mobile-menu-btn svg { width: 1.1em; height: 1.1em; }
+
+h1, h2, h3, h4 { line-height: 1.2; font-weight: 700; color: var(--text); }
 
 img { max-width: 100%; display: block; }
 
@@ -202,12 +272,7 @@ img { max-width: 100%; display: block; }
   transform: translateY(-3px);
   border-color: var(--preview-text);
 }
-.theme-icon {
-  font-size: 1.8rem;
-  /* Emoji font stack for welcome popup theme icons */
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
-  line-height: 1;
-}
+.theme-icon { display: flex; align-items: center; justify-content: center; }
 .theme-label { font-size: 0.85rem; }
 
 .welcome-memory-note {
@@ -239,10 +304,7 @@ img { max-width: 100%; display: block; }
   font-size: 1.2rem;
   font-weight: 800;
   color: var(--text);
-  white-space: nowrap;
-  /* Emoji font stack so the 🧭 compass icon renders correctly on all platforms */
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
-}
+  white-space: nowrap;}
 
 .main-nav { display: flex; gap: 26px; }
 .main-nav a {
@@ -298,11 +360,7 @@ img { max-width: 100%; display: block; }
   align-items: center;
   justify-content: center;
   transition: transform 0.15s, background 0.2s;
-  opacity: 0.55;
-  /* Emoji font stack for theme toggle icons (🌅 🌙 📚 🌿) */
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
-  line-height: 1;
-}
+  opacity: 0.55;}
 .theme-toggle-btn:hover { opacity: 1; transform: scale(1.1); background: var(--bg-alt); }
 .theme-toggle-btn.is-active {
   opacity: 1;
@@ -391,11 +449,7 @@ img { max-width: 100%; display: block; }
   padding: 22px;
   font-size: 2.5rem;
   box-shadow: var(--shadow);
-  animation: floatCard 6s ease-in-out infinite;
-  /* Emoji font stack for hero floating cards (📚 ⏱️ 🧠 📝) */
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
-  line-height: 1;
-}
+  animation: floatCard 6s ease-in-out infinite;}
 .hero-card-1 { top: 10%; left: 10%; animation-delay: 0s; }
 .hero-card-2 { top: 25%; right: 5%; animation-delay: 1.2s; }
 .hero-card-3 { bottom: 25%; left: 0; animation-delay: 2.4s; }
@@ -462,10 +516,8 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  /* Emoji font stack so tool card icons (🧮 🎯 🗂️ ⏱️ etc.) render as colorful icons */
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
-  line-height: 1;
+  font-size: 1.5rem;  /* SVG icon sizing */
+  color: var(--accent);
   margin-bottom: 16px;
 }
 .tool-name { font-size: 1.1rem; margin-bottom: 8px; }
@@ -1173,7 +1225,7 @@ img { max-width: 100%; display: block; }
 .blog-featured:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
 .blog-featured-thumb { position: relative; min-height: 240px; overflow: hidden; background: var(--bg-alt); }
 .blog-featured-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; inset: 0; }
-.blog-featured-thumb .thumb-emoji-badge { position: absolute; top: 16px; left: 16px; background: var(--surface); border-radius: 10px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: var(--shadow); z-index: 1; font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif; line-height: 1; }
+.blog-featured-thumb .thumb-emoji-badge { position: absolute; top: 16px; left: 16px; background: var(--surface); border-radius: 10px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: var(--shadow); z-index: 1;  }
 .blog-featured-body { padding: 36px 36px 36px 0; display: flex; flex-direction: column; justify-content: center; }
 .blog-featured-body .blog-tag { margin-bottom: 12px; }
 .blog-featured-body h2 { font-size: 1.6rem; margin-bottom: 12px; line-height: 1.3; }
@@ -1184,7 +1236,7 @@ img { max-width: 100%; display: block; }
 /* Blog card thumbnail with image + emoji badge */
 .blog-thumb { position: relative; height: 180px; overflow: hidden; background: var(--bg-alt); display: block; }
 .blog-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.blog-thumb .thumb-emoji-badge { position: absolute; top: 10px; left: 10px; background: var(--surface); border-radius: 8px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: var(--shadow); z-index: 1; font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif; line-height: 1; }
+.blog-thumb .thumb-emoji-badge { position: absolute; top: 10px; left: 10px; background: var(--surface); border-radius: 8px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: var(--shadow); z-index: 1;  }
 
 .blog-article { max-width: 760px; margin: 0 auto; }
 .blog-article-header { margin-bottom: 30px; text-align: center; }
@@ -1194,7 +1246,7 @@ img { max-width: 100%; display: block; }
 .blog-article-meta span { display: flex; align-items: center; gap: 5px; }
 .blog-article-hero { position: relative; border-radius: 20px; min-height: 320px; overflow: hidden; margin-bottom: 30px; background: var(--bg-alt); }
 .blog-article-hero img { width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; inset: 0; }
-.blog-article-hero .hero-emoji-badge { position: absolute; top: 16px; left: 16px; background: var(--surface); border-radius: 10px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: var(--shadow); z-index: 1; font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif; line-height: 1; }
+.blog-article-hero .hero-emoji-badge { position: absolute; top: 16px; left: 16px; background: var(--surface); border-radius: 10px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: var(--shadow); z-index: 1;  }
 .blog-article-body { font-family: 'Lora', Georgia, serif; font-size: 1.08rem; line-height: 1.8; color: var(--text); }
 .blog-article-body p { margin-bottom: 22px; }
 .blog-article-body h2 { font-family: 'Inter', sans-serif; font-size: 1.4rem; margin: 36px 0 14px; color: var(--text); scroll-margin-top: 90px; }
