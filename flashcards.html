@@ -4,34 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Free Flashcard Maker by Study Compass — create, flip, and study your own flashcards right in your browser. Cards save automatically. Plus the science of active recall and spaced repetition." />
-  <meta name="keywords" content="flashcard maker, free flashcards, study flashcards, active recall, spaced repetition, retrieval practice, free study tool, online flashcards" />
+  <meta name="keywords" content="flashcard maker, free flashcards, active recall, spaced repetition, study tool, exam prep" />
   <title>Flashcard Maker — Free Study Tool | Study Compass</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 
-    <!-- Canonical -->
-<!-- Open Graph (Facebook, Pinterest, LinkedIn) -->
-
-
-
-
-
-
-
-
-<!-- Twitter Card -->
-
-
-
-
-<!-- Pinterest rich pins (uses OG tags above; this explicitly enables) -->
-
-    <!-- Canonical -->
     <link rel="canonical" href="https://studycompass.github.io/study-compass/flashcards.html" />
-
-    <!-- Open Graph (Facebook, Pinterest, LinkedIn) -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Study Compass" />
     <meta property="og:title" content="Flashcard Maker — Free Study Tool | Study Compass" />
@@ -41,15 +21,11 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Flashcard Maker — Free Study Tool | Study Compass" />
-
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Flashcard Maker — Free Study Tool | Study Compass" />
     <meta name="twitter:description" content="Free Flashcard Maker by Study Compass — create, flip, and study your own flashcards right in your browser. Cards save automatically. Plus the science of active recall and spaced repetition." />
     <meta name="twitter:image" content="https://studycompass.github.io/study-compass/og-images/flashcards.png" />
     <meta name="twitter:image:alt" content="Flashcard Maker — Free Study Tool | Study Compass" />
-
-    <!-- Pinterest rich pins (uses OG tags above; this explicitly enables) -->
     <meta name="pinterest" content="nohover" />
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WY2VYWK4WQ"></script>
@@ -57,7 +33,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-WY2VYWK4WQ');
 </script>
 </head>
@@ -67,14 +42,12 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="logo" aria-label="Study Compass home">🧭 Study Compass</a>
-
       <nav class="main-nav" aria-label="Primary navigation">
         <a href="index.html#tools">Tools</a>
         <a href="blog.html">Blog</a>
         <a href="#">Premium Resources</a>
         <a href="index.html#about">About</a>
       </nav>
-
       <div class="header-actions">
         <div class="search-wrap" role="search">
           <input type="search" id="globalSearch" class="search-input" placeholder="Search tools & articles…" aria-label="Search tools and articles" autocomplete="off" />
@@ -101,7 +74,7 @@
 
   <main>
 
-    <!-- Breadcrumb for SEO + UX -->
+    <!-- Breadcrumb -->
     <div class="container" style="padding-top: 24px;">
       <nav aria-label="Breadcrumb" style="font-size:0.85rem; color:var(--text-muted);">
         <a href="index.html">Home</a> ›
@@ -116,8 +89,8 @@
           <span class="section-eyebrow">Free Study Tool</span>
           <h1 class="section-title">Flashcard Maker</h1>
           <p class="section-subtitle">
-            Create, flip, and study your own flashcards — no sign-up, no limits. Your deck
-            auto-saves in your browser so you can come back tomorrow.
+            Create, flip, and study your own flashcards — no sign-up, no limits.
+            Your deck auto-saves in your browser so you can come back tomorrow.
           </p>
         </div>
 
@@ -125,256 +98,206 @@
 
           <!-- ===== MAIN COLUMN: tool + article ===== -->
           <div class="tool-page-main">
+            <div class="flashcard-app">
 
-            <!-- Interactive tool -->
-            <div class="tool-interface" id="flashcardsTool">
-              <div class="flashcard-app">
+              <!-- 1. BUILDER: add a new card -->
+              <div class="fc-builder">
+                <h3>➕ Add a new flashcard</h3>
+                <div class="fc-builder-grid">
+                  <input type="text" id="fcQuestion" placeholder="Front — question or prompt" aria-label="Question" />
+                  <input type="text" id="fcAnswer" placeholder="Back — answer or definition" aria-label="Answer" />
+                </div>
+                <button id="fcAddBtn" class="btn btn-primary" style="width:100%;">Add to deck</button>
+              </div>
 
-                <!-- ===== Section 1: Builder ===== -->
-                <section class="fc-builder" aria-label="Add a new flashcard">
-                  <h3>➕ Add a new flashcard</h3>
-                  <div class="fc-builder-grid">
-                    <input type="text" id="fcQuestionInput" placeholder="Front — question or prompt" aria-label="Flashcard question or prompt" autocomplete="off" />
-                    <input type="text" id="fcAnswerInput" placeholder="Back — answer or definition" aria-label="Flashcard answer or definition" autocomplete="off" />
-                  </div>
-                  <button id="fcAddBtn" class="btn btn-primary" style="width:100%;">Add to deck</button>
-                </section>
+              <!-- 2. STUDY MODE: flip cards -->
+              <div class="fc-study">
+                <div class="fc-study-header">
+                  <span class="fc-progress" id="fcProgress">Card 0 of 0</span>
+                  <span>Click the card to flip · ← → to navigate</span>
+                </div>
 
-                <!-- ===== Section 2: Study Mode ===== -->
-                <section class="fc-study" aria-label="Study your flashcards">
-                  <div class="fc-study-header">
-                    <span class="fc-progress" id="fcProgress">Card 0 of 0</span>
-                    <span>Click the card to flip · ← → to navigate</span>
-                  </div>
-
-                  <div class="fc-card-container" id="fcContainer" role="button" tabindex="0" aria-label="Flashcard. Click or press Enter to flip.">
-                    <div class="fc-card" id="fcCard">
-                      <div class="fc-card-face fc-card-front">
-                        <span class="face-label">Question</span>
-                        <div class="face-text" id="fcFrontText">Your first card will appear here.</div>
-                      </div>
-                      <div class="fc-card-face fc-card-back">
-                        <span class="face-label">Answer</span>
-                        <div class="face-text" id="fcBackText">And the answer will appear here.</div>
-                      </div>
+                <div class="fc-card-container" id="fcContainer" role="button" tabindex="0" aria-label="Flashcard — click or press Enter to flip">
+                  <div class="fc-card" id="fcCard">
+                    <div class="fc-card-face fc-card-front">
+                      <span class="face-label">Question</span>
+                      <div class="face-text" id="fcFrontText">Your flashcards will appear here. Add one above to begin.</div>
+                    </div>
+                    <div class="fc-card-face fc-card-back">
+                      <span class="face-label">Answer</span>
+                      <div class="face-text" id="fcBackText">—</div>
                     </div>
                   </div>
+                </div>
 
-                  <div class="fc-study-controls">
-                    <button id="fcPrevBtn" class="btn btn-ghost" aria-label="Previous card">◀ Previous</button>
-                    <button id="fcFlipBtn" class="btn btn-primary" aria-label="Flip the current card">Flip card</button>
-                    <button id="fcNextBtn" class="btn btn-ghost" aria-label="Next card">Next ▶</button>
-                    <button id="fcShuffleBtn" class="btn btn-ghost" aria-label="Shuffle the deck">🔀 Shuffle</button>
-                  </div>
+                <div class="fc-study-controls">
+                  <button id="fcPrevBtn" class="btn btn-ghost">← Previous</button>
+                  <button id="fcFlipBtn" class="btn btn-primary">Flip card</button>
+                  <button id="fcNextBtn" class="btn btn-ghost">Next →</button>
+                  <button id="fcShuffleBtn" class="btn btn-ghost">🔀 Shuffle</button>
+                </div>
+                <p class="fc-hint">Tip: Saying the answer out loud before flipping boosts retention by up to 50%.</p>
+              </div>
 
-                  <p class="fc-hint">Tip: Saying the answer out loud before flipping boosts retention by up to 50%.</p>
-                </section>
-
-                <!-- ===== Section 3: Deck List ===== -->
-                <section class="fc-deck-list" aria-label="Your flashcard deck">
-                  <h3>📚 Your deck <span class="fc-deck-count" id="fcCount">0 cards</span></h3>
-                  <div id="fcDeckList"></div>
-                  <button class="fc-clear-btn" id="fcClearBtn" hidden>🗑 Clear entire deck</button>
-                </section>
-
+              <!-- 3. DECK LIST: manage saved cards -->
+              <div class="fc-deck-list">
+                <h3>
+                  📚 Your deck
+                  <span class="fc-deck-count" id="fcCount">0 cards</span>
+                </h3>
+                <div id="fcDeckList">
+                  <p class="fc-empty">No cards yet. Add your first flashcard above to get started.</p>
+                </div>
+                <button id="fcClearBtn" class="fc-clear-btn" style="margin-top:14px;" hidden>🗑 Clear entire deck</button>
               </div>
             </div>
 
             <!-- ===== SEO ARTICLE (800+ words) ===== -->
-            <article class="tool-article">
+            <article class="tool-article" style="margin-top: 36px;">
 
-              <h2>How Flashcards Work: Where Active Recall Meets Spaced Repetition</h2>
+              <h2>How to Study With Flashcards: The Science of Active Recall and Spaced Repetition</h2>
 
               <p>
-                Flashcards are one of the oldest and most quietly powerful study tools ever
-                devised. A simple paper rectangle with a question on one side and an answer on
-                the other may not look like cutting-edge learning technology, yet decades of
-                cognitive-science research consistently rank flashcard-style retrieval practice
-                among the most effective study methods ever measured. Their power comes from the
-                convergence of two well-documented learning mechanisms: active recall and spaced
-                repetition. Neither mechanism is novel — both were described over a century ago —
-                but few study tools combine them as cleanly as a well-made flashcard deck.
+                Flashcards are one of the oldest and most effective study tools ever invented.
+                From the Latin <em>carta</em> used by medieval scholars to memorize scripture,
+                to the modern Anki decks medical students swear by, the humble two-sided card
+                has outlasted countless study fads. The reason flashcards work so well is not
+                magic — it is the convergence of two of the most robust findings in cognitive
+                psychology: <strong>active recall</strong> and <strong>spaced repetition</strong>.
+                This article explains how each works, why the combination is so powerful, and
+                how to use the free flashcard maker above to study more efficiently.
               </p>
 
               <h3>What Is Active Recall?</h3>
 
               <p>
-                Active recall is the cognitive process of deliberately retrieving information
-                from memory rather than passively re-exposing yourself to it. Reading a textbook,
-                highlighting notes, or watching a lecture recording are all forms of passive
-                review: the information flows in, but you are never required to pull it back out.
-                Active recall inverts that direction — you give yourself a cue (a question) and
-                force your brain to generate the answer from long-term storage. This retrieval
-                effort, even when it fails, is what cements the memory trace more deeply into
-                the cortex.
+                Active recall — also called retrieval practice — is the act of deliberately
+                pulling information out of your memory rather than passively re-reading it.
+                When you look at the front of a flashcard and try to remember the back before
+                flipping it over, you are engaging in active recall. Each successful retrieval
+                strengthens the neural pathway to that information, making it easier to access
+                next time. This is fundamentally different from recognition (recognizing the
+                right answer when you see it) which is what happens when you re-read a textbook
+                or watch a lecture a second time.
               </p>
 
               <p>
-                The defining study on active recall was published in 2013 by psychologists
-                Jeffrey Karpicke and Janell Blunt at Purdue University. In their experiment,
-                students learned science concepts using one of several strategies, then returned
-                a week later for a final test. The retrieval-practice group — students who spent
-                their study time recalling concepts from memory — dramatically outperformed peers
-                who had spent the same time building detailed concept maps while looking at the
-                material. The retrieval-practice students scored roughly 50% higher on the final
-                assessment, a gap large enough to move most students up a full letter grade.
-                Karpicke and Blunt's conclusion was unambiguous: the act of retrieving, not the
-                act of organizing or re-reading, is what produces durable learning.
+                A landmark 2013 study by Karpicke and Blunt at Purdue University compared
+                students who studied via retrieval practice with students who studied via
+                concept mapping (a more elaborate study technique). The retrieval group
+                outperformed the concept-mapping group by roughly 50% on a test one week
+                later. Similar results have been replicated across dozens of studies spanning
+                vocabulary learning, medical facts, history, and even motor skills. The
+                takeaway is simple but counterintuitive: trying to remember something is
+                almost always a more efficient use of study time than re-reading or
+                re-writing it.
               </p>
 
               <h3>What Is Spaced Repetition?</h3>
 
               <p>
-                Spaced repetition is the practice of revisiting information at increasing
-                intervals rather than cramming it all into a single marathon session. The first
-                systematic description of the effect came from German psychologist Hermann
-                Ebbinghaus, who in 1885 published the results of years of self-experimentation on
-                memory for nonsense syllables. Ebbinghaus charted what he called the
-                <em>forgetting curve</em> — a steep, exponential decay in retention that begins
-                within minutes of first learning something. Without review, most newly learned
-                material is forgotten within days, sometimes within hours.
+                Spaced repetition is the practice of reviewing information at increasing
+                intervals — perhaps one day after first learning it, then three days, then a
+                week, then a month. Each successful review pushes the next review further into
+                the future. The technique exploits the way human memory naturally decays:
+                psychologist Hermann Ebbinghaus first mapped this decay in 1885 with his famous
+                <em>forgetting curve</em>, which shows that without review, most newly learned
+                information is lost within days.
               </p>
 
               <p>
-                Ebbinghaus also discovered the antidote: each review of the material, spaced out
-                over time, flattens the forgetting curve further. After the first review, the
-                memory decays more slowly; after the second, more slowly still. With three or
-                four well-timed reviews, the curve flattens enough that the information becomes
-                effectively permanent. Modern spaced-repetition software (Anki, SuperMemo, and
-                similar tools) algorithmically schedules each card's next review based on how
-                easily you recalled it. The same logic applies — to a slightly less precise
-                degree — when you simply shuffle a flashcard deck and review it on a daily or
-                weekly cadence.
+                By spacing reviews at the moment you are about to forget, you flatten the
+                forgetting curve. Each review makes the memory more durable, so the next
+                interval can be longer. Modern spaced-repetition systems like SuperMemo,
+                Anki, and Quizlet's "Learn" mode use algorithms to schedule cards for you,
+                but the principle is the same one Ebbinghaus discovered nearly 150 years ago.
+                The free flashcard maker above doesn't auto-schedule reviews, but you can
+                build the habit manually: study a new deck today, revisit it in two days,
+                then a week, then two weeks.
               </p>
 
               <h3>Why Flashcards Combine Both So Well</h3>
 
               <p>
-                Flashcards are the rare study tool that activates both mechanisms in a single
-                brief action. The moment you turn over a card and try to remember the answer
-                before peeking, you are performing active recall. The moment you return to that
-                card a day, a week, or a month later, you are performing spaced repetition. Few
-                other study techniques do both so efficiently: re-reading a chapter does neither,
-                summarizing notes does weak recall but no spacing, and even practice tests —
-                although excellent for active recall — are too time-consuming to repeat often
-                enough to optimize spacing.
-              </p>
-
-              <p>
-                The flashcard format also enforces a healthy study rhythm. Each card takes only
-                seconds to attempt, so you can review dozens of items in a single short session.
-                Failed cards reveal exactly which specific facts or concepts have not yet
-                consolidated, letting you focus the next session's energy where it is most needed.
-                This precision-targeted review is one reason spaced-repetition flashcard decks
-                have been shown in randomized trials to roughly halve the time students need to
-                memorize new vocabulary, anatomy, and legal definitions.
+                Flashcards are uniquely well-suited to active recall because they force a
+                binary choice — you either know the answer or you do not. There is no
+                multiple-choice hint to lean on. And because each card is a discrete,
+                self-contained unit, they are trivially easy to space out across days.
+                You can shuffle the deck to prevent order effects (where you memorize the
+                sequence rather than the content), and you can pull out cards you consistently
+                get wrong for extra review. Few study techniques combine active recall and
+                spaced repetition as cleanly as a well-maintained flashcard deck.
               </p>
 
               <h3>How to Write Effective Flashcards</h3>
 
               <p>
-                The quality of your flashcards matters at least as much as the quantity. Three
-                principles separate decks that accelerate learning from decks that waste time.
-                First, keep each card <strong>atomic</strong>: one card should test one idea, not
-                a list of related facts. A card that asks "List the causes of the French
-                Revolution" forces you to recall an entire essay on demand, which the brain does
-                poorly; four separate cards asking about specific causes will be learned faster
-                and remembered longer. Atomic cards also reveal exactly which pieces of knowledge
-                are missing, rather than masking partial recall behind a vague sense of
-                familiarity.
+                The biggest mistake students make with flashcards is cramming too much
+                information onto a single card. A flashcard should test <em>one</em> atomic
+                fact, not a paragraph. Instead of "List the causes of the French Revolution"
+                (which is an essay question, not a flashcard), break it into individual cards:
+                "What was the immediate financial trigger of the French Revolution?" → "The
+                bankruptcy of the royal treasury in 1788." Atomic cards are faster to review,
+                easier to remember, and give cleaner feedback on what you actually know.
               </p>
 
               <p>
-                Second, write cards <strong>in your own words</strong> rather than copying
-                definitions verbatim from the textbook. Translating a definition into your own
-                phrasing forces you to understand it first, and the act of translation itself
-                produces a richer, more retrievable memory trace. Third, apply the
-                <strong>10-second rule</strong>: if you cannot answer a card in under ten
-                seconds, the card is too long, too complex, or insufficiently understood — break
-                it up or rewrite it. Cards that take half a minute to recall are cards that get
-                skipped, then forgotten, then quietly abandoned at the bottom of the deck.
+                A second principle is to <strong>use your own words</strong> wherever possible.
+                Copying definitions verbatim from a textbook creates the illusion of learning,
+                but the act of paraphrasing forces you to actually understand the material
+                before you write the card. If you cannot put a concept into your own words,
+                that is a signal to study it more before adding it to your deck. Many
+                top-performing students follow the "10-second rule": if a flashcard cannot
+                be answered in under 10 seconds, it should be split into smaller cards or
+                rewritten more clearly.
               </p>
 
               <h3>Using the Flashcard Maker Above</h3>
 
               <p>
-                The free flashcard maker on this page is designed to make the workflow above as
-                frictionless as possible. Type a question into the front field and an answer into
-                the back field, then press Enter or click <em>Add to deck</em> — the card is
-                appended instantly. When you are ready to study, the central card flips on click,
-                and the Previous / Next / Shuffle buttons let you navigate however you like.
-                Most importantly, your deck auto-saves to your browser's localStorage under the
-                key <code>studyCompass.flashcards</code>, so the cards you build today will still
-                be there when you return tomorrow — no account, no sign-up, no cloud sync
-                required.
+                The free flashcard maker on this page is intentionally simple. Type a question
+                in the front field, an answer in the back field, and click <em>Add to deck</em>.
+                Your cards save automatically to your browser's local storage — they will still
+                be there tomorrow, even if you close the tab. Use the Previous and Next buttons
+                (or the left and right arrow keys on your keyboard) to move through your deck,
+                and click the card or press Enter to flip it. The Shuffle button randomizes
+                the order so you do not accidentally memorize the sequence.
               </p>
 
               <p>
-                Because the data lives only in this browser, you can build personal decks for
-                specific classes, exams, or languages without worrying about anyone else seeing
-                them. To move a deck to another device, you can copy the questions and answers
-                into a spreadsheet or document and recreate them on the new machine. For daily
-                review, simply open the page, click Shuffle, and flip through the deck once or
-                twice — a three-minute ritual that, repeated over weeks, produces surprisingly
-                durable long-term memory.
+                For students who want a more structured spaced-repetition schedule, our
+                <a href="index.html#premium">Student Reset Planner</a> includes a built-in
+                flashcard review tracker that helps you schedule decks at optimal intervals
+                — one day, three days, one week, two weeks, one month — and integrates them
+                with your broader study plan. Pairing daily flashcard review with a weekly
+                reset review is one of the highest-leverage study routines a student can build.
               </p>
 
               <h3>Common Pitfalls to Avoid</h3>
 
               <p>
-                The most common flashcard mistake is the <strong>recognition trap</strong>:
-                flipping the card too quickly and feeling a vague "oh yeah, I knew that"
-                sensation that mimics recall but is actually just recognition. Recognition is
-                dramatically easier than recall and does not produce the same learning benefit.
-                Force yourself to articulate the full answer out loud (or in writing) before
-                flipping the card — even if you are alone in your room. Saying the answer aloud
-                has been shown in several studies to boost retention by up to 50% compared to
-                silent self-assessment, which is why the hint below the study controls above
-                reminds you to do exactly that.
+                First, avoid the "recognition trap" — flipping the card too quickly because
+                it <em>feels</em> familiar. Always commit to an answer in your head (or said
+                out loud) before flipping. Second, do not let your deck grow unchecked. A
+                deck of 5000 cards you never review is worse than a deck of 200 cards you
+                review daily. Periodically retire cards you have mastered and split cards
+                you consistently get wrong into smaller, simpler versions. Finally, do not
+                rely solely on flashcards for skills that require application — they are
+                excellent for facts and definitions, but problem-solving requires actually
+                doing problems.
               </p>
 
               <p>
-                A second pitfall is <strong>deck bloat</strong>. Students often generate hundreds
-                of cards in a single motivated burst, then become overwhelmed by the daily review
-                load and abandon the deck entirely. A better strategy is to cap your deck at the
-                size you can comfortably review in 10 to 15 minutes a day — usually 100 to 300
-                cards — and aggressively retire or rewrite cards you consistently get right. A
-                third, subtler pitfall is testing pure recall when the real exam demands
-                <strong>application</strong>. If your final assessment will ask you to apply a
-                concept, write at least some cards that pose scenarios ("A patient presents
-                with…") rather than just definitions, so your study practice matches the
-                cognitive demand of the test itself.
-              </p>
-
-              <h3>Pairing Daily Flashcards With a Weekly Reset</h3>
-
-              <p>
-                Flashcards are excellent for daily micro-reviews, but they work best inside a
-                broader study system that also includes planning, reflection, and energy
-                management. Once a week — Sunday evening works well for most students — sit down
-                for 20 to 30 minutes and review which decks you actually studied, which cards you
-                consistently missed, and where your study time should focus next week. Our
-                <a href="index.html#premium">Student Reset Planner</a> includes a built-in
-                spaced-repetition tracker, a daily focus log, and weekly reflection prompts
-                designed to slot flashcard review into a complete study routine. Students who
-                pair daily retrieval practice with a weekly review consistently report stronger
-                retention, lower cramming stress, and a clearer sense of which subjects actually
-                need their attention.
-              </p>
-
-              <p>
-                Start small. Build five cards today — one for each of the five concepts you most
-                need to remember from this week's classes. Review them once tomorrow, once the
-                day after, and once again on Sunday. By next week, you will have a small but
-                durable pocket of long-term memory that no amount of last-minute cramming could
-                have produced. Flashcards are not glamorous, but they are quietly the most
-                evidence-backed study tool you can carry in your pocket.
+                Build your first deck above right now — start with 10 cards on whatever you
+                are studying this week. Review it tonight, then again in two days. By the
+                end of the month, you will have a personal study asset that is more durable
+                than any textbook highlight could ever be.
               </p>
 
             </article>
           </div>
 
-          <!-- ===== SIDEBAR: premium promo + AdSense ===== -->
+          <!-- ===== SIDEBAR ===== -->
           <aside class="tool-page-sidebar" aria-label="Premium resources and advertisements">
 
             <div class="ad-slot" aria-label="Advertisement">
@@ -394,7 +317,7 @@
                   <span class="promo-icon">🧭</span>
                   <div>
                     <strong>The Student Reset Planner</strong>
-                    <p>Burned out? Reset your week in 30 minutes with a built-in spaced-repetition tracker.</p>
+                    <p>Includes a built-in spaced-repetition tracker for flashcard decks.</p>
                     <a href="index.html#premium">Learn more →</a>
                   </div>
                 </li>
@@ -402,7 +325,7 @@
                   <span class="promo-icon">✅</span>
                   <div>
                     <strong>Digital Habit Trackers</strong>
-                    <p>Build focus, sleep &amp; study streaks that actually stick.</p>
+                    <p>Build daily review streaks that actually stick.</p>
                     <a href="index.html#premium">Learn more →</a>
                   </div>
                 </li>
@@ -459,161 +382,125 @@
   <script src="script.js" defer></script>
   <script>
     /* =========================================================
-       FLASHCARD MAKER — standalone logic for flashcards.html
-       (script.js handles the index demo; this page uses the
-        full-featured version with localStorage persistence,
-        3D flip, keyboard shortcuts, shuffle, and deck management.)
+       FLASHCARD MAKER — full client-side logic
+       Features:
+       - Add / delete cards
+       - Click card or press Enter to flip
+       - ← / → arrow keys to navigate
+       - Shuffle deck
+       - Auto-save to localStorage (persists across sessions)
        ========================================================= */
     window.addEventListener('DOMContentLoaded', () => {
       const STORAGE_KEY = 'studyCompass.flashcards';
 
-      // ---- DOM references ----
-      const qInput        = document.getElementById('fcQuestionInput');
-      const aInput        = document.getElementById('fcAnswerInput');
+      const questionInput = document.getElementById('fcQuestion');
+      const answerInput   = document.getElementById('fcAnswer');
       const addBtn        = document.getElementById('fcAddBtn');
-
-      const progressEl    = document.getElementById('fcProgress');
-      const cardContainer = document.getElementById('fcContainer');
       const cardEl        = document.getElementById('fcCard');
-      const frontTextEl   = document.getElementById('fcFrontText');
-      const backTextEl    = document.getElementById('fcBackText');
+      const containerEl   = document.getElementById('fcContainer');
+      const frontText     = document.getElementById('fcFrontText');
+      const backText      = document.getElementById('fcBackText');
       const prevBtn       = document.getElementById('fcPrevBtn');
-      const flipBtn       = document.getElementById('fcFlipBtn');
       const nextBtn       = document.getElementById('fcNextBtn');
+      const flipBtn       = document.getElementById('fcFlipBtn');
       const shuffleBtn    = document.getElementById('fcShuffleBtn');
-
+      const progressEl    = document.getElementById('fcProgress');
       const countEl       = document.getElementById('fcCount');
       const deckListEl    = document.getElementById('fcDeckList');
       const clearBtn      = document.getElementById('fcClearBtn');
 
-      // ---- State ----
-      let deck        = [];
+      let deck = [];
       let currentIndex = 0;
-      let isFlipped    = false;
+      let isFlipped = false;
 
-      // ---- Persistence ----
+      /* ---------- Persistence ---------- */
       function loadDeck() {
         try {
-          const raw = localStorage.getItem(STORAGE_KEY);
-          if (raw) {
-            const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed)) {
-              deck = parsed.filter(c => c && typeof c.q === 'string' && typeof c.a === 'string');
-            }
-          }
+          const saved = localStorage.getItem(STORAGE_KEY);
+          deck = saved ? JSON.parse(saved) : [];
         } catch (e) {
-          // Corrupt data — start fresh.
           deck = [];
         }
-        if (currentIndex > deck.length - 1) currentIndex = Math.max(0, deck.length - 1);
       }
 
       function saveDeck() {
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(deck));
         } catch (e) {
-          // Storage full or disabled — silently keep deck in memory only.
+          console.warn('Flashcard Maker: could not save deck.', e);
         }
       }
 
-      // ---- Rendering ----
+      /* ---------- Render the current study card ---------- */
       function renderCurrentCard() {
-        // Reset flip state on every re-render.
-        isFlipped = false;
-        cardEl.classList.remove('is-flipped');
-
         if (deck.length === 0) {
+          frontText.textContent = 'Your flashcards will appear here. Add one above to begin.';
+          backText.textContent  = '—';
           progressEl.textContent = 'Card 0 of 0';
-          frontTextEl.textContent = 'Your first card will appear here.';
-          backTextEl.textContent  = 'And the answer will appear here.';
-          cardContainer.setAttribute('aria-label', 'No flashcards yet. Add one above to begin.');
+          cardEl.classList.remove('is-flipped');
+          isFlipped = false;
           return;
         }
-
-        // Clamp currentIndex defensively.
-        if (currentIndex < 0) currentIndex = 0;
-        if (currentIndex > deck.length - 1) currentIndex = deck.length - 1;
-
+        if (currentIndex >= deck.length) currentIndex = 0;
+        if (currentIndex < 0) currentIndex = deck.length - 1;
         const card = deck[currentIndex];
+        frontText.textContent = card.q;
+        backText.textContent  = card.a;
         progressEl.textContent = `Card ${currentIndex + 1} of ${deck.length}`;
-        frontTextEl.textContent = card.q;
-        backTextEl.textContent  = card.a;
-        cardContainer.setAttribute('aria-label',
-          `Flashcard ${currentIndex + 1} of ${deck.length}. Question: ${card.q}. Click or press Enter to flip.`);
+        cardEl.classList.remove('is-flipped');
+        isFlipped = false;
       }
 
+      /* ---------- Render the deck list (manage cards) ---------- */
       function renderDeckList() {
-        deckListEl.innerHTML = '';
-
-        // Update count badge.
-        countEl.textContent = deck.length === 1 ? '1 card' : `${deck.length} cards`;
-
-        // Toggle clear button visibility.
+        countEl.textContent = `${deck.length} ${deck.length === 1 ? 'card' : 'cards'}`;
         clearBtn.hidden = deck.length === 0;
 
         if (deck.length === 0) {
-          const empty = document.createElement('div');
-          empty.className = 'fc-empty';
-          empty.textContent = 'No cards yet — add your first flashcard above.';
-          deckListEl.appendChild(empty);
+          deckListEl.innerHTML = '<p class="fc-empty">No cards yet. Add your first flashcard above to get started.</p>';
           return;
         }
 
-        deck.forEach((card, index) => {
+        deckListEl.innerHTML = '';
+        deck.forEach((card, i) => {
           const row = document.createElement('div');
           row.className = 'fc-card-row';
-
-          const qSpan = document.createElement('span');
-          qSpan.className = 'q';
-          qSpan.textContent = card.q;
-
-          const aSpan = document.createElement('span');
-          aSpan.className = 'a';
-          aSpan.textContent = card.a;
-
-          const delBtn = document.createElement('button');
-          delBtn.className = 'fc-delete-btn';
-          delBtn.textContent = '✕';
-          delBtn.setAttribute('aria-label', `Delete card ${index + 1}`);
-          delBtn.addEventListener('click', () => deleteCard(index));
-
-          row.appendChild(qSpan);
-          row.appendChild(aSpan);
-          row.appendChild(delBtn);
+          row.innerHTML = `
+            <span class="q"></span>
+            <span class="a"></span>
+            <button class="fc-delete-btn" aria-label="Delete card ${i + 1}">✕</button>
+          `;
+          // Use textContent for the spans to safely escape user input
+          row.querySelector('.q').textContent = card.q;
+          row.querySelector('.a').textContent = card.a;
+          row.querySelector('.fc-delete-btn').addEventListener('click', () => deleteCard(i));
           deckListEl.appendChild(row);
         });
       }
 
-      // ---- Actions ----
+      /* ---------- Actions ---------- */
       function addCard() {
-        const q = qInput.value.trim();
-        const a = aInput.value.trim();
+        const q = questionInput.value.trim();
+        const a = answerInput.value.trim();
         if (!q || !a) {
-          // Friendly nudge rather than silent failure.
-          if (!q) qInput.focus(); else aInput.focus();
+          // Light visual cue — focus the empty field
+          if (!q) questionInput.focus();
+          else answerInput.focus();
           return;
         }
         deck.push({ q, a });
+        questionInput.value = '';
+        answerInput.value = '';
+        questionInput.focus();
         currentIndex = deck.length - 1;
         saveDeck();
-        qInput.value = '';
-        aInput.value = '';
-        qInput.focus();
         renderCurrentCard();
         renderDeckList();
       }
 
       function deleteCard(index) {
-        if (index < 0 || index >= deck.length) return;
         deck.splice(index, 1);
-        // Keep currentIndex valid.
-        if (deck.length === 0) {
-          currentIndex = 0;
-        } else if (index < currentIndex) {
-          currentIndex--;
-        } else if (currentIndex > deck.length - 1) {
-          currentIndex = deck.length - 1;
-        }
+        if (currentIndex >= deck.length) currentIndex = Math.max(0, deck.length - 1);
         saveDeck();
         renderCurrentCard();
         renderDeckList();
@@ -639,7 +526,7 @@
 
       function shuffleDeck() {
         if (deck.length < 2) return;
-        // Fisher-Yates shuffle.
+        // Fisher-Yates shuffle
         for (let i = deck.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [deck[i], deck[j]] = [deck[j], deck[i]];
@@ -652,68 +539,44 @@
 
       function clearAll() {
         if (deck.length === 0) return;
-        const ok = confirm('Clear your entire flashcard deck? This cannot be undone.');
-        if (!ok) return;
+        if (!confirm(`Delete all ${deck.length} flashcards? This cannot be undone.`)) return;
         deck = [];
         currentIndex = 0;
-        isFlipped = false;
         saveDeck();
         renderCurrentCard();
         renderDeckList();
       }
 
-      // ---- Event wiring ----
+      /* ---------- Wire up events ---------- */
       addBtn.addEventListener('click', addCard);
+      questionInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') addCard(); });
+      answerInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') addCard(); });
+
+      containerEl.addEventListener('click', flipCard);
+      containerEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flipCard(); }
+      });
       flipBtn.addEventListener('click', flipCard);
       nextBtn.addEventListener('click', nextCard);
       prevBtn.addEventListener('click', prevCard);
       shuffleBtn.addEventListener('click', shuffleDeck);
       clearBtn.addEventListener('click', clearAll);
 
-      // Click the card to flip.
-      cardContainer.addEventListener('click', flipCard);
-
-      // Keyboard activation on the focused card container (role="button").
-      cardContainer.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+      // Global keyboard shortcuts
+      document.addEventListener('keydown', (e) => {
+        // Don't trigger when typing in an input/textarea
+        const tag = (e.target.tagName || '').toLowerCase();
+        if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+        if (e.key === 'ArrowRight') nextCard();
+        else if (e.key === 'ArrowLeft') prevCard();
+        else if (e.key === ' ' || e.key === 'Enter') {
+          if (document.activeElement === containerEl) return; // already handled
           e.preventDefault();
           flipCard();
         }
       });
 
-      // Enter in either input adds the card.
-      [qInput, aInput].forEach((input) => {
-        input.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            addCard();
-          }
-        });
-      });
-
-      // Global keyboard shortcuts — ignored while typing in inputs.
-      document.addEventListener('keydown', (e) => {
-        const t = e.target;
-        const isTyping = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
-        if (isTyping) return;
-
-        if (e.key === 'ArrowRight') {
-          e.preventDefault();
-          nextCard();
-        } else if (e.key === 'ArrowLeft') {
-          e.preventDefault();
-          prevCard();
-        } else if (e.key === ' ' || e.key === 'Enter') {
-          // Space/Enter flips — but only when focus is not already on the card
-          // container (which has its own handler above).
-          if (t !== cardContainer) {
-            e.preventDefault();
-            flipCard();
-          }
-        }
-      });
-
-      // ---- Initialize ----
+      /* ---------- Initialize ---------- */
       loadDeck();
       renderCurrentCard();
       renderDeckList();

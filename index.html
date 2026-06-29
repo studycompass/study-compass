@@ -11,27 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 
-    <!-- Canonical -->
-<!-- Open Graph (Facebook, Pinterest, LinkedIn) -->
-
-
-
-
-
-
-
-
-<!-- Twitter Card -->
-
-
-
-
-<!-- Pinterest rich pins (uses OG tags above; this explicitly enables) -->
-
-    <!-- Canonical -->
     <link rel="canonical" href="https://studycompass.github.io/study-compass/index.html" />
-
-    <!-- Open Graph (Facebook, Pinterest, LinkedIn) -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Study Compass" />
     <meta property="og:title" content="Study Compass — Navigate Your Academic Journey" />
@@ -41,15 +21,11 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Study Compass — Navigate Your Academic Journey" />
-
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Study Compass — Navigate Your Academic Journey" />
     <meta name="twitter:description" content="Study Compass — your cozy, focus-driven academic toolkit. Free study tools, planners, and premium digital resources for students." />
     <meta name="twitter:image" content="https://studycompass.github.io/study-compass/og-images/index.png" />
     <meta name="twitter:image:alt" content="Study Compass — Navigate Your Academic Journey" />
-
-    <!-- Pinterest rich pins (uses OG tags above; this explicitly enables) -->
     <meta name="pinterest" content="nohover" />
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WY2VYWK4WQ"></script>
@@ -57,7 +33,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-WY2VYWK4WQ');
 </script>
 </head>
@@ -73,11 +48,11 @@
       <p class="welcome-subtitle">Choose your favorite study environment.</p>
 
       <div class="welcome-theme-buttons">
-        <button class="welcome-theme-btn" data-theme="morning" style="--preview-bg:#FAF6EF; --preview-text:#4A4036;">
+        <button class="welcome-theme-btn" data-theme="morning" style="--preview-bg:#FCFBF7; --preview-text:#4A5D23;">
           <span class="theme-icon">🌅</span>
           <span class="theme-label">Morning Focus</span>
         </button>
-        <button class="welcome-theme-btn" data-theme="night" style="--preview-bg:#1A1715; --preview-text:#E8DFD3;">
+        <button class="welcome-theme-btn" data-theme="night" style="--preview-bg:#121212; --preview-text:#E0E0E0;">
           <span class="theme-icon">🌙</span>
           <span class="theme-label">Night Study</span>
         </button>
@@ -85,7 +60,7 @@
           <span class="theme-icon">📚</span>
           <span class="theme-label">Library Mode</span>
         </button>
-        <button class="welcome-theme-btn" data-theme="nature" style="--preview-bg:#EBF3EA; --preview-text:#2D4A2F;">
+        <button class="welcome-theme-btn" data-theme="nature" style="--preview-bg:#E8F5E9; --preview-text:#1B5E20;">
           <span class="theme-icon">🌿</span>
           <span class="theme-label">Nature Mode</span>
         </button>
@@ -102,14 +77,12 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="logo" aria-label="Study Compass home">🧭 Study Compass</a>
-
       <nav class="main-nav" aria-label="Primary navigation">
         <a href="index.html#tools">Tools</a>
         <a href="blog.html">Blog</a>
         <a href="#">Premium Resources</a>
         <a href="index.html#about">About</a>
       </nav>
-
       <div class="header-actions">
         <div class="search-wrap" role="search">
           <input type="search" id="globalSearch" class="search-input" placeholder="Search tools & articles…" aria-label="Search tools and articles" autocomplete="off" />
@@ -191,7 +164,7 @@
             <div class="tool-icon">🎯</div>
             <h3 class="tool-name">Quiz Generator</h3>
             <p class="tool-desc">Turn your class notes into instant self-test quizzes.</p>
-            <a class="tool-link" href="quiz.html">Open tool →</a>
+            <a class="tool-link" href="tool-template.html">Open tool →</a>
           </article>
 
           <article class="tool-card" data-name="flashcard maker study cards memory" tabindex="0">
@@ -212,20 +185,42 @@
             <div class="tool-icon">📅</div>
             <h3 class="tool-name">Study Planner</h3>
             <p class="tool-desc">Plan your week, set priorities, and never miss a deadline.</p>
-            <a class="tool-link" href="planner.html">Open tool →</a>
+            <a class="tool-link" href="tool-template.html">Open tool →</a>
           </article>
 
           <article class="tool-card" data-name="essay outline generator writing" tabindex="0">
             <div class="tool-icon">📝</div>
             <h3 class="tool-name">Essay Outline Generator</h3>
             <p class="tool-desc">Structure essays with a clean, argument-driven outline.</p>
-            <a class="tool-link" href="essay.html">Open tool →</a>
+            <a class="tool-link" href="tool-template.html">Open tool →</a>
           </article>
 
-          <article class="tool-card is-placeholder" data-name="more tools coming soon future roadmap" aria-label="More tools coming soon">
-            <div class="placeholder-icon">🚧</div>
-            <h3 class="placeholder-title">More Tools Coming Soon</h3>
-            <p class="placeholder-desc">We're crafting new study tools. Have an idea? <a href="contact.html">Tell us what you need →</a></p>
+          <article class="tool-card" data-name="unit converter metric imperial" tabindex="0">
+            <div class="tool-icon">📐</div>
+            <h3 class="tool-name">Unit Converter</h3>
+            <p class="tool-desc">Convert metric and imperial units for physics & chemistry.</p>
+            <a class="tool-link" href="tool-template.html">Open tool →</a>
+          </article>
+
+          <article class="tool-card" data-name="periodic table explorer chemistry elements" tabindex="0">
+            <div class="tool-icon">⚗️</div>
+            <h3 class="tool-name">Periodic Table Explorer</h3>
+            <p class="tool-desc">Browse all 118 elements with properties at a glance.</p>
+            <a class="tool-link" href="tool-template.html">Open tool →</a>
+          </article>
+
+          <article class="tool-card" data-name="math formula library equations reference" tabindex="0">
+            <div class="tool-icon">∑</div>
+            <h3 class="tool-name">Math Formula Library</h3>
+            <p class="tool-desc">A clean reference of algebra, calculus & geometry formulas.</p>
+            <a class="tool-link" href="tool-template.html">Open tool →</a>
+          </article>
+
+          <article class="tool-card" data-name="random quiz of the day daily challenge" tabindex="0">
+            <div class="tool-icon">🎲</div>
+            <h3 class="tool-name">Random Quiz of the Day</h3>
+            <p class="tool-desc">A fresh 5-question quiz every day to keep you sharp.</p>
+            <a class="tool-link" href="tool-template.html">Open tool →</a>
           </article>
 
         </div>
@@ -253,7 +248,7 @@
               <span class="blog-tag">Productivity</span>
               <h3 class="blog-title">The Science Behind the Pomodoro Technique</h3>
               <p class="blog-excerpt">Why 25-minute sprints work — and how to customize the cycle for deep work sessions.</p>
-              <a class="blog-link" href="blog.html#pomodoro-science">Read article →</a>
+              <a class="blog-link" href="#">Read article →</a>
             </div>
           </article>
 
@@ -263,7 +258,7 @@
               <span class="blog-tag">Memory</span>
               <h3 class="blog-title">Active Recall vs. Spaced Repetition: A Guide</h3>
               <p class="blog-excerpt">Two powerful learning strategies, demystified — with a weekly schedule template.</p>
-              <a class="blog-link" href="blog.html#active-recall">Read article →</a>
+              <a class="blog-link" href="#">Read article →</a>
             </div>
           </article>
 
@@ -273,14 +268,10 @@
               <span class="blog-tag">Writing</span>
               <h3 class="blog-title">How to Outline an Essay in 10 Minutes</h3>
               <p class="blog-excerpt">A repeatable framework for thesis-driven essays that win professor feedback.</p>
-              <a class="blog-link" href="blog.html#essay-outline">Read article →</a>
+              <a class="blog-link" href="#">Read article →</a>
             </div>
           </article>
 
-        </div>
-
-        <div style="text-align:center; margin-top:36px;">
-          <a href="blog.html" class="btn btn-ghost">View all articles →</a>
         </div>
       </div>
     </section>

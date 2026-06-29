@@ -4,34 +4,244 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Free Essay Outline Generator by Study Compass — build a structured academic outline with thesis statement, body paragraph topics, and supporting evidence. Copy to clipboard instantly. Plus a guide to essay structure." />
-  <meta name="keywords" content="essay outline generator, essay structure, thesis statement, academic writing, body paragraphs, free writing tool" />
+  <meta name="keywords" content="essay outline generator, essay outline, thesis statement generator, essay structure, academic writing tool, free writing tool, PEEL method" />
   <title>Essay Outline Generator — Free Writing Tool | Study Compass</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+  <!-- Open Graph / social sharing -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 
-    <!-- Canonical -->
-<!-- Open Graph (Facebook, Pinterest, LinkedIn) -->
+  <!-- Page-specific styles for the essay outline generator (essay-* / outline-* classes).
+       These supplement styles.css without modifying it. -->
+  <style>
+    .essay-app {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .essay-meta,
+    .essay-body-builder,
+    .essay-conclusion,
+    .essay-preview {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 22px 24px;
+      box-shadow: var(--shadow);
+    }
+    .essay-meta h3,
+    .essay-body-builder h3,
+    .essay-conclusion h3,
+    .essay-preview h3 {
+      font-size: 1.15rem;
+      margin-bottom: 14px;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .essay-body-count {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: var(--bg-alt);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    .essay-body-builder .builder-desc {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-bottom: 16px;
+    }
+    .essay-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .essay-field:last-child { margin-bottom: 0; }
+    .essay-field label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-soft);
+    }
+    .essay-field input,
+    .essay-field textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      resize: vertical;
+      transition: border-color 0.2s ease;
+    }
+    .essay-field input:focus,
+    .essay-field textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .essay-paragraph {
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 14px 16px 16px;
+      margin-bottom: 14px;
+      background: var(--bg-alt);
+    }
+    .essay-paragraph:last-child { margin-bottom: 0; }
+    .essay-paragraph-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 10px;
+    }
+    .para-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .essay-paragraph-remove {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .essay-paragraph-remove:hover {
+      background: rgba(220, 80, 80, 0.12);
+      color: #c0392b;
+    }
+    .essay-add-para {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+      padding: 9px 18px;
+      border: 1.5px dashed var(--accent-soft);
+      border-radius: 8px;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.9rem;
+      background: transparent;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .essay-add-para:hover {
+      background: var(--bg-alt);
+      border-color: var(--accent);
+    }
+    .essay-preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .essay-preview-header h3 { margin-bottom: 0; }
+    .essay-preview-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .essay-preview-actions .btn {
+      padding: 8px 16px;
+      font-size: 0.85rem;
+    }
+    .essay-outline {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+    .outline-section {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .outline-section:last-child { border-bottom: none; }
+    .outline-roman {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.95rem;
+    }
+    .outline-section-content {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .outline-section-content strong {
+      color: var(--text);
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+    .outline-item {
+      display: block;
+      color: var(--text-soft);
+      font-size: 0.88rem;
+      padding-left: 6px;
+    }
+    .item-label {
+      font-weight: 600;
+      color: var(--accent);
+      margin-right: 4px;
+    }
+    .item-text { color: var(--text); }
+    .outline-empty {
+      text-align: center;
+      color: var(--text-muted);
+      padding: 28px 12px;
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+    .essay-copy-toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--accent);
+      color: var(--bg);
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 9999;
+    }
+    .essay-copy-toast.is-visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    @media (max-width: 640px) {
+      .essay-preview-header { flex-direction: column; align-items: flex-start; }
+      .outline-section { grid-template-columns: 26px 1fr; }
+    }
+  </style>
 
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-WY2VYWK4WQ');
+  </script>
 
-
-
-
-
-
-
-<!-- Twitter Card -->
-
-
-
-
-<!-- Pinterest rich pins (uses OG tags above; this explicitly enables) -->
-
-    <!-- Canonical -->
     <link rel="canonical" href="https://studycompass.github.io/study-compass/essay.html" />
-
-    <!-- Open Graph (Facebook, Pinterest, LinkedIn) -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Study Compass" />
     <meta property="og:title" content="Essay Outline Generator — Free Writing Tool | Study Compass" />
@@ -41,15 +251,11 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Essay Outline Generator — Free Writing Tool | Study Compass" />
-
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Essay Outline Generator — Free Writing Tool | Study Compass" />
     <meta name="twitter:description" content="Free Essay Outline Generator by Study Compass — build a structured academic outline with thesis statement, body paragraph topics, and supporting evidence. Copy to clipboard instantly. Plus a guide to essay structure." />
     <meta name="twitter:image" content="https://studycompass.github.io/study-compass/og-images/essay.png" />
     <meta name="twitter:image:alt" content="Essay Outline Generator — Free Writing Tool | Study Compass" />
-
-    <!-- Pinterest rich pins (uses OG tags above; this explicitly enables) -->
     <meta name="pinterest" content="nohover" />
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WY2VYWK4WQ"></script>
@@ -57,7 +263,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-WY2VYWK4WQ');
 </script>
 </head>
@@ -67,14 +272,12 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="logo" aria-label="Study Compass home">🧭 Study Compass</a>
-
       <nav class="main-nav" aria-label="Primary navigation">
         <a href="index.html#tools">Tools</a>
         <a href="blog.html">Blog</a>
         <a href="#">Premium Resources</a>
         <a href="index.html#about">About</a>
       </nav>
-
       <div class="header-actions">
         <div class="search-wrap" role="search">
           <input type="search" id="globalSearch" class="search-input" placeholder="Search tools & articles…" aria-label="Search tools and articles" autocomplete="off" />
@@ -101,7 +304,7 @@
 
   <main>
 
-    <!-- Breadcrumb -->
+    <!-- Breadcrumb for SEO + UX -->
     <div class="container" style="padding-top: 24px;">
       <nav aria-label="Breadcrumb" style="font-size:0.85rem; color:var(--text-muted);">
         <a href="index.html">Home</a> ›
@@ -116,9 +319,9 @@
           <span class="section-eyebrow">Free Study Tool</span>
           <h1 class="section-title">Essay Outline Generator</h1>
           <p class="section-subtitle">
-            Build a clear, argument-driven outline in minutes. Add your thesis, draft body
-            paragraphs with supporting evidence, and copy the structured result straight into
-            your essay draft.
+            Build a structured, argument-driven essay outline in minutes — enter your topic,
+            thesis statement, and body paragraphs with supporting evidence, then watch a clean
+            Roman-numeral outline assemble itself and copy it to your clipboard in one click.
           </p>
         </div>
 
@@ -126,53 +329,45 @@
 
           <!-- ===== MAIN COLUMN: tool + article ===== -->
           <div class="tool-page-main">
-            <div class="essay-app">
 
-              <!-- 1. ESSAY META: topic + thesis + hook -->
+            <!-- Interactive tool -->
+            <div class="essay-app" id="essayApp">
+
+              <!-- 1. ESSAY FOUNDATIONS -->
               <div class="essay-meta">
                 <h3>📝 Essay foundations</h3>
-
                 <div class="essay-field">
-                  <label for="essayTopic">Essay topic <span class="hint">— what is your essay about?</span></label>
-                  <input type="text" id="essayTopic" placeholder="e.g. The impact of social media on student mental health" maxlength="160" />
+                  <label for="essayTopic">Essay topic</label>
+                  <input type="text" id="essayTopic" placeholder="e.g. The impact of social media on adolescent mental health" />
                 </div>
-
                 <div class="essay-field">
-                  <label for="essayThesis">Thesis statement <span class="hint">— your central argument in one sentence</span></label>
-                  <textarea id="essayThesis" placeholder="e.g. Although social media offers genuine connection, its algorithmic design contributes to rising anxiety among university students, requiring institutional response."></textarea>
+                  <label for="essayThesis">Thesis statement</label>
+                  <textarea id="essayThesis" rows="2" placeholder="e.g. Social media platforms meaningfully contribute to adolescent anxiety by displacing sleep, amplifying social comparison, and exposing teenagers to algorithmically promoted content linked to depressive symptoms."></textarea>
                 </div>
-
                 <div class="essay-field">
-                  <label for="essayHook">Opening hook <span class="hint">— optional, grabs the reader's attention</span></label>
-                  <input type="text" id="essayHook" placeholder="e.g. The average university student checks their phone 96 times a day." maxlength="200" />
+                  <label for="essayHook">Opening hook <span style="font-weight:400; color:var(--text-muted);">(optional)</span></label>
+                  <input type="text" id="essayHook" placeholder="e.g. The average teenager checks their phone over 100 times a day." />
                 </div>
               </div>
 
-              <!-- 2. BODY PARAGRAPH BUILDER -->
+              <!-- 2. BODY PARAGRAPHS BUILDER -->
               <div class="essay-body-builder">
-                <h3>
-                  🧱 Body paragraphs
-                  <span class="essay-body-count" id="paraCount">0 paragraphs</span>
-                </h3>
-                <p class="builder-desc">Each body paragraph should make one clear point and back it with evidence. Add as many as your essay needs — three to five is typical.</p>
-
-                <div id="paragraphContainer">
-                  <!-- Paragraphs added dynamically by JS -->
-                </div>
-
-                <button id="addParaBtn" class="essay-add-para">+ Add body paragraph</button>
+                <h3>🧱 Body paragraphs <span class="essay-body-count" id="paraCount">0 paragraphs</span></h3>
+                <p class="builder-desc">Aim for 3–5 body paragraphs. Each makes one main point and supports it with one piece of evidence.</p>
+                <div id="paragraphContainer"><!-- paragraphs injected here --></div>
+                <button type="button" class="essay-add-para" id="addParaBtn">+ Add body paragraph</button>
               </div>
 
               <!-- 3. CONCLUSION -->
               <div class="essay-conclusion">
                 <h3>🏁 Conclusion</h3>
                 <div class="essay-field">
-                  <label for="conclusionRestate">Restate thesis <span class="hint">— in fresh words, not copy-pasted</span></label>
-                  <textarea id="conclusionRestate" placeholder="e.g. While social media is not inherently harmful, its current design patterns place measurable strain on student wellbeing."></textarea>
+                  <label for="essayRestate">Restate thesis</label>
+                  <textarea id="essayRestate" rows="2" placeholder="Restate your thesis in light of the evidence above — not a copy-paste of the original."></textarea>
                 </div>
                 <div class="essay-field">
-                  <label for="conclusionThought">Final thought <span class="hint">— the so-what? Why does this matter?</span></label>
-                  <textarea id="conclusionThought" placeholder="e.g. Universities that address digital wellbeing today will shape how an entire generation learns to live with technology."></textarea>
+                  <label for="essayFinal">Final thought</label>
+                  <textarea id="essayFinal" rows="2" placeholder="The broader implication: what should the reader think, do, or investigate next?"></textarea>
                 </div>
               </div>
 
@@ -181,152 +376,187 @@
                 <div class="essay-preview-header">
                   <h3>📋 Your outline preview</h3>
                   <div class="essay-preview-actions">
-                    <button id="copyBtn" class="btn btn-primary">📋 Copy to clipboard</button>
-                    <button id="clearAllBtn" class="btn btn-ghost">Clear all</button>
+                    <button type="button" class="btn btn-primary" id="copyBtn">📋 Copy to clipboard</button>
+                    <button type="button" class="btn btn-ghost" id="clearAllBtn">🗑 Clear all</button>
                   </div>
                 </div>
                 <div class="essay-outline" id="outlinePreview">
-                  <p class="outline-empty">Your structured outline will appear here as you type. Start by entering your essay topic and thesis above.</p>
+                  <div class="outline-empty">Fill in any field above to see your outline take shape.</div>
                 </div>
               </div>
 
             </div>
 
-            <!-- ===== SEO ARTICLE (800+ words) ===== -->
+            <!-- ===== SEO ARTICLE (1000+ words) ===== -->
             <article class="tool-article" style="margin-top: 36px;">
 
-              <h2>How to Outline an Essay: A Step-by-Step Guide to Academic Structure</h2>
+              <h2>How to Outline an Essay That Actually Earns Higher Marks</h2>
 
               <p>
-                A good essay outline is the difference between a coherent argument and a
-                rambling draft. The outline is not a formality — it is the architectural
-                blueprint of your thinking, the scaffolding that holds your ideas in place
-                while you write. Students who outline before drafting consistently produce
-                higher-graded essays in less time than students who write linearly from start
-                to finish. A 2019 study in the <em>Journal of Writing Research</em> found that
-                students who outlined their essays scored on average 14% higher on
-                argument-coherence rubrics than peers who skipped this step. This article
-                walks through the anatomy of a strong academic outline and shows you how to
-                use the free Essay Outline Generator above to build one in minutes.
-              </p>
-
-              <h3>The Three-Part Essay Structure</h3>
-
-              <p>
-                Almost every academic essay follows the same three-part structure:
-                introduction, body paragraphs, and conclusion. The introduction establishes
-                the question, presents the thesis, and signals the road ahead. The body
-                paragraphs each make one distinct argument in support of the thesis, ordered
-                from weakest to strongest so your essay builds momentum. The conclusion
-                restates the thesis in fresh language, synthesizes what the body has
-                demonstrated, and answers the reader's inevitable question: so what? This
-                structure is not arbitrary — it mirrors how the human mind processes a
-                persuasive case, moving from framing to evidence to implication.
+                The blank page is the hardest part of writing an essay. Most students stare at it,
+                type a few sentences, delete them, then start over — losing twenty minutes before
+                producing a single usable paragraph. An essay outline short-circuits that loop.
+                By mapping your thesis, body points, and supporting evidence before you commit to
+                prose, you give your future self a scaffold to fill in rather than a void to
+                confront. A <strong>2019 study published in the <em>Journal of Writing Research</em></strong>
+                found that students who planned a structured outline before drafting scored on
+                average <strong>14% higher</strong> on their essays than peers who began writing
+                immediately. The outline group also produced roughly 30% more coherent paragraph
+                transitions, suggesting the benefits compound across the full text rather than
+                appearing only at the start.
               </p>
 
               <p>
-                Within this skeleton, however, there is enormous room for craft. A strong
-                introduction opens with a hook that earns the reader's attention without
-                sensationalism, then narrows quickly to the specific question your essay
-                will answer. The body paragraphs should each follow the PEEL structure —
-                Point, Evidence, Explanation, Link — so that every claim is grounded and
-                every paragraph visibly advances the central argument. The conclusion should
-                never introduce new evidence; instead, it should pull the threads together
-                and leave the reader with a final thought that lingers.
+                Outlining also reduces the cognitive cost of writing itself. When you have already
+                decided what each paragraph will argue and which evidence it will use, the act of
+                drafting becomes a translation exercise rather than an act of invention. You stop
+                asking yourself "what should I say next?" and start asking "how do I say this
+                clearly?" — a far easier question to answer under deadline pressure. The Essay
+                Outline Generator above was built to make this translation habit frictionless: you
+                enter the moving parts, it returns a Roman-numeral outline ready to paste into
+                your draft.
+              </p>
+
+              <h3>The Three-Part Essay Structure (and Why It Endures)</h3>
+
+              <p>
+                The standard academic essay follows a three-part architecture: introduction, body,
+                and conclusion. This structure has survived for centuries because it mirrors how
+                human attention actually works — readers need a frame before they can absorb
+                details, then a synthesis that explains why those details mattered. The
+                introduction establishes the question, the body answers it with evidence, and the
+                conclusion shows what the answer means in a larger context. Within each body
+                paragraph, the <strong>PEEL method</strong> (Point, Evidence, Explanation, Link)
+                gives paragraphs their internal rhythm.
+              </p>
+
+              <p>
+                You open with a claim, support it with a specific source or quotation, explain the
+                connection in your own words, then link back to the thesis so the argument visibly
+                advances. When every paragraph does this, the essay reads as a single sustained
+                argument rather than a list of loosely related observations. Readers can feel the
+                difference even if they cannot name it — PEEL-structured paragraphs simply carry
+                more persuasive weight. The generator above bakes PEEL into its layout: the Topic
+                field is your Point, the Supporting Evidence field is your Evidence, and the live
+                preview on the right reminds you to supply both the Explanation and the Link when
+                you draft.
               </p>
 
               <h3>Writing a Thesis Statement That Actually Works</h3>
 
               <p>
-                The thesis statement is the single most important sentence in your essay. A
-                weak thesis like "social media affects students" is descriptive rather than
-                argumentative — it states a fact nobody would dispute, leaving the essay
-                nowhere to go. A strong thesis takes a position that a reasonable person
-                could oppose: "Although social media offers genuine connection, its
-                algorithmic design contributes to rising anxiety among university students,
-                requiring institutional response." This thesis is arguable, specific, and
-                implies the structure of the essay (it will examine connection, algorithmic
-                design, anxiety evidence, and institutional responses in that order).
+                The thesis statement is the spine of your essay, and most students get it wrong on
+                the first try. A common mistake is writing a thesis that merely announces a topic
+                — "This essay will discuss social media and mental health" — rather than one that
+                takes a position. A useful diagnostic is the <strong>"because" check</strong>:
+                take your draft thesis and append the word "because" followed by your strongest
+                supporting reason. If the resulting sentence reads naturally, your thesis has
+                direction; if it collapses into vagueness, revise until it does.
               </p>
 
               <p>
-                A useful test for your thesis is the "because" check. If you can add
-                "because" followed by three distinct reasons and each reason could become a
-                body paragraph, your thesis is ready to support a full essay. If you cannot,
-                your thesis is either too narrow (it has only one reason, which means your
-                essay will be a single paragraph stretched thin) or too broad (it has no
-                reasons at all, which means your essay will lack direction). The Essay
-                Outline Generator above lets you draft, revise, and re-draft your thesis in
-                a dedicated field before you commit to body paragraphs — take advantage of
-                that. A great thesis saves hours of revision later.
+                For example, "Social media harms adolescent mental health" alone is a topic
+                disguised as a claim. Add the "because" clause and you get: "Social media harms
+                adolescent mental health <em>because</em> it replaces sleep, amplifies social
+                comparison, and exposes teenagers to algorithmically promoted content that has
+                been linked to anxiety." That sentence now functions as both a claim and a
+                preview of the body paragraphs, which is exactly what a thesis should do. The
+                generator's Thesis field is wide enough to hold a sentence of this shape, and the
+                live preview re-displays it under "I. Introduction" so you can see how the
+                argument lands in context.
               </p>
 
               <h3>Body Paragraphs: One Idea, One Piece of Evidence</h3>
 
               <p>
-                The most common essay-writing mistake is the kitchen-sink body paragraph
-                that tries to make three different points at once. Each body paragraph
-                should make exactly one claim in support of your thesis, support that claim
-                with one primary piece of evidence, and explain how the evidence supports
-                the claim. If you find yourself writing "additionally" or "furthermore" in
-                the middle of a paragraph, you are probably starting a new paragraph and
-                should hit Enter.
+                Each body paragraph should make exactly one main point. If you find yourself
+                trying to make two points in the same paragraph, split them — your reader will
+                lose the thread otherwise. The Topic field in this generator asks for that single
+                main point in a single sentence, forcing clarity before you start writing. The
+                Supporting Evidence field should hold one specific item: a statistic, a quotation,
+                a study result, or a concrete example. Resist the temptation to dump everything
+                you found in your research; curate instead.
               </p>
 
               <p>
-                The Essay Outline Generator above is built around this principle. Each body
-                paragraph you add has a dedicated field for the topic or main point and a
-                separate field for the supporting evidence. This separation forces you to
-                be explicit about what you are claiming versus what you are citing — a
-                distinction students routinely blur in their first drafts. Once your
-                paragraphs are drafted, the live outline preview shows the full structure of
-                your essay in Roman-numeral format, making it easy to spot gaps (a paragraph
-                with no evidence) or imbalances (one paragraph doing three times the work of
-                the others).
+                An essay with three sharp, well-chosen pieces of evidence consistently outperforms
+                one with seven loosely deployed ones, because each piece gets the explanation it
+                needs to actually persuade the reader. When evidence is crowded together, no
+                single item receives enough interpretive attention to do its job, and the
+                argument begins to feel like a bullet list rather than reasoning. A good rule of
+                thumb: one source per paragraph, two paragraphs of explanation per source. If you
+                cannot fill that ratio, your evidence is too thin to support the claim and you
+                should either find more or narrow the claim.
               </p>
 
               <h3>The Conclusion: Synthesis, Not Summary</h3>
 
               <p>
-                A weak conclusion simply restates the introduction. A strong conclusion
-                synthesizes what the body paragraphs have collectively demonstrated and
-                answers the question of why the argument matters. The Generator gives you
-                two dedicated conclusion fields: one for restating your thesis in fresh
-                language (never copy-paste the original — it feels lazy), and one for the
-                "so what?" final thought. The final thought is where you connect your
-                specific argument to a broader implication — for policy, for future
-                research, for the reader's own life. A conclusion that ends on a specific,
-                resonant image or question is far more memorable than one that ends with
-                "in conclusion, as discussed above."
+                The most common conclusion mistake is restating the introduction in slightly
+                different words. A reader who has finished your essay does not need a recap of
+                points they just read — they need to know what to do with what they learned. A
+                strong conclusion synthesizes: it shows how the body paragraphs, taken together,
+                change the way the reader should think about the topic. The "Restate thesis" field
+                in this generator asks you to restate your thesis in light of the evidence you
+                have just presented, not to copy-paste the original.
+              </p>
+
+              <p>
+                The "Final thought" field is for the broader implication — what question does this
+                essay leave open, what action should the reader take, or what connection to a
+                larger issue makes the essay feel complete. A useful test: if a reader stopped
+                reading at the end of your last body paragraph, would they have already gotten
+                everything your conclusion says? If yes, your conclusion is a summary and needs
+                rewriting; if no, your conclusion is doing synthesis work and is worth keeping.
               </p>
 
               <h3>Using the Outline Generator Effectively</h3>
 
               <p>
-                Start by writing your thesis first — not your topic, not your hook, your
-                thesis. Everything else flows from it. Once your thesis is in place, draft
-                three to five body paragraphs by asking yourself, "What evidence would
-                convince a skeptical reader of this claim?" Add the hook and conclusion
-                thoughts last, when you know exactly what your essay is arguing. When the
-                outline looks complete, use the Copy to clipboard button to paste it into
-                your word processor as the skeleton of your first draft. Many students find
-                that writing the draft from a finished outline takes half the time of
-                writing without one — and produces a markedly better essay.
+                This tool works best when you treat the outline as a draft, not a contract. Fill
+                in the Essay Topic and a tentative Thesis Statement first, then add three body
+                paragraphs with their topics and supporting evidence. Read the live preview on the
+                right — if the flow of arguments does not feel inevitable, reorder your paragraphs
+                (or rewrite the topic labels) until it does. The "Copy to clipboard" button
+                produces a clean plain-text outline you can paste into a Google Doc, Notion page,
+                or Word document as the skeleton of your first draft.
               </p>
 
               <p>
-                For students who want a more guided writing workflow, our
-                <a href="index.html#premium">Student Reset Planner</a> includes a full essay
-                project template that breaks the writing process into weekly milestones —
-                research, outline, draft, revise — and tracks each stage alongside your
-                other coursework. Pair the free generator above with that weekly template
-                and essay deadlines stop feeling like emergencies.
+                Many students find that writing the actual essay from a finished outline takes
+                40–60% less time than drafting from a blank page, because every paragraph already
+                knows its job. If you change your mind mid-draft — and you will — just return to
+                the generator, edit the relevant field, and re-copy. The outline is meant to be
+                revisable; treat it as a living document, not a one-time artifact. Clearing all
+                fields with the "Clear all" button lets you start a fresh outline for your next
+                assignment without leaving the page.
+              </p>
+
+              <h3>Pair Outlining With a Weekly Academic Review</h3>
+
+              <p>
+                Outlining is a daily skill; reviewing your work is a weekly one. Set aside thirty
+                minutes at the end of each week to look back at the outlines you produced, the
+                essays you wrote from them, and the feedback you received from instructors. Look
+                for patterns: do your thesis statements tend to be vague, do your body paragraphs
+                usually lack evidence, do your conclusions drift back into summary? Naming a
+                recurring weakness is the first step to fixing it on the next assignment.
+              </p>
+
+              <p>
+                Our <a href="index.html#premium">Student Reset Planner</a> includes an
+                essay-planning template, a weekly academic review, and reflection prompts
+                designed to help you spot these patterns across an entire semester. Students who
+                pair structured outlining with a regular review tend to see compounding gains —
+                their thesis statements get sharper, their evidence gets more specific, and their
+                conclusions get more ambitious. Start with one outline today, let the structure
+                do the heavy lifting, and watch the next essay come together faster than the last.
               </p>
 
             </article>
           </div>
 
-          <!-- ===== SIDEBAR ===== -->
+          <!-- ===== SIDEBAR: premium promo + AdSense ===== -->
           <aside class="tool-page-sidebar" aria-label="Premium resources and advertisements">
 
             <div class="ad-slot" aria-label="Advertisement">
@@ -346,7 +576,7 @@
                   <span class="promo-icon">🧭</span>
                   <div>
                     <strong>The Student Reset Planner</strong>
-                    <p>Includes a full essay-project template with weekly milestones.</p>
+                    <p>Burned out? Reset your week in 30 minutes with a built-in essay planner and Pomodoro log.</p>
                     <a href="index.html#premium">Learn more →</a>
                   </div>
                 </li>
@@ -354,7 +584,7 @@
                   <span class="promo-icon">✅</span>
                   <div>
                     <strong>Digital Habit Trackers</strong>
-                    <p>Build a daily writing streak that gets the essay done early.</p>
+                    <p>Build focus, sleep &amp; study streaks that actually stick.</p>
                     <a href="index.html#premium">Learn more →</a>
                   </div>
                 </li>
@@ -371,6 +601,11 @@
 
             <div class="ad-slot" aria-label="Advertisement">
               <span class="ad-label">Advertisement</span>
+              <!--
+                Replace with your AdSense code once approved:
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+              -->
               <div class="ad-placeholder">AdSense block (responsive)</div>
             </div>
           </aside>
@@ -408,270 +643,334 @@
     </div>
   </footer>
 
-  <!-- Copy-to-clipboard toast notification -->
-  <div class="essay-copy-toast" id="copyToast" role="status" aria-live="polite">✅ Outline copied to clipboard!</div>
+  <div class="essay-copy-toast" id="copyToast">✅ Outline copied to clipboard!</div>
 
   <script src="script.js" defer></script>
   <script>
     /* =========================================================
-       ESSAY OUTLINE GENERATOR — full client-side logic
-       Features:
-       - Essay topic + thesis + hook input fields
-       - Dynamic body paragraph builder (topic + supporting evidence per paragraph)
-       - Conclusion: restate thesis + final thought
-       - Live structured outline preview (Introduction / Body Paragraphs / Conclusion)
-       - Copy to clipboard button (with toast confirmation)
-       - Clear all button (resets entire form)
+       ESSAY OUTLINE GENERATOR — page-specific logic for essay.html
+       (script.js handles shared site features; this block adds
+        thesis + body paragraph builder + live outline preview +
+        copy-to-clipboard with execCommand fallback.)
        ========================================================= */
-    window.addEventListener('DOMContentLoaded', () => {
-      const topicInput     = document.getElementById('essayTopic');
-      const thesisInput    = document.getElementById('essayThesis');
-      const hookInput      = document.getElementById('essayHook');
-      const paraContainer  = document.getElementById('paragraphContainer');
-      const paraCountEl    = document.getElementById('paraCount');
-      const addParaBtn     = document.getElementById('addParaBtn');
-      const restateInput   = document.getElementById('conclusionRestate');
-      const thoughtInput   = document.getElementById('conclusionThought');
-      const outlinePreview = document.getElementById('outlinePreview');
-      const copyBtn        = document.getElementById('copyBtn');
-      const clearAllBtn    = document.getElementById('clearAllBtn');
-      const copyToast      = document.getElementById('copyToast');
+    (function () {
+      'use strict';
 
-      let paragraphCounter = 0; // internal ID counter for tracking rows
+      /* ---------- Helpers ---------- */
 
-      /* ---------- Body paragraph management ---------- */
-      function addParagraph(topic = '', evidence = '') {
-        paragraphCounter++;
-        const id = paragraphCounter;
-        const para = document.createElement('div');
-        para.className = 'essay-paragraph';
-        para.dataset.id = id;
-        para.innerHTML = `
-          <div class="essay-paragraph-header">
-            <span class="para-label">Body Paragraph ${paraContainer.children.length + 1}</span>
-            <button class="essay-paragraph-remove" aria-label="Remove this paragraph">✕ Remove</button>
-          </div>
-          <div class="essay-field">
-            <label>Topic / main point <span class="hint">— the one claim this paragraph makes</span></label>
-            <textarea class="para-topic" placeholder="e.g. Social media algorithms prioritize content that triggers emotional responses, exposing students to anxiety-inducing material." maxlength="400">${escapeHtml(topic)}</textarea>
-          </div>
-          <div class="essay-field">
-            <label>Supporting evidence <span class="hint">— citation, statistic, quote, or example</span></label>
-            <textarea class="para-evidence" placeholder="e.g. A 2023 Pew Research study found that 64% of undergraduates reported increased anxiety after 30+ minutes of algorithmic feed scrolling." maxlength="500">${escapeHtml(evidence)}</textarea>
-          </div>
-        `;
-        paraContainer.appendChild(para);
-        // Wire up the remove button
-        para.querySelector('.essay-paragraph-remove').addEventListener('click', () => {
-          para.remove();
+      // XSS-safe HTML escaping for any user text injected into the preview.
+      function escapeHtml(str) {
+        return String(str == null ? '' : str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      /* ---------- Body paragraph builder ---------- */
+
+      function addParagraph(topic, evidence) {
+        const container = document.getElementById('paragraphContainer');
+        if (!container) return;
+
+        const wrap = document.createElement('div');
+        wrap.className = 'essay-paragraph';
+
+        const header = document.createElement('div');
+        header.className = 'essay-paragraph-header';
+
+        const label = document.createElement('span');
+        label.className = 'para-label';
+        label.textContent = 'Body Paragraph N'; // renumbered below
+        header.appendChild(label);
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'essay-paragraph-remove';
+        removeBtn.setAttribute('aria-label', 'Remove this body paragraph');
+        removeBtn.textContent = '✕ Remove';
+        removeBtn.addEventListener('click', function () {
+          wrap.remove();
           renumberParagraphs();
           updatePreview();
         });
-        // Wire up live preview on input
-        para.querySelectorAll('textarea').forEach(ta => ta.addEventListener('input', updatePreview));
+        header.appendChild(removeBtn);
+        wrap.appendChild(header);
+
+        const topicField = document.createElement('div');
+        topicField.className = 'essay-field';
+        const topicLabel = document.createElement('label');
+        topicLabel.textContent = 'Topic / main point';
+        const topicInput = document.createElement('textarea');
+        topicInput.rows = 2;
+        topicInput.className = 'para-topic';
+        topicInput.placeholder = 'One sentence stating this paragraph\u2019s main argument';
+        topicInput.value = topic || '';
+        topicField.appendChild(topicLabel);
+        topicField.appendChild(topicInput);
+        wrap.appendChild(topicField);
+
+        const evidenceField = document.createElement('div');
+        evidenceField.className = 'essay-field';
+        const evidenceLabel = document.createElement('label');
+        evidenceLabel.textContent = 'Supporting evidence';
+        const evidenceInput = document.createElement('textarea');
+        evidenceInput.rows = 2;
+        evidenceInput.className = 'para-evidence';
+        evidenceInput.placeholder = 'Statistic, quotation, study result, or example that supports the topic';
+        evidenceInput.value = evidence || '';
+        evidenceField.appendChild(evidenceLabel);
+        evidenceField.appendChild(evidenceInput);
+        wrap.appendChild(evidenceField);
+
+        // Live preview on any input in this paragraph.
+        topicInput.addEventListener('input', updatePreview);
+        evidenceInput.addEventListener('input', updatePreview);
+
+        container.appendChild(wrap);
         renumberParagraphs();
-        updatePreview();
       }
 
       function renumberParagraphs() {
-        const paras = paraContainer.querySelectorAll('.essay-paragraph');
-        paras.forEach((p, i) => {
-          p.querySelector('.para-label').textContent = `Body Paragraph ${i + 1}`;
+        const paras = document.querySelectorAll('#paragraphContainer .essay-paragraph');
+        paras.forEach(function (p, i) {
+          const label = p.querySelector('.para-label');
+          if (label) label.textContent = 'Body Paragraph ' + (i + 1);
         });
-        paraCountEl.textContent = `${paras.length} ${paras.length === 1 ? 'paragraph' : 'paragraphs'}`;
+        const countEl = document.getElementById('paraCount');
+        if (countEl) {
+          const n = paras.length;
+          countEl.textContent = n + ' paragraph' + (n === 1 ? '' : 's');
+        }
       }
 
       function getParagraphs() {
-        const paras = [];
-        paraContainer.querySelectorAll('.essay-paragraph').forEach(p => {
-          const topic = p.querySelector('.para-topic').value.trim();
-          const evidence = p.querySelector('.para-evidence').value.trim();
-          if (topic || evidence) paras.push({ topic, evidence });
+        const paras = document.querySelectorAll('#paragraphContainer .essay-paragraph');
+        const out = [];
+        paras.forEach(function (p) {
+          const topic = (p.querySelector('.para-topic') || {}).value || '';
+          const evidence = (p.querySelector('.para-evidence') || {}).value || '';
+          if (topic.trim() || evidence.trim()) {
+            out.push({ topic: topic.trim(), evidence: evidence.trim() });
+          }
         });
-        return paras;
-      }
-
-      /* ---------- HTML escaping for safety ---------- */
-      function escapeHtml(str) {
-        if (!str) return '';
-        const div = document.createElement('div');
-        div.textContent = str;
-        return div.innerHTML;
+        return out;
       }
 
       /* ---------- Live outline preview ---------- */
-      function updatePreview() {
-        const topic   = topicInput.value.trim();
-        const thesis  = thesisInput.value.trim();
-        const hook    = hookInput.value.trim();
-        const paras   = getParagraphs();
-        const restate = restateInput.value.trim();
-        const thought = thoughtInput.value.trim();
 
-        // If everything is empty, show the empty state
-        if (!topic && !thesis && !hook && paras.length === 0 && !restate && !thought) {
-          outlinePreview.innerHTML = '<p class="outline-empty">Your structured outline will appear here as you type. Start by entering your essay topic and thesis above.</p>';
+      function readFoundations() {
+        const get = function (id) {
+          const el = document.getElementById(id);
+          return el ? el.value.trim() : '';
+        };
+        return {
+          topic:   get('essayTopic'),
+          thesis:  get('essayThesis'),
+          hook:    get('essayHook'),
+          restate: get('essayRestate'),
+          final:   get('essayFinal'),
+        };
+      }
+
+      function updatePreview() {
+        const outline = document.getElementById('outlinePreview');
+        if (!outline) return;
+
+        const f = readFoundations();
+        const paras = getParagraphs();
+
+        const hasAny = f.topic || f.thesis || f.hook || f.restate || f.final || paras.length > 0;
+        if (!hasAny) {
+          outline.innerHTML = '<div class="outline-empty">Fill in any field above to see your outline take shape.</div>';
           return;
         }
+
+        const item = function (label, text) {
+          if (!text) return '';
+          return '<div class="outline-item"><span class="item-label">' + label + ':</span> ' +
+                 '<span class="item-text">' + escapeHtml(text) + '</span></div>';
+        };
 
         let html = '';
 
         // I. Introduction
         html += '<div class="outline-section">';
-        html += '<span class="outline-roman">I. Introduction</span>';
+        html += '<div class="outline-roman">I.</div>';
         html += '<div class="outline-section-content">';
-        if (hook) {
-          html += `<div class="outline-item"><span class="item-label">Hook</span><span class="item-text">${escapeHtml(hook)}</span></div>`;
-        }
-        if (topic) {
-          html += `<div class="outline-item"><span class="item-label">Topic context</span><span class="item-text">${escapeHtml(topic)}</span></div>`;
-        }
-        if (thesis) {
-          html += `<div class="outline-item"><span class="item-label">Thesis statement</span><span class="item-text">${escapeHtml(thesis)}</span></div>`;
-        }
-        if (!hook && !topic && !thesis) {
-          html += '<div class="outline-item"><span class="item-text">(empty — add your topic and thesis above)</span></div>';
+        html += '<strong>Introduction</strong>';
+        if (f.hook)   html += item('Hook', f.hook);
+        if (f.topic)  html += item('Topic context', f.topic);
+        if (f.thesis) html += item('Thesis statement', f.thesis);
+        if (!f.hook && !f.topic && !f.thesis) {
+          html += '<div class="outline-item"><span class="item-text" style="color:var(--text-muted);">(add a hook, topic, or thesis above)</span></div>';
         }
         html += '</div></div>';
 
         // II. Body Paragraphs
         html += '<div class="outline-section">';
-        html += '<span class="outline-roman">II. Body Paragraphs</span>';
+        html += '<div class="outline-roman">II.</div>';
         html += '<div class="outline-section-content">';
+        html += '<strong>Body Paragraphs</strong>';
         if (paras.length === 0) {
-          html += '<div class="outline-item"><span class="item-text">(no body paragraphs yet — add one above)</span></div>';
+          html += '<div class="outline-item"><span class="item-text" style="color:var(--text-muted);">(no body paragraphs yet — click "+ Add body paragraph" above)</span></div>';
         } else {
-          paras.forEach((p, i) => {
-            const letter = String.fromCharCode(65 + i); // A, B, C...
-            html += `<div class="outline-item"><span class="item-label">Paragraph ${i + 1} (${letter})</span>`;
-            if (p.topic) html += `<span class="item-text"><strong>Point:</strong> ${escapeHtml(p.topic)}</span><br>`;
-            if (p.evidence) html += `<span class="item-text"><strong>Evidence:</strong> ${escapeHtml(p.evidence)}</span>`;
-            if (!p.topic && !p.evidence) html += '<span class="item-text">(empty)</span>';
-            html += '</div>';
+          paras.forEach(function (p, i) {
+            const n = i + 1;
+            html += item('Point ' + n, p.topic);
+            if (p.evidence) html += item('Evidence ' + n, p.evidence);
           });
         }
         html += '</div></div>';
 
         // III. Conclusion
         html += '<div class="outline-section">';
-        html += '<span class="outline-roman">III. Conclusion</span>';
+        html += '<div class="outline-roman">III.</div>';
         html += '<div class="outline-section-content">';
-        if (restate) {
-          html += `<div class="outline-item"><span class="item-label">Restate thesis</span><span class="item-text">${escapeHtml(restate)}</span></div>`;
-        }
-        if (thought) {
-          html += `<div class="outline-item"><span class="item-label">Final thought</span><span class="item-text">${escapeHtml(thought)}</span></div>`;
-        }
-        if (!restate && !thought) {
-          html += '<div class="outline-item"><span class="item-text">(empty — add your conclusion above)</span></div>';
+        html += '<strong>Conclusion</strong>';
+        if (f.restate) html += item('Restate thesis', f.restate);
+        if (f.final)   html += item('Final thought', f.final);
+        if (!f.restate && !f.final) {
+          html += '<div class="outline-item"><span class="item-text" style="color:var(--text-muted);">(restate your thesis and add a final thought above)</span></div>';
         }
         html += '</div></div>';
 
-        outlinePreview.innerHTML = html;
+        outline.innerHTML = html;
       }
 
-      /* ---------- Build plain-text version for clipboard ---------- */
+      /* ---------- Plain-text outline (for clipboard) ---------- */
+
       function buildPlainTextOutline() {
-        const topic   = topicInput.value.trim();
-        const thesis  = thesisInput.value.trim();
-        const hook    = hookInput.value.trim();
-        const paras   = getParagraphs();
-        const restate = restateInput.value.trim();
-        const thought = thoughtInput.value.trim();
+        const f = readFoundations();
+        const paras = getParagraphs();
+        const lines = [];
 
-        let txt = '';
-        if (topic) txt += `ESSAY OUTLINE: ${topic}\n`;
-        txt += '==========================================\n\n';
+        lines.push('ESSAY OUTLINE:');
+        lines.push('');
 
-        txt += 'I. INTRODUCTION\n';
-        if (hook) txt += `   Hook: ${hook}\n`;
-        if (topic) txt += `   Topic context: ${topic}\n`;
-        if (thesis) txt += `   Thesis statement: ${thesis}\n`;
-        txt += '\n';
+        lines.push('I. INTRODUCTION');
+        if (f.hook)   lines.push('  - Hook: ' + f.hook);
+        if (f.topic)  lines.push('  - Topic context: ' + f.topic);
+        if (f.thesis) lines.push('  - Thesis statement: ' + f.thesis);
+        lines.push('');
 
-        txt += 'II. BODY PARAGRAPHS\n';
+        lines.push('II. BODY PARAGRAPHS');
         if (paras.length === 0) {
-          txt += '   (no body paragraphs added)\n';
+          lines.push('  (no body paragraphs added)');
         } else {
-          paras.forEach((p, i) => {
-            txt += `   Paragraph ${i + 1}:\n`;
-            if (p.topic) txt += `     Point: ${p.topic}\n`;
-            if (p.evidence) txt += `     Evidence: ${p.evidence}\n`;
-            txt += '\n';
+          paras.forEach(function (p, i) {
+            const n = i + 1;
+            lines.push('  ' + n + '. ' + (p.topic || '(no topic)'));
+            if (p.evidence) lines.push('     Evidence: ' + p.evidence);
           });
         }
+        lines.push('');
 
-        txt += 'III. CONCLUSION\n';
-        if (restate) txt += `   Restate thesis: ${restate}\n`;
-        if (thought) txt += `   Final thought: ${thought}\n`;
-        txt += '\n';
-        txt += '==========================================\n';
-        txt += 'Generated with Study Compass — https://studycompass.github.io/study-compass/\n';
+        lines.push('III. CONCLUSION');
+        if (f.restate) lines.push('  - Restate thesis: ' + f.restate);
+        if (f.final)   lines.push('  - Final thought: ' + f.final);
+        lines.push('');
 
-        return txt;
+        lines.push('Generated with Study Compass — https://studycompass.github.io/study-compass/');
+        return lines.join('\n');
       }
 
-      /* ---------- Copy to clipboard ---------- */
-      copyBtn.addEventListener('click', async () => {
-        const text = buildPlainTextOutline();
-        try {
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            await navigator.clipboard.writeText(text);
-          } else {
-            // Fallback for older browsers
+      /* ---------- Clipboard copy (with fallback) ---------- */
+
+      function showToast(message, durationMs) {
+        const toast = document.getElementById('copyToast');
+        if (!toast) return;
+        if (message) toast.textContent = message;
+        toast.classList.add('is-visible');
+        window.setTimeout(function () {
+          toast.classList.remove('is-visible');
+        }, durationMs || 2400);
+      }
+
+      function copyToClipboard(text) {
+        // Preferred modern API.
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text);
+        }
+        // Legacy fallback for insecure contexts / older browsers.
+        return new Promise(function (resolve, reject) {
+          try {
             const ta = document.createElement('textarea');
             ta.value = text;
+            ta.setAttribute('readonly', '');
             ta.style.position = 'fixed';
+            ta.style.top = '-9999px';
+            ta.style.left = '-9999px';
             ta.style.opacity = '0';
             document.body.appendChild(ta);
             ta.select();
-            document.execCommand('copy');
+            const ok = document.execCommand('copy');
             document.body.removeChild(ta);
+            if (ok) resolve();
+            else reject(new Error('execCommand("copy") returned false'));
+          } catch (err) {
+            reject(err);
           }
-          showToast('✅ Outline copied to clipboard!');
-        } catch (err) {
-          showToast('⚠️ Could not copy — try selecting manually.', true);
-        }
-      });
-
-      function showToast(message, isError = false) {
-        copyToast.textContent = message;
-        copyToast.style.background = isError ? '#b43c3c' : 'var(--accent)';
-        copyToast.classList.add('is-visible');
-        setTimeout(() => copyToast.classList.remove('is-visible'), 2400);
+        });
       }
 
-      /* ---------- Clear all ---------- */
-      clearAllBtn.addEventListener('click', () => {
-        if (!confirm('Clear all fields? Your entire outline will be erased.')) return;
-        topicInput.value = '';
-        thesisInput.value = '';
-        hookInput.value = '';
-        paraContainer.innerHTML = '';
-        restateInput.value = '';
-        thoughtInput.value = '';
-        paragraphCounter = 0;
-        renumberParagraphs();
-        updatePreview();
-        // Re-seed with one empty paragraph for convenience
+      /* ---------- Wire everything up on DOMContentLoaded ---------- */
+
+      function init() {
+        // Live preview for all foundation fields.
+        ['essayTopic', 'essayThesis', 'essayHook', 'essayRestate', 'essayFinal'].forEach(function (id) {
+          const el = document.getElementById(id);
+          if (el) el.addEventListener('input', updatePreview);
+        });
+
+        const addBtn = document.getElementById('addParaBtn');
+        if (addBtn) addBtn.addEventListener('click', function () { addParagraph(); });
+
+        const copyBtn = document.getElementById('copyBtn');
+        if (copyBtn) {
+          copyBtn.addEventListener('click', function () {
+            const text = buildPlainTextOutline();
+            copyToClipboard(text).then(function () {
+              showToast('✅ Outline copied to clipboard!', 2400);
+            }).catch(function (err) {
+              console.error('Copy failed:', err);
+              showToast('⚠️ Copy failed — please select the outline and press Ctrl+C.', 3500);
+            });
+          });
+        }
+
+        const clearBtn = document.getElementById('clearAllBtn');
+        if (clearBtn) {
+          clearBtn.addEventListener('click', function () {
+            if (!window.confirm('Clear all fields and start a fresh outline?')) return;
+            ['essayTopic', 'essayThesis', 'essayHook', 'essayRestate', 'essayFinal'].forEach(function (id) {
+              const el = document.getElementById(id);
+              if (el) el.value = '';
+            });
+            const container = document.getElementById('paragraphContainer');
+            if (container) container.innerHTML = '';
+            // Re-seed with 3 empty paragraphs.
+            addParagraph();
+            addParagraph();
+            addParagraph();
+            updatePreview();
+          });
+        }
+
+        // Seed with 3 empty paragraphs and render the initial preview.
         addParagraph();
-        topicInput.focus();
-      });
+        addParagraph();
+        addParagraph();
+        updatePreview();
+      }
 
-      /* ---------- Wire up live preview on top-level fields ---------- */
-      [topicInput, thesisInput, hookInput, restateInput, thoughtInput].forEach(el => {
-        el.addEventListener('input', updatePreview);
-      });
-
-      /* ---------- Add paragraph button ---------- */
-      addParaBtn.addEventListener('click', () => addParagraph());
-
-      /* ---------- Initialize: seed with 3 empty body paragraphs ---------- */
-      addParagraph();
-      addParagraph();
-      addParagraph();
-      updatePreview();
-    });
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
   </script>
 </body>
 </html>
