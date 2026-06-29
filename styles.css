@@ -83,6 +83,10 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* Emoji font stack — appended so emoji glyphs render as colorful icons on all platforms.
+     Browsers fall back through this list per-glyph: Apple Color Emoji on macOS/iOS,
+     Segoe UI Emoji on Windows, Noto Color Emoji on Linux/Android. */
+  --emoji-font-stack: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
   background-color: var(--bg);
   color: var(--text);
   line-height: 1.6;
@@ -96,7 +100,13 @@ a:hover { opacity: 0.75; }
 
 button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-h1, h2, h3, h4 { line-height: 1.2; font-weight: 700; color: var(--text); }
+h1, h2, h3, h4 {
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--text);
+  /* Emoji font stack so any emoji in headings render as colorful icons */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+}
 
 img { max-width: 100%; display: block; }
 
@@ -192,7 +202,12 @@ img { max-width: 100%; display: block; }
   transform: translateY(-3px);
   border-color: var(--preview-text);
 }
-.theme-icon { font-size: 1.8rem; }
+.theme-icon {
+  font-size: 1.8rem;
+  /* Emoji font stack for welcome popup theme icons */
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+  line-height: 1;
+}
 .theme-label { font-size: 0.85rem; }
 
 .welcome-memory-note {
@@ -225,6 +240,8 @@ img { max-width: 100%; display: block; }
   font-weight: 800;
   color: var(--text);
   white-space: nowrap;
+  /* Emoji font stack so the 🧭 compass icon renders correctly on all platforms */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
 }
 
 .main-nav { display: flex; gap: 26px; }
@@ -282,6 +299,9 @@ img { max-width: 100%; display: block; }
   justify-content: center;
   transition: transform 0.15s, background 0.2s;
   opacity: 0.55;
+  /* Emoji font stack for theme toggle icons (🌅 🌙 📚 🌿) */
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+  line-height: 1;
 }
 .theme-toggle-btn:hover { opacity: 1; transform: scale(1.1); background: var(--bg-alt); }
 .theme-toggle-btn.is-active {
@@ -372,6 +392,9 @@ img { max-width: 100%; display: block; }
   font-size: 2.5rem;
   box-shadow: var(--shadow);
   animation: floatCard 6s ease-in-out infinite;
+  /* Emoji font stack for hero floating cards (📚 ⏱️ 🧠 📝) */
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+  line-height: 1;
 }
 .hero-card-1 { top: 10%; left: 10%; animation-delay: 0s; }
 .hero-card-2 { top: 25%; right: 5%; animation-delay: 1.2s; }
@@ -440,6 +463,9 @@ img { max-width: 100%; display: block; }
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
+  /* Emoji font stack so tool card icons (🧮 🎯 🗂️ ⏱️ etc.) render as colorful icons */
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+  line-height: 1;
   margin-bottom: 16px;
 }
 .tool-name { font-size: 1.1rem; margin-bottom: 8px; }
