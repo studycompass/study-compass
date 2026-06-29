@@ -805,7 +805,7 @@
           const removeBtn = document.createElement('button');
           removeBtn.type = 'button';
           removeBtn.className = 'quiz-q-remove';
-          removeBtn.textContent = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+          removeBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
           removeBtn.setAttribute('aria-label', `Remove question ${i + 1}`);
           removeBtn.addEventListener('click', () => removeQuestion(i));
 
@@ -915,7 +915,7 @@
 
         // Brief confirmation
         const note = document.createElement('div');
-        note.textContent = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Added ${generated.length} question${generated.length === 1 ? '' : 's'}.`;
+        note.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Added ${generated.length} question${generated.length === 1 ? '' : 's'}.`;
         note.style.cssText = 'color:var(--accent);font-size:0.88rem;font-weight:600;margin-top:10px;';
         questionsListEl.prepend(note);
         setTimeout(() => note.remove(), 3500);
