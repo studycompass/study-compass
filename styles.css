@@ -478,14 +478,9 @@ img { max-width: 100%; display: block; }
 .blog-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 .blog-card.is-hidden { display: none; }
 
-.blog-thumb {
-  background: var(--bg-alt);
-  height: 140px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-}
+/* NOTE: .blog-thumb styles moved to section 10h (Blog Page) to support
+   image thumbnails with emoji badge overlays. The old flex-based emoji-only
+   rule was removed to prevent display: flex from conflicting with img sizing. */
 .blog-body { padding: 22px; }
 .blog-tag {
   display: inline-block;
@@ -1150,20 +1145,30 @@ img { max-width: 100%; display: block; }
 .blog-page { max-width: 1100px; margin: 0 auto; }
 .blog-featured { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; background: var(--surface); border: 1px solid var(--border); border-radius: 22px; overflow: hidden; margin-bottom: 50px; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; }
 .blog-featured:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
-.blog-featured-thumb { background: var(--bg-alt); min-height: 240px; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+.blog-featured-thumb { position: relative; min-height: 240px; overflow: hidden; background: var(--bg-alt); }
+.blog-featured-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; inset: 0; }
+.blog-featured-thumb .thumb-emoji-badge { position: absolute; top: 16px; left: 16px; background: var(--surface); border-radius: 10px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: var(--shadow); z-index: 1; font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif; line-height: 1; }
 .blog-featured-body { padding: 36px 36px 36px 0; display: flex; flex-direction: column; justify-content: center; }
 .blog-featured-body .blog-tag { margin-bottom: 12px; }
 .blog-featured-body h2 { font-size: 1.6rem; margin-bottom: 12px; line-height: 1.3; }
 .blog-featured-body .blog-meta { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px; }
 .blog-featured-body p { color: var(--text-soft); line-height: 1.7; margin-bottom: 18px; }
 .blog-page .blog-grid { margin-bottom: 40px; }
+
+/* Blog card thumbnail with image + emoji badge */
+.blog-thumb { position: relative; height: 180px; overflow: hidden; background: var(--bg-alt); display: block; }
+.blog-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.blog-thumb .thumb-emoji-badge { position: absolute; top: 10px; left: 10px; background: var(--surface); border-radius: 8px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: var(--shadow); z-index: 1; font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif; line-height: 1; }
+
 .blog-article { max-width: 760px; margin: 0 auto; }
 .blog-article-header { margin-bottom: 30px; text-align: center; }
 .blog-article-header .blog-tag { margin-bottom: 14px; }
 .blog-article-header h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.015em; }
 .blog-article-meta { font-size: 0.85rem; color: var(--text-muted); display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
 .blog-article-meta span { display: flex; align-items: center; gap: 5px; }
-.blog-article-hero { background: var(--bg-alt); border-radius: 20px; min-height: 220px; display: flex; align-items: center; justify-content: center; font-size: 4rem; margin-bottom: 30px; }
+.blog-article-hero { position: relative; border-radius: 20px; min-height: 320px; overflow: hidden; margin-bottom: 30px; background: var(--bg-alt); }
+.blog-article-hero img { width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; inset: 0; }
+.blog-article-hero .hero-emoji-badge { position: absolute; top: 16px; left: 16px; background: var(--surface); border-radius: 10px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: var(--shadow); z-index: 1; font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif; line-height: 1; }
 .blog-article-body { font-family: 'Lora', Georgia, serif; font-size: 1.08rem; line-height: 1.8; color: var(--text); }
 .blog-article-body p { margin-bottom: 22px; }
 .blog-article-body h2 { font-family: 'Inter', sans-serif; font-size: 1.4rem; margin: 36px 0 14px; color: var(--text); scroll-margin-top: 90px; }
@@ -1178,7 +1183,7 @@ img { max-width: 100%; display: block; }
 .blog-author-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--bg-alt); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
 .blog-author-info strong { display: block; font-size: 0.95rem; }
 .blog-author-info span { font-size: 0.82rem; color: var(--text-muted); }
-@media (max-width: 800px) { .blog-featured { grid-template-columns: 1fr; } .blog-featured-thumb { min-height: 180px; } .blog-featured-body { padding: 24px 26px 30px; } .blog-article-body { font-size: 1rem; } }
+@media (max-width: 800px) { .blog-featured { grid-template-columns: 1fr; } .blog-featured-thumb { min-height: 180px; } .blog-featured-body { padding: 24px 26px 30px; } .blog-article-body { font-size: 1rem; } .blog-article-hero { min-height: 220px; } }
 @media (max-width: 600px) { .blog-article-footer { flex-direction: column; align-items: flex-start; } }
 
 /* ---------- 11. TOOL PAGE TEMPLATE LAYOUT ---------- */
