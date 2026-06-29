@@ -782,12 +782,16 @@
         }
 
         modalOverlay.hidden = false;
+        modalOverlay.classList.add('is-visible');
         // Focus the title input after a tick so the modal paints first
         setTimeout(function () { taskTitleInput.focus(); }, 0);
       }
 
       function closeModal() {
-        if (modalOverlay) modalOverlay.hidden = true;
+        if (modalOverlay) {
+          modalOverlay.hidden = true;
+          modalOverlay.classList.remove('is-visible');
+        }
         editingContext = null;
       }
 
@@ -829,7 +833,7 @@
 
       // ---------- Grid click handler ----------
       gridEl.addEventListener('click', function (e) {
-        // 1. Click on chip-delete button <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> delete immediately (with confirm)
+        // 1. Click on chip-delete button -> delete immediately (with confirm) width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> delete immediately (with confirm)
         const deleteBtn = e.target.closest('.chip-delete');
         if (deleteBtn) {
           const chip = deleteBtn.closest('.task-chip');
@@ -849,7 +853,7 @@
           return;
         }
 
-        // 2. Click on a task-chip <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> open edit modal
+        // 2. Click on a task-chip -> open edit modal
         const chip = e.target.closest('.task-chip');
         if (chip) {
           const cell = chip.closest('.planner-cell');
@@ -864,7 +868,7 @@
           return;
         }
 
-        // 3. Click on empty cell <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> open add modal
+        // 3. Click on empty cell -> open add modal
         const cell = e.target.closest('.planner-cell');
         if (cell) {
           const dayIdx = parseInt(cell.getAttribute('data-day'), 10);
@@ -908,6 +912,14 @@
         saveTasks(currentWeekStart, {});
         renderGrid();
       });
+
+      // ---------- Print / Export PDF ----------
+      const printBtn = document.getElementById('printBtn');
+      if (printBtn) {
+        printBtn.addEventListener('click', function () {
+          window.print();
+        });
+      }
 
       // ---------- Init ----------
       currentWeekStart = getWeekStart(new Date());

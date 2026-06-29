@@ -1481,3 +1481,235 @@ input:focus-visible,
   outline-offset: 2px;
   border-radius: 6px;
 }
+
+/* =========================================================
+   PRINT STYLES — @media print
+   Produces a clean, paper-friendly weekly planner layout.
+   Hides all interactive web UI (header, footer, nav, buttons,
+   inputs, delete icons, print button) and expands the grid
+   to fill A4/Letter paper margins.
+   ========================================================= */
+@media print {
+  /* Force light background + dark text for print (regardless of theme) */
+  body {
+    background: #FFFFFF !important;
+    color: #1A1A1A !important;
+    font-size: 11pt !important;
+  }
+
+  /* Hide all interactive web UI elements */
+  .site-header,
+  .site-footer,
+  .mobile-nav,
+  .mobile-menu-btn,
+  .planner-actions,
+  .planner-modal-overlay,
+  .planner-empty-banner,
+  .ad-slot,
+  .tool-page-sidebar,
+  .tool-article,
+  .search-wrap,
+  .theme-toggles,
+  #printBtn,
+  #clearWeekBtn,
+  #prevWeekBtn,
+  #nextWeekBtn,
+  #todayBtn {
+    display: none !important;
+  }
+
+  /* Hide delete buttons inside task chips */
+  .chip-delete {
+    display: none !important;
+  }
+
+  /* Remove shadows, borders, and rounded corners for clean print */
+  .planner-toolbar,
+  .planner-grid-wrap {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  /* Toolbar: only show the week label and stats, hide button row */
+  .planner-toolbar {
+    display: block !important;
+    margin-bottom: 16pt !important;
+    padding-bottom: 8pt !important;
+    border-bottom: 2pt solid #1A1A1A !important;
+  }
+
+  .planner-toolbar h3 {
+    font-size: 18pt !important;
+    margin: 0 0 4pt 0 !important;
+  }
+
+  .planner-week-pill {
+    display: inline-block !important;
+    background: transparent !important;
+    color: #1A1A1A !important;
+    font-size: 12pt !important;
+    padding: 0 !important;
+  }
+
+  .planner-stats-group {
+    display: block !important;
+    margin-top: 4pt !important;
+    font-size: 10pt !important;
+    color: #555 !important;
+  }
+
+  .planner-stat {
+    display: inline !important;
+    border: none !important;
+  }
+
+  .planner-stat strong {
+    color: #1A1A1A !important;
+  }
+
+  .planner-stat span,
+  .stat-label {
+    color: #555 !important;
+  }
+
+  /* Expand the grid to fill the page */
+  .container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .tool-page-layout {
+    display: block !important;
+  }
+
+  .tool-page-main {
+    width: 100% !important;
+  }
+
+  .planner-grid {
+    min-width: 0 !important;
+    width: 100% !important;
+    grid-template-columns: 50px repeat(7, 1fr) !important;
+    gap: 1pt !important;
+  }
+
+  /* Day headers: clean, bold, bordered */
+  .planner-day-header {
+    background: #F0F0F0 !important;
+    color: #1A1A1A !important;
+    border: 1pt solid #999 !important;
+    border-radius: 0 !important;
+    padding: 4pt 2pt !important;
+    font-size: 9pt !important;
+  }
+
+  .planner-day-header .day-name {
+    color: #1A1A1A !important;
+    font-size: 8pt !important;
+  }
+
+  .planner-day-header .day-date {
+    color: #1A1A1A !important;
+    font-size: 11pt !important;
+  }
+
+  .planner-day-header.is-today {
+    background: #1A1A1A !important;
+    color: #FFFFFF !important;
+  }
+
+  .planner-day-header.is-today .day-name,
+  .planner-day-header.is-today .day-date {
+    color: #FFFFFF !important;
+  }
+
+  /* Time labels: compact, right-aligned */
+  .planner-time-label {
+    color: #555 !important;
+    border-right: 1pt solid #999 !important;
+    font-size: 8pt !important;
+    padding: 2pt 4pt !important;
+  }
+
+  /* Cells: bordered, min height for handwriting */
+  .planner-cell {
+    background: #FFFFFF !important;
+    border: 1pt solid #999 !important;
+    border-radius: 0 !important;
+    min-height: 40pt !important;
+    padding: 2pt !important;
+  }
+
+  .planner-cell:hover {
+    background: #FFFFFF !important;
+    border-color: #999 !important;
+  }
+
+  .planner-cell.is-empty::before {
+    display: none !important;
+  }
+
+  /* Task chips: clean text, no shadows */
+  .task-chip {
+    background: #F5F5F5 !important;
+    color: #1A1A1A !important;
+    border: 1pt solid #CCC !important;
+    border-radius: 2pt !important;
+    box-shadow: none !important;
+    font-size: 8pt !important;
+    padding: 2pt 4pt !important;
+    margin-bottom: 2pt !important;
+    break-inside: avoid !important;
+  }
+
+  .task-chip.is-done {
+    text-decoration: line-through !important;
+    color: #777 !important;
+  }
+
+  .task-chip.category-study { border-left: 3pt solid #4A5D23 !important; }
+  .task-chip.category-class { border-left: 3pt solid #3B5998 !important; }
+  .task-chip.category-work { border-left: 3pt solid #8B6F4E !important; }
+  .task-chip.category-personal { border-left: 3pt solid #5B8C5E !important; }
+  .task-chip.category-break { border-left: 3pt solid #B0876B !important; }
+
+  /* Corner cell */
+  .planner-corner {
+    background: transparent !important;
+    color: #555 !important;
+    font-size: 8pt !important;
+  }
+
+  /* Section header (eyebrow + title) — compact for print */
+  .section-header {
+    margin-bottom: 12pt !important;
+  }
+
+  .section-eyebrow {
+    display: none !important;
+  }
+
+  .section-title {
+    font-size: 20pt !important;
+  }
+
+  .section-subtitle {
+    display: none !important;
+  }
+
+  /* Breadcrumb — hide */
+  nav[aria-label="Breadcrumb"] {
+    display: none !important;
+  }
+
+  /* Page setup: A4/Letter margins */
+  @page {
+    size: A4 landscape;
+    margin: 1.5cm;
+  }
+}
