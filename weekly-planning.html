@@ -3,27 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A daily to-do list is fragile; a weekly plan is resilient. Learn the research behind weekly planning, the case for time blocking, and how to build your first weekly schedule." />
+  <meta name="description" content="The research-backed case for weekly planning over daily to-do lists — why stepping back once a week beats reacting every day, and how to start in 30 minutes." />
+  <meta name="keywords" content="weekly planning, study planner, time management, to-do list, productivity, student schedule" />
   <title>Why Weekly Planning Beats Daily To-Do Lists | Study Compass</title>
+<!-- Open Graph -->
+
+
+
+
+
+
+
+
+<!-- Twitter Card -->
+
+
+
+
+<!-- Pinterest -->
+<meta name="p:domain_verify" content="studycompass.github.io" />
+
+  <!-- Fonts & styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Page-scoped styles for blog article layout classes (scoped here so styles.css stays untouched) -->
+  <style>
+    .blog-article { max-width: 820px; margin: 0 auto; }
+    .blog-article-header { text-align: center; margin-bottom: 34px; }
+    .blog-article-header .blog-tag { display: inline-block; margin-bottom: 16px; }
+    .blog-article-header h1 { font-size: clamp(2rem, 5vw, 2.8rem); margin: 0 0 18px; letter-spacing: -0.02em; line-height: 1.2; }
+    .blog-article-meta { color: var(--text-muted); font-size: 0.9rem; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; align-items: center; }
+    .blog-article-meta span { display: inline-flex; align-items: center; gap: 6px; }
+    .blog-article-meta svg { width: 16px; height: 16px; }
+
+    .blog-article-hero { position: relative; border-radius: 18px; overflow: hidden; margin-bottom: 40px; box-shadow: var(--shadow); }
+    .blog-article-hero img { width: 100%; height: auto; display: block; aspect-ratio: 16 / 9; object-fit: cover; }
+
+    .hero-emoji-badge { position: absolute; display: flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; color: var(--accent); box-shadow: var(--shadow); bottom: 24px; left: 24px; width: 64px; height: 64px; padding: 14px; }
+    .hero-emoji-badge svg { width: 100%; height: 100%; }
+
+    .blog-article-body { font-family: 'Lora', Georgia, serif; font-size: 1.08rem; line-height: 1.85; color: var(--text); }
+    .blog-article-body h2 { font-family: 'Inter', sans-serif; font-size: 1.5rem; margin: 38px 0 14px; letter-spacing: -0.01em; }
+    .blog-article-body h3 { font-family: 'Inter', sans-serif; font-size: 1.2rem; margin: 28px 0 10px; }
+    .blog-article-body p { margin: 0 0 18px; }
+    .blog-article-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+    .blog-article-body strong { color: var(--text); }
+
+    .blog-article-footer { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .blog-author { display: flex; align-items: center; gap: 12px; }
+    .author-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--bg-alt); display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
+    .author-avatar svg { width: 22px; height: 22px; }
+    .blog-author .author-meta strong { display: block; font-size: 0.95rem; }
+    .blog-author .author-meta span { font-size: 0.82rem; color: var(--text-muted); }
+    .back-to-blog { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: transform 0.15s, box-shadow 0.15s; }
+    .back-to-blog:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+    @media (max-width: 640px) {
+      .hero-emoji-badge { width: 52px; height: 52px; bottom: 16px; left: 16px; padding: 11px; }
+      .blog-article-body { font-size: 1rem; }
+    }
+  </style>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WY2VYWK4WQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-WY2VYWK4WQ');
+  </script>
+
     <link rel="canonical" href="https://studycompass.github.io/study-compass/weekly-planning.html" />
-    <meta property="og:type" content="article" />
+    <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Study Compass" />
     <meta property="og:title" content="Why Weekly Planning Beats Daily To-Do Lists | Study Compass" />
-    <meta property="og:description" content="A daily to-do list is fragile; a weekly plan is resilient. Learn the research behind weekly planning, the case for time blocking, and how to build your first weekly schedule." />
+    <meta property="og:description" content="The research-backed case for weekly planning over daily to-do lists — why stepping back once a week beats reacting every day, and how to start in 30 minutes." />
     <meta property="og:url" content="https://studycompass.github.io/study-compass/weekly-planning.html" />
-    <meta property="og:image" content="https://unsplash.com/photos/ebvCsRypmxM/download" />
+    <meta property="og:image" content="https://studycompass.github.io/study-compass/og-images/weekly-planning.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Why Weekly Planning Beats Daily To-Do Lists" />
+    <meta property="og:image:alt" content="Why Weekly Planning Beats Daily To-Do Lists | Study Compass" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Why Weekly Planning Beats Daily To-Do Lists | Study Compass" />
-    <meta name="twitter:description" content="A daily to-do list is fragile; a weekly plan is resilient. Learn the research behind weekly planning, the case for time blocking, and how to build your first weekly schedule." />
-    <meta name="twitter:image" content="https://unsplash.com/photos/ebvCsRypmxM/download" />
-    <meta name="twitter:image:alt" content="Why Weekly Planning Beats Daily To-Do Lists" />
+    <meta name="twitter:description" content="The research-backed case for weekly planning over daily to-do lists — why stepping back once a week beats reacting every day, and how to start in 30 minutes." />
+    <meta name="twitter:image" content="https://studycompass.github.io/study-compass/og-images/weekly-planning.png" />
+    <meta name="twitter:image:alt" content="Why Weekly Planning Beats Daily To-Do Lists | Study Compass" />
     <meta name="pinterest" content="nohover" />
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WY2VYWK4WQ"></script>
@@ -36,6 +103,7 @@
 </head>
 <body>
 
+  <!-- SHARED HEADER -->
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="logo" aria-label="Study Compass home"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> Study Compass</a>
@@ -82,74 +150,95 @@
 
     <section class="section" style="padding-top: 30px;">
       <div class="container">
+
         <article class="blog-article">
 
           <header class="blog-article-header">
             <span class="blog-tag">Planning</span>
             <h1>Why Weekly Planning Beats Daily To-Do Lists</h1>
             <div class="blog-article-meta">
-              <span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> June 28, 2026</span>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                June 28, 2026
+              </span>
               <span>·</span>
-              <span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg> 6 min read</span>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+                6 min read
+              </span>
               <span>·</span>
-              <span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> Study Compass Team</span>
+              <span>By Study Compass Team</span>
             </div>
           </header>
 
           <div class="blog-article-hero">
-            <img src="https://unsplash.com/photos/ebvCsRypmxM/download" alt="Why Weekly Planning Beats Daily To-Do Lists" loading="lazy" />
-            <span class="hero-emoji-badge" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+            <img src="https://unsplash.com/photos/ebvCsRypmxM/download?w=1600" alt="A weekly planner open on a desk with a pen." loading="lazy" />
+            <span class="hero-emoji-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </span>
           </div>
 
           <div class="blog-article-body">
+
             <p>
-              A daily to-do list is fragile; one unexpected event can collapse the entire
-              day. A weekly plan is resilient because it spreads commitments across seven
-              days, giving you room to absorb shocks without abandoning your goals. Research
-              from the University of California, Irvine, found that students who planned
-              their week in advance completed 23% more academic work and reported 40% lower
-              stress than peers who studied reactively.
+              Daily to-do lists feel productive but quietly work against you. They force you to
+              decide what matters <em>in the moment</em>, when you are most tired, most
+              distracted, and most tempted to pick the easiest task instead of the most
+              important one. Research on what psychologists call the <strong>planning
+              fallacy</strong> shows that humans consistently underestimate how long tasks will
+              take — by as much as 50% — when they plan at the daily level. A weekly plan
+              sidesteps this by lifting your perspective one level up: you decide priorities
+              once, on Sunday evening, when you can see the whole week at a glance and
+              realistically weigh a Wednesday problem set against a Friday essay.
             </p>
 
             <p>
-              Perhaps most importantly, a weekly plan forces you to confront the math of
-              your time. There are 168 hours in a week. Subtract 56 for sleep and 40 for
-              class and you are left with 72 hours for everything else — study, meals,
-              socializing, exercise, and rest. Most students overestimate how much free
-              time they have until they see it laid out in a grid.
+              A weekly planning session does not have to be elaborate. Thirty minutes is enough.
+              List every deadline and commitment for the week, identify the three most important
+              outcomes (not tasks — outcomes), and block time on the calendar for each. Leave
+              20% of your week unscheduled as a buffer for the inevitable surprises. The goal is
+              not to fill every hour; it is to make sure the important work has a place to live
+              before the urgent work crowds it out.
             </p>
 
             <p>
-              Time blocking is the practice of assigning specific tasks to specific blocks
-              of time on your calendar, rather than working from an open-ended to-do list.
-              Cal Newport popularized the technique in <em>Deep Work</em>, arguing that the
-              absence of a clear plan is the single biggest enemy of focused intellectual
-              labor. Use our free <a href="planner.html">Study Planner</a> to build your
-              first weekly schedule with time blocks.
+              To make this concrete, our free <a href="planner.html">Study Planner</a> gives you
+              a clean weekly grid with priority slots and deadline tracking — no signup, no
+              clutter, just the structure you need to run the ritual each Sunday.
             </p>
 
             <p>
-              Full article coming soon. In the meantime, try the free tool above to plan
-              your week.
+              If you want a deeper weekly review that combines planning with reflection on what
+              worked and what did not, the <a href="index.html#premium">Student Reset Planner</a>
+              includes a guided 30-minute weekly reset, energy-level journal, and priority
+              matrix designed specifically for students juggling classes, deadlines, and life.
             </p>
 
           </div>
 
           <footer class="blog-article-footer">
             <div class="blog-author">
-              <div class="blog-author-avatar" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
-              <div class="blog-author-info">
+              <span class="author-avatar" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 5 5v3a5 5 0 0 1-10 0V7a5 5 0 0 1 5-5z"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+              </span>
+              <div class="author-meta">
                 <strong>Study Compass Team</strong>
-                <span>Calm, focused study tools for every student.</span>
+                <span>Cozy, focused tools for students.</span>
               </div>
             </div>
-            <a href="blog.html" class="btn btn-ghost"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg> Back to all articles</a>
+            <a class="back-to-blog" href="blog.html">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+              Back to all articles
+            </a>
           </footer>
+
         </article>
+
       </div>
     </section>
   </main>
 
+  <!-- SHARED FOOTER -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">

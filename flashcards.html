@@ -102,7 +102,7 @@
 
               <!-- 1. BUILDER: add a new card -->
               <div class="fc-builder">
-                <h3><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add a new flashcard</h3>
+                <h3>➕ Add a new flashcard</h3>
                 <div class="fc-builder-grid">
                   <input type="text" id="fcQuestion" placeholder="Front — question or prompt" aria-label="Question" />
                   <input type="text" id="fcAnswer" placeholder="Back — answer or definition" aria-label="Answer" />
@@ -114,7 +114,7 @@
               <div class="fc-study">
                 <div class="fc-study-header">
                   <span class="fc-progress" id="fcProgress">Card 0 of 0</span>
-                  <span>Click the card to flip · <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> to navigate</span>
+                  <span>Click the card to flip · ← → to navigate</span>
                 </div>
 
                 <div class="fc-card-container" id="fcContainer" role="button" tabindex="0" aria-label="Flashcard — click or press Enter to flip">
@@ -131,10 +131,10 @@
                 </div>
 
                 <div class="fc-study-controls">
-                  <button id="fcPrevBtn" class="btn btn-ghost"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Previous</button>
+                  <button id="fcPrevBtn" class="btn btn-ghost">← Previous</button>
                   <button id="fcFlipBtn" class="btn btn-primary">Flip card</button>
-                  <button id="fcNextBtn" class="btn btn-ghost">Next <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-                  <button id="fcShuffleBtn" class="btn btn-ghost"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg> Shuffle</button>
+                  <button id="fcNextBtn" class="btn btn-ghost">Next →</button>
+                  <button id="fcShuffleBtn" class="btn btn-ghost">🔀 Shuffle</button>
                 </div>
                 <p class="fc-hint">Tip: Saying the answer out loud before flipping boosts retention by up to 50%.</p>
               </div>
@@ -142,13 +142,13 @@
               <!-- 3. DECK LIST: manage saved cards -->
               <div class="fc-deck-list">
                 <h3>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Your deck
+                  📚 Your deck
                   <span class="fc-deck-count" id="fcCount">0 cards</span>
                 </h3>
                 <div id="fcDeckList">
                   <p class="fc-empty">No cards yet. Add your first flashcard above to get started.</p>
                 </div>
-                <button id="fcClearBtn" class="fc-clear-btn" style="margin-top:14px;" hidden><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg> Clear entire deck</button>
+                <button id="fcClearBtn" class="fc-clear-btn" style="margin-top:14px;" hidden>🗑 Clear entire deck</button>
               </div>
             </div>
 
@@ -236,7 +236,7 @@
                 information onto a single card. A flashcard should test <em>one</em> atomic
                 fact, not a paragraph. Instead of "List the causes of the French Revolution"
                 (which is an essay question, not a flashcard), break it into individual cards:
-                "What was the immediate financial trigger of the French Revolution?" <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> "The
+                "What was the immediate financial trigger of the French Revolution?" → "The
                 bankruptcy of the royal treasury in 1788." Atomic cards are faster to review,
                 easier to remember, and give cleaner feedback on what you actually know.
               </p>
@@ -314,27 +314,27 @@
               <h3>Premium Picks for Students</h3>
               <ul class="promo-list">
                 <li>
-                  <span class="promo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span>
+                  <span class="promo-icon">🧭</span>
                   <div>
                     <strong>The Student Reset Planner</strong>
                     <p>Includes a built-in spaced-repetition tracker for flashcard decks.</p>
-                    <a href="index.html#premium">Learn more <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                    <a href="index.html#premium">Learn more →</a>
                   </div>
                 </li>
                 <li>
-                  <span class="promo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span class="promo-icon">✅</span>
                   <div>
                     <strong>Digital Habit Trackers</strong>
                     <p>Build daily review streaks that actually stick.</p>
-                    <a href="index.html#premium">Learn more <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                    <a href="index.html#premium">Learn more →</a>
                   </div>
                 </li>
                 <li>
-                  <span class="promo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></span>
+                  <span class="promo-icon">📊</span>
                   <div>
                     <strong>Sheets Budget &amp; Spending Tracker</strong>
                     <p>Auto-categorized finance dashboard for students.</p>
-                    <a href="index.html#premium">Learn more <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                    <a href="index.html#premium">Learn more →</a>
                   </div>
                 </li>
               </ul>
@@ -386,7 +386,7 @@
        Features:
        - Add / delete cards
        - Click card or press Enter to flip
-       - <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> / <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> arrow keys to navigate
+       - ← / → arrow keys to navigate
        - Shuffle deck
        - Auto-save to localStorage (persists across sessions)
        ========================================================= */
@@ -468,7 +468,7 @@
           row.innerHTML = `
             <span class="q"></span>
             <span class="a"></span>
-            <button class="fc-delete-btn" aria-label="Delete card ${i + 1}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            <button class="fc-delete-btn" aria-label="Delete card ${i + 1}">✕</button>
           `;
           // Use textContent for the spans to safely escape user input
           row.querySelector('.q').textContent = card.q;

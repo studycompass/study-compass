@@ -1,0 +1,11 @@
+# Study Compass — robots.txt
+# https://studycompass.github.io/study-compass/
+#
+# Allow all search engines to crawl all pages.
+# The site is fully public (no private areas, no admin panels).
+
+User-agent: *
+Allow: /
+
+# Reference the sitemap so crawlers can discover all pages efficiently.
+Sitemap: https://studycompass.github.io/study-compass/sitemap.xml

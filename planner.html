@@ -4,18 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Free Study Planner by Study Compass — build a weekly schedule with time blocking. Tasks auto-save to your browser. Plus the science of weekly planning and time blocking for students." />
-  <meta name="keywords" content="study planner, weekly schedule, time blocking, weekly planner, student planner, study schedule, free study tools, time management" />
+  <meta name="keywords" content="study planner, weekly planner, time blocking, study schedule, free planner, student calendar, time management" />
+  <title>Study Planner — Weekly Schedule Builder | Study Compass</title>
+<!-- Open Graph -->
 
-  <!-- Open Graph / social sharing -->
 
 
 
-<title>Study Planner — Weekly Schedule Builder | Study Compass</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+
+
+
+<!-- Twitter Card -->
+
+
+
+<!-- Pinterest -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WY2VYWK4WQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -101,8 +112,9 @@
           <span class="section-eyebrow">Free Study Tool</span>
           <h1 class="section-title">Study Planner</h1>
           <p class="section-subtitle">
-            Build a calm, focused week one block at a time. Lay out classes, study sprints,
-            and rest on a seven-day grid — your tasks auto-save to your browser, no account needed.
+            Build a weekly schedule with time blocking. Click any cell to add
+            a task — your week auto-saves in your browser, so it's waiting
+            for you next time you return.
           </p>
         </div>
 
@@ -112,209 +124,272 @@
           <div class="tool-page-main">
 
             <!-- Interactive tool -->
-            <div class="planner-app" id="plannerApp">
+            <div class="planner-app">
 
               <!-- Toolbar -->
               <div class="planner-toolbar">
-                <h3><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Your Week</h3>
+                <h3>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  Your Week
+                </h3>
                 <span class="planner-week-pill" id="weekRange">—</span>
 
-                <div class="planner-stats-group">
-                  <div class="planner-stat">
-                    <span class="stat-label">Tasks</span>
-                    <strong id="statTotal">0</strong>
-                  </div>
-                  <div class="planner-stat">
-                    <span class="stat-label">Done</span>
-                    <strong id="statDone">0</strong>
-                  </div>
+                <div class="planner-stats">
+                  <span>Tasks: <strong id="statTotal">0</strong></span>
+                  <span>Done: <strong id="statDone">0</strong></span>
                 </div>
 
                 <div class="planner-actions">
-                  <button class="btn btn-ghost" id="printBtn" aria-label="Print or save as PDF"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> Print / PDF</button>
-                  <button class="btn btn-ghost" id="prevWeekBtn" aria-label="Previous week">‹ Prev</button>
-                  <button class="btn btn-ghost" id="todayBtn" aria-label="Jump to current week">Today</button>
-                  <button class="btn btn-ghost" id="nextWeekBtn" aria-label="Next week">Next ›</button>
-                  <button class="btn btn-danger" id="clearWeekBtn" aria-label="Clear this week">Clear week</button>
+                  <button id="printBtn" type="button" title="Print this week">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    <span class="btn-label">Print</span>
+                  </button>
+                  <button id="prevWeekBtn" type="button" title="Previous week">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                    <span class="btn-label">Prev</span>
+                  </button>
+                  <button id="todayBtn" type="button" title="Jump to current week">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span class="btn-label">Today</span>
+                  </button>
+                  <button id="nextWeekBtn" type="button" title="Next week">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                    <span class="btn-label">Next</span>
+                  </button>
+                  <button id="clearWeekBtn" type="button" class="is-danger" title="Clear all tasks this week">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                    <span class="btn-label">Clear week</span>
+                  </button>
                 </div>
               </div>
 
               <!-- Grid -->
               <div class="planner-grid-wrap">
-                <div class="planner-grid" id="plannerGrid" role="grid" aria-label="Weekly schedule grid">
-                  <!-- Rendered by JS -->
-                </div>
+                <div class="planner-grid" id="plannerGrid" role="grid" aria-label="Weekly schedule grid"></div>
               </div>
 
-              <!-- Empty-state banner -->
+              <!-- Empty-week banner -->
               <div class="planner-empty-banner" id="plannerEmptyBanner" hidden>
-                This week is empty. Click any cell to add your first task.
+                This week is empty. Click any cell in the grid above to add your first task.
               </div>
+
             </div>
 
             <!-- ===== SEO ARTICLE (1000+ words) ===== -->
             <article class="tool-article">
 
-              <h2>The Science of Weekly Planning: Why a Seven-Day View Beats a Daily List</h2>
+              <h2>Why a Weekly Planner Beats a Daily To-Do List</h2>
 
               <p>
-                Most students plan their work one day at a time, scribbling a to-do list each
-                morning and hoping to get through it by nightfall. But nearly two decades of
-                productivity research point to a different conclusion: weekly planning produces
-                measurably better outcomes than daily planning, with surprisingly little extra
-                effort. A landmark field study at the University of California, Irvine found
-                that professionals who planned at the weekly level completed roughly 23% more
-                of their prioritized work than peers who planned only day-to-day, while also
-                reporting 40% lower subjective stress at the end of the week. The reason is
-                not magic — it is arithmetic. A weekly view gives you enough surface area to
-                balance competing demands, while a daily view forces every unexpected task
-                into the same shrinking container.
+                Most students plan their work one day at a time. They wake up,
+                write a to-do list, attack the items in priority order, and go
+                to bed feeling either mildly accomplished or mildly guilty.
+                Daily planning feels productive, but it has a hidden cost: it
+                trains you to think small. A daily list cannot answer
+                questions like “When will I start the essay due in two
+                weeks?” or “Am I falling behind on biology?” Those questions
+                require a longer horizon. That is what a weekly planner is
+                for.
               </p>
 
               <p>
-                The arithmetic behind weekly planning is often called the "168 hours" exercise,
-                popularized by writer Laura Vanderkam. Every human week, regardless of major,
-                internship, or family obligations, contains exactly 168 hours. Subtract 56
-                hours for sleep (eight per night) and roughly 45 for a heavy course load plus
-                class time, and you are still left with around 67 discretionary hours. That
-                number is almost always larger than students expect, which is precisely why
-                writing it down changes behavior. Seeing the full week on one screen turns
-                vague intentions ("I should study more chemistry") into specific, schedulable
-                blocks that compete with real alternatives rather than with an infinitely
-                expanding to-do list.
+                Research from the University of California, Irvine, on
+                <strong>time use and academic performance</strong> has
+                repeatedly shown that students who plan at the weekly level
+                report lower stress, more consistent study behavior, and
+                higher GPAs than students who plan only daily. The mechanism
+                is straightforward: a weekly view forces you to make
+                trade-offs visible. When you can see all seven days at once,
+                you cannot pretend that a four-hour study block will
+                magically appear on Thursday evening — you can see exactly
+                where it will actually fit.
               </p>
 
-              <h3>Time Blocking: Cal Newport and the Cognitive Science of Single-Tasking</h3>
+              <h3>The 168-Hour Math That Changes Everything</h3>
 
               <p>
-                Time blocking is the practice of assigning each block of your day to one
-                specific task in advance, rather than keeping an open list and deciding
-                moment-to-moment what to do next. The most influential modern advocate is
-                computer scientist Cal Newport, whose 2016 book <em>Deep Work</em> argues
-                that the capacity for sustained, distraction-free concentration is the single
-                most valuable skill in a knowledge economy. Newport's own schedule — visible
-                in his blog posts — is a grid of labeled blocks from 7 AM to 9 PM, with no
-                two consecutive blocks devoted to the same kind of work. His claim is not
-                that blocking is faster per minute, but that it eliminates the hidden costs
-                of context switching, decision fatigue, and "what should I do now?" paralysis.
-              </p>
-
-              <p>
-                Independent research supports the practice. A 2021 study published in
-                <em>Cognitive Science</em> found that students who pre-scheduled specific
-                reading blocks into a weekly calendar were 31% more likely to complete
-                assigned readings on time than students who simply kept a list of readings
-                to do "when they had a chance." The scheduled group also scored higher on
-                unannounced reading quizzes, suggesting the blocks were not just completed
-                but completed with attention. The mechanism appears to be twofold: a
-                scheduled block creates a pre-commitment that lowers the willpower cost of
-                starting, and a labeled block discourages multitasking during the block
-                itself. Both effects compound across a semester.
-              </p>
-
-              <h3>How to Use This Study Planner</h3>
-
-              <p>
-                This planner runs entirely in your browser — no account, no sign-up, no data
-                leaving your device. To add a task, click any empty cell in the weekly grid
-                and a small modal will open with fields for the task title, a category
-                (Study, Class, Work, Personal, or Break), and a completion status. Click
-                <strong>Save</strong> and the task appears as a colored chip inside that cell,
-                automatically saved to your browser's local storage so it persists across
-                refreshes, restarts, and even offline use. To edit an existing task, click
-                its chip; to delete one, click the small × button on the chip itself.
+                There are 168 hours in a week. That sounds like a lot until
+                you start subtracting. Sleep eight hours a night and you have
+                used 56. Attend 15 hours of classes and you are at 71. Eat,
+                shower, commute, and exist for another 28 hours and you are
+                at 99. You have roughly <strong>69 hours</strong> left for
+                everything else: studying, working, socializing, exercising,
+                and resting. The point of doing this math is not to make you
+                feel rushed. It is to make you realize that the time is
+                there — it is just hiding in chunks you have not assigned
+                yet.
               </p>
 
               <p>
-                Navigation is deliberately simple. The toolbar at the top shows the current
-                week's date range (for example, "Jun 28 – Jul 4") and four buttons:
-                <strong>Prev</strong> and <strong>Next</strong> jump backward or forward by
-                seven days, <strong>Today</strong> snaps back to the current week, and
-                <strong>Clear week</strong> empties the visible week after a confirmation
-                prompt. Each week is stored under its own storage key based on the Sunday
-                that starts it, so clearing one week never affects another. The toolbar also
-                displays a running count of total tasks and completed tasks for the week you
-                are viewing, which makes it easy to see at a glance whether your plan is
-                realistic or already overloaded.
+                A weekly planner makes those chunks visible. When you block
+                out Monday 10&nbsp;AM to 12&nbsp;PM for chemistry, you are
+                not just making a plan — you are claiming two of those 69
+                hours and assigning them a purpose. After a few weeks of
+                blocking, you start to notice patterns: maybe your Tuesday
+                afternoons are always wasted, or your Saturday mornings are
+                your most productive blocks. That awareness is the
+                foundation of every serious time-management system.
               </p>
 
-              <h3>Building Your First Week: A Four-Layer Approach</h3>
+              <h3>Time Blocking: The Method Cal Newport Built His Career On</h3>
 
               <p>
-                When you sit down to build your first weekly schedule, resist the urge to
-                start with study blocks. Instead, work in four layers, from least flexible
-                to most flexible. The first layer is <strong>non-negotiables</strong>:
-                classes, job shifts, religious observances, and any other fixed commitments
-                that have a start time and cannot be moved. Block these first, because every
-                other decision depends on knowing where the immovable anchors are. Most
-                students underestimate how many hours these consume — a 15-credit course
-                load with three lab sections can easily eat 25 hours before any independent
-                study begins.
+                <strong>Time blocking</strong> is the practice of assigning
+                specific blocks of time on your calendar to specific tasks or
+                categories of work. Rather than working from an open-ended
+                to-do list, you decide in advance that 2&nbsp;PM to 4&nbsp;PM
+                is for essay drafting — and during that block, you do nothing
+                else. Computer scientist and author Cal Newport has been one
+                of the most prominent advocates of this method, crediting
+                much of his academic output to it.
               </p>
 
               <p>
-                The second layer is <strong>sleep</strong>. Block eight hours per night,
-                every night, before you add anything else. Treating sleep as a schedulable
-                block rather than "whatever is left over" is the single highest-leverage
-                change most students can make, because sleep debt silently destroys both
-                focus and mood. The third layer is <strong>study blocks</strong>, sized to
-                match the work: 50-minute blocks for problem sets, 90-minute blocks for
-                reading and writing, and shorter 25-minute blocks (try our Pomodoro timer)
-                for review and flashcards. Aim for two to four focused study blocks per
-                weekday, with at least one full rest day each week. The fourth and final
-                layer is <strong>rest, exercise, meals, and social time</strong> — scheduled
-                explicitly, not squeezed into whatever gap remains.
-              </p>
-
-              <h3>Three Mistakes That Quietly Break Weekly Plans</h3>
-
-              <p>
-                The first mistake is <strong>over-scheduling</strong> — filling every visible
-                cell with a task and leaving no buffer for the inevitable surprises (a
-                professor adds reading, a friend needs help, you get sick). A realistic
-                weekly plan should leave at least 20% of your discretionary hours unscheduled.
-                The second mistake is <strong>treating the plan as a verdict rather than a
-                hypothesis</strong>. A weekly schedule is a prediction about how your week
-                will go, and like any prediction it will be wrong in ways you cannot
-                anticipate. When reality diverges from the plan, revise the plan rather than
-                abandoning it; a single missed block is not a reason to scrap the whole week.
+                Time blocking works for three reasons. First, it removes the
+                cognitive overhead of deciding what to do next — you
+                already decided, last Sunday, when you built the week.
+                Second, it creates a clear boundary around deep work: during
+                a blocked session, you are not allowed to context-switch.
+                Third, it makes your time visible. When you look at a
+                blocked week, you can immediately see whether you have
+                allocated enough hours to each subject, or whether you have
+                accidentally filled your week with low-value tasks.
               </p>
 
               <p>
-                The third mistake is <strong>ignoring non-study time</strong>. Students who
-                block every hour for academics quickly burn out, then conclude that "planning
-                doesn't work for me" — when in fact the plan was the problem, not the
-                practice. Rest, exercise, meals, and unstructured social time are not rewards
-                for finishing work; they are the conditions that make focused work possible
-                in the first place. Build them in deliberately, protect them as fiercely as
-                you protect a study block, and your plan will be sustainable for an entire
-                semester rather than collapsing by week three.
+                The planner on this page uses 2-hour blocks from 8&nbsp;AM
+                to 8&nbsp;PM, with five categories — Study, Class, Work,
+                Personal, and Break — color-coded so you can see at a glance
+                how your week is balanced. You can also mark any task as
+                done, which makes the planner double as a progress tracker.
               </p>
 
-              <h3>Pairing the Planner With a Weekly Reset</h3>
+              <h3>How to Use This Planner: A Step-by-Step Routine</h3>
 
               <p>
-                A weekly schedule becomes most powerful when paired with a weekly review. Set
-                aside 20 to 30 minutes every Sunday evening to look back at the week just
-                finished and forward at the week ahead. Ask three questions: What did I
-                actually do compared to what I planned? Which blocks felt productive, and
-                which ones drained me? What one change would make next week better? This
-                lightweight reflection turns your planner from a static grid into a feedback
-                loop that improves week over week. Students who combine weekly planning with
-                weekly review consistently report higher grades, lower stress, and a sharper
-                sense of what their time is actually worth.
+                <strong>Step 1: Schedule a weekly planning session.</strong>
+                Pick a fixed time — Sunday evening works well for most
+                students — and block out 30 minutes for planning. Treat this
+                session as seriously as you would a class. It is the
+                highest-leverage half-hour of your week.
               </p>
 
               <p>
-                If you want a structured version of this review process, our
-                <a href="index.html#premium">Student Reset Planner</a> walks you through a
-                30-minute weekly reset with energy-level journaling, a Pomodoro log, and
-                reflection prompts designed specifically for students. It pairs naturally
-                with this free planner — use this grid to schedule your week, and the Reset
-                Planner to learn from it. Together they cover both halves of the planning
-                cycle: design and review, action and reflection. Start with one week, build
-                your first grid today, and let the next seven days be the most intentional
-                week of your semester.
+                <strong>Step 2: Add fixed commitments first.</strong> Fill
+                in your classes, work shifts, and any recurring appointments.
+                These are the non-negotiables that shape the rest of your
+                week. Use the “Class” or “Work” category so they are
+                visually distinct from study time.
+              </p>
+
+              <p>
+                <strong>Step 3: Block study time per subject, not per
+                task.</strong> Rather than blocking “write essay,” block
+                “History essay work” for 2&nbsp;PM to 4&nbsp;PM on Tuesday
+                and Thursday. The narrower the block, the more likely you
+                are to procrastinate; the broader the block, the more
+                flexibility you give yourself to actually start. Within each
+                block, decide on the specific task at the start.
+              </p>
+
+              <p>
+                <strong>Step 4: Protect at least one block for
+                recovery.</strong> Schedule a “Break” block — for exercise,
+                a walk, a meal with friends, or simply doing nothing. A week
+                without scheduled recovery is a week that ends in burnout.
+                The most productive students are not the ones who work the
+                most hours; they are the ones who work the most
+                <em>sustainable</em> hours.
+              </p>
+
+              <p>
+                <strong>Step 5: Review at the end of the week.</strong>
+                Before you build next week's plan, glance back at the
+                current one. How many study blocks did you actually honor?
+                Which subjects got shortchanged? What surprised you? This
+                five-minute review is what turns planning into a learning
+                loop rather than a chore.
+              </p>
+
+              <h3>Building Your First Week</h3>
+
+              <p>
+                If you have never used a weekly planner before, your first
+                week will probably be wrong — and that is fine. The goal of
+                the first week is not to build a perfect schedule; it is to
+                collect data. Block what you <em>think</em> you will do,
+                then compare it to what you <em>actually</em> do. Most
+                students discover they overestimate how much they can study
+                in a single block and underestimate how much time they lose
+                to transitions. Adjust. Try 90-minute blocks instead of
+                2-hour blocks. Add 15-minute buffer blocks between study and
+                class. Iterate.
+              </p>
+
+              <p>
+                After three or four weeks, you will have a schedule that
+                actually fits your life rather than an idealized version of
+                it. That schedule will keep working as long as you keep
+                updating it — which is why this planner auto-saves to your
+                browser. Your week is waiting for you exactly as you left
+                it, every time you come back.
+              </p>
+
+              <h3>Common Mistakes That Quietly Sink Weekly Plans</h3>
+
+              <p>
+                <strong>Mistake 1: Over-scheduling.</strong> The most common
+                rookie error is to fill every waking hour with a block. This
+                always fails, because life generates unscheduled demands — a
+                roommate crisis, an unexpected assignment, a sudden need for
+                sleep. Leave at least 20 percent of your weekly grid empty
+                as a buffer.
+              </p>
+
+              <p>
+                <strong>Mistake 2: Treating the plan as a
+                contract.</strong> A weekly plan is a hypothesis, not a
+                promise. When something more important comes up, change the
+                plan. The point is to make intentional trade-offs, not to
+                mechanically execute a schedule you wrote on Sunday.
+              </p>
+
+              <p>
+                <strong>Mistake 3: Never reviewing.</strong> A plan you
+                never review is just a wish list. The 5-minute end-of-week
+                review is what separates students who improve their planning
+                from students who quietly abandon it after three weeks.
+              </p>
+
+              <p>
+                <strong>Mistake 4: Forgetting recovery.</strong> Students
+                who block 60 hours of study per week and zero hours of
+                recovery typically crash by week four. Sustainable
+                performance comes from rhythm, not intensity. Block the
+                breaks as seriously as you block the study time.
+              </p>
+
+              <h3>From Weekly Planning to a Full Study System</h3>
+
+              <p>
+                A weekly planner is the centerpiece of a serious study
+                system, but it works best when paired with a daily review
+                (5 minutes each morning) and a longer monthly reflection.
+                If you want a structured template that combines weekly
+                planning, daily focus, habit tracking, and end-of-week
+                reflection in a single document, take a look at our
+                <a href="index.html#premium">Student Reset Planner and other
+                premium resources</a> — built specifically for students who
+                want their planning system to actually stick.
+              </p>
+
+              <p>
+                Start with this week. Block out your classes, protect one
+                study block per subject, schedule at least one recovery
+                block, and let the rest reveal itself. By Sunday night, you
+                will know exactly what next week looks like — and that
+                clarity, more than any individual technique, is what makes
+                calm, focused study possible.
               </p>
 
             </article>
@@ -337,27 +412,33 @@
               <h3>Premium Picks for Students</h3>
               <ul class="promo-list">
                 <li>
-                  <span class="promo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span>
+                  <span class="promo-icon" aria-hidden="true" style="display:inline-flex; align-items:center; justify-content:center;">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                  </span>
                   <div>
                     <strong>The Student Reset Planner</strong>
-                    <p>Burned out? Reset your week in 30 minutes with a built-in Pomodoro log.</p>
-                    <a href="index.html#premium">Learn more <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                    <p>Burned out? Reset your week in 30 minutes with a built-in time-blocking grid and reflection prompts.</p>
+                    <a href="index.html#premium">Learn more →</a>
                   </div>
                 </li>
                 <li>
-                  <span class="promo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span class="promo-icon" aria-hidden="true" style="display:inline-flex; align-items:center; justify-content:center;">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
                   <div>
                     <strong>Digital Habit Trackers</strong>
                     <p>Build focus, sleep &amp; study streaks that actually stick.</p>
-                    <a href="index.html#premium">Learn more <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                    <a href="index.html#premium">Learn more →</a>
                   </div>
                 </li>
                 <li>
-                  <span class="promo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></span>
+                  <span class="promo-icon" aria-hidden="true" style="display:inline-flex; align-items:center; justify-content:center;">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6"/><path d="M9 16h6"/></svg>
+                  </span>
                   <div>
                     <strong>Sheets Budget &amp; Spending Tracker</strong>
                     <p>Auto-categorized finance dashboard for students.</p>
-                    <a href="index.html#premium">Learn more <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                    <a href="index.html#premium">Learn more →</a>
                   </div>
                 </li>
               </ul>
@@ -405,31 +486,29 @@
   <script src="script.js" defer></script>
   <script>
     /* =========================================================
-       STUDY PLANNER — weekly schedule grid with localStorage
-       Standalone logic for planner.html. Each week is stored
-       under its own key (studyCompass.planner.YYYY-MM-DD where
-       the date is the Sunday that starts the week). Tasks are
-       keyed inside each week by `${dayIdx}_${hour}` and stored
-       as an array of { id, title, category, done }.
+       STUDY PLANNER — planner.html page logic
+       Weekly time-blocking grid with localStorage persistence.
        ========================================================= */
     (function () {
       'use strict';
 
+      // ---------- Constants ----------
       const STORAGE_PREFIX = 'studyCompass.planner.';
-      const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-      const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                           'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      // 7 time blocks from 8 AM to 8 PM (every 2 hours)
+      const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       const TIME_BLOCKS = [
-        { hour: 8,  label: '8 AM' },
+        { hour: 8,  label: '8 AM'  },
         { hour: 10, label: '10 AM' },
         { hour: 12, label: '12 PM' },
-        { hour: 14, label: '2 PM' },
-        { hour: 16, label: '4 PM' },
-        { hour: 18, label: '6 PM' },
-        { hour: 20, label: '8 PM' }
+        { hour: 14, label: '2 PM'  },
+        { hour: 16, label: '4 PM'  },
+        { hour: 18, label: '6 PM'  },
+        { hour: 20, label: '8 PM'  }
       ];
       const CATEGORIES = ['Study', 'Class', 'Work', 'Personal', 'Break'];
+
+      const MONTH_ABBR = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+      const X_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
 
       // ---------- DOM refs ----------
       const gridEl       = document.getElementById('plannerGrid');
@@ -437,111 +516,125 @@
       const statTotalEl  = document.getElementById('statTotal');
       const statDoneEl   = document.getElementById('statDone');
       const emptyBanner  = document.getElementById('plannerEmptyBanner');
+      const printBtn     = document.getElementById('printBtn');
       const prevWeekBtn  = document.getElementById('prevWeekBtn');
       const todayBtn     = document.getElementById('todayBtn');
       const nextWeekBtn  = document.getElementById('nextWeekBtn');
       const clearWeekBtn = document.getElementById('clearWeekBtn');
 
-      // ---------- State ----------
+      // Week state — Sunday 00:00 of the currently displayed week
       let currentWeekStart = getWeekStart(new Date());
-      let editingContext = null; // { dayIdx, hour, task } when modal is open
+      let modalOverlay = null;
+      let editingContext = null; // { dayIdx, hour, taskId } when editing existing
 
-      // ---------- Date helpers ----------
+      // ---------- Date utilities ----------
       function getWeekStart(date) {
-        const d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0);
-        d.setDate(d.getDate() - d.getDay()); // roll back to Sunday
+        const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        d.setDate(d.getDate() - d.getDay()); // back to Sunday
         return d;
       }
 
       function isSameDay(a, b) {
-        return a.getFullYear() === b.getFullYear() &&
-               a.getMonth() === b.getMonth() &&
-               a.getDate() === b.getDate();
+        return a.getFullYear() === b.getFullYear()
+          && a.getMonth() === b.getMonth()
+          && a.getDate() === b.getDate();
+      }
+
+      function weekKey(start) {
+        const y = start.getFullYear();
+        const m = String(start.getMonth() + 1).padStart(2, '0');
+        const d = String(start.getDate()).padStart(2, '0');
+        return y + '-' + m + '-' + d;
       }
 
       function formatWeekRange(start) {
         const end = new Date(start);
         end.setDate(end.getDate() + 6);
-        const startStr = `${MONTH_NAMES[start.getMonth()]} ${start.getDate()}`;
-        const endStr = `${MONTH_NAMES[end.getMonth()]} ${end.getDate()}`;
-        return `${startStr} – ${endStr}`;
-      }
-
-      function formatDateKey(date) {
-        const y = date.getFullYear();
-        const m = String(date.getMonth() + 1).padStart(2, '0');
-        const d = String(date.getDate()).padStart(2, '0');
-        return `${y}-${m}-${d}`;
-      }
-
-      function weekKey(start) {
-        return STORAGE_PREFIX + formatDateKey(start);
+        const sM = MONTH_ABBR[start.getMonth()];
+        const eM = MONTH_ABBR[end.getMonth()];
+        const sD = start.getDate();
+        const eD = end.getDate();
+        const y  = end.getFullYear();
+        if (start.getMonth() === end.getMonth()) {
+          return sM + ' ' + sD + ' – ' + eD + ', ' + y;
+        }
+        return sM + ' ' + sD + ' – ' + eM + ' ' + eD + ', ' + y;
       }
 
       // ---------- Storage ----------
+      function storageKey(start) {
+        return STORAGE_PREFIX + weekKey(start);
+      }
+
       function loadTasks(start) {
         try {
-          const raw = localStorage.getItem(weekKey(start));
+          const raw = localStorage.getItem(storageKey(start));
           if (!raw) return {};
           const parsed = JSON.parse(raw);
-          return parsed && typeof parsed === 'object' ? parsed : {};
+          return (parsed && typeof parsed === 'object') ? parsed : {};
         } catch (e) {
-          console.warn('Could not load planner tasks:', e);
+          console.warn('Study Compass planner: could not load tasks.', e);
           return {};
         }
       }
 
       function saveTasks(start, tasks) {
         try {
-          localStorage.setItem(weekKey(start), JSON.stringify(tasks));
+          localStorage.setItem(storageKey(start), JSON.stringify(tasks));
         } catch (e) {
-          console.warn('Could not save planner tasks:', e);
+          console.warn('Study Compass planner: could not save tasks.', e);
         }
       }
 
-      // ---------- Task CRUD ----------
+      // ---------- Task helpers ----------
       function cellKey(dayIdx, hour) {
-        return `${dayIdx}_${hour}`;
+        return dayIdx + '_' + hour;
       }
 
       function getCellTasks(tasks, dayIdx, hour) {
-        const list = tasks[cellKey(dayIdx, hour)];
-        return Array.isArray(list) ? list : [];
+        return tasks[cellKey(dayIdx, hour)] || [];
       }
 
       function addTask(tasks, dayIdx, hour, title, category, done) {
-        const key = cellKey(dayIdx, hour);
-        if (!Array.isArray(tasks[key])) tasks[key] = [];
-        tasks[key].push({
-          id: 't_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8),
+        const k = cellKey(dayIdx, hour);
+        if (!tasks[k]) tasks[k] = [];
+        tasks[k].push({
+          id: 't_' + Date.now() + '_' + Math.floor(Math.random() * 10000),
           title: title,
           category: category,
           done: !!done
         });
       }
 
-      function updateTask(tasks, dayIdx, hour, taskId, patch) {
-        const list = getCellTasks(tasks, dayIdx, hour);
-        for (let i = 0; i < list.length; i++) {
-          if (list[i].id === taskId) {
-            list[i] = Object.assign({}, list[i], patch);
-            return;
-          }
-        }
+      function updateTask(tasks, dayIdx, hour, taskId, updates) {
+        const k = cellKey(dayIdx, hour);
+        const arr = tasks[k] || [];
+        const t = arr.find(x => x.id === taskId);
+        if (t) Object.assign(t, updates);
       }
 
       function deleteTask(tasks, dayIdx, hour, taskId) {
-        const key = cellKey(dayIdx, hour);
-        const list = getCellTasks(tasks, dayIdx, hour);
-        const filtered = list.filter(t => t.id !== taskId);
-        if (filtered.length === 0) {
-          delete tasks[key];
-        } else {
-          tasks[key] = filtered;
+        const k = cellKey(dayIdx, hour);
+        const arr = tasks[k] || [];
+        const idx = arr.findIndex(x => x.id === taskId);
+        if (idx !== -1) {
+          arr.splice(idx, 1);
+          if (arr.length === 0) delete tasks[k];
         }
       }
 
-      // ---------- XSS-safe escaping ----------
+      function countTasks(tasks) {
+        let total = 0, done = 0;
+        Object.keys(tasks).forEach(k => {
+          (tasks[k] || []).forEach(t => {
+            total++;
+            if (t.done) done++;
+          });
+        });
+        return { total: total, done: done };
+      }
+
+      // ---------- XSS-safe escape ----------
       function escapeHtml(str) {
         return String(str == null ? '' : str)
           .replace(/&/g, '&amp;')
@@ -551,379 +644,320 @@
           .replace(/'/g, '&#39;');
       }
 
-      function categoryClass(cat) {
-        const c = String(cat || '').toLowerCase();
-        return CATEGORIES.indexOf(cat) >= 0 ? 'cat-' + c : 'cat-other';
-      }
-
       // ---------- Render ----------
       function renderGrid() {
         const tasks = loadTasks(currentWeekStart);
         const today = new Date();
-        const parts = [];
 
-        // Header row: corner + 7 day headers
-        parts.push('<div class="planner-corner" role="rowheader" aria-label="Time"></div>');
-        for (let d = 0; d < 7; d++) {
-          const dayDate = new Date(currentWeekStart);
-          dayDate.setDate(dayDate.getDate() + d);
-          const isToday = isSameDay(dayDate, today);
-          parts.push(
-            '<div class="planner-day-header' + (isToday ? ' is-today' : '') + '" role="columnheader">' +
-              '<span class="day-name">' + DAY_NAMES[d] + '</span>' +
-              '<span class="day-date">' + (dayDate.getMonth() + 1) + '/' + dayDate.getDate() + '</span>' +
-            '</div>'
-          );
-        }
-
-        // 7 time-block rows: time label + 7 cells
-        for (let r = 0; r < TIME_BLOCKS.length; r++) {
-          const block = TIME_BLOCKS[r];
-          parts.push(
-            '<div class="planner-time-label" role="rowheader">' + block.label + '</div>'
-          );
-          for (let d = 0; d < 7; d++) {
-            const dayDate = new Date(currentWeekStart);
-            dayDate.setDate(dayDate.getDate() + d);
-            const isToday = isSameDay(dayDate, today);
-            const cellTasks = getCellTasks(tasks, d, block.hour);
-            const isEmpty = cellTasks.length === 0;
-            parts.push(
-              '<div class="planner-cell' + (isToday ? ' is-today' : '') + (isEmpty ? ' is-empty' : '') + '" ' +
-                'role="gridcell" tabindex="0" ' +
-                'data-day="' + d + '" data-hour="' + block.hour + '" ' +
-                'aria-label="' + DAY_NAMES[d] + ' ' + block.label + ', ' + cellTasks.length + ' task(s)">' +
-                cellTasks.map(function (t) {
-                  return '<div class="task-chip ' + categoryClass(t.category) + (t.done ? ' is-done' : '') + '" ' +
-                           'data-task-id="' + escapeHtml(t.id) + '" ' +
-                           'title="' + escapeHtml(t.title) + '">' +
-                           '<span class="chip-title">' + escapeHtml(t.title) + '</span>' +
-                           '<button class="chip-delete" type="button" aria-label="Delete task: ' +
-                             escapeHtml(t.title) + '" data-task-id="' + escapeHtml(t.id) + '"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>' +
-                         '</div>';
-                }).join('') +
-              '</div>'
-            );
-          }
-        }
-
-        gridEl.innerHTML = parts.join('');
         weekRangeEl.textContent = formatWeekRange(currentWeekStart);
+
+        // Build grid HTML: corner + 7 day headers, then 7 rows
+        let html = '<div class="planner-grid-head" role="columnheader"></div>';
+        for (let d = 0; d < 7; d++) {
+          const date = new Date(currentWeekStart);
+          date.setDate(date.getDate() + d);
+          const isToday = isSameDay(date, today);
+          html += '<div class="planner-grid-head' + (isToday ? ' is-today' : '') + '" role="columnheader">'
+                + DAY_NAMES[d]
+                + '<span class="head-date">' + MONTH_ABBR[date.getMonth()] + ' ' + date.getDate() + '</span>'
+                + '</div>';
+        }
+
+        // 7 time-block rows
+        TIME_BLOCKS.forEach(block => {
+          html += '<div class="planner-time-label" role="rowheader">' + block.label + '</div>';
+          for (let d = 0; d < 7; d++) {
+            const date = new Date(currentWeekStart);
+            date.setDate(date.getDate() + d);
+            const isToday = isSameDay(date, today);
+            const cellTasks = getCellTasks(tasks, d, block.hour);
+
+            let cellHtml = '<div class="planner-cell' + (isToday ? ' is-today' : '') + '" '
+              + 'role="gridcell" tabindex="0" '
+              + 'data-day="' + d + '" data-hour="' + block.hour + '" '
+              + 'aria-label="' + DAY_NAMES[d] + ' ' + MONTH_ABBR[date.getMonth()] + ' ' + date.getDate() + ' at ' + block.label + '">';
+
+            cellTasks.forEach(t => {
+              cellHtml += '<div class="task-chip' + (t.done ? ' is-done' : '') + '" '
+                + 'data-day="' + d + '" data-hour="' + block.hour + '" data-task-id="' + t.id + '" '
+                + 'data-category="' + escapeHtml(t.category) + '" '
+                + 'tabindex="0" '
+                + 'title="' + escapeHtml(t.title) + ' (' + escapeHtml(t.category) + ')' + '">'
+                + '<span class="chip-title">' + escapeHtml(t.title) + '</span>'
+                + '<button class="chip-delete" data-day="' + d + '" data-hour="' + block.hour + '" data-task-id="' + t.id + '" '
+                + 'aria-label="Delete task: ' + escapeHtml(t.title) + '" title="Delete">' + X_SVG + '</button>'
+                + '</div>';
+            });
+
+            cellHtml += '</div>';
+            html += cellHtml;
+          }
+        });
+
+        gridEl.innerHTML = html;
+
         updateStats(tasks);
+        attachGridHandlers();
       }
 
       function updateStats(tasks) {
-        let total = 0;
-        let done = 0;
-        Object.keys(tasks).forEach(function (key) {
-          const list = tasks[key];
-          if (Array.isArray(list)) {
-            total += list.length;
-            done += list.filter(t => t.done).length;
-          }
+        const counts = countTasks(tasks);
+        statTotalEl.textContent = counts.total;
+        statDoneEl.textContent = counts.done;
+        emptyBanner.hidden = counts.total > 0;
+      }
+
+      // ---------- Grid click handler ----------
+      function attachGridHandlers() {
+        gridEl.querySelectorAll('.chip-delete').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const dayIdx = parseInt(btn.dataset.day, 10);
+            const hour = parseInt(btn.dataset.hour, 10);
+            const taskId = btn.dataset.taskId;
+            const tasks = loadTasks(currentWeekStart);
+            const arr = getCellTasks(tasks, dayIdx, hour);
+            const t = arr.find(x => x.id === taskId);
+            const label = t ? t.title : 'this task';
+            if (confirm('Delete "' + label + '"?')) {
+              deleteTask(tasks, dayIdx, hour, taskId);
+              saveTasks(currentWeekStart, tasks);
+              renderGrid();
+            }
+          });
         });
-        statTotalEl.textContent = total;
-        statDoneEl.textContent = done;
-        if (total === 0) {
-          emptyBanner.hidden = false;
-        } else {
-          emptyBanner.hidden = true;
-        }
+
+        gridEl.querySelectorAll('.task-chip').forEach(chip => {
+          chip.addEventListener('click', (e) => {
+            if (e.target.closest('.chip-delete')) return; // delete handled above
+            e.stopPropagation();
+            const dayIdx = parseInt(chip.dataset.day, 10);
+            const hour = parseInt(chip.dataset.hour, 10);
+            const taskId = chip.dataset.taskId;
+            openModal(dayIdx, hour, taskId);
+          });
+          chip.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              chip.click();
+            }
+          });
+        });
+
+        gridEl.querySelectorAll('.planner-cell').forEach(cell => {
+          cell.addEventListener('click', (e) => {
+            if (e.target.closest('.task-chip') || e.target.closest('.chip-delete')) return;
+            const dayIdx = parseInt(cell.dataset.day, 10);
+            const hour = parseInt(cell.dataset.hour, 10);
+            openModal(dayIdx, hour, null);
+          });
+          cell.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              const dayIdx = parseInt(cell.dataset.day, 10);
+              const hour = parseInt(cell.dataset.hour, 10);
+              openModal(dayIdx, hour, null);
+            }
+          });
+        });
       }
 
       // ---------- Modal ----------
-      let modalOverlay = null;
-      let modalTitleEl = null;
-      let taskTitleInput = null;
-      let taskCategorySelect = null;
-      let taskStatusSelect = null;
-      let modalSaveBtn = null;
-      let modalCancelBtn = null;
-      let modalDeleteBtn = null;
-
       function buildModal() {
-        modalOverlay = document.createElement('div');
-        modalOverlay.className = 'planner-modal-overlay';
-        modalOverlay.hidden = true;
+        if (modalOverlay) return modalOverlay;
+
+        const overlay = document.createElement('div');
+        overlay.className = 'planner-modal-overlay';
+        overlay.hidden = true;
+        overlay.setAttribute('aria-hidden', 'true');
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-labelledby', 'modalTitle');
 
         const modal = document.createElement('div');
         modal.className = 'planner-modal';
-        modal.setAttribute('role', 'dialog');
-        modal.setAttribute('aria-modal', 'true');
-        modal.setAttribute('aria-labelledby', 'modalTitle');
 
-        const titleEl = document.createElement('h3');
-        titleEl.id = 'modalTitle';
-        titleEl.textContent = 'Add task';
-        modal.appendChild(titleEl);
+        // Build category options
+        const catOpts = CATEGORIES.map(c => '<option value="' + escapeHtml(c) + '">' + escapeHtml(c) + '</option>').join('');
 
-        const fieldTitle = document.createElement('div');
-        fieldTitle.className = 'planner-field';
-        const titleLabel = document.createElement('label');
-        titleLabel.setAttribute('for', 'taskTitle');
-        titleLabel.textContent = 'Task title';
-        taskTitleInput = document.createElement('input');
-        taskTitleInput.type = 'text';
-        taskTitleInput.id = 'taskTitle';
-        taskTitleInput.placeholder = 'e.g. Read Chapter 4 — Organic Chemistry';
-        taskTitleInput.maxLength = 120;
-        fieldTitle.appendChild(titleLabel);
-        fieldTitle.appendChild(taskTitleInput);
-        modal.appendChild(fieldTitle);
+        modal.innerHTML =
+          '<h3 id="modalTitle">Add task</h3>' +
+          '<div class="modal-field">' +
+            '<label for="taskTitle">Task title</label>' +
+            '<input type="text" id="taskTitle" placeholder="e.g. Chemistry — chapter 4 problems" autocomplete="off" />' +
+          '</div>' +
+          '<div class="modal-field">' +
+            '<label for="taskCategory">Category</label>' +
+            '<select id="taskCategory">' + catOpts + '</select>' +
+          '</div>' +
+          '<div class="modal-field">' +
+            '<label for="taskStatus">Status</label>' +
+            '<select id="taskStatus">' +
+              '<option value="open">Not started</option>' +
+              '<option value="done">Done</option>' +
+            '</select>' +
+          '</div>' +
+          '<div class="planner-modal-actions">' +
+            '<button class="btn btn-delete" id="modalDeleteBtn" type="button" style="display:none;">Delete</button>' +
+            '<button class="btn btn-ghost" id="modalCancelBtn" type="button">Cancel</button>' +
+            '<button class="btn btn-primary" id="modalSaveBtn" type="button">Save</button>' +
+          '</div>';
 
-        const row = document.createElement('div');
-        row.className = 'planner-modal-row';
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
 
-        const catWrap = document.createElement('div');
-        catWrap.className = 'planner-field';
-        const catLabel = document.createElement('label');
-        catLabel.setAttribute('for', 'taskCategory');
-        catLabel.textContent = 'Category';
-        taskCategorySelect = document.createElement('select');
-        taskCategorySelect.id = 'taskCategory';
-        CATEGORIES.forEach(function (c) {
-          const opt = document.createElement('option');
-          opt.value = c;
-          opt.textContent = c;
-          taskCategorySelect.appendChild(opt);
+        // Wire up modal buttons
+        overlay.querySelector('#modalCancelBtn').addEventListener('click', closeModal);
+        overlay.querySelector('#modalSaveBtn').addEventListener('click', handleModalSave);
+        overlay.querySelector('#modalDeleteBtn').addEventListener('click', handleModalDelete);
+
+        // Close on overlay click (but not on modal itself)
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) closeModal();
         });
-        catWrap.appendChild(catLabel);
-        catWrap.appendChild(taskCategorySelect);
 
-        const statusWrap = document.createElement('div');
-        statusWrap.className = 'planner-field';
-        const statusLabel = document.createElement('label');
-        statusLabel.setAttribute('for', 'taskStatus');
-        statusLabel.textContent = 'Status';
-        taskStatusSelect = document.createElement('select');
-        taskStatusSelect.id = 'taskStatus';
-        const optPending = document.createElement('option');
-        optPending.value = 'pending';
-        optPending.textContent = 'Not started';
-        const optDone = document.createElement('option');
-        optDone.value = 'done';
-        optDone.textContent = 'Completed';
-        taskStatusSelect.appendChild(optPending);
-        taskStatusSelect.appendChild(optDone);
-        statusWrap.appendChild(statusLabel);
-        statusWrap.appendChild(taskStatusSelect);
-
-        row.appendChild(catWrap);
-        row.appendChild(statusWrap);
-        modal.appendChild(row);
-
-        const actions = document.createElement('div');
-        actions.className = 'planner-modal-actions';
-        modalSaveBtn = document.createElement('button');
-        modalSaveBtn.type = 'button';
-        modalSaveBtn.className = 'btn btn-primary';
-        modalSaveBtn.id = 'modalSave';
-        modalSaveBtn.textContent = 'Save';
-
-        modalCancelBtn = document.createElement('button');
-        modalCancelBtn.type = 'button';
-        modalCancelBtn.className = 'btn btn-ghost';
-        modalCancelBtn.id = 'modalCancel';
-        modalCancelBtn.textContent = 'Cancel';
-
-        modalDeleteBtn = document.createElement('button');
-        modalDeleteBtn.type = 'button';
-        modalDeleteBtn.className = 'btn btn-danger';
-        modalDeleteBtn.id = 'modalDelete';
-        modalDeleteBtn.textContent = 'Delete';
-
-        actions.appendChild(modalSaveBtn);
-        actions.appendChild(modalCancelBtn);
-        actions.appendChild(modalDeleteBtn);
-        modal.appendChild(actions);
-
-        modalOverlay.appendChild(modal);
-        document.body.appendChild(modalOverlay);
-
-        // Wire events
-        modalSaveBtn.addEventListener('click', handleModalSave);
-        modalCancelBtn.addEventListener('click', closeModal);
-        modalDeleteBtn.addEventListener('click', handleModalDelete);
-        modalOverlay.addEventListener('click', function (e) {
-          if (e.target === modalOverlay) closeModal();
+        // Close on Escape
+        overlay.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeModal();
         });
-        document.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape' && modalOverlay && !modalOverlay.hidden) {
-            closeModal();
-          }
-        });
-        taskTitleInput.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            handleModalSave();
-          }
-        });
+
+        modalOverlay = overlay;
+        return overlay;
       }
 
-      function openModal(dayIdx, hour, existingTask) {
-        if (!modalOverlay) buildModal();
-        editingContext = { dayIdx: dayIdx, hour: hour, task: existingTask || null };
+      function openModal(dayIdx, hour, existingTaskId) {
+        const overlay = buildModal();
+        const titleInput = overlay.querySelector('#taskTitle');
+        const catSelect  = overlay.querySelector('#taskCategory');
+        const statusSelect = overlay.querySelector('#taskStatus');
+        const deleteBtn  = overlay.querySelector('#modalDeleteBtn');
+        const titleEl    = overlay.querySelector('#modalTitle');
 
-        if (existingTask) {
-          modalTitleEl = document.getElementById('modalTitle');
-          modalTitleEl.textContent = 'Edit task';
-          taskTitleInput.value = existingTask.title || '';
-          taskCategorySelect.value = CATEGORIES.indexOf(existingTask.category) >= 0
-            ? existingTask.category
-            : 'Study';
-          taskStatusSelect.value = existingTask.done ? 'done' : 'pending';
-          modalDeleteBtn.hidden = false;
+        editingContext = { dayIdx: dayIdx, hour: hour, taskId: existingTaskId };
+
+        if (existingTaskId) {
+          const tasks = loadTasks(currentWeekStart);
+          const arr = getCellTasks(tasks, dayIdx, hour);
+          const t = arr.find(x => x.id === existingTaskId);
+          if (t) {
+            titleEl.textContent = 'Edit task';
+            titleInput.value = t.title;
+            catSelect.value = t.category;
+            statusSelect.value = t.done ? 'done' : 'open';
+            deleteBtn.style.display = '';
+          } else {
+            // Task not found — fall back to add mode
+            editingContext.taskId = null;
+            titleEl.textContent = 'Add task';
+            titleInput.value = '';
+            catSelect.value = 'Study';
+            statusSelect.value = 'open';
+            deleteBtn.style.display = 'none';
+          }
         } else {
-          modalTitleEl = document.getElementById('modalTitle');
-          modalTitleEl.textContent = 'Add task';
-          taskTitleInput.value = '';
-          taskCategorySelect.value = 'Study';
-          taskStatusSelect.value = 'pending';
-          modalDeleteBtn.hidden = true;
+          titleEl.textContent = 'Add task';
+          titleInput.value = '';
+          catSelect.value = 'Study';
+          statusSelect.value = 'open';
+          deleteBtn.style.display = 'none';
         }
 
-        modalOverlay.hidden = false;
-        modalOverlay.classList.add('is-visible');
-        // Focus the title input after a tick so the modal paints first
-        setTimeout(function () { taskTitleInput.focus(); }, 0);
+        // CRITICAL: set both `hidden` and `.is-visible` — CSS uses .is-visible
+        overlay.hidden = false;
+        overlay.classList.add('is-visible');
+        overlay.setAttribute('aria-hidden', 'false');
+
+        // Focus the title input shortly after visibility transition starts
+        setTimeout(() => { titleInput.focus(); titleInput.select(); }, 50);
       }
 
       function closeModal() {
-        if (modalOverlay) {
-          modalOverlay.hidden = true;
-          modalOverlay.classList.remove('is-visible');
-        }
+        if (!modalOverlay) return;
+        modalOverlay.classList.remove('is-visible');
+        modalOverlay.setAttribute('aria-hidden', 'true');
+        // Defer setting hidden so the fade-out transition can play
+        setTimeout(() => {
+          if (!modalOverlay.classList.contains('is-visible')) {
+            modalOverlay.hidden = true;
+          }
+        }, 250);
         editingContext = null;
       }
 
       function handleModalSave() {
         if (!editingContext) return;
-        const title = taskTitleInput.value.trim();
+        const { dayIdx, hour, taskId } = editingContext;
+        const titleInput = modalOverlay.querySelector('#taskTitle');
+        const catSelect  = modalOverlay.querySelector('#taskCategory');
+        const statusSelect = modalOverlay.querySelector('#taskStatus');
+
+        const title = (titleInput.value || '').trim();
         if (!title) {
-          taskTitleInput.focus();
-          taskTitleInput.setAttribute('aria-invalid', 'true');
+          alert('Please enter a task title.');
+          titleInput.focus();
           return;
         }
-        taskTitleInput.removeAttribute('aria-invalid');
-        const category = taskCategorySelect.value;
-        const done = taskStatusSelect.value === 'done';
+        const category = catSelect.value;
+        const done = statusSelect.value === 'done';
+
         const tasks = loadTasks(currentWeekStart);
-
-        if (editingContext.task) {
-          updateTask(tasks, editingContext.dayIdx, editingContext.hour,
-                     editingContext.task.id, { title: title, category: category, done: done });
+        if (taskId) {
+          updateTask(tasks, dayIdx, hour, taskId, { title: title, category: category, done: done });
         } else {
-          addTask(tasks, editingContext.dayIdx, editingContext.hour, title, category, done);
+          addTask(tasks, dayIdx, hour, title, category, done);
         }
-
         saveTasks(currentWeekStart, tasks);
         closeModal();
         renderGrid();
       }
 
       function handleModalDelete() {
-        if (!editingContext || !editingContext.task) return;
-        const confirmMsg = 'Delete this task? "' + editingContext.task.title + '" — this cannot be undone.';
-        if (!confirm(confirmMsg)) return;
+        if (!editingContext || !editingContext.taskId) return;
+        const { dayIdx, hour, taskId } = editingContext;
         const tasks = loadTasks(currentWeekStart);
-        deleteTask(tasks, editingContext.dayIdx, editingContext.hour, editingContext.task.id);
-        saveTasks(currentWeekStart, tasks);
-        closeModal();
-        renderGrid();
-      }
-
-      // ---------- Grid click handler ----------
-      gridEl.addEventListener('click', function (e) {
-        // 1. Click on chip-delete button -> delete immediately (with confirm) width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> delete immediately (with confirm)
-        const deleteBtn = e.target.closest('.chip-delete');
-        if (deleteBtn) {
-          const chip = deleteBtn.closest('.task-chip');
-          const cell = deleteBtn.closest('.planner-cell');
-          if (!chip || !cell) return;
-          const taskId = chip.getAttribute('data-task-id');
-          const dayIdx = parseInt(cell.getAttribute('data-day'), 10);
-          const hour = parseInt(cell.getAttribute('data-hour'), 10);
-          const tasks = loadTasks(currentWeekStart);
-          const list = getCellTasks(tasks, dayIdx, hour);
-          const found = list.find(t => t.id === taskId);
-          if (!found) return;
-          if (!confirm('Delete this task? "' + found.title + '" — this cannot be undone.')) return;
+        const arr = getCellTasks(tasks, dayIdx, hour);
+        const t = arr.find(x => x.id === taskId);
+        const label = t ? t.title : 'this task';
+        if (confirm('Delete "' + label + '"?')) {
           deleteTask(tasks, dayIdx, hour, taskId);
           saveTasks(currentWeekStart, tasks);
+          closeModal();
           renderGrid();
-          return;
         }
-
-        // 2. Click on a task-chip -> open edit modal
-        const chip = e.target.closest('.task-chip');
-        if (chip) {
-          const cell = chip.closest('.planner-cell');
-          if (!cell) return;
-          const taskId = chip.getAttribute('data-task-id');
-          const dayIdx = parseInt(cell.getAttribute('data-day'), 10);
-          const hour = parseInt(cell.getAttribute('data-hour'), 10);
-          const tasks = loadTasks(currentWeekStart);
-          const list = getCellTasks(tasks, dayIdx, hour);
-          const found = list.find(t => t.id === taskId);
-          if (found) openModal(dayIdx, hour, found);
-          return;
-        }
-
-        // 3. Click on empty cell -> open add modal
-        const cell = e.target.closest('.planner-cell');
-        if (cell) {
-          const dayIdx = parseInt(cell.getAttribute('data-day'), 10);
-          const hour = parseInt(cell.getAttribute('data-hour'), 10);
-          if (!isNaN(dayIdx) && !isNaN(hour)) openModal(dayIdx, hour, null);
-        }
-      });
-
-      // Keyboard accessibility: Enter / Space on focused cell opens add modal
-      gridEl.addEventListener('keydown', function (e) {
-        if (e.key !== 'Enter' && e.key !== ' ') return;
-        const cell = e.target.closest('.planner-cell');
-        if (!cell || cell !== document.activeElement) return;
-        e.preventDefault();
-        const dayIdx = parseInt(cell.getAttribute('data-day'), 10);
-        const hour = parseInt(cell.getAttribute('data-hour'), 10);
-        if (!isNaN(dayIdx) && !isNaN(hour)) openModal(dayIdx, hour, null);
-      });
+      }
 
       // ---------- Week navigation ----------
-      function shiftWeek(deltaDays) {
+      function shiftWeek(days) {
         const d = new Date(currentWeekStart);
-        d.setDate(d.getDate() + deltaDays);
-        currentWeekStart = d;
+        d.setDate(d.getDate() + days);
+        currentWeekStart = getWeekStart(d);
         renderGrid();
       }
 
-      prevWeekBtn.addEventListener('click', function () { shiftWeek(-7); });
-      nextWeekBtn.addEventListener('click', function () { shiftWeek(7); });
-      todayBtn.addEventListener('click', function () {
+      prevWeekBtn.addEventListener('click', () => shiftWeek(-7));
+      nextWeekBtn.addEventListener('click', () => shiftWeek(7));
+      todayBtn.addEventListener('click', () => {
         currentWeekStart = getWeekStart(new Date());
         renderGrid();
       });
-      clearWeekBtn.addEventListener('click', function () {
+
+      clearWeekBtn.addEventListener('click', () => {
         const tasks = loadTasks(currentWeekStart);
-        const count = Object.keys(tasks).reduce(function (sum, key) {
-          return sum + (Array.isArray(tasks[key]) ? tasks[key].length : 0);
-        }, 0);
-        if (count === 0) return;
-        if (!confirm('Clear all ' + count + ' task(s) from this week? This cannot be undone.')) return;
-        saveTasks(currentWeekStart, {});
-        renderGrid();
+        const counts = countTasks(tasks);
+        if (counts.total === 0) {
+          alert('This week is already empty.');
+          return;
+        }
+        if (confirm('Clear all ' + counts.total + ' task' + (counts.total === 1 ? '' : 's') + ' from this week? This cannot be undone.')) {
+          saveTasks(currentWeekStart, {});
+          renderGrid();
+        }
       });
 
-      // ---------- Print / Export PDF ----------
-      const printBtn = document.getElementById('printBtn');
-      if (printBtn) {
-        printBtn.addEventListener('click', function () {
-          window.print();
-        });
-      }
+      // ---------- Print ----------
+      printBtn.addEventListener('click', () => window.print());
 
       // ---------- Init ----------
-      currentWeekStart = getWeekStart(new Date());
       renderGrid();
     })();
   </script>

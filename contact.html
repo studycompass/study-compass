@@ -86,14 +86,15 @@
 
           <!-- ===== CONTACT FORM (Formspree-powered) ===== -->
           <!--
-            Formspree-powered contact form (Vanilla JS / AJAX submit).
-            Endpoint: https://formspree.io/f/mnjkzjrz
-            Submissions are sent via fetch() so the user stays on this page;
-            success/error states are shown in the #formStatus div below.
+            INSTRUCTIONS:
+            1. Sign up free at https://formspree.io
+            2. Create a new form and copy your endpoint ID (looks like "xayznvqk")
+            3. Replace "YOUR_FORM_ID" in the action URL below with your ID.
+            That's it — Formspree will email submissions to your registered inbox.
           -->
           <form class="contact-form"
                 id="contactForm"
-                action="https://formspree.io/f/mnjkzjrz"
+                action="https://formspree.io/f/YOUR_FORM_ID"
                 method="POST">
 
             <div class="form-field">
@@ -126,7 +127,7 @@
             <!-- Honeypot field for spam protection (Formspree recommends this) -->
             <input type="text" name="_gotcha" style="display:none !important;" tabindex="-1" autocomplete="off" />
 
-            <button type="submit" class="btn btn-primary btn-block">Send message <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></button>
+            <button type="submit" class="btn btn-primary btn-block">Send message ✉️</button>
 
             <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
           </form>
@@ -151,28 +152,28 @@
 
             <ul class="contact-channels">
               <li>
-                <span class="channel-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><line x1="6" y1="2" x2="10" y2="2"/><line x1="14" y1="2" x2="18" y2="2"/></svg></span>
+                <span class="channel-icon">⏱️</span>
                 <div>
                   <strong>Tool &amp; bug reports</strong>
                   <span>Use the form — pick "Bug report" so we can prioritize it.</span>
                 </div>
               </li>
               <li>
-                <span class="channel-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 9.4 7.5 4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
+                <span class="channel-icon">📦</span>
                 <div>
                   <strong>Premium product support</strong>
                   <span>Include your Payhip order ID for fastest help.</span>
                 </div>
               </li>
               <li>
-                <span class="channel-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></span>
+                <span class="channel-icon">🤝</span>
                 <div>
                   <strong>Partnerships &amp; press</strong>
                   <span>We typically reply within 1 business day.</span>
                 </div>
               </li>
               <li>
-                <span class="channel-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                <span class="channel-icon">🔒</span>
                 <div>
                   <strong>Privacy &amp; data requests</strong>
                   <span>See our <a href="privacy.html">Privacy Policy</a> for your rights.</span>
@@ -237,18 +238,18 @@
 
           if (response.ok) {
             status.className = 'form-status is-success';
-            status.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Thanks! Your message has been sent. We\'ll reply within 2 business days.';
+            status.textContent = '✅ Thanks! Your message has been sent. We\'ll reply within 2 business days.';
             form.reset();
           } else {
             const data = await response.json().catch(() => ({}));
             status.className = 'form-status is-error';
             status.textContent = data?.errors?.[0]?.message
-              ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>️ ' + data.errors[0].message
-              : '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>️ Something went wrong. Please email us directly.';
+              ? '⚠️ ' + data.errors[0].message
+              : '⚠️ Something went wrong. Please email us directly.';
           }
         } catch (err) {
           status.className = 'form-status is-error';
-          status.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>️ Network error. Please check your connection and try again.';
+          status.textContent = '⚠️ Network error. Please check your connection and try again.';
         }
       });
     });
