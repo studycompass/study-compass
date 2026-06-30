@@ -1,0 +1,102 @@
+# =============================================================
+# Study Compass — Decap CMS Configuration
+# =============================================================
+# This configures the Decap CMS admin dashboard at /admin
+#
+# BEFORE THIS WORKS, you must:
+# 1. Create a GitHub OAuth App (see SETUP-GUIDE.md)
+# 2. Deploy to Cloudflare Pages (the functions/api/ folder handles OAuth)
+# 3. Set environment variables in Cloudflare Pages dashboard:
+#    - GITHUB_CLIENT_ID
+#    - GITHUB_CLIENT_SECRET
+#    - OAUTH_REDIRECT_URL (e.g., https://your-site.pages.dev/api/callback)
+#
+# The base_url below should be your Cloudflare Pages domain.
+# The functions/api/auth.js and functions/api/callback.js files
+# handle the OAuth flow on the SAME domain as your site.
+# =============================================================
+
+# Use the editorial workflow for draft/review/publish stages
+publish_mode: editorial_workflow
+
+# Backend: GitHub (direct commit to your repo)
+backend:
+  name: github
+  repo: studycompass/study-compass
+  branch: main
+  # Your Cloudflare Pages domain (NOT a separate Worker URL).
+  # The /api/auth endpoint is served by functions/api/auth.js
+  # Replace with your actual Cloudflare Pages URL:
+  base_url: https://studycompass.pages.dev
+  auth_endpoint: api/auth
+
+# Media: images uploaded via CMS go here
+media_folder: "assets/images/blog"
+public_folder: "/assets/images/blog"
+
+# Collections: Blog Posts
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    label_singular: "Blog Post"
+    folder: "_posts"
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} — {{date}}"
+    sortable_fields: ['date', 'title']
+    view_filters:
+      - label: "Published"
+        field: draft
+        pattern: false
+      - label: "Drafts"
+        field: draft
+        pattern: true
+    fields:
+      - { name: "layout", widget: "hidden", default: "article" }
+      - { name: "title", label: "Title", widget: "string", hint: "The headline of your article. Keep it under 60 characters for SEO." }
+      - { name: "date", label: "Publish Date", widget: "datetime", hint: "When this article should be published. Articles appear newest-first." }
+      - { name: "draft", label: "Draft (unpublished)", widget: "boolean", default: false, hint: "Check to keep this article unpublished. Uncheck to publish." }
+      - name: "featured_image"
+        label: "Featured Image"
+        widget: "image"
+        required: false
+        hint: "Upload or select the main image for this article. Shows at the top and in social media previews."
+      - { name: "excerpt", label: "Excerpt", widget: "text", required: false, hint: "Short summary shown on the blog index page and in search results. Keep under 160 characters." }
+      - name: "seo_title"
+        label: "SEO Title"
+        widget: "string"
+        required: false
+        hint: "Custom title for search engines. Leave blank to use the main title. Keep under 60 characters."
+      - name: "meta_description"
+        label: "Meta Description"
+        widget: "text"
+        required: false
+        hint: "Custom description for search engine results. Leave blank to use the excerpt. Keep under 160 characters."
+      - name: "categories"
+        label: "Categories"
+        widget: "list"
+        required: false
+        max: 1
+        hint: "One primary category (e.g., Productivity, Memory, Writing, Planning, Grades, Wellbeing)."
+        default: ["Productivity"]
+      - name: "tags"
+        label: "Tags"
+        widget: "list"
+        required: false
+        hint: "Keywords for this article. Used for related articles and search. Add as many as needed."
+      - { name: "body", label: "Article Content", widget: "markdown", hint: "Write your article in Markdown. Use # for headings, **bold**, *italic*, [links](url), and ![images](url)." }
+
+  # Media Library (separate collection for image management)
+  - name: "media"
+    label: "Image Library"
+    label_singular: "Image"
+    folder: "assets/images/blog"
+    create: true
+    delete: true
+    editor:
+      preview: false
+    fields:
+      - { name: "title", label: "Image Name", widget: "string" }
+      - { name: "image", label: "Image File", widget: "image" }
+      - { name: "alt_text", label: "Alt Text (accessibility)", widget: "string", required: false, hint: "Describe the image for screen readers and SEO." }
