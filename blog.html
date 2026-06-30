@@ -1,85 +1,135 @@
-(function () {
-  function formatDate(iso) {
-    const d = new Date(iso + 'T00:00:00');
-    return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The Study Compass Blog — practical, science-backed study guides on focus, memory, writing, and time management for students." />
+  <title>Blog — Study Guides &amp; Articles | Study Compass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 
-  function renderFeatured(post) {
-    const el = document.getElementById('sc-featured');
-    if (!el || !post) return;
-    el.innerHTML = `
-      <a href="#${post.slug}" style="text-decoration:none; color:inherit;">
-        <article class="blog-featured">
-          <div class="blog-featured-thumb" aria-hidden="true">${post.emoji}</div>
-          <div class="blog-featured-body">
-            <span class="blog-tag">Featured · ${post.category}</span>
-            <h2>${post.title}</h2>
-            <p class="blog-meta">📅 ${formatDate(post.date)} · ☕ ${post.readTime} · 🧭 ${post.author}</p>
-            <p>${post.excerpt}</p>
-            <span class="btn btn-primary" style="align-self:flex-start;">Read featured article →</span>
-          </div>
-        </article>
-      </a>`;
-  }
+    <link rel="canonical" href="https://studycompass.github.io/study-compass/blog.html" />
 
-  function renderList(posts) {
-    const el = document.getElementById('sc-article-list');
-    if (!el) return;
-    el.innerHTML = posts.map(p => `
-      <article class="blog-card" data-name="${(p.category + ' ' + p.title).toLowerCase()}">
-        <a href="#${p.slug}" style="text-decoration:none; color:inherit; display:block;">
-          <div class="blog-thumb" aria-hidden="true">${p.emoji}</div>
-          <div class="blog-body">
-            <span class="blog-tag">${p.category}</span>
-            <h3 class="blog-title">${p.title}</h3>
-            <p class="blog-excerpt">${p.excerpt}</p>
-            <span class="blog-link">Read article →</span>
-          </div>
-        </a>
-      </article>`).join('');
-  }
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Study Compass" />
+    <meta property="og:title" content="Blog — Study Guides &amp; Articles | Study Compass" />
+    <meta property="og:description" content="The Study Compass Blog — practical, science-backed study guides on focus, memory, writing, and time management for students." />
+    <meta property="og:url" content="https://studycompass.github.io/study-compass/blog.html" />
+    <meta property="og:image" content="https://studycompass.github.io/study-compass/og-images/blog.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Blog — Study Guides &amp; Articles | Study Compass" />
 
-  function renderFull(posts) {
-    const el = document.getElementById('sc-full-articles');
-    if (!el) return;
-    el.innerHTML = posts.map(p => `
-      <article class="blog-article" id="${p.slug}" style="margin-top: 80px;">
-        <header class="blog-article-header">
-          <span class="blog-tag">${p.category}</span>
-          <h1>${p.title}</h1>
-          <div class="blog-article-meta">
-            <span>📅 ${formatDate(p.date)}</span><span>·</span>
-            <span>☕ ${p.readTime}</span><span>·</span>
-            <span>🧭 ${p.author}</span>
-          </div>
-        </header>
-        <div class="blog-article-hero" aria-hidden="true">${p.emoji}</div>
-        <div class="blog-article-body">${p.bodyHtml}</div>
-        <footer class="blog-article-footer">
-          <div class="blog-author">
-            <div class="blog-author-avatar" aria-hidden="true">🧭</div>
-            <div class="blog-author-info">
-              <strong>${p.author}</strong>
-              <span>Calm, focused study tools for every student.</span>
-            </div>
-          </div>
-          <a href="blog.html" class="btn btn-ghost">↑ Back to all articles</a>
-        </footer>
-      </article>`).join('');
-  }
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Blog — Study Guides &amp; Articles | Study Compass" />
+    <meta name="twitter:description" content="The Study Compass Blog — practical, science-backed study guides on focus, memory, writing, and time management for students." />
+    <meta name="twitter:image" content="https://studycompass.github.io/study-compass/og-images/blog.png" />
+    <meta name="twitter:image:alt" content="Blog — Study Guides &amp; Articles | Study Compass" />
 
-  fetch('posts.json', { cache: 'no-store' })
-    .then(r => r.json())
-    .then(posts => {
-      posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-      const featured = posts.find(p => p.featured) || posts[0];
-      renderFeatured(featured);
-      renderList(posts);
-      renderFull(posts);
-    })
-    .catch(err => {
-      console.error('Could not load blog posts:', err);
-      const el = document.getElementById('sc-article-list');
-      if (el) el.textContent = 'Could not load posts right now — please refresh.';
-    });
-})();
+    <meta name="pinterest" content="nohover" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Study Compass home">🧭 Study Compass</a>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html#tools">Tools</a>
+        <a href="blog.html">Blog</a>
+        <a href="#">Premium Resources</a>
+        <a href="index.html#about">About</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="search-wrap" role="search">
+          <input type="search" id="globalSearch" class="search-input" placeholder="Search tools & articles…" aria-label="Search tools and articles" autocomplete="off" />
+          <span class="search-icon" aria-hidden="true">🔍</span>
+        </div>
+        <div class="theme-toggles" role="group" aria-label="Switch study theme">
+          <button class="theme-toggle-btn" data-theme="morning" title="Morning Focus" aria-label="Morning Focus theme">🌅</button>
+          <button class="theme-toggle-btn" data-theme="night" title="Night Study" aria-label="Night Study theme">🌙</button>
+          <button class="theme-toggle-btn" data-theme="library" title="Library Mode" aria-label="Library Mode theme">📚</button>
+          <button class="theme-toggle-btn" data-theme="nature" title="Nature Mode" aria-label="Nature Mode theme">🌿</button>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="index.html#tools">Tools</a>
+      <a href="blog.html">Blog</a>
+      <a href="#">Premium Resources</a>
+      <a href="index.html#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="container" style="padding-top: 24px;">
+      <nav aria-label="Breadcrumb" style="font-size:0.85rem; color:var(--text-muted);">
+        <a href="index.html">Home</a> ›
+        <span style="color:var(--text-soft);">Blog</span>
+      </nav>
+    </div>
+
+    <section class="section" style="padding-top: 30px; padding-bottom: 30px;">
+      <div class="container blog-page">
+        <div class="section-header">
+          <span class="section-eyebrow">Study Guides</span>
+          <h1 class="section-title">The Study Compass Blog</h1>
+          <p class="section-subtitle">
+            Practical, science-backed articles on focus, memory, writing, and time
+            management — written for students who want to study smarter, not harder.
+          </p>
+        </div>
+
+        <div id="sc-featured"></div>
+
+        <div class="section-header" style="text-align:left; max-width:none; margin-bottom: 30px;">
+          <h2 class="section-title" style="font-size:1.5rem;">All Articles</h2>
+        </div>
+
+        <div class="blog-grid" id="sc-article-list"></div>
+
+        <div id="sc-full-articles"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">🧭 Study Compass</a>
+        <p>Navigate your academic journey with calm, focused tools.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <div>
+          <h4>Site</h4>
+          <a href="index.html#tools">Tools</a>
+          <a href="blog.html">Blog</a>
+          <a href="#">Premium Resources</a>
+          <a href="index.html#about">About</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="contact.html">Contact</a>
+          <a href="privacy.html#cookies">Cookie Policy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div class="container"><p>&copy; 2026 Study Compass. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script src="blog-loader.js"></script>
+</body>
+</html>
