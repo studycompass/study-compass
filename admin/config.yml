@@ -27,7 +27,7 @@ backend:
   # Your Cloudflare Pages domain (NOT a separate Worker URL).
   # The /api/auth endpoint is served by functions/api/auth.js
   # Replace with your actual Cloudflare Pages URL:
-  base_url: https://studycompass.pages.dev
+  base_url: https://your-oauth-proxy-url.workers.dev
   auth_endpoint: api/auth
 
 # Media: images uploaded via CMS go here
