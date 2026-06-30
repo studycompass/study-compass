@@ -1,619 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="The Study Compass Blog — practical, science-backed study guides on focus, memory, writing, and time management for students." />
-  <title>Blog — Study Guides &amp; Articles | Study Compass</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+(function () {
+  function formatDate(iso) {
+    const d = new Date(iso + 'T00:00:00');
+    return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  }
 
-    <!-- Canonical -->
-<!-- Open Graph (Facebook, Pinterest, LinkedIn) -->
+  function renderFeatured(post) {
+    const el = document.getElementById('sc-featured');
+    if (!el || !post) return;
+    el.innerHTML = `
+      <a href="#${post.slug}" style="text-decoration:none; color:inherit;">
+        <article class="blog-featured">
+          <div class="blog-featured-thumb" aria-hidden="true">${post.emoji}</div>
+          <div class="blog-featured-body">
+            <span class="blog-tag">Featured · ${post.category}</span>
+            <h2>${post.title}</h2>
+            <p class="blog-meta">📅 ${formatDate(post.date)} · ☕ ${post.readTime} · 🧭 ${post.author}</p>
+            <p>${post.excerpt}</p>
+            <span class="btn btn-primary" style="align-self:flex-start;">Read featured article →</span>
+          </div>
+        </article>
+      </a>`;
+  }
 
-
-
-
-
-
-
-
-<!-- Twitter Card -->
-
-
-
-
-<!-- Pinterest rich pins (uses OG tags above; this explicitly enables) -->
-
-    <!-- Canonical -->
-    <link rel="canonical" href="https://studycompass.github.io/study-compass/blog.html" />
-
-    <!-- Open Graph (Facebook, Pinterest, LinkedIn) -->
-    <meta property="og:type" content="article" />
-    <meta property="og:site_name" content="Study Compass" />
-    <meta property="og:title" content="Blog — Study Guides &amp; Articles | Study Compass" />
-    <meta property="og:description" content="The Study Compass Blog — practical, science-backed study guides on focus, memory, writing, and time management for students." />
-    <meta property="og:url" content="https://studycompass.github.io/study-compass/blog.html" />
-    <meta property="og:image" content="https://studycompass.github.io/study-compass/og-images/blog.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Blog — Study Guides &amp; Articles | Study Compass" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Blog — Study Guides &amp; Articles | Study Compass" />
-    <meta name="twitter:description" content="The Study Compass Blog — practical, science-backed study guides on focus, memory, writing, and time management for students." />
-    <meta name="twitter:image" content="https://studycompass.github.io/study-compass/og-images/blog.png" />
-    <meta name="twitter:image:alt" content="Blog — Study Guides &amp; Articles | Study Compass" />
-
-    <!-- Pinterest rich pins (uses OG tags above; this explicitly enables) -->
-    <meta name="pinterest" content="nohover" />
-</head>
-<body>
-
-  <!-- SHARED HEADER -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo" aria-label="Study Compass home">🧭 Study Compass</a>
-
-      <nav class="main-nav" aria-label="Primary navigation">
-        <a href="index.html#tools">Tools</a>
-        <a href="blog.html">Blog</a>
-        <a href="#">Premium Resources</a>
-        <a href="index.html#about">About</a>
-      </nav>
-
-      <div class="header-actions">
-        <div class="search-wrap" role="search">
-          <input type="search" id="globalSearch" class="search-input" placeholder="Search tools & articles…" aria-label="Search tools and articles" autocomplete="off" />
-          <span class="search-icon" aria-hidden="true">🔍</span>
-        </div>
-        <div class="theme-toggles" role="group" aria-label="Switch study theme">
-          <button class="theme-toggle-btn" data-theme="morning" title="Morning Focus" aria-label="Morning Focus theme">🌅</button>
-          <button class="theme-toggle-btn" data-theme="night" title="Night Study" aria-label="Night Study theme">🌙</button>
-          <button class="theme-toggle-btn" data-theme="library" title="Library Mode" aria-label="Library Mode theme">📚</button>
-          <button class="theme-toggle-btn" data-theme="nature" title="Nature Mode" aria-label="Nature Mode theme">🌿</button>
-        </div>
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
-      <a href="index.html#tools">Tools</a>
-      <a href="blog.html">Blog</a>
-      <a href="#">Premium Resources</a>
-      <a href="index.html#about">About</a>
-    </nav>
-  </header>
-
-  <main>
-
-    <!-- Breadcrumb -->
-    <div class="container" style="padding-top: 24px;">
-      <nav aria-label="Breadcrumb" style="font-size:0.85rem; color:var(--text-muted);">
-        <a href="index.html">Home</a> ›
-        <span style="color:var(--text-soft);">Blog</span>
-      </nav>
-    </div>
-
-    <!-- =========================================================
-         PAGE HEADER
-    =========================================================== -->
-    <section class="section" style="padding-top: 30px; padding-bottom: 30px;">
-      <div class="container blog-page">
-        <div class="section-header">
-          <span class="section-eyebrow">Study Guides</span>
-          <h1 class="section-title">The Study Compass Blog</h1>
-          <p class="section-subtitle">
-            Practical, science-backed articles on focus, memory, writing, and time
-            management — written for students who want to study smarter, not harder.
-          </p>
-        </div>
-
-        <!-- =========================================================
-             FEATURED POST
-             To feature a new post: update the thumb emoji, tag, title,
-             excerpt, and the #anchor link to the article below.
-        =========================================================== -->
-        <a href="#pomodoro-science" style="text-decoration:none; color:inherit;">
-          <article class="blog-featured">
-            <div class="blog-featured-thumb" aria-hidden="true">⏱️</div>
-            <div class="blog-featured-body">
-              <span class="blog-tag">Featured · Productivity</span>
-              <h2>The Science Behind the Pomodoro Technique</h2>
-              <p class="blog-meta">📅 June 28, 2026 · ☕ 6 min read · 🧭 Study Compass Team</p>
-              <p>Why 25-minute sprints align with how the brain actually pays attention — and how to customize the cycle for deep work sessions that don't end in burnout.</p>
-              <span class="btn btn-primary" style="align-self:flex-start;">Read featured article →</span>
-            </div>
-          </article>
+  function renderList(posts) {
+    const el = document.getElementById('sc-article-list');
+    if (!el) return;
+    el.innerHTML = posts.map(p => `
+      <article class="blog-card" data-name="${(p.category + ' ' + p.title).toLowerCase()}">
+        <a href="#${p.slug}" style="text-decoration:none; color:inherit; display:block;">
+          <div class="blog-thumb" aria-hidden="true">${p.emoji}</div>
+          <div class="blog-body">
+            <span class="blog-tag">${p.category}</span>
+            <h3 class="blog-title">${p.title}</h3>
+            <p class="blog-excerpt">${p.excerpt}</p>
+            <span class="blog-link">Read article →</span>
+          </div>
         </a>
+      </article>`).join('');
+  }
 
-        <!-- =========================================================
-             BLOG POST GRID
-             To add a new post: copy one <article class="blog-card"> block,
-             update the thumb, tag, title, excerpt, and #anchor link.
-             Then add the full article markup at the bottom of this file.
-        =========================================================== -->
-        <div class="section-header" style="text-align:left; max-width:none; margin-bottom: 30px;">
-          <h2 class="section-title" style="font-size:1.5rem;">All Articles</h2>
-        </div>
-
-        <div class="blog-grid">
-
-          <article class="blog-card" data-name="pomodoro technique science focus productivity">
-            <a href="#pomodoro-science" style="text-decoration:none; color:inherit; display:block;">
-              <div class="blog-thumb" aria-hidden="true">⏱️</div>
-              <div class="blog-body">
-                <span class="blog-tag">Productivity</span>
-                <h3 class="blog-title">The Science Behind the Pomodoro Technique</h3>
-                <p class="blog-excerpt">Why 25-minute sprints work — and how to customize the cycle for deep work sessions.</p>
-                <span class="blog-link">Read article →</span>
-              </div>
-            </a>
-          </article>
-
-          <article class="blog-card" data-name="active recall spaced repetition memory">
-            <a href="#active-recall" style="text-decoration:none; color:inherit; display:block;">
-              <div class="blog-thumb" aria-hidden="true">🧠</div>
-              <div class="blog-body">
-                <span class="blog-tag">Memory</span>
-                <h3 class="blog-title">Active Recall vs. Spaced Repetition: A Guide</h3>
-                <p class="blog-excerpt">Two powerful learning strategies, demystified — with a weekly schedule template.</p>
-                <span class="blog-link">Read article →</span>
-              </div>
-            </a>
-          </article>
-
-          <article class="blog-card" data-name="essay writing thesis structure academic">
-            <a href="#essay-outline" style="text-decoration:none; color:inherit; display:block;">
-              <div class="blog-thumb" aria-hidden="true">📝</div>
-              <div class="blog-body">
-                <span class="blog-tag">Writing</span>
-                <h3 class="blog-title">How to Outline an Essay in 10 Minutes</h3>
-                <p class="blog-excerpt">A repeatable framework for thesis-driven essays that win professor feedback.</p>
-                <span class="blog-link">Read article →</span>
-              </div>
-            </a>
-          </article>
-
-          <article class="blog-card" data-name="weekly planning time blocking schedule">
-            <a href="#weekly-planning" style="text-decoration:none; color:inherit; display:block;">
-              <div class="blog-thumb" aria-hidden="true">📅</div>
-              <div class="blog-body">
-                <span class="blog-tag">Planning</span>
-                <h3 class="blog-title">Why Weekly Planning Beats Daily To-Do Lists</h3>
-                <p class="blog-excerpt">The research-backed case for stepping back once a week instead of reacting every day.</p>
-                <span class="blog-link">Read article →</span>
-              </div>
-            </a>
-          </article>
-
-          <article class="blog-card" data-name="grade calculation gpa percentage average">
-            <a href="#grade-calculation" style="text-decoration:none; color:inherit; display:block;">
-              <div class="blog-thumb" aria-hidden="true">🧮</div>
-              <div class="blog-body">
-                <span class="blog-tag">Grades</span>
-                <h3 class="blog-title">How Your GPA Actually Gets Calculated</h3>
-                <p class="blog-excerpt">The math behind percentages, weighted averages, and credit-hour GPA — explained simply.</p>
-                <span class="blog-link">Read article →</span>
-              </div>
-            </a>
-          </article>
-
-          <article class="blog-card" data-name="study burnout reset rest recovery">
-            <a href="#burnout-reset" style="text-decoration:none; color:inherit; display:block;">
-              <div class="blog-thumb" aria-hidden="true">🌿</div>
-              <div class="blog-body">
-                <span class="blog-tag">Wellbeing</span>
-                <h3 class="blog-title">The 30-Minute Student Reset: A Recovery Ritual</h3>
-                <p class="blog-excerpt">When burnout hits, this weekly reset ritual helps you recover momentum without guilt.</p>
-                <span class="blog-link">Read article →</span>
-              </div>
-            </a>
-          </article>
-
-        </div>
-
-        <!-- =========================================================
-             SAMPLE FULL ARTICLE
-             This is the template layout for a complete article.
-             To publish a new article: copy this entire <article> block,
-             update the id, tag, title, meta, hero, and body content.
-        =========================================================== -->
-        <article class="blog-article" id="pomodoro-science" style="margin-top: 80px;">
-
-          <header class="blog-article-header">
-            <span class="blog-tag">Productivity</span>
-            <h1>The Science Behind the Pomodoro Technique</h1>
-            <div class="blog-article-meta">
-              <span>📅 June 28, 2026</span>
-              <span>·</span>
-              <span>☕ 6 min read</span>
-              <span>·</span>
-              <span>🧭 Study Compass Team</span>
-            </div>
-          </header>
-
-          <div class="blog-article-hero" aria-hidden="true">⏱️</div>
-
-          <div class="blog-article-body">
-
-            <p>
-              The Pomodoro Technique, developed by Italian entrepreneur Francesco Cirillo in
-              the late 1980s, is one of the most widely recommended time-management methods
-              in academic settings. Its premise is deceptively simple: break your work into
-              short, focused intervals — traditionally 25 minutes — separated by brief rest
-              periods. Cirillo named the system after the tomato-shaped kitchen timer he used
-              as a university student. Nearly four decades later, the technique remains
-              popular because it aligns surprisingly well with how the human brain actually
-              pays attention.
-            </p>
-
-            <p>
-              If you've ever found yourself reading the same paragraph for the fifth time
-              without retaining a word, you have experienced the vigilance decrement
-              firsthand. Research in cognitive psychology consistently shows that sustained
-              attention is not a steady state but a fluctuating resource. The Pomodoro
-              Technique works precisely because it surrenders to this constraint rather than
-              fighting it.
-            </p>
-
-            <h2>The Cognitive Science of 25-Minute Sprints</h2>
-
-            <p>
-              After roughly 20 to 30 minutes of concentrated effort on a single task, most
-              learners experience a measurable decline in vigilance, working-memory
-              capacity, and reaction speed. This phenomenon, sometimes called the
-              <em>vigilance decrement</em>, is not a sign of laziness — it is a biological
-              constraint built into the prefrontal cortex. The brain simply cannot maintain
-              peak focus indefinitely, no matter how motivated you are.
-            </p>
-
-            <p>
-              A 5-minute break in the Pomodoro cycle serves as a release valve: it lets the
-              working memory partially empty, allows the brain to begin consolidating what
-              you just learned, and restores the cognitive resources needed for the next
-              sprint. In functional MRI studies, brief rest periods have been shown to
-              reactivate the default mode network — a set of brain regions involved in
-              memory consolidation, creative problem-solving, and self-reflection.
-            </p>
-
-            <h2>Cognitive Load Theory: Why Your Brain Needs Rest</h2>
-
-            <p>
-              To understand why the Pomodoro Technique is so effective, it helps to look at
-              Cognitive Load Theory, developed by educational psychologist John Sweller in
-              the 1980s. The theory distinguishes three types of cognitive load:
-            </p>
-
-            <ul>
-              <li><strong>Intrinsic load</strong> — the inherent difficulty of the material itself.</li>
-              <li><strong>Extraneous load</strong> — mental effort wasted on poor presentation or distractions.</li>
-              <li><strong>Germane load</strong> — the productive effort of building long-term memory structures.</li>
-            </ul>
-
-            <p>
-              Your working memory can only hold a finite amount of information at once —
-              usually described as four to seven chunks. When you study without breaks, all
-              three types of load accumulate simultaneously. Your working memory fills up,
-              your ability to encode new information into long-term memory declines, and you
-              become increasingly vulnerable to distractions.
-            </p>
-
-            <h2>What Counts as a Real Study Break?</h2>
-
-            <p>
-              Not all breaks are created equal. The quality of your 5-minute rest is just as
-              important as the quality of your 25-minute focus block. The most restorative
-              breaks share three characteristics:
-            </p>
-
-            <ol>
-              <li>They physically move you away from your study surface.</li>
-              <li>They shift sensory input away from screens and dense text.</li>
-              <li>They avoid introducing new cognitive demands.</li>
-            </ol>
-
-            <p>
-              Standing up, stretching, looking out a window, drinking water, or doing a
-              brief mindful breathing exercise all qualify. The worst kind of break — and
-              the most common among modern students — is scrolling a social media feed.
-              While this technically feels like "not working," it actually floods your
-              working memory with new information and emotional stimuli, leaving you more
-              depleted than before the break.
-            </p>
-
-            <blockquote>
-              The most frequent Pomodoro mistake is skipping breaks when you feel "in the
-              zone." While tempting, this typically leads to a crash two to three hours
-              later, often followed by an inability to focus for the rest of the day.
-            </blockquote>
-
-            <h2>Customizing Your Cycle</h2>
-
-            <p>
-              The classic Pomodoro cycle calls for a longer 15-to-30-minute break after
-              every fourth focus session. This longer rest is essential: it gives your brain
-              time to fully consolidate what you have learned and prevents the gradual
-              fatigue that builds up across multiple short cycles. If you find that
-              25-minute sprints feel too short for your work — common during deep problem
-              sets or essay drafting — experiment with 50/10 or 90/20 cycles.
-            </p>
-
-            <p>
-              Track which cycle produces the most sustainable focus over a full week, then
-              make it your default. You can use our free
-              <a href="timer.html">Pomodoro Study Timer</a> to test custom cycles, or pair
-              the technique with our <a href="planner.html">Weekly Study Planner</a> to
-              schedule your sprints in advance.
-            </p>
-
-            <h2>Common Mistakes to Avoid</h2>
-
-            <p>
-              The second most common mistake is multitasking during a focus block — even a
-              single glance at a notification can cost you up to 23 minutes of full
-              re-engagement time, according to research by Gloria Mark at UC Irvine. Treat
-              each Pomodoro as an uninterrupted single-task commitment. Turn on Do Not
-              Disturb, close unrelated tabs, and put your phone in another room if possible.
-            </p>
-
-            <p>
-              A third, subtler mistake is using the Pomodoro Technique as a procrastination
-              tool in disguise — spending 25 minutes "preparing to study" by reorganizing
-              notes, choosing the perfect playlist, or optimizing the timer settings. If
-              you catch yourself doing this, force the next session to begin with the most
-              concrete, lowest-friction action: open the textbook, read one paragraph,
-              write one sentence. Momentum will carry you through the rest.
-            </p>
-
-            <h2>Putting It All Together</h2>
-
-            <p>
-              The Pomodoro Technique is not a magic cure for procrastination, but it is one
-              of the most reliably effective study techniques ever studied. It works because
-              it respects the brain's natural constraints instead of fighting them. Start
-              with a single 25-minute session today — pick one task, press start on the
-              timer, and let the next half hour be the most focused block of your week.
-              Your future self — and your GPA — will thank you.
-            </p>
-
+  function renderFull(posts) {
+    const el = document.getElementById('sc-full-articles');
+    if (!el) return;
+    el.innerHTML = posts.map(p => `
+      <article class="blog-article" id="${p.slug}" style="margin-top: 80px;">
+        <header class="blog-article-header">
+          <span class="blog-tag">${p.category}</span>
+          <h1>${p.title}</h1>
+          <div class="blog-article-meta">
+            <span>📅 ${formatDate(p.date)}</span><span>·</span>
+            <span>☕ ${p.readTime}</span><span>·</span>
+            <span>🧭 ${p.author}</span>
           </div>
-
-          <footer class="blog-article-footer">
-            <div class="blog-author">
-              <div class="blog-author-avatar" aria-hidden="true">🧭</div>
-              <div class="blog-author-info">
-                <strong>Study Compass Team</strong>
-                <span>Calm, focused study tools for every student.</span>
-              </div>
+        </header>
+        <div class="blog-article-hero" aria-hidden="true">${p.emoji}</div>
+        <div class="blog-article-body">${p.bodyHtml}</div>
+        <footer class="blog-article-footer">
+          <div class="blog-author">
+            <div class="blog-author-avatar" aria-hidden="true">🧭</div>
+            <div class="blog-author-info">
+              <strong>${p.author}</strong>
+              <span>Calm, focused study tools for every student.</span>
             </div>
-            <a href="blog.html" class="btn btn-ghost">↑ Back to all articles</a>
-          </footer>
-        </article>
-
-        <!-- =========================================================
-             PLACEHOLDER FOR FUTURE ARTICLES
-             Copy the article template above, give it a new id (matching
-             the #anchor used in the blog-card grid), and write the body.
-             The remaining 5 articles (active-recall, essay-outline,
-             weekly-planning, grade-calculation, burnout-reset) are
-             stubbed with short summaries so anchors don't break.
-        =========================================================== -->
-
-        <article class="blog-article" id="active-recall" style="margin-top: 80px;">
-          <header class="blog-article-header">
-            <span class="blog-tag">Memory</span>
-            <h1>Active Recall vs. Spaced Repetition: A Guide</h1>
-            <div class="blog-article-meta">
-              <span>📅 June 28, 2026</span><span>·</span>
-              <span>☕ 7 min read</span><span>·</span>
-              <span>🧭 Study Compass Team</span>
-            </div>
-          </header>
-          <div class="blog-article-hero" aria-hidden="true">🧠</div>
-          <div class="blog-article-body">
-            <p>
-              <em>This article is a placeholder. Replace this paragraph and the content below
-              with your full article text. The structure — header, hero, body with h2/h3/p/ul/
-              blockquote, and footer — is the template you should copy for every new post.</em>
-            </p>
-            <p>
-              Active recall and spaced repetition are the two most evidence-backed study
-              techniques in cognitive psychology. Active recall is the act of deliberately
-              pulling information out of your memory rather than passively re-reading it;
-              spaced repetition is the practice of reviewing information at increasing
-              intervals. Combine the two — for example, by using our
-              <a href="flashcards.html">Flashcard Maker</a> — and you have a study system
-              that dramatically outperforms re-reading or highlighting.
-            </p>
-            <p>Full article coming soon. In the meantime, try the free tools above to put these techniques into practice.</p>
           </div>
-          <footer class="blog-article-footer">
-            <div class="blog-author">
-              <div class="blog-author-avatar" aria-hidden="true">🧭</div>
-              <div class="blog-author-info">
-                <strong>Study Compass Team</strong>
-                <span>Calm, focused study tools for every student.</span>
-              </div>
-            </div>
-            <a href="blog.html" class="btn btn-ghost">↑ Back to all articles</a>
-          </footer>
-        </article>
+          <a href="blog.html" class="btn btn-ghost">↑ Back to all articles</a>
+        </footer>
+      </article>`).join('');
+  }
 
-        <article class="blog-article" id="essay-outline" style="margin-top: 80px;">
-          <header class="blog-article-header">
-            <span class="blog-tag">Writing</span>
-            <h1>How to Outline an Essay in 10 Minutes</h1>
-            <div class="blog-article-meta">
-              <span>📅 June 28, 2026</span><span>·</span>
-              <span>☕ 5 min read</span><span>·</span>
-              <span>🧭 Study Compass Team</span>
-            </div>
-          </header>
-          <div class="blog-article-hero" aria-hidden="true">📝</div>
-          <div class="blog-article-body">
-            <p>
-              <em>Placeholder article — replace with your full text using the same structure
-              as the Pomodoro article above.</em>
-            </p>
-            <p>
-              A strong essay outline is the architectural blueprint of your thinking. In this
-              guide, we walk through how to write a thesis that actually argues something,
-              how to structure body paragraphs using the PEEL method, and how to write a
-              conclusion that synthesizes rather than summarizes. Pair this guide with our
-              free <a href="essay.html">Essay Outline Generator</a> to build your next
-              outline in minutes.
-            </p>
-            <p>Full article coming soon.</p>
-          </div>
-          <footer class="blog-article-footer">
-            <div class="blog-author">
-              <div class="blog-author-avatar" aria-hidden="true">🧭</div>
-              <div class="blog-author-info">
-                <strong>Study Compass Team</strong>
-                <span>Calm, focused study tools for every student.</span>
-              </div>
-            </div>
-            <a href="blog.html" class="btn btn-ghost">↑ Back to all articles</a>
-          </footer>
-        </article>
-
-        <article class="blog-article" id="weekly-planning" style="margin-top: 80px;">
-          <header class="blog-article-header">
-            <span class="blog-tag">Planning</span>
-            <h1>Why Weekly Planning Beats Daily To-Do Lists</h1>
-            <div class="blog-article-meta">
-              <span>📅 June 28, 2026</span><span>·</span>
-              <span>☕ 6 min read</span><span>·</span>
-              <span>🧭 Study Compass Team</span>
-            </div>
-          </header>
-          <div class="blog-article-hero" aria-hidden="true">📅</div>
-          <div class="blog-article-body">
-            <p><em>Placeholder article — replace with your full text.</em></p>
-            <p>
-              A daily to-do list is fragile; one unexpected event can collapse the entire
-              day. A weekly plan is resilient because it spreads commitments across seven
-              days. In this article we cover the research behind weekly planning, the case
-              for time blocking, and how to use our free <a href="planner.html">Study Planner</a>
-              to build your first weekly schedule.
-            </p>
-            <p>Full article coming soon.</p>
-          </div>
-          <footer class="blog-article-footer">
-            <div class="blog-author">
-              <div class="blog-author-avatar" aria-hidden="true">🧭</div>
-              <div class="blog-author-info">
-                <strong>Study Compass Team</strong>
-                <span>Calm, focused study tools for every student.</span>
-              </div>
-            </div>
-            <a href="blog.html" class="btn btn-ghost">↑ Back to all articles</a>
-          </footer>
-        </article>
-
-        <article class="blog-article" id="grade-calculation" style="margin-top: 80px;">
-          <header class="blog-article-header">
-            <span class="blog-tag">Grades</span>
-            <h1>How Your GPA Actually Gets Calculated</h1>
-            <div class="blog-article-meta">
-              <span>📅 June 28, 2026</span><span>·</span>
-              <span>☕ 5 min read</span><span>·</span>
-              <span>🧭 Study Compass Team</span>
-            </div>
-          </header>
-          <div class="blog-article-hero" aria-hidden="true">🧮</div>
-          <div class="blog-article-body">
-            <p><em>Placeholder article — replace with your full text.</em></p>
-            <p>
-              Few things cause more academic anxiety than grade calculations. In this guide
-              we break down percentages, weighted averages, and credit-hour GPA math with
-              worked examples. Pair it with our free <a href="calculator.html">Homework
-              Calculator</a> to run the numbers on your own grades.
-            </p>
-            <p>Full article coming soon.</p>
-          </div>
-          <footer class="blog-article-footer">
-            <div class="blog-author">
-              <div class="blog-author-avatar" aria-hidden="true">🧭</div>
-              <div class="blog-author-info">
-                <strong>Study Compass Team</strong>
-                <span>Calm, focused study tools for every student.</span>
-              </div>
-            </div>
-            <a href="blog.html" class="btn btn-ghost">↑ Back to all articles</a>
-          </footer>
-        </article>
-
-        <article class="blog-article" id="burnout-reset" style="margin-top: 80px;">
-          <header class="blog-article-header">
-            <span class="blog-tag">Wellbeing</span>
-            <h1>The 30-Minute Student Reset: A Recovery Ritual</h1>
-            <div class="blog-article-meta">
-              <span>📅 June 28, 2026</span><span>·</span>
-              <span>☕ 4 min read</span><span>·</span>
-              <span>🧭 Study Compass Team</span>
-            </div>
-          </header>
-          <div class="blog-article-hero" aria-hidden="true">🌿</div>
-          <div class="blog-article-body">
-            <p><em>Placeholder article — replace with your full text.</em></p>
-            <p>
-              Burnout is not a personal failure — it is a signal that your study system
-              needs a reset. This 30-minute weekly ritual walks you through reviewing the
-              past week, reprioritizing deadlines, and rebuilding a sustainable routine.
-              It pairs naturally with our <a href="index.html#premium">Student Reset Planner</a>.
-            </p>
-            <p>Full article coming soon.</p>
-          </div>
-          <footer class="blog-article-footer">
-            <div class="blog-author">
-              <div class="blog-author-avatar" aria-hidden="true">🧭</div>
-              <div class="blog-author-info">
-                <strong>Study Compass Team</strong>
-                <span>Calm, focused study tools for every student.</span>
-              </div>
-            </div>
-            <a href="blog.html" class="btn btn-ghost">↑ Back to all articles</a>
-          </footer>
-        </article>
-
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <a href="index.html" class="logo">🧭 Study Compass</a>
-        <p>Navigate your academic journey with calm, focused tools.</p>
-      </div>
-      <nav class="footer-nav" aria-label="Footer">
-        <div>
-          <h4>Site</h4>
-          <a href="index.html#tools">Tools</a>
-          <a href="blog.html">Blog</a>
-          <a href="#">Premium Resources</a>
-          <a href="index.html#about">About</a>
-        </div>
-        <div>
-          <h4>Legal</h4>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
-          <a href="contact.html">Contact</a>
-          <a href="privacy.html#cookies">Cookie Policy</a>
-        </div>
-      </nav>
-    </div>
-    <div class="footer-bottom">
-      <div class="container"><p>&copy; 2026 Study Compass. All rights reserved.</p></div>
-    </div>
-  </footer>
-
-  <script src="script.js" defer></script>
-<script src="blog-loader.js"></script></body>
-</html>
+  fetch('posts.json', { cache: 'no-store' })
+    .then(r => r.json())
+    .then(posts => {
+      posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+      const featured = posts.find(p => p.featured) || posts[0];
+      renderFeatured(featured);
+      renderList(posts);
+      renderFull(posts);
+    })
+    .catch(err => {
+      console.error('Could not load blog posts:', err);
+      const el = document.getElementById('sc-article-list');
+      if (el) el.textContent = 'Could not load posts right now — please refresh.';
+    });
+})();
