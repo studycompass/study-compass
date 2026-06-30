@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Study Compass — your cozy, focus-driven academic toolkit. Free study tools, planners, and premium digital resources for students." />
+  <meta name="author" content="Study Compass" />
+  <title>Study Compass — Navigate Your Academic Journey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+    <!-- Canonical -->
+<!-- Open Graph (Facebook, Pinterest, LinkedIn) -->
+
+
+
+
+
+
+
+
+<!-- Twitter Card -->
+
+
+
+
+<!-- Pinterest rich pins (uses OG tags above; this explicitly enables) -->
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://studycompass.github.io/study-compass/index.html" />
+
+    <!-- Open Graph (Facebook, Pinterest, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Study Compass" />
+    <meta property="og:title" content="Study Compass — Navigate Your Academic Journey" />
+    <meta property="og:description" content="Study Compass — your cozy, focus-driven academic toolkit. Free study tools, planners, and premium digital resources for students." />
+    <meta property="og:url" content="https://studycompass.github.io/study-compass/index.html" />
+    <meta property="og:image" content="https://studycompass.github.io/study-compass/og-images/index.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Study Compass — Navigate Your Academic Journey" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Study Compass — Navigate Your Academic Journey" />
+    <meta name="twitter:description" content="Study Compass — your cozy, focus-driven academic toolkit. Free study tools, planners, and premium digital resources for students." />
+    <meta name="twitter:image" content="https://studycompass.github.io/study-compass/og-images/index.png" />
+    <meta name="twitter:image:alt" content="Study Compass — Navigate Your Academic Journey" />
+
+    <!-- Pinterest rich pins (uses OG tags above; this explicitly enables) -->
+    <meta name="pinterest" content="nohover" />
+</head>
+<body>
+
+  <!-- =========================================================
+       1. WELCOME POPUP (first-visit only, theme selection)
+       Triggered by JS when localStorage has no saved theme.
+  ========================================================== -->
+  <div id="welcome-overlay" class="welcome-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
+    <div class="welcome-popup">
+      <h2 id="welcome-title" class="welcome-title">👋 Welcome to Study Compass!</h2>
+      <p class="welcome-subtitle">Choose your favorite study environment.</p>
+
+      <div class="welcome-theme-buttons">
+        <button class="welcome-theme-btn" data-theme="morning" style="--preview-bg:#FAF6EF; --preview-text:#4A4036;">
+          <span class="theme-icon">🌅</span>
+          <span class="theme-label">Morning Focus</span>
+        </button>
+        <button class="welcome-theme-btn" data-theme="night" style="--preview-bg:#1A1715; --preview-text:#E8DFD3;">
+          <span class="theme-icon">🌙</span>
+          <span class="theme-label">Night Study</span>
+        </button>
+        <button class="welcome-theme-btn" data-theme="library" style="--preview-bg:#F4ECD8; --preview-text:#3B3A36;">
+          <span class="theme-icon">📚</span>
+          <span class="theme-label">Library Mode</span>
+        </button>
+        <button class="welcome-theme-btn" data-theme="nature" style="--preview-bg:#EBF3EA; --preview-text:#2D4A2F;">
+          <span class="theme-icon">🌿</span>
+          <span class="theme-label">Nature Mode</span>
+        </button>
+      </div>
+
+      <p class="welcome-memory-note">We'll remember your choice.</p>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       2. STICKY HEADER
+       Logo • Nav • Search Bar • Theme Toggles
+  ========================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Study Compass home">🧭 Study Compass</a>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html#tools">Tools</a>
+        <a href="blog.html">Blog</a>
+        <a href="#">Premium Resources</a>
+        <a href="index.html#about">About</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="search-wrap" role="search">
+          <input type="search" id="globalSearch" class="search-input" placeholder="Search tools & articles…" aria-label="Search tools and articles" autocomplete="off" />
+          <span class="search-icon" aria-hidden="true">🔍</span>
+        </div>
+        <div class="theme-toggles" role="group" aria-label="Switch study theme">
+          <button class="theme-toggle-btn" data-theme="morning" title="Morning Focus" aria-label="Morning Focus theme">🌅</button>
+          <button class="theme-toggle-btn" data-theme="night" title="Night Study" aria-label="Night Study theme">🌙</button>
+          <button class="theme-toggle-btn" data-theme="library" title="Library Mode" aria-label="Library Mode theme">📚</button>
+          <button class="theme-toggle-btn" data-theme="nature" title="Nature Mode" aria-label="Nature Mode theme">🌿</button>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="index.html#tools">Tools</a>
+      <a href="blog.html">Blog</a>
+      <a href="#">Premium Resources</a>
+      <a href="index.html#about">About</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- =========================================================
+         3. HERO SECTION
+    =========================================================== -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <span class="hero-eyebrow">Your cozy academic companion</span>
+          <h1 class="hero-headline">Navigate your academic journey with ease.</h1>
+          <p class="hero-subheadline">
+            Find your focus with calm, beautifully crafted study tools — from Pomodoro timers
+            to essay outliners. Built by students, for students who want to do more with less stress.
+          </p>
+          <div class="hero-cta-row">
+            <a href="#tools" class="btn btn-primary">Explore Free Tools</a>
+            <a href="#premium" class="btn btn-ghost">Browse Premium Resources</a>
+          </div>
+          <div class="hero-stats">
+            <div><strong>10+</strong><span>Free tools</span></div>
+            <div><strong>4</strong><span>Cozy themes</span></div>
+            <div><strong>100%</strong><span>Mobile-friendly</span></div>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-card hero-card-1">📚</div>
+          <div class="hero-card hero-card-2">⏱️</div>
+          <div class="hero-card hero-card-3">🧠</div>
+          <div class="hero-card hero-card-4">📝</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         4. THE ULTIMATE STUDENT TOOLKIT — Tools Grid
+         Each card carries data attributes for the search filter.
+    =========================================================== -->
+    <section class="section" id="tools">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">The Ultimate Student Toolkit</h2>
+          <p class="section-subtitle">Ten handcrafted tools to help you study smarter — all free, all in your browser.</p>
+        </div>
+
+        <div class="tools-grid" id="toolsGrid">
+
+          <article class="tool-card" data-name="homework calculator gpa averages percentages" tabindex="0">
+            <div class="tool-icon">🧮</div>
+            <h3 class="tool-name">Homework Calculator</h3>
+            <p class="tool-desc">Compute percentages, averages, and GPA in seconds.</p>
+            <a class="tool-link" href="calculator.html">Open tool →</a>
+          </article>
+
+          <article class="tool-card" data-name="quiz generator notes to quiz test" tabindex="0">
+            <div class="tool-icon">🎯</div>
+            <h3 class="tool-name">Quiz Generator</h3>
+            <p class="tool-desc">Turn your class notes into instant self-test quizzes.</p>
+            <a class="tool-link" href="quiz.html">Open tool →</a>
+          </article>
+
+          <article class="tool-card" data-name="flashcard maker study cards memory" tabindex="0">
+            <div class="tool-icon">🗂️</div>
+            <h3 class="tool-name">Flashcard Maker</h3>
+            <p class="tool-desc">Create, flip, and review flashcards for active recall.</p>
+            <a class="tool-link" href="flashcards.html">Open tool →</a>
+          </article>
+
+          <article class="tool-card" data-name="study timer pomodoro focus" tabindex="0">
+            <div class="tool-icon">⏱️</div>
+            <h3 class="tool-name">Study Timer (Pomodoro)</h3>
+            <p class="tool-desc">Work in focused 25-minute sprints with built-in breaks.</p>
+            <a class="tool-link" href="timer.html">Open tool →</a>
+          </article>
+
+          <article class="tool-card" data-name="study planner schedule calendar" tabindex="0">
+            <div class="tool-icon">📅</div>
+            <h3 class="tool-name">Study Planner</h3>
+            <p class="tool-desc">Plan your week, set priorities, and never miss a deadline.</p>
+            <a class="tool-link" href="planner.html">Open tool →</a>
+          </article>
+
+          <article class="tool-card" data-name="essay outline generator writing" tabindex="0">
+            <div class="tool-icon">📝</div>
+            <h3 class="tool-name">Essay Outline Generator</h3>
+            <p class="tool-desc">Structure essays with a clean, argument-driven outline.</p>
+            <a class="tool-link" href="essay.html">Open tool →</a>
+          </article>
+
+          <article class="tool-card is-placeholder" data-name="more tools coming soon future roadmap" aria-label="More tools coming soon">
+            <div class="placeholder-icon">🚧</div>
+            <h3 class="placeholder-title">More Tools Coming Soon</h3>
+            <p class="placeholder-desc">We're crafting new study tools. Have an idea? <a href="contact.html">Tell us what you need →</a></p>
+          </article>
+
+        </div>
+
+        <p class="no-results-msg" id="noResultsMsg" hidden>No tools match your search. Try another keyword.</p>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         5. RECENT BLOG POSTS
+         3 placeholder cards — also searchable.
+    =========================================================== -->
+    <section class="section section-alt" id="blog">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Recent Study Guides</h2>
+          <p class="section-subtitle">Practical, science-backed articles to help you learn better.</p>
+        </div>
+
+        <div class="blog-grid" id="blogGrid">
+
+          <article class="blog-card" data-name="pomodoro technique science focus productivity">
+            <div class="blog-thumb" aria-hidden="true">⏱️</div>
+            <div class="blog-body">
+              <span class="blog-tag">Productivity</span>
+              <h3 class="blog-title">The Science Behind the Pomodoro Technique</h3>
+              <p class="blog-excerpt">Why 25-minute sprints work — and how to customize the cycle for deep work sessions.</p>
+              <a class="blog-link" href="blog.html#pomodoro-science">Read article →</a>
+            </div>
+          </article>
+
+          <article class="blog-card" data-name="active recall spaced repetition memory">
+            <div class="blog-thumb" aria-hidden="true">🧠</div>
+            <div class="blog-body">
+              <span class="blog-tag">Memory</span>
+              <h3 class="blog-title">Active Recall vs. Spaced Repetition: A Guide</h3>
+              <p class="blog-excerpt">Two powerful learning strategies, demystified — with a weekly schedule template.</p>
+              <a class="blog-link" href="blog.html#active-recall">Read article →</a>
+            </div>
+          </article>
+
+          <article class="blog-card" data-name="essay writing thesis structure academic">
+            <div class="blog-thumb" aria-hidden="true">📝</div>
+            <div class="blog-body">
+              <span class="blog-tag">Writing</span>
+              <h3 class="blog-title">How to Outline an Essay in 10 Minutes</h3>
+              <p class="blog-excerpt">A repeatable framework for thesis-driven essays that win professor feedback.</p>
+              <a class="blog-link" href="blog.html#essay-outline">Read article →</a>
+            </div>
+          </article>
+
+        </div>
+
+        <div style="text-align:center; margin-top:36px;">
+          <a href="blog.html" class="btn btn-ghost">View all articles →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         6. PREMIUM RESOURCES PREVIEW (lead-gen)
+    =========================================================== -->
+    <section class="section" id="premium">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Premium Digital Resources</h2>
+          <p class="section-subtitle">Carefully designed templates & planners for serious students.</p>
+        </div>
+
+        <div class="premium-grid">
+          <div class="premium-card">
+            <div class="premium-badge">Bestseller</div>
+            <div class="premium-icon">🧭</div>
+            <h3>The Student Reset Planner</h3>
+            <p>Hit academic burnout? This all-in-one reset planner walks you through a full weekly review, prioritizes your deadlines, and rebuilds your study routine from the ground up — in under 30 minutes a week.</p>
+            <a href="#" target="_blank" rel="noopener nofollow" class="btn btn-primary btn-block">Get the product →</a>
+          </div>
+
+          <div class="premium-card">
+            <div class="premium-badge">New</div>
+            <div class="premium-icon">✅</div>
+            <h3>Digital Habit Trackers</h3>
+            <p>Build focus, sleep, and study streaks that actually stick. Beautifully designed digital trackers (PDF + GoodNotes) engineered around student energy cycles — not generic productivity bro-science.</p>
+            <a href="#" target="_blank" rel="noopener nofollow" class="btn btn-primary btn-block">Get the product →</a>
+          </div>
+
+          <div class="premium-card">
+            <div class="premium-badge">Automated</div>
+            <div class="premium-icon">📊</div>
+            <h3>Google Sheets Budget & Spending Tracker</h3>
+            <p>Auto-categorized spending, smart budget envelopes, and a savings dashboard that updates itself. Built for students who want financial clarity without spreadsheets that feel like homework.</p>
+            <a href="#" target="_blank" rel="noopener nofollow" class="btn btn-primary btn-block">Get the product →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         7. TOOL PAGE TEMPLATE — Study Timer (Pomodoro)
+         Reference design for every individual tool page.
+         Includes: interactive tool + rich article + premium sidebar + ad slot.
+    =========================================================== -->
+    <section class="section section-alt" id="tool-page-template">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Tool Page Template · Example</span>
+          <h2 class="section-title">Study Timer (Pomodoro)</h2>
+          <p class="section-subtitle">
+            Below is the canonical layout every tool page follows: interactive tool first,
+            educational article below, premium sidebar, and ad slots — built to satisfy
+            AdSense content-depth guidelines.
+          </p>
+        </div>
+
+        <div class="tool-page-layout">
+
+          <!-- Main column: interactive tool + rich article -->
+          <div class="tool-page-main">
+
+            <!-- Interactive tool interface -->
+            <div class="tool-interface" id="pomodoroTool">
+              <div class="timer-display" id="timerDisplay">25:00</div>
+              <div class="timer-mode" id="timerMode">Focus session</div>
+              <div class="timer-controls">
+                <button id="timerStart" class="btn btn-primary">Start</button>
+                <button id="timerPause" class="btn btn-ghost">Pause</button>
+                <button id="timerReset" class="btn btn-ghost">Reset</button>
+              </div>
+              <div class="timer-meta">
+                <span>🔴 Sessions completed: <strong id="sessionsCompleted">0</strong></span>
+              </div>
+            </div>
+
+            <!-- Rich-text article wrapper (semantic HTML) -->
+            <article class="tool-article">
+              <h2>The Science of the Pomodoro Technique</h2>
+              <p>
+                The Pomodoro Technique, developed by Francesco Cirillo in the late 1980s, is a
+                time-management method that uses a timer to break work into intervals —
+                traditionally 25 minutes in length — separated by short breaks. The name comes
+                from the tomato-shaped kitchen timer Cirillo used as a university student.
+              </p>
+              <p>
+                Research in cognitive psychology suggests that brief, focused work sessions
+                align with the brain's natural attention cycles. After roughly 20–30 minutes of
+                concentrated effort, most learners experience a measurable drop in retention and
+                mental stamina. Short breaks allow the prefrontal cortex to reset, reducing
+                cognitive fatigue without sacrificing momentum.
+              </p>
+
+              <h3>How to use this timer effectively</h3>
+              <p>
+                Start with a single, clearly defined task before pressing <em>Start</em>. Vague
+                goals like "study chemistry" tend to fragment attention; instead, try "summarize
+                chapter 4 of the chemistry textbook." When the timer rings, step away from your
+                desk entirely — stretch, hydrate, or look out a window for five minutes.
+              </p>
+
+              <h3>Customizing your cycle</h3>
+              <p>
+                The classic Pomodoro is 25 minutes of work followed by a 5-minute break, with a
+                longer 15–30 minute break after every fourth session. However, many students find
+                that longer 50-minute sessions suit deep work like essay writing or problem sets.
+                Experiment with 25/5, 50/10, and 90/20 cycles for one week each and track which
+                produces the most sustainable focus.
+              </p>
+
+              <h3>Common mistakes to avoid</h3>
+              <p>
+                The most frequent mistake is skipping breaks when you feel "in the zone." While
+                tempting, this often leads to burnout two to three hours later. The second is
+                multitasking during a Pomodoro — even checking a single notification can reset
+                your focus cycle. Treat each session as a single, uninterrupted block of work.
+              </p>
+              <p>
+                For students who want a structured weekly Pomodoro plan, our
+                <a href="#premium">Student Reset Planner</a> includes a built-in cycle tracker
+                and energy-level journal so you can identify your peak focus windows.
+              </p>
+            </article>
+          </div>
+
+          <!-- Sidebar: premium resources + AdSense slot -->
+          <aside class="tool-page-sidebar" aria-label="Premium resources and advertisements">
+
+            <!-- AdSense placeholder -->
+            <div class="ad-slot" aria-label="Advertisement">
+              <span class="ad-label">Advertisement</span>
+              <!--
+                Replace this comment with your AdSense code once approved:
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+              -->
+              <div class="ad-placeholder">AdSense block (300×250)</div>
+            </div>
+
+            <div class="sidebar-promo">
+              <h3>Premium Picks for Students</h3>
+              <ul class="promo-list">
+                <li>
+                  <span class="promo-icon">🧭</span>
+                  <div>
+                    <strong>The Student Reset Planner</strong>
+                    <p>Burned out? Reset your week in 30 minutes.</p>
+                    <a href="#" target="_blank" rel="noopener nofollow">Learn more →</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="promo-icon">✅</span>
+                  <div>
+                    <strong>Digital Habit Trackers</strong>
+                    <p>Build focus, sleep & study streaks that stick.</p>
+                    <a href="#" target="_blank" rel="noopener nofollow">Learn more →</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="promo-icon">📊</span>
+                  <div>
+                    <strong>Sheets Budget & Spending Tracker</strong>
+                    <p>Auto-categorized finance dashboard for students.</p>
+                    <a href="#" target="_blank" rel="noopener nofollow">Learn more →</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Second ad slot -->
+            <div class="ad-slot" aria-label="Advertisement">
+              <span class="ad-label">Advertisement</span>
+              <div class="ad-placeholder">AdSense block (responsive)</div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         8. ABOUT (mini-section, supports AdSense trust signals)
+    =========================================================== -->
+    <section class="section" id="about">
+      <div class="container about-inner">
+        <div class="about-text">
+          <h2 class="section-title">About Study Compass</h2>
+          <p>
+            Study Compass is a calm, ad-supported toolkit built by students who struggled to find
+            beautiful, distraction-free study tools online. Every free tool here is crafted to
+            reduce friction — no sign-ups, no clutter, no dark patterns. Premium resources help
+            us keep the free tools running forever.
+          </p>
+          <p>
+            We believe the best study environment is the one that fits <em>you</em>. That's why
+            every page adapts to four cozy themes — Morning, Night, Library, and Nature — and
+            remembers your choice on your next visit.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       9. FOOTER — mandatory AdSense trust links
+  =========================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">🧭 Study Compass</a>
+        <p>Navigate your academic journey with calm, focused tools.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <div>
+          <h4>Site</h4>
+          <a href="index.html#tools">Tools</a>
+          <a href="blog.html">Blog</a>
+          <a href="#">Premium Resources</a>
+          <a href="index.html#about">About</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="contact.html">Contact</a>
+          <a href="privacy.html#cookies">Cookie Policy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div class="container"><p>&copy; 2026 Study Compass. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
