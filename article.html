@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Title -->
+  <title>{{ page.seo_title | default: page.title }} | Study Compass</title>
+  <meta name="description" content="{{ page.meta_description | default: page.excerpt | default: page.content | strip_html | truncate: 160 | escape }}" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Study Compass" />
+  <meta property="og:title" content="{{ page.title | escape }}" />
+  <meta property="og:description" content="{{ page.meta_description | default: page.excerpt | default: page.content | strip_html | truncate: 160 | escape }}" />
+  <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}{{ page.url }}" />
+  {% if page.featured_image %}
+  <meta property="og:image" content="{{ site.url }}{{ site.baseurl }}{{ page.featured_image }}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="{{ page.title | escape }}" />
+  {% endif %}
+  <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}" />
+  <meta property="article:author" content="Study Compass Team" />
+  {% if page.categories.size > 0 %}
+  <meta property="article:section" content="{{ page.categories.first }}" />
+  {% endif %}
+  {% for tag in page.tags %}
+  <meta property="article:tag" content="{{ tag }}" />
+  {% endfor %}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ page.title | escape }}" />
+  <meta name="twitter:description" content="{{ page.meta_description | default: page.excerpt | default: page.content | strip_html | truncate: 160 | escape }}" />
+  {% if page.featured_image %}
+  <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}{{ page.featured_image }}" />
+  <meta name="twitter:image:alt" content="{{ page.title | escape }}" />
+  {% endif %}
+
+  <!-- Pinterest -->
+  <meta name="pinterest" content="nohover" />
+
+  <!-- Structured Data (JSON-LD) for Google Rich Results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ page.title | jsonify }},
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.date | date_to_xmlschema }}",
+    "author": {
+      "@type": "Organization",
+      "name": "Study Compass"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Study Compass"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ site.url }}{{ site.baseurl }}{{ page.url }}"
+    }
+    {% if page.featured_image %}
+    ,"image": "{{ site.url }}{{ site.baseurl }}{{ page.featured_image }}"
+    {% endif %}
+  }
+  </script>
+
+  <!-- Fonts & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ site.baseurl }}/styles.css" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WY2VYWK4WQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-WY2VYWK4WQ');
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="{{ site.baseurl }}/" class="logo" aria-label="Study Compass home"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> Study Compass</a>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="{{ site.baseurl }}/#tools">Tools</a>
+        <a href="{{ site.baseurl }}/blog.html">Blog</a>
+        <a href="#">Premium Resources</a>
+        <a href="{{ site.baseurl }}/#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <div class="search-wrap" role="search">
+          <input type="search" id="globalSearch" class="search-input" placeholder="Search tools &amp; articles…" aria-label="Search tools and articles" autocomplete="off" />
+          <span class="search-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+        </div>
+        <div class="theme-toggles" role="group" aria-label="Switch study theme">
+          <button class="theme-toggle-btn" data-theme="morning" title="Morning Focus" aria-label="Morning Focus theme"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 0 0-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/><line x1="23" y1="22" x2="1" y2="22"/><polyline points="8 6 12 2 16 6"/></svg></button>
+          <button class="theme-toggle-btn" data-theme="night" title="Night Study" aria-label="Night Study theme"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+          <button class="theme-toggle-btn" data-theme="library" title="Library Mode" aria-label="Library Mode theme"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></button>
+          <button class="theme-toggle-btn" data-theme="nature" title="Nature Mode" aria-label="Nature Mode theme"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 22h5"/><path d="M15 22h2"/><path d="M9 22v-4"/><path d="M13 22v-7"/><path d="M15.5 8.5c1.5-1.5 4-3 6-3 0 4-2 6-4 7"/><path d="M17 2c-3 0-5 1-6 3"/><path d="M2 18c1.5 0 3-1 4-2"/><path d="M2 12c2 0 4-1 6-3"/><path d="M2 6c3 0 6-2 8-4"/></svg></button>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="{{ site.baseurl }}/#tools">Tools</a>
+      <a href="{{ site.baseurl }}/blog.html">Blog</a>
+      <a href="#">Premium Resources</a>
+      <a href="{{ site.baseurl }}/#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Breadcrumb -->
+    <div class="container" style="padding-top: 24px;">
+      <nav aria-label="Breadcrumb" style="font-size:0.85rem; color:var(--text-muted);">
+        <a href="{{ site.baseurl }}/">Home</a> &rsaquo;
+        <a href="{{ site.baseurl }}/blog.html">Blog</a> &rsaquo;
+        <span style="color:var(--text-soft);">{{ page.title }}</span>
+      </nav>
+    </div>
+
+    <section class="section" style="padding-top: 30px;">
+      <div class="container">
+        <article class="blog-article">
+
+          <!-- Article Header -->
+          <header class="blog-article-header">
+            {% if page.categories.size > 0 %}
+            <span class="blog-tag">{{ page.categories.first }}</span>
+            {% endif %}
+            <h1>{{ page.title }}</h1>
+            <div class="blog-article-meta">
+              <span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> {{ page.date | date: "%B %d, %Y }}</span>
+              <span>&middot;</span>
+              <span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg> {{ content | number_of_words | divided_by: 200 | at_least: 1 }} min read</span>
+              <span>&middot;</span>
+              <span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> Study Compass Team</span>
+            </div>
+          </header>
+
+          <!-- Featured Image -->
+          {% if page.featured_image %}
+          <div class="blog-article-hero">
+            <img src="{{ page.featured_image }}" alt="{{ page.title | escape }}" loading="lazy" />
+          </div>
+          {% endif %}
+
+          <!-- Article Body (Markdown rendered by Jekyll/Kramdown) -->
+          <div class="blog-article-body">
+            {{ content }}
+          </div>
+
+          <!-- Tags -->
+          {% if page.tags.size > 0 %}
+          <div class="blog-article-tags" style="margin-top: 40px; display: flex; flex-wrap: wrap; gap: 8px;">
+            {% for tag in page.tags %}
+            <span class="blog-tag" style="background: var(--bg-alt); color: var(--accent); padding: 4px 12px; border-radius: 999px; font-size: 0.82rem; font-weight: 600;">{{ tag }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <!-- Related Articles -->
+          {% assign related_posts = site.posts | where_exp: "post", "post.url != page.url" | limit: 3 %}
+          {% if related_posts.size > 0 %}
+          <div style="margin-top: 60px;">
+            <h2 style="font-size: 1.4rem; margin-bottom: 20px;">Related Articles</h2>
+            <div class="blog-grid">
+              {% for post in related_posts %}
+              <article class="blog-card">
+                <a href="{{ post.url }}" style="text-decoration:none; color:inherit; display:block;">
+                  {% if post.featured_image %}
+                  <div class="blog-thumb">
+                    <img src="{{ post.featured_image }}" alt="{{ post.title | escape }}" loading="lazy" />
+                  </div>
+                  {% endif %}
+                  <div class="blog-body">
+                    {% if post.categories.size > 0 %}
+                    <span class="blog-tag">{{ post.categories.first }}</span>
+                    {% endif %}
+                    <h3 class="blog-title">{{ post.title }}</h3>
+                    <p class="blog-excerpt">{{ post.excerpt | default: post.content | strip_html | truncatewords: 15 }}</p>
+                    <span class="blog-link">Read article <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+                  </div>
+                </a>
+              </article>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+
+          <!-- Article Footer -->
+          <footer class="blog-article-footer">
+            <div class="blog-author">
+              <div class="blog-author-avatar"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
+              <div class="blog-author-info">
+                <strong>Study Compass Team</strong>
+                <span>Calm, focused study tools for every student.</span>
+              </div>
+            </div>
+            <a href="{{ site.baseurl }}/blog.html" class="btn btn-ghost"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg> Back to all articles</a>
+          </footer>
+
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="{{ site.baseurl }}/" class="logo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> Study Compass</a>
+        <p>Navigate your academic journey with calm, focused tools.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <div>
+          <h4>Site</h4>
+          <a href="{{ site.baseurl }}/#tools">Tools</a>
+          <a href="{{ site.baseurl }}/blog.html">Blog</a>
+          <a href="#">Premium Resources</a>
+          <a href="{{ site.baseurl }}/#about">About</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="{{ site.baseurl }}/privacy.html">Privacy Policy</a>
+          <a href="{{ site.baseurl }}/terms.html">Terms of Service</a>
+          <a href="{{ site.baseurl }}/contact.html">Contact</a>
+          <a href="{{ site.baseurl }}/privacy.html#cookies">Cookie Policy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div class="container"><p>&copy; 2026 Study Compass. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="{{ site.baseurl }}/script.js" defer></script>
+</body>
+</html>

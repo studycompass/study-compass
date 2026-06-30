@@ -1,119 +1,49 @@
+---
+layout: null
+---
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Study Compass — Sitemap
-     Generated for https://studycompass.github.io/study-compass/
-     Lists all 17 public HTML pages for Google Search Console indexing. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <!-- Homepage -->
   <url>
-    <loc>https://studycompass.github.io/study-compass/</loc>
-    <lastmod>2026-06-29</lastmod>
+    <loc>{{ site.url }}{{ site.baseurl }}/</loc>
+    <lastmod>{{ site.time | date: "%Y-%m-%d" }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- 6 Tool Pages -->
-  <url>
-    <loc>https://studycompass.github.io/study-compass/timer.html</loc>
-    <lastmod>2026-06-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://studycompass.github.io/study-compass/flashcards.html</loc>
-    <lastmod>2026-06-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://studycompass.github.io/study-compass/calculator.html</loc>
-    <lastmod>2026-06-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://studycompass.github.io/study-compass/quiz.html</loc>
-    <lastmod>2026-06-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://studycompass.github.io/study-compass/planner.html</loc>
-    <lastmod>2026-06-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://studycompass.github.io/study-compass/essay.html</loc>
-    <lastmod>2026-06-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+  <!-- Tool Pages -->
+  <url><loc>{{ site.url }}{{ site.baseurl }}/timer.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}{{ site.baseurl }}/flashcards.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}{{ site.baseurl }}/calculator.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}{{ site.baseurl }}/quiz.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}{{ site.baseurl }}/planner.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}{{ site.baseurl }}/essay.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
 
   <!-- Blog Index -->
-  <url>
-    <loc>https://studycompass.github.io/study-compass/blog.html</loc>
-    <lastmod>2026-06-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <url><loc>{{ site.url }}{{ site.baseurl }}/blog.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
 
-  <!-- 6 Blog Articles -->
-  <url>
-    <loc>https://studycompass.github.io/study-compass/pomodoro.html</loc>
-    <lastmod>2026-06-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://studycompass.github.io/study-compass/active-recall.html</loc>
-    <lastmod>2026-06-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://studycompass.github.io/study-compass/essay-outline.html</loc>
-    <lastmod>2026-06-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://studycompass.github.io/study-compass/weekly-planning.html</loc>
-    <lastmod>2026-06-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://studycompass.github.io/study-compass/gpa.html</loc>
-    <lastmod>2026-06-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://studycompass.github.io/study-compass/student-reset.html</loc>
-    <lastmod>2026-06-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+  <!-- Static Blog Articles (legacy) -->
+  <url><loc>{{ site.url }}{{ site.baseurl }}/pomodoro.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}{{ site.baseurl }}/active-recall.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}{{ site.baseurl }}/essay-outline.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}{{ site.baseurl }}/weekly-planning.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}{{ site.baseurl }}/gpa.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}{{ site.baseurl }}/student-reset.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
 
-  <!-- Legal & Contact Pages -->
+  <!-- Legal & Contact -->
+  <url><loc>{{ site.url }}{{ site.baseurl }}/privacy.html</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
+  <url><loc>{{ site.url }}{{ site.baseurl }}/terms.html</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
+  <url><loc>{{ site.url }}{{ site.baseurl }}/contact.html</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
+
+  <!-- CMS-Published Blog Posts (auto-generated by Jekyll) -->
+  {% for post in site.posts %}
   <url>
-    <loc>https://studycompass.github.io/study-compass/privacy.html</loc>
-    <lastmod>2026-06-29</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>{{ site.url }}{{ site.baseurl }}{{ post.url }}</loc>
+    <lastmod>{{ post.date | date: "%Y-%m-%d" }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://studycompass.github.io/study-compass/terms.html</loc>
-    <lastmod>2026-06-29</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://studycompass.github.io/study-compass/contact.html</loc>
-    <lastmod>2026-06-29</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
+  {% endfor %}
 
 </urlset>
