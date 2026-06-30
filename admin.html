@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Study Compass — Admin</title>
+<style>
+  :root{
+    --cream:#FAF6EF;
+    --ink:#2E2A24;
+    --terracotta:#C1654B;
+    --moss:#5C6E55;
+    --line:#E4DCCC;
+    --card:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    padding:24px 16px 80px;
+  }
+  .wrap{max-width:640px;margin:0 auto;}
+  h1{font-size:1.5rem;margin:0 0 4px;}
+  .sub{color:#7a7264;font-size:0.9rem;margin:0 0 24px;}
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:20px;
+    margin-bottom:20px;
+  }
+  .card h2{font-size:1rem;margin:0 0 14px;color:var(--terracotta);}
+  label{display:block;font-size:0.85rem;font-weight:600;margin:14px 0 6px;}
+  label:first-of-type{margin-top:0;}
+  input[type=text],input[type=password],input[type=number],textarea,select{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    font-size:0.95rem;
+    font-family:inherit;
+    background:#FFFDFA;
+    color:var(--ink);
+  }
+  textarea{min-height:200px;resize:vertical;line-height:1.5;}
+  .hint{font-size:0.78rem;color:#8a8270;margin-top:4px;}
+  .row{display:flex;gap:12px;}
+  .row > div{flex:1;}
+  button{
+    background:var(--terracotta);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:12px 18px;
+    font-size:0.95rem;
+    font-weight:600;
+    cursor:pointer;
+    width:100%;
+    margin-top:18px;
+  }
+  button:disabled{opacity:0.5;cursor:not-allowed;}
+  button.secondary{background:transparent;color:var(--moss);border:1px solid var(--moss);}
+  .status{
+    margin-top:14px;
+    padding:10px 12px;
+    border-radius:8px;
+    font-size:0.88rem;
+    display:none;
+  }
+  .status.ok{display:block;background:#EAF1E6;color:#3E5236;}
+  .status.err{display:block;background:#F8E6E1;color:#8C3A26;}
+  .status.loading{display:block;background:#EFE9DC;color:#6b6354;}
+  .post-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 0;
+    border-bottom:1px solid var(--line);
+    font-size:0.88rem;
+  }
+  .post-item:last-child{border-bottom:none;}
+  .post-item button{
+    width:auto;
+    margin:0;
+    padding:6px 10px;
+    font-size:0.78rem;
+    background:transparent;
+    color:#B33;
+    border:1px solid #E2B3A8;
+  }
+  .gear{font-size:0.78rem;color:#8a8270;cursor:pointer;text-decoration:underline;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🧭 Study Compass — Admin</h1>
+  <p class="sub">Private publishing tool. Don't share this URL.</p>
+
+  <div class="card" id="setupCard">
+    <h2>Connection</h2>
+    <label>GitHub repo (owner/name)</label>
+    <input type="text" id="repoInput" placeholder="studycompass/study-compass" value="studycompass/study-compass">
+    <label>Branch</label>
+    <input type="text" id="branchInput" placeholder="main" value="main">
+    <label>GitHub access token</label>
+    <input type="password" id="tokenInput" placeholder="ghp_...">
+    <p class="hint">Create a fine-grained token at github.com → Settings → Developer settings → Personal access tokens. Scope it to only this repo, with "Contents" read/write permission. Stored only in this browser (localStorage) — never sent anywhere but GitHub's API.</p>
+    <button id="saveConnBtn">Save connection</button>
+    <div class="status" id="connStatus"></div>
+  </div>
+
+  <div class="card" id="formCard" style="display:none;">
+    <h2>New post</h2>
+    <label>Title</label>
+    <input type="text" id="title" placeholder="How to Beat Procrastination Tonight">
+    <div class="row">
+      <div>
+        <label>Category</label>
+        <input type="text" id="category" placeholder="Productivity">
+      </div>
+      <div>
+        <label>Emoji icon</label>
+        <input type="text" id="emoji" placeholder="⏱️">
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Read time</label>
+        <input type="text" id="readTime" placeholder="5 min read">
+      </div>
+      <div>
+        <label>Slug (URL anchor)</label>
+        <input type="text" id="slug" placeholder="auto-generated-from-title">
+      </div>
+    </div>
+    <label>Excerpt (1–2 sentences for the article card)</label>
+    <textarea id="excerpt" style="min-height:70px;"></textarea>
+    <label>Body</label>
+    <textarea id="body" placeholder="Write your article here.&#10;&#10;Leave a blank line between paragraphs.&#10;## Use this for a subheading&#10;- Use this for a bullet&#10;> Use this for a quote"></textarea>
+    <p class="hint">Plain text is fine — blank line = new paragraph. ## for subheading, - for bullets, &gt; for a blockquote.</p>
+    <label><input type="checkbox" id="featured" style="width:auto;"> Feature this post at the top of the blog</label>
+    <button id="publishBtn">Publish post</button>
+    <div class="status" id="publishStatus"></div>
+  </div>
+
+  <div class="card" id="listCard" style="display:none;">
+    <h2>Existing posts</h2>
+    <div id="postList">Loading…</div>
+  </div>
+
+  <p class="gear" id="resetConn">Reset connection</p>
+</div>
+
+<script>
+const POSTS_PATH = 'posts.json';
+let conn = JSON.parse(localStorage.getItem('sc_admin_conn') || 'null');
+
+const setupCard = document.getElementById('setupCard');
+const formCard = document.getElementById('formCard');
+const listCard = document.getElementById('listCard');
+const connStatus = document.getElementById('connStatus');
+const publishStatus = document.getElementById('publishStatus');
+
+function showStatus(el, msg, type){
+  el.textContent = msg;
+  el.className = 'status ' + type;
+}
+
+function apiBase(){
+  return `https://api.github.com/repos/${conn.repo}/contents/${POSTS_PATH}`;
+}
+
+async function fetchPosts(){
+  const res = await fetch(apiBase() + `?ref=${conn.branch}`, {
+    headers: { Authorization: `token ${conn.token}`, Accept: 'application/vnd.github+json' }
+  });
+  if(!res.ok) throw new Error(`GitHub fetch failed (${res.status}). Check token permissions and repo name.`);
+  const data = await res.json();
+  const content = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
+  return { posts: JSON.parse(content), sha: data.sha };
+}
+
+async function savePosts(posts, sha, message){
+  const body = unescape(encodeURIComponent(JSON.stringify(posts, null, 2)));
+  const b64 = btoa(body);
+  const res = await fetch(apiBase(), {
+    method: 'PUT',
+    headers: {
+      Authorization: `token ${conn.token}`,
+      Accept: 'application/vnd.github+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ message, content: b64, sha, branch: conn.branch })
+  });
+  if(!res.ok){
+    const err = await res.json().catch(()=>({}));
+    throw new Error(`GitHub save failed (${res.status}): ${err.message || 'unknown error'}`);
+  }
+  return res.json();
+}
+
+function slugify(str){
+  return str.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+}
+
+function textToHtml(raw){
+  const lines = raw.split('\n');
+  let html = '';
+  let buffer = [];
+  let inList = false;
+
+  function flushParagraph(){
+    if(buffer.length){
+      html += `<p>${buffer.join(' ')}</p>`;
+      buffer = [];
+    }
+  }
+  function closeList(){
+    if(inList){ html += '</ul>'; inList = false; }
+  }
+
+  for(const line of lines){
+    const t = line.trim();
+    if(t === ''){ flushParagraph(); closeList(); continue; }
+    if(t.startsWith('## ')){
+      flushParagraph(); closeList();
+      html += `<h2>${t.slice(3)}</h2>`;
+    } else if(t.startsWith('- ')){
+      flushParagraph();
+      if(!inList){ html += '<ul>'; inList = true; }
+      html += `<li>${t.slice(2)}</li>`;
+    } else if(t.startsWith('> ')){
+      flushParagraph(); closeList();
+      html += `<blockquote>${t.slice(2)}</blockquote>`;
+    } else {
+      buffer.push(t);
+    }
+  }
+  flushParagraph();
+  closeList();
+  return html;
+}
+
+document.getElementById('saveConnBtn').addEventListener('click', async () => {
+  const repo = document.getElementById('repoInput').value.trim();
+  const branch = document.getElementById('branchInput').value.trim() || 'main';
+  const token = document.getElementById('tokenInput').value.trim();
+  if(!repo || !token){
+    showStatus(connStatus, 'Repo and token are required.', 'err');
+    return;
+  }
+  conn = { repo, branch, token };
+  showStatus(connStatus, 'Checking connection…', 'loading');
+  try{
+    await fetchPosts();
+    localStorage.setItem('sc_admin_conn', JSON.stringify(conn));
+    showStatus(connStatus, 'Connected ✓', 'ok');
+    formCard.style.display = 'block';
+    listCard.style.display = 'block';
+    loadPostList();
+  }catch(e){
+    showStatus(connStatus, e.message, 'err');
+  }
+});
+
+document.getElementById('resetConn').addEventListener('click', () => {
+  localStorage.removeItem('sc_admin_conn');
+  conn = null;
+  formCard.style.display = 'none';
+  listCard.style.display = 'none';
+  showStatus(connStatus, 'Connection cleared.', 'ok');
+});
+
+document.getElementById('title').addEventListener('input', (e) => {
+  const slugField = document.getElementById('slug');
+  if(!slugField.dataset.touched) slugField.value = slugify(e.target.value);
+});
+document.getElementById('slug').addEventListener('input', (e) => { e.target.dataset.touched = '1'; });
+
+document.getElementById('publishBtn').addEventListener('click', async () => {
+  const title = document.getElementById('title').value.trim();
+  const category = document.getElementById('category').value.trim();
+  const emoji = document.getElementById('emoji').value.trim() || '📝';
+  const readTime = document.getElementById('readTime').value.trim() || '5 min read';
+  let slug = document.getElementById('slug').value.trim();
+  const excerpt = document.getElementById('excerpt').value.trim();
+  const bodyRaw = document.getElementById('body').value.trim();
+  const featured = document.getElementById('featured').checked;
+
+  if(!title || !category || !excerpt || !bodyRaw){
+    showStatus(publishStatus, 'Title, category, excerpt, and body are all required.', 'err');
+    return;
+  }
+  if(!slug) slug = slugify(title);
+
+  const btn = document.getElementById('publishBtn');
+  btn.disabled = true;
+  showStatus(publishStatus, 'Publishing…', 'loading');
+
+  try{
+    const { posts, sha } = await fetchPosts();
+    if(posts.some(p => p.slug === slug)){
+      throw new Error(`A post with slug "${slug}" already exists. Choose a different slug.`);
+    }
+    if(featured){
+      posts.forEach(p => p.featured = false);
+    }
+    const newPost = {
+      slug, category, emoji,
+      title,
+      date: new Date().toISOString().slice(0,10),
+      readTime,
+      author: 'Study Compass Team',
+      featured,
+      excerpt,
+      bodyHtml: textToHtml(bodyRaw)
+    };
+    posts.unshift(newPost);
+    await savePosts(posts, sha, `Add post: ${title}`);
+    showStatus(publishStatus, `Published ✓ — live in ~1 min once GitHub Pages rebuilds.`, 'ok');
+    ['title','category','emoji','readTime','slug','excerpt','body'].forEach(id => {
+      const el = document.getElementById(id);
+      el.value = '';
+      delete el.dataset.touched;
+    });
+    document.getElementById('featured').checked = false;
+    loadPostList();
+  }catch(e){
+    showStatus(publishStatus, e.message, 'err');
+  }finally{
+    btn.disabled = false;
+  }
+});
+
+async function loadPostList(){
+  const listEl = document.getElementById('postList');
+  try{
+    const { posts } = await fetchPosts();
+    if(!posts.length){ listEl.textContent = 'No posts yet.'; return; }
+    listEl.innerHTML = '';
+    posts.forEach(p => {
+      const row = document.createElement('div');
+      row.className = 'post-item';
+      row.innerHTML = `<span>${p.emoji} ${p.title} ${p.featured ? '⭐' : ''}</span>`;
+      const delBtn = document.createElement('button');
+      delBtn.textContent = 'Delete';
+      delBtn.addEventListener('click', () => deletePost(p.slug));
+      row.appendChild(delBtn);
+      listEl.appendChild(row);
+    });
+  }catch(e){
+    listEl.textContent = 'Could not load posts: ' + e.message;
+  }
+}
+
+async function deletePost(slug){
+  if(!confirm('Delete this post permanently?')) return;
+  try{
+    const { posts, sha } = await fetchPosts();
+    const filtered = posts.filter(p => p.slug !== slug);
+    await savePosts(filtered, sha, `Delete post: ${slug}`);
+    loadPostList();
+  }catch(e){
+    alert('Delete failed: ' + e.message);
+  }
+}
+
+// Auto-restore connection on load
+if(conn){
+  document.getElementById('repoInput').value = conn.repo;
+  document.getElementById('branchInput').value = conn.branch;
+  document.getElementById('tokenInput').value = conn.token;
+  fetchPosts().then(() => {
+    showStatus(connStatus, 'Connected ✓', 'ok');
+    formCard.style.display = 'block';
+    listCard.style.display = 'block';
+    loadPostList();
+  }).catch(e => showStatus(connStatus, e.message, 'err'));
+}
+</script>
+</body>
+</html>
