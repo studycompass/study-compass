@@ -91,4 +91,3 @@
       if (el) el.textContent = 'Could not load posts right now — please refresh.';
     });
 })();
-"update blog loader",
