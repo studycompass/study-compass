@@ -1399,11 +1399,10 @@ input:focus-visible,
   border-radius: 6px;
 }
 .quiz-tab svg {
-  width: 20px;
-  height: 20px;
+  width: 20px !important;
+  height: 20px !important;
   flex-shrink: 0;
 }
-
 .quiz-tab {
   display: inline-flex;
   align-items: center;
