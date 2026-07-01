@@ -1398,3 +1398,14 @@ input:focus-visible,
   outline-offset: 2px;
   border-radius: 6px;
 }
+.quiz-tab svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.quiz-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
