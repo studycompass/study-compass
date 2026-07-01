@@ -1409,3 +1409,7 @@ input:focus-visible,
   align-items: center;
   gap: 8px;
 }
+.promo-icon svg {
+  width: 28px;
+  height: 28px;
+}
