@@ -11,27 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 
-    <!-- Canonical -->
-<!-- Open Graph (Facebook, Pinterest, LinkedIn) -->
-
-
-
-
-
-
-
-
-<!-- Twitter Card -->
-
-
-
-
-<!-- Pinterest rich pins (uses OG tags above; this explicitly enables) -->
-
-    <!-- Canonical -->
     <link rel="canonical" href="https://studycompass.github.io/study-compass/index.html" />
 
-    <!-- Open Graph (Facebook, Pinterest, LinkedIn) -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Study Compass" />
     <meta property="og:title" content="Study Compass — Navigate Your Academic Journey" />
@@ -42,22 +23,33 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Study Compass — Navigate Your Academic Journey" />
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Study Compass — Navigate Your Academic Journey" />
     <meta name="twitter:description" content="Study Compass — your cozy, focus-driven academic toolkit. Free study tools, planners, and premium digital resources for students." />
     <meta name="twitter:image" content="https://studycompass.github.io/study-compass/og-images/index.png" />
     <meta name="twitter:image:alt" content="Study Compass — Navigate Your Academic Journey" />
 
-    <!-- Pinterest rich pins (uses OG tags above; this explicitly enables) -->
     <meta name="pinterest" content="nohover" />
+
+  <style>
+    .coming-soon-badge {
+      display: inline-block;
+      background: #E8E0D0;
+      color: #3B3530;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 0.5rem 1.25rem;
+      border-radius: 100px;
+      margin-top: 0.5rem;
+      width: 100%;
+      text-align: center;
+      box-sizing: border-box;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- =========================================================
-       1. WELCOME POPUP (first-visit only, theme selection)
-       Triggered by JS when localStorage has no saved theme.
-  ========================================================== -->
   <div id="welcome-overlay" class="welcome-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
     <div class="welcome-popup">
       <h2 id="welcome-title" class="welcome-title">👋 Welcome to Study Compass!</h2>
@@ -86,10 +78,6 @@
     </div>
   </div>
 
-  <!-- =========================================================
-       2. STICKY HEADER
-       Logo • Nav • Search Bar • Theme Toggles
-  ========================================================== -->
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="logo" aria-label="Study Compass home">🧭 Study Compass</a>
@@ -127,9 +115,6 @@
 
   <main id="top">
 
-    <!-- =========================================================
-         3. HERO SECTION
-    =========================================================== -->
     <section class="hero">
       <div class="container hero-inner">
         <div class="hero-text">
@@ -158,10 +143,6 @@
       </div>
     </section>
 
-    <!-- =========================================================
-         4. THE ULTIMATE STUDENT TOOLKIT — Tools Grid
-         Each card carries data attributes for the search filter.
-    =========================================================== -->
     <section class="section" id="tools">
       <div class="container">
         <div class="section-header">
@@ -225,10 +206,6 @@
       </div>
     </section>
 
-    <!-- =========================================================
-         5. RECENT BLOG POSTS
-         3 placeholder cards — also searchable.
-    =========================================================== -->
     <section class="section section-alt" id="blog">
       <div class="container">
         <div class="section-header">
@@ -276,9 +253,6 @@
       </div>
     </section>
 
-    <!-- =========================================================
-         6. PREMIUM RESOURCES PREVIEW (lead-gen)
-    =========================================================== -->
     <section class="section" id="premium">
       <div class="container">
         <div class="section-header">
@@ -288,37 +262,29 @@
 
         <div class="premium-grid">
           <div class="premium-card">
-            <div class="premium-badge">Bestseller</div>
             <div class="premium-icon">🧭</div>
             <h3>The Student Reset Planner</h3>
             <p>Hit academic burnout? This all-in-one reset planner walks you through a full weekly review, prioritizes your deadlines, and rebuilds your study routine from the ground up — in under 30 minutes a week.</p>
-            <a href="#" target="_blank" rel="noopener nofollow" class="btn btn-primary btn-block">Get the product →</a>
+            <span class="coming-soon-badge">🕐 Coming Soon</span>
           </div>
 
           <div class="premium-card">
-            <div class="premium-badge">New</div>
             <div class="premium-icon">✅</div>
             <h3>Digital Habit Trackers</h3>
             <p>Build focus, sleep, and study streaks that actually stick. Beautifully designed digital trackers (PDF + GoodNotes) engineered around student energy cycles — not generic productivity bro-science.</p>
-            <a href="#" target="_blank" rel="noopener nofollow" class="btn btn-primary btn-block">Get the product →</a>
+            <span class="coming-soon-badge">🕐 Coming Soon</span>
           </div>
 
           <div class="premium-card">
-            <div class="premium-badge">Automated</div>
             <div class="premium-icon">📊</div>
             <h3>Google Sheets Budget & Spending Tracker</h3>
             <p>Auto-categorized spending, smart budget envelopes, and a savings dashboard that updates itself. Built for students who want financial clarity without spreadsheets that feel like homework.</p>
-            <a href="#" target="_blank" rel="noopener nofollow" class="btn btn-primary btn-block">Get the product →</a>
+            <span class="coming-soon-badge">🕐 Coming Soon</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- =========================================================
-         7. TOOL PAGE TEMPLATE — Study Timer (Pomodoro)
-         Reference design for every individual tool page.
-         Includes: interactive tool + rich article + premium sidebar + ad slot.
-    =========================================================== -->
     <section class="section section-alt" id="tool-page-template">
       <div class="container">
         <div class="section-header">
@@ -333,10 +299,8 @@
 
         <div class="tool-page-layout">
 
-          <!-- Main column: interactive tool + rich article -->
           <div class="tool-page-main">
 
-            <!-- Interactive tool interface -->
             <div class="tool-interface" id="pomodoroTool">
               <div class="timer-display" id="timerDisplay">25:00</div>
               <div class="timer-mode" id="timerMode">Focus session</div>
@@ -350,7 +314,6 @@
               </div>
             </div>
 
-            <!-- Rich-text article wrapper (semantic HTML) -->
             <article class="tool-article">
               <h2>The Science of the Pomodoro Technique</h2>
               <p>
@@ -399,17 +362,10 @@
             </article>
           </div>
 
-          <!-- Sidebar: premium resources + AdSense slot -->
           <aside class="tool-page-sidebar" aria-label="Premium resources and advertisements">
 
-            <!-- AdSense placeholder -->
             <div class="ad-slot" aria-label="Advertisement">
               <span class="ad-label">Advertisement</span>
-              <!--
-                Replace this comment with your AdSense code once approved:
-                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-              -->
               <div class="ad-placeholder">AdSense block (300×250)</div>
             </div>
 
@@ -443,7 +399,6 @@
               </ul>
             </div>
 
-            <!-- Second ad slot -->
             <div class="ad-slot" aria-label="Advertisement">
               <span class="ad-label">Advertisement</span>
               <div class="ad-placeholder">AdSense block (responsive)</div>
@@ -453,9 +408,6 @@
       </div>
     </section>
 
-    <!-- =========================================================
-         8. ABOUT (mini-section, supports AdSense trust signals)
-    =========================================================== -->
     <section class="section" id="about">
       <div class="container about-inner">
         <div class="about-text">
@@ -477,9 +429,6 @@
 
   </main>
 
-  <!-- =========================================================
-       9. FOOTER — mandatory AdSense trust links
-  =========================================================== -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
@@ -507,7 +456,6 @@
       <div class="container"><p>&copy; 2026 Study Compass. All rights reserved.</p></div>
     </div>
   </footer>
-
   <script src="script.js" defer></script>
 </body>
 </html>
