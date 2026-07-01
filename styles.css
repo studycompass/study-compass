@@ -25,7 +25,12 @@
   --popup-bg:     #FFFFFF;
   --overlay:      rgba(74, 93, 35, 0.35);
 }
-
+svg {
+  width: 1.25em;
+  height: 1.25em;
+  flex-shrink: 0;
+  vertical-align: -0.2em;
+}
 [data-theme="night"] {
   --bg:           #121212;
   --bg-alt:       #1A1A1A;
