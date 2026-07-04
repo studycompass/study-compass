@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free Syllabus to Calendar Converter by Study Compass — paste your syllabus and instantly extract every exam, assignment, and reading deadline. Export straight to Google Calendar, Apple Calendar, or Outlook." />
+  <meta name="keywords" content="syllabus to calendar, syllabus parser, add syllabus to google calendar, semester planner, exam date tracker, assignment deadline tracker, student calendar tool" />
+  <title>Syllabus to Calendar Converter — Never Miss a Deadline | Study Compass</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <link rel="canonical" href="https://studycompass.github.io/study-compass/syllabus-planner.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Study Compass" />
+  <meta property="og:title" content="Syllabus to Calendar Converter — Never Miss a Deadline | Study Compass" />
+  <meta property="og:description" content="Free Syllabus to Calendar Converter by Study Compass — paste your syllabus and instantly extract every exam, assignment, and reading deadline. Export straight to Google Calendar, Apple Calendar, or Outlook." />
+  <meta property="og:url" content="https://studycompass.github.io/study-compass/syllabus-planner.html" />
+  <meta property="og:image" content="https://studycompass.github.io/study-compass/og-images/syllabus-planner.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Syllabus to Calendar Converter — Never Miss a Deadline | Study Compass" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Syllabus to Calendar Converter — Never Miss a Deadline | Study Compass" />
+  <meta name="twitter:description" content="Free Syllabus to Calendar Converter by Study Compass — paste your syllabus and instantly extract every exam, assignment, and reading deadline. Export straight to Google Calendar, Apple Calendar, or Outlook." />
+  <meta name="twitter:image" content="https://studycompass.github.io/study-compass/og-images/syllabus-planner.png" />
+  <meta name="twitter:image:alt" content="Syllabus to Calendar Converter — Never Miss a Deadline | Study Compass" />
+  <meta name="pinterest" content="nohover" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WY2VYWK4WQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-WY2VYWK4WQ');
+  </script>
+</head>
+<body>
+
+  <!-- SHARED HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Study Compass home"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> Study Compass</a>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html#tools">Tools</a>
+        <a href="blog.html">Blog</a>
+        <a href="#">Premium Resources</a>
+        <a href="index.html#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <div class="search-wrap" role="search">
+          <input type="search" id="globalSearch" class="search-input" placeholder="Search tools & articles…" aria-label="Search tools and articles" autocomplete="off" />
+          <span class="search-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+        </div>
+        <div class="theme-toggles" role="group" aria-label="Switch study theme">
+          <button class="theme-toggle-btn" data-theme="morning" title="Morning Focus" aria-label="Morning Focus theme"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 0 0-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/><line x1="23" y1="22" x2="1" y2="22"/><polyline points="8 6 12 2 16 6"/></svg></button>
+          <button class="theme-toggle-btn" data-theme="night" title="Night Study" aria-label="Night Study theme"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+          <button class="theme-toggle-btn" data-theme="library" title="Library Mode" aria-label="Library Mode theme"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></button>
+          <button class="theme-toggle-btn" data-theme="nature" title="Nature Mode" aria-label="Nature Mode theme"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 22h5"/><path d="M15 22h2"/><path d="M9 22v-4"/><path d="M13 22v-7"/><path d="M15.5 8.5c1.5-1.5 4-3 6-3 0 4-2 6-4 7"/><path d="M17 2c-3 0-5 1-6 3"/><path d="M2 18c1.5 0 3-1 4-2"/><path d="M2 12c2 0 4-1 6-3"/><path d="M2 6c3 0 6-2 8-4"/></svg></button>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="index.html#tools">Tools</a>
+      <a href="blog.html">Blog</a>
+      <a href="#">Premium Resources</a>
+      <a href="index.html#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Breadcrumb for SEO + UX -->
+    <div class="container" style="padding-top: 24px;">
+      <nav aria-label="Breadcrumb" style="font-size:0.85rem; color:var(--text-muted);">
+        <a href="index.html">Home</a> ›
+        <a href="index.html#tools">Tools</a> ›
+        <span style="color:var(--text-soft);">Syllabus to Calendar</span>
+      </nav>
+    </div>
+
+    <section class="section" style="padding-top: 30px;">
+      <div class="container">
+        <div class="section-header" style="margin-bottom: 36px;">
+          <span class="section-eyebrow">Free Study Tool</span>
+          <h1 class="section-title">Syllabus to Calendar Converter</h1>
+          <p class="section-subtitle">
+            Paste your syllabus and we'll pull out every exam, assignment, and
+            reading deadline automatically. Fix anything we missed, then
+            export straight to your calendar — no sign-up, no limits.
+          </p>
+        </div>
+
+        <div class="tool-page-layout">
+
+          <!-- ===== MAIN COLUMN: tool + article ===== -->
+          <div class="tool-page-main">
+
+            <div class="quiz-app">
+
+              <!-- Tabs -->
+              <div class="quiz-tabs" role="tablist" aria-label="Syllabus converter steps">
+                <button class="quiz-tab is-active" role="tab" aria-selected="true" data-tab="paste" id="tab-paste">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6"/><path d="M9 16h6"/></svg>
+                  Paste Syllabus
+                </button>
+                <button class="quiz-tab" role="tab" aria-selected="false" data-tab="review" id="tab-review">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  Review &amp; Edit
+                </button>
+                <button class="quiz-tab" role="tab" aria-selected="false" data-tab="export" id="tab-export">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  Export
+                </button>
+              </div>
+
+              <!-- Panel 1: Paste -->
+              <div class="quiz-panel is-active" role="tabpanel" aria-labelledby="tab-paste" id="panel-paste">
+                <h3>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6"/><path d="M9 16h6"/></svg>
+                  Paste your syllabus text
+                </h3>
+                <p class="panel-desc">Copy the whole syllabus — from a PDF, Word doc, or course site — and paste it below. Messy formatting is fine; we'll scan for dates and match them to nearby keywords like "exam," "due," or "reading."</p>
+
+                <div class="quiz-field">
+                  <label for="syllabusInput">Syllabus text</label>
+                  <textarea id="syllabusInput" style="min-height:220px;" placeholder="Paste your syllabus here…&#10;&#10;Example:&#10;Week 3 — Sept 15: Reading due, Ch. 4&#10;Midterm Exam: October 3, 2026&#10;Final paper due 11/20&#10;Nov 5 - Nov 7: Group project presentations"></textarea>
+                </div>
+
+                <div class="quiz-actions">
+                  <button class="btn btn-primary" id="parseBtn" type="button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-3px; margin-right:6px;"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+                    Parse syllabus
+                  </button>
+                  <button class="btn btn-ghost" id="clearSyllabusBtn" type="button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-3px; margin-right:6px;"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 3v6h6"/></svg>
+                    Clear
+                  </button>
+                </div>
+                <p id="parseStatus" style="font-size:0.85rem; color:var(--text-muted); margin-top:14px; min-height:1.1em;"></p>
+              </div>
+
+              <!-- Panel 2: Review & Edit -->
+              <div class="quiz-panel" role="tabpanel" aria-labelledby="tab-review" id="panel-review">
+                <h3>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  Review your deadlines
+                </h3>
+                <p class="panel-desc">Fix any date the parser got wrong, change the event type, or delete a row entirely. Add anything it missed using the form below.</p>
+
+                <div id="eventsTableWrap">
+                  <div class="quiz-questions">
+                    <h3 style="font-size:0.95rem; color:var(--text-soft); margin-bottom:6px;">Your events (<span id="eventCount">0</span>)</h3>
+                    <div id="eventsList"></div>
+                  </div>
+                </div>
+
+                <div style="margin-top:20px; padding-top:20px; border-top:1px solid var(--border);">
+                  <h3 style="font-size:0.95rem; margin-bottom:12px;">Add a missed event</h3>
+                  <div class="calc-row" style="margin-bottom:12px;">
+                    <div class="quiz-field" style="margin-bottom:0;">
+                      <label for="addDate">Date</label>
+                      <input type="date" id="addDate" />
+                    </div>
+                    <div class="quiz-field" style="margin-bottom:0;">
+                      <label for="addType">Type</label>
+                      <select id="addType">
+                        <option value="Exam">Exam</option>
+                        <option value="Assignment">Assignment</option>
+                        <option value="Reading">Reading</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="quiz-field">
+                    <label for="addTitle">Event title</label>
+                    <input type="text" id="addTitle" placeholder="e.g. Final paper due" />
+                  </div>
+                  <div class="quiz-actions">
+                    <button class="btn btn-primary" id="addEventBtn" type="button">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-3px; margin-right:6px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                      Add event
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel 3: Export -->
+              <div class="quiz-panel" role="tabpanel" aria-labelledby="tab-export" id="panel-export">
+                <h3>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  Export your deadlines
+                </h3>
+                <p class="panel-desc">Download a calendar file you can import into Google Calendar, Apple Calendar, or Outlook — or copy everything as a plain checklist.</p>
+
+                <div class="quiz-progress">
+                  <span id="exportSummary">0 events ready to export</span>
+                </div>
+
+                <div class="quiz-actions" style="margin-top:18px;">
+                  <button class="btn btn-primary" id="downloadIcsBtn" type="button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-3px; margin-right:6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download Calendar (.ics)
+                  </button>
+                  <button class="btn btn-ghost" id="copyListBtn" type="button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-3px; margin-right:6px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    Copy as list
+                  </button>
+                </div>
+                <p id="exportStatus" style="font-size:0.85rem; color:var(--text-muted); margin-top:14px; min-height:1.1em;"></p>
+
+                <div class="calc-result" style="margin-top:22px; text-align:left;">
+                  <div class="result-label">How to import your .ics file</div>
+                  <div class="result-detail" style="line-height:1.8;">
+                    <strong>Google Calendar:</strong> Settings → Import &amp; export → Import → choose the downloaded file.<br/>
+                    <strong>Apple Calendar:</strong> Just open the downloaded .ics file and it will add automatically.<br/>
+                    <strong>Outlook:</strong> File → Open &amp; Export → Import/Export → Import an iCalendar file.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- ===== SEO ARTICLE ===== -->
+            <article class="tool-article">
+
+              <h2>Why Every Student Loses Points on Deadlines They Actually Knew About</h2>
+
+              <p>
+                Almost no student misses a deadline because they didn't
+                understand the material. They miss it because the date lived
+                in a 12-page PDF they skimmed once during syllabus week and
+                never opened again. By week six, three different professors
+                have handed out three different documents, each with its own
+                formatting, its own vague phrasing ("readings due before
+                class" — which class, which week?), and its own hidden
+                exam date buried in a paragraph instead of a table. The
+                information was always there. It just was never anywhere you
+                would actually see it when it mattered.
+              </p>
+
+              <p>
+                The Syllabus to Calendar Converter on this page exists to fix
+                exactly that failure mode. Paste in the raw syllabus text,
+                let the tool pull out every date it can find, correct
+                anything it got wrong, and export the whole thing into the
+                calendar you already check every day. The rest of this
+                article covers why this small piece of admin work has an
+                outsized effect on grades, and how to get the most out of
+                the tool once your semester is loaded in.
+              </p>
+
+              <h3>The Real Cost of an "Out of Sight" Deadline</h3>
+
+              <p>
+                Cognitive scientists who study prospective memory — the
+                ability to remember to do something in the future — have
+                found that intention alone is a weak predictor of whether a
+                task gets done. Knowing you have a paper due in six weeks
+                does almost nothing to guarantee you'll start it with enough
+                time. What actually predicts follow-through is whether the
+                task has a concrete, external trigger: a notification, a
+                calendar block, a visible countdown. Without that trigger,
+                the brain relies on remembering to remember, which is
+                exactly the mechanism that fails under the load of five
+                other classes, a job, and a social life.
+              </p>
+
+              <p>
+                This is why the single act of moving a deadline out of a
+                syllabus PDF and into your phone's calendar is disproportionately
+                powerful compared to how little effort it takes. It isn't
+                about being more organized as a personality trait — it's
+                about giving your brain an external system it can rely on
+                instead of an internal one it can't.
+              </p>
+
+              <h3>Why Syllabi Are Uniquely Bad at This Job</h3>
+
+              <p>
+                Syllabi are written to be read once, carefully, at the start
+                of the semester. They are not written to be re-scanned
+                quickly in week nine when you're trying to remember if the
+                midterm is the 14th or the 17th. Dates are often scattered
+                across a grading policy, a weekly schedule table, and a
+                separate "important dates" paragraph, sometimes with
+                inconsistent formats in the same document — "Oct. 3,"
+                "10/3," and "the third week of October" might all describe
+                the same deadline.
+              </p>
+
+              <p>
+                On top of that, most students are juggling four to six of
+                these documents at once, each with a different layout, and
+                each professor assuming their class is the only one that
+                matters. The result is that the "system" most students
+                actually use is a mental patchwork of half-remembered dates
+                — which is precisely the condition that leads to a paper
+                being submitted the same week as two exams that could have
+                been studied for over the previous three weeks if the dates
+                had been visible earlier.
+              </p>
+
+              <h3>Getting the Most Out of This Tool</h3>
+
+              <p>
+                <strong>1. Paste the whole document, not just the schedule
+                table.</strong> Important dates often hide in policy
+                paragraphs ("no late work accepted after the final exam
+                date of December 12") that a quick skim would miss entirely.
+                More text gives the parser more chances to catch something
+                real.
+              </p>
+
+              <p>
+                <strong>2. Always check the Review tab before exporting.
+                </strong> Automated date parsing is good, not perfect. A
+                phrase like "Chapter 3–5" can occasionally get misread as a
+                date range. Spend the thirty seconds it takes to scan the
+                table once — it's far cheaper than discovering the error
+                the week of the actual exam.
+              </p>
+
+              <p>
+                <strong>3. Add the dates that aren't written down anywhere.
+                </strong> Some of the most important deadlines are ones you
+                know from experience rather than the syllabus itself — like
+                when you personally need to start a paper to avoid an
+                all-nighter. Use the "Add a missed event" form to build
+                those personal buffer deadlines directly alongside the
+                official ones.
+              </p>
+
+              <p>
+                <strong>4. Do this once per class, at the start of the term.
+                </strong> The entire value of this tool comes from front-loading
+                the work when your motivation and available time are
+                highest — syllabus week — rather than trying to reconstruct
+                the semester's deadlines from memory in week ten.
+              </p>
+
+              <h3>From Calendar to Actual Study Plan</h3>
+
+              <p>
+                A calendar full of deadlines tells you <em>when</em>
+                something is due. It doesn't tell you when to actually start
+                studying for it — and exam dates in particular benefit from
+                working backward. Once your exam and paper deadlines are on
+                your calendar, it's worth blocking out review sessions in
+                the days beforehand rather than waiting for the date itself
+                to arrive as a surprise.
+              </p>
+
+              <p>
+                This pairs naturally with our
+                <a href="spaced-repetition.html">Spaced Repetition
+                Reviewer</a>, which is built around exactly this kind of
+                backward planning — once you know an exam date, spacing
+                your review sessions in the weeks leading up to it produces
+                far better retention than a single cram session the night
+                before. Loading your semester into this converter first
+                gives every other study tool on this site something
+                concrete to plan around.
+              </p>
+
+              <p>
+                Want a more structured system for the whole semester, not
+                just deadline tracking? Our
+                <a href="index.html#premium">Student Reset Planner and
+                other premium resources</a> are built to turn a calendar
+                full of dates into an actual weekly study rhythm.
+              </p>
+
+            </article>
+          </div>
+
+          <!-- ===== SIDEBAR: premium promo + AdSense ===== -->
+          <aside class="tool-page-sidebar" aria-label="Premium resources and advertisements">
+
+            <div class="ad-slot" aria-label="Advertisement">
+              <span class="ad-label">Advertisement</span>
+              <div class="ad-placeholder">AdSense block (300×250)</div>
+            </div>
+
+            <div class="sidebar-promo">
+              <h3>Premium Picks for Students</h3>
+              <ul class="promo-list">
+                <li>
+                  <span class="promo-icon" aria-hidden="true" style="display:inline-flex; align-items:center; justify-content:center;">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                  </span>
+                  <div>
+                    <strong>The Student Reset Planner</strong>
+                    <p>Turn your semester's deadlines into a real weekly study rhythm.</p>
+                    <a href="index.html#premium">Learn more →</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="promo-icon" aria-hidden="true" style="display:inline-flex; align-items:center; justify-content:center;">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <div>
+                    <strong>Digital Habit Trackers</strong>
+                    <p>Build focus, sleep &amp; study streaks that actually stick.</p>
+                    <a href="index.html#premium">Learn more →</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="promo-icon" aria-hidden="true" style="display:inline-flex; align-items:center; justify-content:center;">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6"/><path d="M9 16h6"/></svg>
+                  </span>
+                  <div>
+                    <strong>Sheets Budget &amp; Spending Tracker</strong>
+                    <p>Auto-categorized finance dashboard for students.</p>
+                    <a href="index.html#premium">Learn more →</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="ad-slot" aria-label="Advertisement">
+              <span class="ad-label">Advertisement</span>
+              <div class="ad-placeholder">AdSense block (responsive)</div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> Study Compass</a>
+        <p>Navigate your academic journey with calm, focused tools.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <div>
+          <h4>Site</h4>
+          <a href="index.html#tools">Tools</a>
+          <a href="blog.html">Blog</a>
+          <a href="#">Premium Resources</a>
+          <a href="index.html#about">About</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="contact.html">Contact</a>
+          <a href="privacy.html#cookies">Cookie Policy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div class="container"><p>&copy; 2026 Study Compass. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script>
+    /* =========================================================
+       SYLLABUS TO CALENDAR CONVERTER — syllabus-planner.html page logic
+       Parse, review/edit, export as .ics or plain list.
+       ========================================================= */
+    (function () {
+      'use strict';
+
+      const MAX_FREE_EVENTS = 15;
+      const events = []; // { id, date: 'YYYY-MM-DD', title, type }
+      let nextId = 1;
+
+      // DOM refs
+      const tabs = document.querySelectorAll('.quiz-tab');
+      const panels = document.querySelectorAll('.quiz-panel');
+
+      const syllabusInput = document.getElementById('syllabusInput');
+      const parseBtn = document.getElementById('parseBtn');
+      const clearSyllabusBtn = document.getElementById('clearSyllabusBtn');
+      const parseStatus = document.getElementById('parseStatus');
+
+      const eventsList = document.getElementById('eventsList');
+      const eventCount = document.getElementById('eventCount');
+
+      const addDate = document.getElementById('addDate');
+      const addType = document.getElementById('addType');
+      const addTitle = document.getElementById('addTitle');
+      const addEventBtn = document.getElementById('addEventBtn');
+
+      const exportSummary = document.getElementById('exportSummary');
+      const downloadIcsBtn = document.getElementById('downloadIcsBtn');
+      const copyListBtn = document.getElementById('copyListBtn');
+      const exportStatus = document.getElementById('exportStatus');
+
+      const X_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+
+      /* ---------- Tab switching ---------- */
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+      });
+
+      function switchTab(name) {
+        tabs.forEach(t => {
+          const active = t.dataset.tab === name;
+          t.classList.toggle('is-active', active);
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        panels.forEach(p => {
+          p.classList.toggle('is-active', p.id === 'panel-' + name);
+        });
+        if (name === 'export') renderExportSummary();
+      }
+
+      /* ---------- Parsing ---------- */
+      const MONTHS = {
+        jan: 0, january: 0, feb: 1, february: 1, mar: 2, march: 2,
+        apr: 3, april: 3, may: 4, jun: 5, june: 5, jul: 6, july: 6,
+        aug: 7, august: 7, sep: 8, sept: 8, september: 8,
+        oct: 9, october: 9, nov: 10, november: 10, dec: 11, december: 11
+      };
+
+      const TYPE_KEYWORDS = [
+        { type: 'Exam', words: ['exam', 'midterm', 'final exam', 'test', 'quiz'] },
+        { type: 'Assignment', words: ['due', 'assignment', 'paper', 'project', 'presentation', 'submit', 'deadline'] },
+        { type: 'Reading', words: ['reading', 'read ch', 'chapter'] }
+      ];
+
+      function guessType(context) {
+        const lower = context.toLowerCase();
+        for (const group of TYPE_KEYWORDS) {
+          for (const word of group.words) {
+            if (lower.indexOf(word) !== -1) return group.type;
+          }
+        }
+        return 'Other';
+      }
+
+      function currentAcademicYear(monthIndex) {
+        // Assume syllabus dates without a year belong to the current
+        // academic year: Aug–Dec => this year, Jan–Jul => next year if
+        // we're currently in fall term. Simplify: use current year,
+        // and roll forward to next year only if the guessed date has
+        // already clearly passed by more than 7 months.
+        const now = new Date();
+        let year = now.getFullYear();
+        return year;
+      }
+
+      function pad(n) { return String(n).padStart(2, '0'); }
+
+      function toISODate(year, monthIndex, day) {
+        const d = new Date(year, monthIndex, day);
+        return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+      }
+
+      function parseSyllabus() {
+        const text = (syllabusInput.value || '').trim();
+        if (!text) {
+          parseStatus.textContent = 'Please paste your syllabus text first.';
+          return;
+        }
+
+        const lines = text.split(/\r?\n/);
+        let added = 0;
+
+        // Regex patterns, checked per line (and per sentence within a line)
+        const patterns = [
+          // "September 15, 2026" or "Sept 15 2026" or "Sept. 15"
+          /\b(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\.?\s+(\d{1,2})(?:st|nd|rd|th)?,?\s*(\d{4})?\b/gi,
+          // "9/15" or "9/15/2026" or "09-15-2026"
+          /\b(\d{1,2})[\/\-](\d{1,2})(?:[\/\-](\d{2,4}))?\b/g
+        ];
+
+        for (const rawLine of lines) {
+          const line = rawLine.trim();
+          if (!line) continue;
+
+          let matchedThisLine = false;
+
+          // Pattern 1: Month name + day (+ optional year)
+          let m;
+          const p1 = new RegExp(patterns[0].source, 'gi');
+          while ((m = p1.exec(line)) !== null) {
+            if (added >= MAX_FREE_EVENTS) break;
+            const monthKey = m[1].toLowerCase().replace('.', '');
+            const monthIndex = MONTHS[monthKey];
+            if (monthIndex === undefined) continue;
+            const day = parseInt(m[2], 10);
+            if (day < 1 || day > 31) continue;
+            const year = m[3] ? parseInt(m[3], 10) : currentAcademicYear(monthIndex);
+            const iso = toISODate(year, monthIndex, day);
+            const title = buildTitle(line, m[0]);
+            events.push({ id: nextId++, date: iso, title: title, type: guessType(line) });
+            added++;
+            matchedThisLine = true;
+          }
+
+          if (matchedThisLine) continue; // avoid double-matching the same line with pattern 2
+
+          // Pattern 2: numeric M/D or M-D (+ optional year)
+          const p2 = new RegExp(patterns[1].source, 'g');
+          while ((m = p2.exec(line)) !== null) {
+            if (added >= MAX_FREE_EVENTS) break;
+            const month = parseInt(m[1], 10);
+            const day = parseInt(m[2], 10);
+            if (month < 1 || month > 12 || day < 1 || day > 31) continue;
+            let year = currentAcademicYear(month - 1);
+            if (m[3]) {
+              year = m[3].length === 2 ? 2000 + parseInt(m[3], 10) : parseInt(m[3], 10);
+            }
+            const iso = toISODate(year, month - 1, day);
+            const title = buildTitle(line, m[0]);
+            events.push({ id: nextId++, date: iso, title: title, type: guessType(line) });
+            added++;
+          }
+
+          if (added >= MAX_FREE_EVENTS) break;
+        }
+
+        if (added === 0) {
+          parseStatus.textContent = "Couldn't find any dates in that text. Try pasting a section that includes specific dates (e.g. \"Sept 15\" or \"9/15\").";
+          return;
+        }
+
+        let msg = 'Found ' + added + ' event' + (added === 1 ? '' : 's') + '. Switch to "Review & Edit" to check them over.';
+        if (added >= MAX_FREE_EVENTS) {
+          msg += ' (Free limit of ' + MAX_FREE_EVENTS + ' reached — remove a row or add more manually on the next tab.)';
+        }
+        parseStatus.textContent = msg;
+        renderEventsList();
+        renderExportSummary();
+      }
+
+      function buildTitle(line, matchedText) {
+        // Strip the matched date substring and surrounding punctuation/dashes
+        // to leave a clean-ish title. Fall back to the whole line if short.
+        let title = line.replace(matchedText, '').trim();
+        title = title.replace(/^[\s\-–—:.,]+|[\s\-–—:.,]+$/g, '');
+        if (!title || title.length < 3) title = line.trim();
+        if (title.length > 90) title = title.slice(0, 87).trim() + '…';
+        return title;
+      }
+
+      parseBtn.addEventListener('click', parseSyllabus);
+
+      clearSyllabusBtn.addEventListener('click', () => {
+        syllabusInput.value = '';
+        parseStatus.textContent = '';
+        syllabusInput.focus();
+      });
+
+      /* ---------- Review & Edit ---------- */
+      function renderEventsList() {
+        // Sort by date ascending for display
+        events.sort((a, b) => a.date.localeCompare(b.date));
+        eventCount.textContent = events.length;
+
+        if (events.length === 0) {
+          eventsList.innerHTML = '<div class="quiz-questions-empty">No events yet. Paste your syllabus on the first tab, or add one manually below.</div>';
+          return;
+        }
+
+        eventsList.innerHTML = '';
+        events.forEach((ev) => {
+          const row = document.createElement('div');
+          row.className = 'quiz-q-row';
+          row.style.gridTemplateColumns = '130px 1fr 130px auto';
+          row.innerHTML =
+            '<input type="date" class="ev-date" data-id="' + ev.id + '" value="' + ev.date + '" aria-label="Event date" />' +
+            '<input type="text" class="ev-title" data-id="' + ev.id + '" value="' + escapeAttr(ev.title) + '" aria-label="Event title" />' +
+            '<select class="ev-type" data-id="' + ev.id + '" aria-label="Event type">' +
+              ['Exam', 'Assignment', 'Reading', 'Other'].map(t =>
+                '<option value="' + t + '"' + (t === ev.type ? ' selected' : '') + '>' + t + '</option>'
+              ).join('') +
+            '</select>' +
+            '<button class="quiz-q-remove" data-id="' + ev.id + '" aria-label="Remove event" title="Remove">' + X_SVG + '</button>';
+          eventsList.appendChild(row);
+        });
+
+        eventsList.querySelectorAll('.ev-date').forEach(input => {
+          input.addEventListener('change', () => {
+            const ev = events.find(e => e.id === parseInt(input.dataset.id, 10));
+            if (ev) ev.date = input.value;
+            renderExportSummary();
+          });
+        });
+        eventsList.querySelectorAll('.ev-title').forEach(input => {
+          input.addEventListener('input', () => {
+            const ev = events.find(e => e.id === parseInt(input.dataset.id, 10));
+            if (ev) ev.title = input.value;
+          });
+        });
+        eventsList.querySelectorAll('.ev-type').forEach(select => {
+          select.addEventListener('change', () => {
+            const ev = events.find(e => e.id === parseInt(select.dataset.id, 10));
+            if (ev) ev.type = select.value;
+          });
+        });
+        eventsList.querySelectorAll('.quiz-q-remove').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const idx = events.findIndex(e => e.id === parseInt(btn.dataset.id, 10));
+            if (idx !== -1) {
+              events.splice(idx, 1);
+              renderEventsList();
+              renderExportSummary();
+            }
+          });
+        });
+      }
+
+      addEventBtn.addEventListener('click', () => {
+        const date = addDate.value;
+        const title = (addTitle.value || '').trim();
+        const type = addType.value;
+        if (!date || !title) {
+          alert('Please enter both a date and a title.');
+          return;
+        }
+        if (events.length >= MAX_FREE_EVENTS) {
+          alert('Free limit of ' + MAX_FREE_EVENTS + ' events reached. Remove an existing event to add a new one.');
+          return;
+        }
+        events.push({ id: nextId++, date: date, title: title, type: type });
+        addDate.value = '';
+        addTitle.value = '';
+        renderEventsList();
+        renderExportSummary();
+      });
+
+      /* ---------- Export ---------- */
+      function renderExportSummary() {
+        exportSummary.textContent = events.length + ' event' + (events.length === 1 ? '' : 's') + ' ready to export';
+      }
+
+      function icsEscape(str) {
+        return String(str).replace(/([,;])/g, '\\$1');
+      }
+
+      function buildICS() {
+        const lines = [
+          'BEGIN:VCALENDAR',
+          'VERSION:2.0',
+          'PRODID:-//Study Compass//Syllabus to Calendar Converter//EN',
+          'CALSCALE:GREGORIAN'
+        ];
+        const now = new Date();
+        const stamp = now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) + 'T' + pad(now.getHours()) + pad(now.getMinutes()) + pad(now.getSeconds()) + 'Z';
+
+        events.forEach((ev, i) => {
+          if (!ev.date) return;
+          const parts = ev.date.split('-');
+          if (parts.length !== 3) return;
+          const dateStr = parts[0] + parts[1] + parts[2];
+          lines.push('BEGIN:VEVENT');
+          lines.push('UID:' + dateStr + '-' + i + '@studycompass.github.io');
+          lines.push('DTSTAMP:' + stamp);
+          lines.push('DTSTART;VALUE=DATE:' + dateStr);
+          lines.push('SUMMARY:' + icsEscape('[' + ev.type + '] ' + ev.title));
+          lines.push('END:VEVENT');
+        });
+
+        lines.push('END:VCALENDAR');
+        return lines.join('\r\n');
+      }
+
+      downloadIcsBtn.addEventListener('click', () => {
+        if (events.length === 0) {
+          exportStatus.textContent = 'Add or parse at least one event first.';
+          return;
+        }
+        const icsContent = buildICS();
+        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'syllabus-deadlines.ics';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        exportStatus.textContent = 'Downloaded! Import this file into Google Calendar, Apple Calendar, or Outlook.';
+      });
+
+      copyListBtn.addEventListener('click', () => {
+        if (events.length === 0) {
+          exportStatus.textContent = 'Add or parse at least one event first.';
+          return;
+        }
+        const sorted = [...events].sort((a, b) => a.date.localeCompare(b.date));
+        const text = sorted.map(ev => ev.date + '  —  [' + ev.type + ']  ' + ev.title).join('\n');
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            exportStatus.textContent = 'Copied to clipboard as a plain checklist.';
+          }).catch(() => {
+            fallbackCopy(text);
+          });
+        } else {
+          fallbackCopy(text);
+        }
+      });
+
+      function fallbackCopy(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+          exportStatus.textContent = 'Copied to clipboard as a plain checklist.';
+        } catch (e) {
+          exportStatus.textContent = 'Could not copy automatically — please select and copy the list manually.';
+        }
+        document.body.removeChild(ta);
+      }
+
+      /* ---------- Utilities ---------- */
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+      function escapeAttr(str) {
+        return escapeHtml(str);
+      }
+
+      /* ---------- Init ---------- */
+      renderEventsList();
+      renderExportSummary();
+    })();
+  </script>
+</body>
+</html>
