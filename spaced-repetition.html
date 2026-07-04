@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free Spaced Repetition Reviewer by Study Compass — add flashcards and let the SM-2 algorithm schedule your reviews at the optimal interval for long-term memory. No sign-up, saves automatically on your device." />
+  <meta name="keywords" content="spaced repetition, SM-2 algorithm, flashcard scheduler, quizlet alternative, anki alternative, active recall, study tool, memory retention" />
+  <title>Spaced Repetition Reviewer — Remember More, Study Less | Study Compass</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <link rel="canonical" href="https://studycompass.github.io/study-compass/spaced-repetition.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Study Compass" />
+  <meta property="og:title" content="Spaced Repetition Reviewer — Remember More, Study Less | Study Compass" />
+  <meta property="og:description" content="Free Spaced Repetition Reviewer by Study Compass — add flashcards and let the SM-2 algorithm schedule your reviews at the optimal interval for long-term memory." />
+  <meta property="og:url" content="https://studycompass.github.io/study-compass/spaced-repetition.html" />
+  <meta property="og:image" content="https://studycompass.github.io/study-compass/og-images/spaced-repetition.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Spaced Repetition Reviewer — Remember More, Study Less | Study Compass" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Spaced Repetition Reviewer — Remember More, Study Less | Study Compass" />
+  <meta name="twitter:description" content="Free Spaced Repetition Reviewer by Study Compass — add flashcards and let the SM-2 algorithm schedule your reviews at the optimal interval for long-term memory." />
+  <meta name="twitter:image" content="https://studycompass.github.io/study-compass/og-images/spaced-repetition.png" />
+  <meta name="twitter:image:alt" content="Spaced Repetition Reviewer — Remember More, Study Less | Study Compass" />
+  <meta name="pinterest" content="nohover" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WY2VYWK4WQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-WY2VYWK4WQ');
+  </script>
+
+  <style>
+    /* Page-specific additions (kept minimal, reuses existing tokens) */
+    .sr-rating-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+    .sr-rating-btn {
+      flex: 1; min-width: 100px; padding: 14px 10px; border-radius: 12px;
+      font-weight: 700; font-size: 0.85rem; text-align: center;
+      border: 1.5px solid var(--border); background: var(--bg);
+      color: var(--text); transition: transform 0.15s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .sr-rating-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .sr-rating-btn small { display:block; font-weight:500; color: var(--text-muted); margin-top:2px; font-size: 0.72rem; }
+    .sr-rating-again { border-color: #b43c3c; color: #b43c3c; }
+    .sr-rating-hard  { border-color: #b98a2e; color: #b98a2e; }
+    .sr-rating-good  { border-color: var(--accent); color: var(--accent); }
+    .sr-rating-easy  { border-color: #4a8a3a; color: #4a8a3a; }
+    .sr-due-badge {
+      display:inline-block; font-size:0.72rem; font-weight:700; padding:3px 9px;
+      border-radius:999px; background: var(--bg-alt); color: var(--accent); margin-left:8px;
+    }
+    .sr-due-badge.is-overdue { background: rgba(180,60,60,0.1); color:#b43c3c; }
+    .sr-empty-state { text-align:center; padding: 40px 20px; }
+    .sr-empty-state .big-icon { font-size: 2.4rem; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+
+  <!-- SHARED HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Study Compass home"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> Study Compass</a>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html#tools">Tools</a>
+        <a href="blog.html">Blog</a>
+        <a href="#">Premium Resources</a>
+        <a href="index.html#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <div class="search-wrap" role="search">
+          <input type="search" id="globalSearch" class="search-input" placeholder="Search tools & articles…" aria-label="Search tools and articles" autocomplete="off" />
+          <span class="search-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+        </div>
+        <div class="theme-toggles" role="group" aria-label="Switch study theme">
+          <button class="theme-toggle-btn" data-theme="morning" title="Morning Focus" aria-label="Morning Focus theme"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 0 0-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/><line x1="23" y1="22" x2="1" y2="22"/><polyline points="8 6 12 2 16 6"/></svg></button>
+          <button class="theme-toggle-btn" data-theme="night" title="Night Study" aria-label="Night Study theme"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+          <button class="theme-toggle-btn" data-theme="library" title="Library Mode" aria-label="Library Mode theme"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></button>
+          <button class="theme-toggle-btn" data-theme="nature" title="Nature Mode" aria-label="Nature Mode theme"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 22h5"/><path d="M15 22h2"/><path d="M9 22v-4"/><path d="M13 22v-7"/><path d="M15.5 8.5c1.5-1.5 4-3 6-3 0 4-2 6-4 7"/><path d="M17 2c-3 0-5 1-6 3"/><path d="M2 18c1.5 0 3-1 4-2"/><path d="M2 12c2 0 4-1 6-3"/><path d="M2 6c3 0 6-2 8-4"/></svg></button>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="index.html#tools">Tools</a>
+      <a href="blog.html">Blog</a>
+      <a href="#">Premium Resources</a>
+      <a href="index.html#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Breadcrumb for SEO + UX -->
+    <div class="container" style="padding-top: 24px;">
+      <nav aria-label="Breadcrumb" style="font-size:0.85rem; color:var(--text-muted);">
+        <a href="index.html">Home</a> ›
+        <a href="index.html#tools">Tools</a> ›
+        <span style="color:var(--text-soft);">Spaced Repetition Reviewer</span>
+      </nav>
+    </div>
+
+    <section class="section" style="padding-top: 30px;">
+      <div class="container">
+        <div class="section-header" style="margin-bottom: 36px;">
+          <span class="section-eyebrow">Free Study Tool</span>
+          <h1 class="section-title">Spaced Repetition Reviewer</h1>
+          <p class="section-subtitle">
+            Add flashcards once, and the SM-2 algorithm schedules exactly
+            when to review each one — spacing reviews wider as you learn
+            them, and pulling them back sooner when you forget. Your cards
+            save automatically on this device, no sign-up needed.
+          </p>
+        </div>
+
+        <div class="tool-page-layout">
+
+          <!-- ===== MAIN COLUMN: tool + article ===== -->
+          <div class="tool-page-main">
+
+            <div class="quiz-app">
+
+              <!-- Tabs -->
+              <div class="quiz-tabs" role="tablist" aria-label="Spaced repetition modes">
+                <button class="quiz-tab is-active" role="tab" aria-selected="true" data-tab="review" id="tab-review">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  Review
+                </button>
+                <button class="quiz-tab" role="tab" aria-selected="false" data-tab="add" id="tab-add">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  Add Cards
+                </button>
+                <button class="quiz-tab" role="tab" aria-selected="false" data-tab="deck" id="tab-deck">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                  My Deck
+                </button>
+              </div>
+
+              <!-- Panel 1: Review -->
+              <div class="quiz-panel is-active" role="tabpanel" aria-labelledby="tab-review" id="panel-review">
+                <h3>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  Today's review<span class="sr-due-badge" id="dueBadge">0 due</span>
+                </h3>
+                <p class="panel-desc">Try to recall the answer before revealing it, then rate how well you remembered it. Your rating sets when this card comes back.</p>
+
+                <div id="reviewArea">
+                  <div class="sr-empty-state" id="reviewEmpty">
+                    <div class="big-icon">🎉</div>
+                    <p style="color:var(--text-soft);">No cards due right now. Add some on the "Add Cards" tab, or check back later.</p>
+                  </div>
+
+                  <div class="fc-card-container" id="reviewCardContainer" style="display:none;">
+                    <div class="fc-card" id="reviewCard">
+                      <div class="fc-card-face fc-card-front">
+                        <span class="face-label">Question</span>
+                        <div class="face-text" id="reviewFront"></div>
+                      </div>
+                      <div class="fc-card-face fc-card-back">
+                        <span class="face-label">Answer</span>
+                        <div class="face-text" id="reviewBack"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="revealWrap" style="display:none; text-align:center; margin-top:16px;">
+                    <button class="btn btn-primary" id="revealBtn" type="button">Show answer</button>
+                    <p class="fc-hint">Tap the card or the button to flip it</p>
+                  </div>
+
+                  <div class="sr-rating-row" id="ratingRow" style="display:none;">
+                    <button class="sr-rating-btn sr-rating-again" data-quality="1" type="button">Again<small>&lt; 10 min</small></button>
+                    <button class="sr-rating-btn sr-rating-hard" data-quality="3" type="button">Hard<small>shorter interval</small></button>
+                    <button class="sr-rating-btn sr-rating-good" data-quality="4" type="button">Good<small>as scheduled</small></button>
+                    <button class="sr-rating-btn sr-rating-easy" data-quality="5" type="button">Easy<small>longer interval</small></button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel 2: Add Cards -->
+              <div class="quiz-panel" role="tabpanel" aria-labelledby="tab-add" id="panel-add">
+                <h3>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  Add a new card
+                </h3>
+                <p class="panel-desc">Write a question and its answer. New cards enter the review queue immediately.</p>
+
+                <div class="quiz-field">
+                  <label for="addFront">Question / front</label>
+                  <textarea id="addFront" style="min-height:70px;" placeholder="e.g. What is the powerhouse of the cell?"></textarea>
+                </div>
+                <div class="quiz-field">
+                  <label for="addBack">Answer / back</label>
+                  <textarea id="addBack" style="min-height:70px;" placeholder="e.g. The mitochondria"></textarea>
+                </div>
+
+                <div class="quiz-actions">
+                  <button class="btn btn-primary" id="addCardBtn" type="button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-3px; margin-right:6px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    Add card
+                  </button>
+                </div>
+                <p id="addStatus" style="font-size:0.85rem; color:var(--text-muted); margin-top:14px; min-height:1.1em;"></p>
+              </div>
+
+              <!-- Panel 3: My Deck -->
+              <div class="quiz-panel" role="tabpanel" aria-labelledby="tab-deck" id="panel-deck">
+                <h3>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                  Your deck (<span id="deckCount">0</span>)
+                </h3>
+                <p class="panel-desc">Every card you've added, with its next scheduled review date. Delete anything you no longer need.</p>
+
+                <div id="deckList"></div>
+
+                <div class="quiz-actions" style="margin-top:18px;">
+                  <button class="btn btn-ghost" id="clearDeckBtn" type="button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-3px; margin-right:6px;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    Clear entire deck
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- ===== SEO ARTICLE ===== -->
+            <article class="tool-article">
+
+              <h2>Why Cramming Fails and Spacing Works: The Science of SM-2</h2>
+
+              <p>
+                If you have ever aced a quiz the day after cramming, then
+                drawn a total blank on the same material two weeks later,
+                you have experienced the difference between short-term
+                recognition and long-term memory. Cramming feels productive
+                because it produces an immediate result. But the psychologist
+                Hermann Ebbinghaus documented this exact failure mode back in
+                1885 with his famous "forgetting curve" — showing that
+                without reinforcement, we lose the majority of newly learned
+                information within days, regardless of how well we felt we
+                knew it at the time.
+              </p>
+
+              <p>
+                The fix Ebbinghaus discovered, and that modern cognitive
+                science has since refined considerably, is deceptively
+                simple: review the material again right before you would
+                otherwise forget it. Do that repeatedly, at gradually
+                increasing intervals, and the forgetting curve flattens
+                dramatically — each successful review makes the next
+                forgetting point arrive later. This is the entire premise
+                behind the tool on this page.
+              </p>
+
+              <h3>What SM-2 Actually Does</h3>
+
+              <p>
+                The reviewer above runs on the <strong>SM-2 algorithm</strong>,
+                developed by Piotr Woźniak in 1987 for the SuperMemo software
+                — the same core scheduling logic that underlies most modern
+                spaced repetition tools. Every card you add is tracked with
+                three numbers: an <strong>ease factor</strong> (how easy the
+                card has been for you historically), a <strong>repetition
+                count</strong> (how many times in a row you've recalled it
+                successfully), and an <strong>interval</strong> (how many
+                days until its next scheduled review).
+              </p>
+
+              <p>
+                Each time you review a card, you rate your recall on a scale
+                from "Again" (you blanked completely) to "Easy" (instant,
+                effortless recall). That rating feeds back into the
+                algorithm: a low rating shrinks the interval and lowers the
+                ease factor, bringing the card back sooner and more often. A
+                high rating stretches the interval further out and slightly
+                raises the ease factor, so a card you consistently know well
+                shows up less and less — freeing your attention for the
+                material that still needs work.
+              </p>
+
+              <h3>Why This Beats a Fixed Review Schedule</h3>
+
+              <p>
+                A common but far less effective approach is reviewing an
+                entire deck on a fixed schedule — every day, or every
+                Sunday, regardless of how well each individual card is
+                already known. This wastes enormous amounts of time
+                re-reviewing material you have already mastered, while
+                under-reviewing the handful of genuinely difficult cards
+                that actually need the attention.
+              </p>
+
+              <p>
+                SM-2 solves this by treating every card as its own
+                independent scheduling problem. A vocabulary word you nailed
+                five times in a row might not need reviewing again for two
+                months. A tricky formula you keep forgetting might come back
+                tomorrow, then the day after, until it finally sticks. Over
+                time, your daily review queue becomes almost entirely
+                composed of the material genuinely at risk of being
+                forgotten — which is exactly where your study time should
+                go.
+              </p>
+
+              <h3>How to Rate Yourself Honestly</h3>
+
+              <p>
+                The algorithm only works as well as your ratings are honest.
+                It's tempting to rate everything "Good" to move through
+                cards quickly, but this defeats the entire mechanism. A
+                useful mental test: did you produce the answer confidently
+                and immediately, with no hesitation? That's "Easy." Did you
+                get there, but it took a genuine effortful pause? That's
+                "Good" or "Hard" depending on how much of a struggle it was.
+                Did you guess, blank, or get it wrong entirely? That's
+                "Again" — no exceptions, even if the answer feels obvious in
+                hindsight once you see it.
+              </p>
+
+              <p>
+                Rating "Again" is not a failure. In fact, the moment of
+                genuinely failed retrieval, followed immediately by seeing
+                the correct answer, is one of the most effective learning
+                events in the entire system — psychologists call this
+                effect "desirable difficulty." The struggle is where the
+                memory gets rebuilt stronger, not a sign you should have
+                studied more beforehand.
+              </p>
+
+              <h3>Writing Cards That Actually Work</h3>
+
+              <p>
+                <strong>Keep each card to one fact.</strong> A card asking
+                "What are the causes and effects of the French Revolution?"
+                invites vague, unratable recall. Split it into several
+                narrow cards instead — one cause per card, one effect per
+                card.
+              </p>
+
+              <p>
+                <strong>Phrase the question so there's exactly one correct
+                answer.</strong> Ambiguous cards make honest self-rating
+                nearly impossible, since you can't tell if you actually
+                recalled the intended answer or just something plausible.
+              </p>
+
+              <p>
+                <strong>Add context sparingly, not answers.</strong> A
+                little context in the question helps trigger the right
+                memory ("In cell biology, what organelle...") without
+                accidentally giving away the answer itself.
+              </p>
+
+              <h3>A Realistic Daily Habit</h3>
+
+              <p>
+                The single biggest reason spaced repetition systems fail for
+                students isn't the algorithm — it's inconsistency. A queue
+                that's ignored for two weeks arrives back all at once,
+                overwhelming and demotivating. The fix is small and daily:
+                open this tool for five to ten minutes each day, every day,
+                treating it the same way you'd treat brushing your teeth.
+                Consistency at low volume beats intensity at irregular
+                intervals every time.
+              </p>
+
+              <p>
+                Already have deadlines loaded into your semester? Pair this
+                tool with our
+                <a href="syllabus-planner.html">Syllabus to Calendar
+                Converter</a> — once your exam dates are on your calendar,
+                add the relevant material to your review deck as soon as
+                each topic is covered in class, so the spacing has time to
+                actually work before the exam arrives.
+              </p>
+
+              <p>
+                Want a more complete weekly system that combines spaced
+                review with structured planning? Check out our
+                <a href="index.html#premium">Student Reset Planner and
+                other premium resources</a>.
+              </p>
+
+            </article>
+          </div>
+
+          <!-- ===== SIDEBAR: premium promo + AdSense ===== -->
+          <aside class="tool-page-sidebar" aria-label="Premium resources and advertisements">
+
+            <div class="ad-slot" aria-label="Advertisement">
+              <span class="ad-label">Advertisement</span>
+              <div class="ad-placeholder">AdSense block (300×250)</div>
+            </div>
+
+            <div class="sidebar-promo">
+              <h3>Premium Picks for Students</h3>
+              <ul class="promo-list">
+                <li>
+                  <span class="promo-icon" aria-hidden="true" style="display:inline-flex; align-items:center; justify-content:center;">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                  </span>
+                  <div>
+                    <strong>The Student Reset Planner</strong>
+                    <p>Turn daily review habits into a full weekly study rhythm.</p>
+                    <a href="index.html#premium">Learn more →</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="promo-icon" aria-hidden="true" style="display:inline-flex; align-items:center; justify-content:center;">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <div>
+                    <strong>Digital Habit Trackers</strong>
+                    <p>Build focus, sleep &amp; study streaks that actually stick.</p>
+                    <a href="index.html#premium">Learn more →</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="promo-icon" aria-hidden="true" style="display:inline-flex; align-items:center; justify-content:center;">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6"/><path d="M9 16h6"/></svg>
+                  </span>
+                  <div>
+                    <strong>Sheets Budget &amp; Spending Tracker</strong>
+                    <p>Auto-categorized finance dashboard for students.</p>
+                    <a href="index.html#premium">Learn more →</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="ad-slot" aria-label="Advertisement">
+              <span class="ad-label">Advertisement</span>
+              <div class="ad-placeholder">AdSense block (responsive)</div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> Study Compass</a>
+        <p>Navigate your academic journey with calm, focused tools.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <div>
+          <h4>Site</h4>
+          <a href="index.html#tools">Tools</a>
+          <a href="blog.html">Blog</a>
+          <a href="#">Premium Resources</a>
+          <a href="index.html#about">About</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="contact.html">Contact</a>
+          <a href="privacy.html#cookies">Cookie Policy</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div class="container"><p>&copy; 2026 Study Compass. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script>
+    /* =========================================================
+       SPACED REPETITION REVIEWER — spaced-repetition.html page logic
+       SM-2 algorithm. Cards persist in localStorage on this device.
+       ========================================================= */
+    (function () {
+      'use strict';
+
+      const STORAGE_KEY = 'sc_spaced_repetition_deck_v1';
+      let cards = []; // { id, front, back, ease, interval, reps, nextReview (YYYY-MM-DD) }
+      let nextId = 1;
+      let currentCard = null;
+      let isFlipped = false;
+
+      // DOM refs
+      const tabs = document.querySelectorAll('.quiz-tab');
+      const panels = document.querySelectorAll('.quiz-panel');
+
+      const dueBadge = document.getElementById('dueBadge');
+      const reviewEmpty = document.getElementById('reviewEmpty');
+      const reviewCardContainer = document.getElementById('reviewCardContainer');
+      const reviewCard = document.getElementById('reviewCard');
+      const reviewFront = document.getElementById('reviewFront');
+      const reviewBack = document.getElementById('reviewBack');
+      const revealWrap = document.getElementById('revealWrap');
+      const revealBtn = document.getElementById('revealBtn');
+      const ratingRow = document.getElementById('ratingRow');
+
+      const addFront = document.getElementById('addFront');
+      const addBack = document.getElementById('addBack');
+      const addCardBtn = document.getElementById('addCardBtn');
+      const addStatus = document.getElementById('addStatus');
+
+      const deckList = document.getElementById('deckList');
+      const deckCount = document.getElementById('deckCount');
+      const clearDeckBtn = document.getElementById('clearDeckBtn');
+
+      const X_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+
+      /* ---------- Persistence ---------- */
+      function loadDeck() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            cards = parsed.cards || [];
+            nextId = parsed.nextId || (cards.length + 1);
+          }
+        } catch (e) {
+          cards = [];
+        }
+      }
+
+      function saveDeck() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({ cards: cards, nextId: nextId }));
+        } catch (e) {
+          // localStorage unavailable (private browsing etc.) — fail silently
+        }
+      }
+
+      /* ---------- Date helpers ---------- */
+      function todayISO() {
+        const d = new Date();
+        return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+      }
+      function pad(n) { return String(n).padStart(2, '0'); }
+      function addDays(iso, days) {
+        const d = new Date(iso + 'T00:00:00');
+        d.setDate(d.getDate() + days);
+        return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+      }
+      function daysUntil(iso) {
+        const today = new Date(todayISO() + 'T00:00:00');
+        const target = new Date(iso + 'T00:00:00');
+        return Math.round((target - today) / 86400000);
+      }
+
+      /* ---------- SM-2 algorithm ---------- */
+      // quality: 1 = Again, 3 = Hard, 4 = Good, 5 = Easy (skips 0/2 for simpler UI)
+      function applySM2(card, quality) {
+        if (quality < 3) {
+          // Failed recall: reset repetitions, review again very soon (same day / next day)
+          card.reps = 0;
+          card.interval = 0; // due immediately (today) so it resurfaces in this session/next visit
+        } else {
+          if (card.reps === 0) {
+            card.interval = 1;
+          } else if (card.reps === 1) {
+            card.interval = 6;
+          } else {
+            card.interval = Math.round(card.interval * card.ease);
+          }
+          card.reps += 1;
+        }
+
+        // Update ease factor (standard SM-2 formula)
+        let ease = card.ease + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+        if (ease < 1.3) ease = 1.3;
+        card.ease = Math.round(ease * 100) / 100;
+
+        card.nextReview = addDays(todayISO(), card.interval);
+      }
+
+      /* ---------- Tab switching ---------- */
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+      });
+
+      function switchTab(name) {
+        tabs.forEach(t => {
+          const active = t.dataset.tab === name;
+          t.classList.toggle('is-active', active);
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        panels.forEach(p => {
+          p.classList.toggle('is-active', p.id === 'panel-' + name);
+        });
+        if (name === 'review') renderReview();
+        if (name === 'deck') renderDeck();
+      }
+
+      /* ---------- Review flow ---------- */
+      function getDueCards() {
+        const today = todayISO();
+        return cards.filter(c => c.nextReview <= today);
+      }
+
+      function renderReview() {
+        const due = getDueCards();
+        dueBadge.textContent = due.length + ' due';
+        dueBadge.classList.toggle('is-overdue', due.length > 0);
+
+        if (due.length === 0) {
+          reviewEmpty.style.display = '';
+          reviewCardContainer.style.display = 'none';
+          revealWrap.style.display = 'none';
+          ratingRow.style.display = 'none';
+          currentCard = null;
+          return;
+        }
+
+        reviewEmpty.style.display = 'none';
+        reviewCardContainer.style.display = '';
+        currentCard = due[0];
+        isFlipped = false;
+        reviewCard.classList.remove('is-flipped');
+        reviewFront.textContent = currentCard.front;
+        reviewBack.textContent = currentCard.back;
+        revealWrap.style.display = '';
+        ratingRow.style.display = 'none';
+      }
+
+      function flipCard() {
+        if (!currentCard) return;
+        isFlipped = true;
+        reviewCard.classList.add('is-flipped');
+        revealWrap.style.display = 'none';
+        ratingRow.style.display = 'flex';
+      }
+
+      revealBtn.addEventListener('click', flipCard);
+      reviewCard.addEventListener('click', () => {
+        if (!isFlipped) flipCard();
+      });
+
+      ratingRow.querySelectorAll('.sr-rating-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (!currentCard) return;
+          const quality = parseInt(btn.dataset.quality, 10);
+          applySM2(currentCard, quality);
+          saveDeck();
+          renderReview(); // moves to next due card, or shows empty state
+        });
+      });
+
+      /* ---------- Add Cards ---------- */
+      addCardBtn.addEventListener('click', () => {
+        const front = (addFront.value || '').trim();
+        const back = (addBack.value || '').trim();
+        if (!front || !back) {
+          addStatus.textContent = 'Please fill in both the question and the answer.';
+          return;
+        }
+        const card = {
+          id: nextId++,
+          front: front,
+          back: back,
+          ease: 2.5,
+          interval: 0,
+          reps: 0,
+          nextReview: todayISO() // new cards are due immediately
+        };
+        cards.push(card);
+        saveDeck();
+        addFront.value = '';
+        addBack.value = '';
+        addStatus.textContent = 'Card added — it\'s in today\'s review queue.';
+        addFront.focus();
+      });
+
+      /* ---------- My Deck ---------- */
+      function renderDeck() {
+        deckCount.textContent = cards.length;
+        if (cards.length === 0) {
+          deckList.innerHTML = '<div class="quiz-questions-empty">No cards yet. Add your first one on the "Add Cards" tab.</div>';
+          return;
+        }
+
+        const sorted = [...cards].sort((a, b) => a.nextReview.localeCompare(b.nextReview));
+        deckList.innerHTML = '';
+        sorted.forEach(c => {
+          const daysAway = daysUntil(c.nextReview);
+          let dueLabel;
+          if (daysAway <= 0) dueLabel = 'Due now';
+          else if (daysAway === 1) dueLabel = 'Due tomorrow';
+          else dueLabel = 'Due in ' + daysAway + ' days';
+
+          const row = document.createElement('div');
+          row.className = 'fc-card-row';
+          row.innerHTML =
+            '<div class="q">' + escapeHtml(c.front) + '</div>' +
+            '<div class="a">' + escapeHtml(c.back) + ' <span class="sr-due-badge' + (daysAway <= 0 ? ' is-overdue' : '') + '">' + dueLabel + '</span></div>' +
+            '<button class="fc-delete-btn" data-id="' + c.id + '" aria-label="Delete card" title="Delete">' + X_SVG + '</button>';
+          deckList.appendChild(row);
+        });
+
+        deckList.querySelectorAll('.fc-delete-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const idx = cards.findIndex(c => c.id === parseInt(btn.dataset.id, 10));
+            if (idx !== -1) {
+              cards.splice(idx, 1);
+              saveDeck();
+              renderDeck();
+            }
+          });
+        });
+      }
+
+      clearDeckBtn.addEventListener('click', () => {
+        if (cards.length === 0) return;
+        if (confirm('Delete your entire deck? This cannot be undone.')) {
+          cards = [];
+          saveDeck();
+          renderDeck();
+        }
+      });
+
+      /* ---------- Utilities ---------- */
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      /* ---------- Init ---------- */
+      loadDeck();
+      renderReview();
+      renderDeck();
+    })();
+  </script>
+</body>
+</html>
