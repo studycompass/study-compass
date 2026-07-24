@@ -8,4 +8,4 @@ User-agent: *
 Allow: /
 
 # Reference the sitemap so crawlers can discover all pages efficiently.
-Sitemap: https://studycompass.github.io/study-compass/sitemap.xml
+Sitemap: https://study-compass.studycompass.workers.dev/sitemap.xml
