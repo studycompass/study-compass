@@ -35,7 +35,7 @@
   .card h2{font-size:1rem;margin:0 0 14px;color:var(--terracotta);}
   label{display:block;font-size:0.85rem;font-weight:600;margin:14px 0 6px;}
   label:first-of-type{margin-top:0;}
-  input[type=text],input[type=password],input[type=number],textarea,select{
+  input[type=text],input[type=password],input[type=number],input[type=file],textarea,select{
     width:100%;
     padding:10px 12px;
     border:1px solid var(--line);
@@ -92,6 +92,7 @@
     border:1px solid #E2B3A8;
   }
   .gear{font-size:0.78rem;color:#8a8270;cursor:pointer;text-decoration:underline;}
+  .preview-thumb{max-width:160px;border-radius:8px;margin-top:8px;display:none;}
 </style>
 </head>
 <body>
@@ -113,7 +114,7 @@
   </div>
 
   <div class="card" id="formCard" style="display:none;">
-    <h2>New post</h2>
+    <h2 id="formHeading">New post</h2>
     <label>Title</label>
     <input type="text" id="title" placeholder="How to Beat Procrastination Tonight">
     <div class="row">
@@ -134,15 +135,23 @@
       <div>
         <label>Slug (URL anchor)</label>
         <input type="text" id="slug" placeholder="auto-generated-from-title">
+        <p class="hint" id="slugLockHint" style="display:none;">Slug can't be changed while editing, so existing links keep working.</p>
       </div>
     </div>
     <label>Excerpt (1–2 sentences for the article card)</label>
     <textarea id="excerpt" style="min-height:70px;"></textarea>
+
+    <label>Featured image (optional)</label>
+    <input type="file" id="featuredImage" accept="image/*">
+    <p class="hint">Uploads straight to the repo and appears at the top of the article. Leave empty to skip.</p>
+    <img id="imagePreview" class="preview-thumb">
+
     <label>Body</label>
-    <textarea id="body" placeholder="Write your article here.&#10;&#10;Leave a blank line between paragraphs.&#10;## Use this for a subheading&#10;- Use this for a bullet&#10;> Use this for a quote"></textarea>
-    <p class="hint">Plain text is fine — blank line = new paragraph. ## for subheading, - for bullets, &gt; for a blockquote.</p>
+    <textarea id="body" placeholder="Write your article here.&#10;&#10;Leave a blank line between paragraphs.&#10;## Use this for a subheading&#10;- Use this for a bullet&#10;> Use this for a quote&#10;[link text](https://example.com) for a link"></textarea>
+    <p class="hint">Plain text is fine — blank line = new paragraph. ## for subheading, - for bullets, &gt; for a blockquote, [text](url) for a link.</p>
     <label><input type="checkbox" id="featured" style="width:auto;"> Feature this post at the top of the blog</label>
     <button id="publishBtn">Publish post</button>
+    <button id="cancelEditBtn" class="secondary" type="button" style="display:none;">Cancel edit</button>
     <div class="status" id="publishStatus"></div>
   </div>
 
@@ -157,6 +166,7 @@
 <script>
 const POSTS_PATH = 'posts.json';
 let conn = JSON.parse(localStorage.getItem('sc_admin_conn') || 'null');
+let editingSlug = null; // null = creating a new post; otherwise the slug of the post being edited
 
 const setupCard = document.getElementById('setupCard');
 const formCard = document.getElementById('formCard');
@@ -171,6 +181,10 @@ function showStatus(el, msg, type){
 
 function apiBase(){
   return `https://api.github.com/repos/${conn.repo}/contents/${POSTS_PATH}`;
+}
+
+function fileApiUrl(path){
+  return `https://api.github.com/repos/${conn.repo}/contents/${path}`;
 }
 
 async function fetchPosts(){
@@ -202,8 +216,74 @@ async function savePosts(posts, sha, message){
   return res.json();
 }
 
+function fileToBase64(file){
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = () => reject(new Error('Could not read the image file.'));
+    reader.readAsDataURL(file);
+  });
+}
+
+// Uploads an image file to blog-images/<slug>.<ext> and returns the site-relative path to use as an <img src>.
+async function uploadImage(slug, file){
+  const extMatch = file.name.match(/\.([a-zA-Z0-9]+)$/);
+  const ext = extMatch ? extMatch[1].toLowerCase() : 'jpg';
+  const path = `blog-images/${slug}.${ext}`;
+  const base64 = await fileToBase64(file);
+
+  // Check if a file already exists at this path (needed for overwrite) — ignore 404.
+  let sha;
+  try{
+    const existing = await fetch(fileApiUrl(path) + `?ref=${conn.branch}`, {
+      headers: { Authorization: `token ${conn.token}`, Accept: 'application/vnd.github+json' }
+    });
+    if(existing.ok){ sha = (await existing.json()).sha; }
+  }catch(e){ /* no existing file, fine */ }
+
+  const res = await fetch(fileApiUrl(path), {
+    method: 'PUT',
+    headers: {
+      Authorization: `token ${conn.token}`,
+      Accept: 'application/vnd.github+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      message: `Add image for post: ${slug}`,
+      content: base64,
+      branch: conn.branch,
+      ...(sha ? { sha } : {})
+    })
+  });
+  if(!res.ok){
+    const err = await res.json().catch(()=>({}));
+    throw new Error(`Image upload failed (${res.status}): ${err.message || 'unknown error'}`);
+  }
+  return path;
+}
+
 function slugify(str){
   return str.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+}
+
+// Converts [text](url) into a real link. Applied to any line of text before it goes into HTML.
+function linkify(str){
+  return str.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+}
+
+// Best-effort reverse conversion, used only for posts published before bodyRaw was saved.
+function htmlToPlainFallback(html){
+  let out = html;
+  out = out.replace(/<img[^>]*>/gi, ''); // the image is handled separately, not part of the body text
+  out = out.replace(/<a\s+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi, '[$2]($1)');
+  out = out.replace(/<h2>([\s\S]*?)<\/h2>/gi, '## $1\n\n');
+  out = out.replace(/<blockquote>([\s\S]*?)<\/blockquote>/gi, '> $1\n\n');
+  out = out.replace(/<ul>([\s\S]*?)<\/ul>/gi, (m, inner) => {
+    return inner.replace(/<li>([\s\S]*?)<\/li>/gi, '- $1\n') + '\n';
+  });
+  out = out.replace(/<p>([\s\S]*?)<\/p>/gi, '$1\n\n');
+  out = out.replace(/&quot;/g, '"').replace(/&amp;/g, '&');
+  return out.trim();
 }
 
 function textToHtml(raw){
@@ -214,7 +294,7 @@ function textToHtml(raw){
 
   function flushParagraph(){
     if(buffer.length){
-      html += `<p>${buffer.join(' ')}</p>`;
+      html += `<p>${linkify(buffer.join(' '))}</p>`;
       buffer = [];
     }
   }
@@ -227,14 +307,14 @@ function textToHtml(raw){
     if(t === ''){ flushParagraph(); closeList(); continue; }
     if(t.startsWith('## ')){
       flushParagraph(); closeList();
-      html += `<h2>${t.slice(3)}</h2>`;
+      html += `<h2>${linkify(t.slice(3))}</h2>`;
     } else if(t.startsWith('- ')){
       flushParagraph();
       if(!inList){ html += '<ul>'; inList = true; }
-      html += `<li>${t.slice(2)}</li>`;
+      html += `<li>${linkify(t.slice(2))}</li>`;
     } else if(t.startsWith('> ')){
       flushParagraph(); closeList();
-      html += `<blockquote>${t.slice(2)}</blockquote>`;
+      html += `<blockquote>${linkify(t.slice(2))}</blockquote>`;
     } else {
       buffer.push(t);
     }
@@ -280,6 +360,17 @@ document.getElementById('title').addEventListener('input', (e) => {
 });
 document.getElementById('slug').addEventListener('input', (e) => { e.target.dataset.touched = '1'; });
 
+document.getElementById('featuredImage').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  const preview = document.getElementById('imagePreview');
+  if(file){
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = 'block';
+  } else {
+    preview.style.display = 'none';
+  }
+});
+
 document.getElementById('publishBtn').addEventListener('click', async () => {
   const title = document.getElementById('title').value.trim();
   const category = document.getElementById('category').value.trim();
@@ -289,6 +380,7 @@ document.getElementById('publishBtn').addEventListener('click', async () => {
   const excerpt = document.getElementById('excerpt').value.trim();
   const bodyRaw = document.getElementById('body').value.trim();
   const featured = document.getElementById('featured').checked;
+  const imageFile = document.getElementById('featuredImage').files[0];
 
   if(!title || !category || !excerpt || !bodyRaw){
     showStatus(publishStatus, 'Title, category, excerpt, and body are all required.', 'err');
@@ -302,37 +394,117 @@ document.getElementById('publishBtn').addEventListener('click', async () => {
 
   try{
     const { posts, sha } = await fetchPosts();
-    if(posts.some(p => p.slug === slug)){
+    const existingIndex = posts.findIndex(p => p.slug === slug);
+
+    if(!editingSlug && existingIndex !== -1){
       throw new Error(`A post with slug "${slug}" already exists. Choose a different slug.`);
     }
+    if(editingSlug && editingSlug !== slug){
+      throw new Error('Slug should not change while editing. Reload the post and try again.');
+    }
+
+    // Keep the previous image unless a new file was chosen.
+    let imagePath = (editingSlug && posts[existingIndex] && posts[existingIndex].image) || '';
+    if(imageFile){
+      showStatus(publishStatus, 'Uploading image…', 'loading');
+      imagePath = await uploadImage(slug, imageFile);
+    }
+
     if(featured){
       posts.forEach(p => p.featured = false);
     }
-    const newPost = {
+
+    let bodyHtml = textToHtml(bodyRaw);
+    if(imagePath){
+      bodyHtml = `<img src="${imagePath}" alt="${title.replace(/"/g,'&quot;')}" style="width:100%;max-width:100%;border-radius:14px;margin:0 0 24px;">` + bodyHtml;
+    }
+
+    const postData = {
       slug, category, emoji,
       title,
-      date: new Date().toISOString().slice(0,10),
+      date: (editingSlug && posts[existingIndex] && posts[existingIndex].date) || new Date().toISOString().slice(0,10),
       readTime,
       author: 'Study Compass Team',
       featured,
       excerpt,
-      bodyHtml: textToHtml(bodyRaw)
+      image: imagePath,
+      bodyRaw,
+      bodyHtml
     };
-    posts.unshift(newPost);
-    await savePosts(posts, sha, `Add post: ${title}`);
-    showStatus(publishStatus, `Published ✓ — live in ~1 min once GitHub Pages rebuilds.`, 'ok');
-    ['title','category','emoji','readTime','slug','excerpt','body'].forEach(id => {
-      const el = document.getElementById(id);
-      el.value = '';
-      delete el.dataset.touched;
-    });
-    document.getElementById('featured').checked = false;
+
+    showStatus(publishStatus, 'Saving post…', 'loading');
+    if(editingSlug){
+      posts[existingIndex] = postData;
+    } else {
+      posts.unshift(postData);
+    }
+    await savePosts(posts, sha, editingSlug ? `Update post: ${title}` : `Add post: ${title}`);
+    showStatus(publishStatus, `${editingSlug ? 'Updated' : 'Published'} ✓ — live in ~1 min once the site rebuilds.`, 'ok');
+    exitEditMode();
     loadPostList();
   }catch(e){
     showStatus(publishStatus, e.message, 'err');
   }finally{
     btn.disabled = false;
   }
+});
+
+function exitEditMode(){
+  editingSlug = null;
+  document.getElementById('formHeading').textContent = 'New post';
+  document.getElementById('publishBtn').textContent = 'Publish post';
+  document.getElementById('cancelEditBtn').style.display = 'none';
+  document.getElementById('slug').disabled = false;
+  document.getElementById('slugLockHint').style.display = 'none';
+  ['title','category','emoji','readTime','slug','excerpt','body'].forEach(id => {
+    const el = document.getElementById(id);
+    el.value = '';
+    delete el.dataset.touched;
+  });
+  document.getElementById('featured').checked = false;
+  document.getElementById('featuredImage').value = '';
+  document.getElementById('imagePreview').style.display = 'none';
+}
+
+function enterEditMode(post){
+  editingSlug = post.slug;
+  document.getElementById('formHeading').textContent = `Editing: ${post.title}`;
+  document.getElementById('publishBtn').textContent = 'Update post';
+  document.getElementById('cancelEditBtn').style.display = 'block';
+
+  document.getElementById('title').value = post.title || '';
+  document.getElementById('category').value = post.category || '';
+  document.getElementById('emoji').value = post.emoji || '';
+  document.getElementById('readTime').value = post.readTime || '';
+  document.getElementById('slug').value = post.slug || '';
+  document.getElementById('slug').disabled = true;
+  document.getElementById('slugLockHint').style.display = 'block';
+  document.getElementById('excerpt').value = post.excerpt || '';
+  document.getElementById('featured').checked = !!post.featured;
+
+  const bodyField = document.getElementById('body');
+  if(post.bodyRaw){
+    bodyField.value = post.bodyRaw;
+  } else {
+    bodyField.value = htmlToPlainFallback(post.bodyHtml || '');
+    showStatus(publishStatus, 'This post was published before raw text was saved — double-check formatting and links below before updating.', 'loading');
+  }
+
+  const preview = document.getElementById('imagePreview');
+  if(post.image){
+    preview.src = post.image;
+    preview.style.display = 'block';
+  } else {
+    preview.style.display = 'none';
+  }
+  document.getElementById('featuredImage').value = '';
+
+  window.scrollTo({ top: formCard.offsetTop - 20, behavior: 'smooth' });
+}
+
+document.getElementById('cancelEditBtn').addEventListener('click', () => {
+  exitEditMode();
+  showStatus(publishStatus, 'Edit cancelled.', 'ok');
 });
 
 async function loadPostList(){
@@ -345,10 +517,24 @@ async function loadPostList(){
       const row = document.createElement('div');
       row.className = 'post-item';
       row.innerHTML = `<span>${p.emoji} ${p.title} ${p.featured ? '⭐' : ''}</span>`;
+
+      const actions = document.createElement('div');
+      actions.style.display = 'flex';
+      actions.style.gap = '6px';
+
+      const editBtn = document.createElement('button');
+      editBtn.textContent = 'Edit';
+      editBtn.style.color = 'var(--moss)';
+      editBtn.style.borderColor = '#C7D2C2';
+      editBtn.addEventListener('click', () => enterEditMode(p));
+
       const delBtn = document.createElement('button');
       delBtn.textContent = 'Delete';
       delBtn.addEventListener('click', () => deletePost(p.slug));
-      row.appendChild(delBtn);
+
+      actions.appendChild(editBtn);
+      actions.appendChild(delBtn);
+      row.appendChild(actions);
       listEl.appendChild(row);
     });
   }catch(e){
