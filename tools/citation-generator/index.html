@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Citation Generator — Study Compass</title>
+<style>
+  :root{
+    --cream:#FBF6EE;
+    --card:#FFFFFF;
+    --ink:#2B2420;
+    --ink-soft:#6B6259;
+    --accent:#C05B2E;
+    --accent-dark:#9C4A24;
+    --accent-soft:#F3E3D6;
+    --border:#EFE4D6;
+    --ring:#C05B2E33;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+    line-height:1.6;
+  }
+  a{color:var(--accent-dark);}
+  .wrap{max-width:760px;margin:0 auto;padding:28px 20px 80px;}
+
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--accent-dark);
+    background:var(--accent-soft);
+    padding:4px 10px;
+    border-radius:999px;
+    margin-bottom:14px;
+  }
+  h1{font-size:32px;margin:0 0 10px;letter-spacing:-.01em;}
+  .lede{color:var(--ink-soft);font-size:16px;margin:0 0 28px;max-width:60ch;}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:22px;
+    margin-bottom:22px;
+  }
+
+  .styletabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
+  .styletab{
+    flex:1;
+    min-width:90px;
+    text-align:center;
+    padding:10px 12px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:var(--cream);
+    color:var(--ink-soft);
+    font-weight:600;
+    font-size:14px;
+    cursor:pointer;
+    transition:.15s ease;
+  }
+  .styletab.active{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#fff;
+  }
+
+  label{
+    display:block;
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--ink-soft);
+    margin:14px 0 6px;
+  }
+  label:first-of-type{margin-top:0;}
+  select, input[type=text], input[type=number]{
+    width:100%;
+    padding:11px 12px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    background:#fff;
+    font-size:15px;
+    color:var(--ink);
+    font-family:inherit;
+  }
+  select:focus, input:focus{
+    outline:none;
+    border-color:var(--accent);
+    box-shadow:0 0 0 4px var(--ring);
+  }
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:4px;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media (max-width:480px){.row2{grid-template-columns:1fr;}}
+
+  .authors-list .author-row{
+    display:flex;
+    gap:8px;
+    margin-bottom:8px;
+  }
+  .author-row input{flex:1;}
+  .icon-btn{
+    border:1px solid var(--border);
+    background:#fff;
+    border-radius:10px;
+    width:42px;
+    flex-shrink:0;
+    cursor:pointer;
+    font-size:16px;
+    color:var(--ink-soft);
+  }
+  .icon-btn:hover{background:var(--accent-soft);color:var(--accent-dark);}
+  .add-author{
+    background:none;
+    border:1px dashed var(--border);
+    color:var(--accent-dark);
+    border-radius:10px;
+    padding:8px 12px;
+    font-size:13.5px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:2px;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    padding:13px 20px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:18px;
+  }
+  .btn:hover{background:var(--accent-dark);}
+  .btn.secondary{
+    background:#fff;
+    color:var(--ink);
+    border:1px solid var(--border);
+  }
+  .btn.secondary:hover{background:var(--accent-soft);}
+
+  .output-card{display:none;}
+  .output-card.show{display:block;}
+  .output-list{list-style:none;margin:0;padding:0;}
+  .output-item{
+    border-bottom:1px solid var(--border);
+    padding:14px 0;
+  }
+  .output-item:last-child{border-bottom:none;}
+  .output-text{
+    font-size:15px;
+    line-height:1.7;
+    padding-left:2.4em;
+    text-indent:-2.4em;
+  }
+  .output-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+  }
+  .copy-btn{
+    flex-shrink:0;
+    background:var(--accent-soft);
+    color:var(--accent-dark);
+    border:none;
+    border-radius:8px;
+    padding:6px 10px;
+    font-size:12.5px;
+    font-weight:700;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .copy-btn:hover{background:var(--accent);color:#fff;}
+  .copy-btn.copied{background:#3f7a4a;color:#fff;}
+  .del-btn{
+    flex-shrink:0;
+    background:none;
+    color:var(--ink-soft);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:6px 10px;
+    font-size:12.5px;
+    font-weight:700;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .del-btn:hover{background:#f4dad1;color:#a5341a;border-color:#f4dad1;}
+  .output-actions{display:flex;gap:6px;}
+
+  .empty-note{color:var(--ink-soft);font-size:14px;text-align:center;padding:6px 0 2px;}
+
+  article h2{font-size:22px;margin:34px 0 10px;}
+  article h3{font-size:18px;margin:26px 0 8px;}
+  article p{color:#3d362f;font-size:15.5px;}
+  article ul{padding-left:20px;color:#3d362f;font-size:15.5px;}
+  article li{margin-bottom:6px;}
+
+  .back-link{
+    display:inline-block;
+    margin-bottom:18px;
+    color:var(--ink-soft);
+    text-decoration:none;
+    font-size:14px;
+  }
+  .back-link:hover{color:var(--accent-dark);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="/">← Back to Home</a>
+  <span class="eyebrow">Free Study Tool</span>
+  <h1>Citation Generator</h1>
+  <p class="lede">Fill in a source once, get a properly formatted citation in APA, MLA, or Chicago style. Build a running list, copy each one, or copy them all at the end. No sign-up, nothing saved to a server.</p>
+
+  <div class="card">
+    <div class="styletabs" role="tablist" aria-label="Citation style">
+      <div class="styletab active" data-style="apa">APA 7</div>
+      <div class="styletab" data-style="mla">MLA 9</div>
+      <div class="styletab" data-style="chicago">Chicago</div>
+    </div>
+
+    <label for="sourceType">Source type</label>
+    <select id="sourceType">
+      <option value="website">Website / Webpage</option>
+      <option value="book">Book</option>
+      <option value="journal">Journal Article</option>
+      <option value="video">Online Video</option>
+    </select>
+
+    <label>Author(s)</label>
+    <div class="authors-list" id="authorsList"></div>
+    <button type="button" class="add-author" id="addAuthor">+ Add another author</button>
+    <p class="hint" id="authorHint">Enter as: Last name, First name. Leave blank if there's no listed author.</p>
+
+    <label for="title">Title</label>
+    <input type="text" id="title" placeholder="e.g., Understanding photosynthesis in plants">
+
+    <div id="siteFields">
+      <div class="row2">
+        <div>
+          <label for="siteName">Site / publisher name</label>
+          <input type="text" id="siteName" placeholder="e.g., National Geographic">
+        </div>
+        <div>
+          <label for="pubDate">Publication date</label>
+          <input type="text" id="pubDate" placeholder="e.g., 2024, March 12">
+        </div>
+      </div>
+      <label for="url">URL</label>
+      <input type="text" id="url" placeholder="https://...">
+      <div class="row2">
+        <div>
+          <label for="accessDate">Date you accessed it</label>
+          <input type="text" id="accessDate" placeholder="e.g., 22 July 2026">
+        </div>
+        <div></div>
+      </div>
+    </div>
+
+    <div id="bookFields" style="display:none;">
+      <div class="row2">
+        <div>
+          <label for="publisher">Publisher</label>
+          <input type="text" id="publisher" placeholder="e.g., Penguin Books">
+        </div>
+        <div>
+          <label for="year">Year published</label>
+          <input type="text" id="year" placeholder="e.g., 2019">
+        </div>
+      </div>
+      <label for="edition">Edition (optional)</label>
+      <input type="text" id="edition" placeholder="e.g., 3rd ed.">
+    </div>
+
+    <div id="journalFields" style="display:none;">
+      <label for="journalName">Journal name</label>
+      <input type="text" id="journalName" placeholder="e.g., Journal of Cognitive Psychology">
+      <div class="row2">
+        <div>
+          <label for="volume">Volume</label>
+          <input type="text" id="volume" placeholder="e.g., 12">
+        </div>
+        <div>
+          <label for="issue">Issue</label>
+          <input type="text" id="issue" placeholder="e.g., 3">
+        </div>
+      </div>
+      <div class="row2">
+        <div>
+          <label for="pages">Page range</label>
+          <input type="text" id="pages" placeholder="e.g., 45-60">
+        </div>
+        <div>
+          <label for="jYear">Year published</label>
+          <input type="text" id="jYear" placeholder="e.g., 2021">
+        </div>
+      </div>
+      <label for="doi">DOI or URL (optional)</label>
+      <input type="text" id="doi" placeholder="https://doi.org/...">
+    </div>
+
+    <div id="videoFields" style="display:none;">
+      <div class="row2">
+        <div>
+          <label for="channel">Channel / uploader</label>
+          <input type="text" id="channel" placeholder="e.g., CrashCourse">
+        </div>
+        <div>
+          <label for="vDate">Upload date</label>
+          <input type="text" id="vDate" placeholder="e.g., 2020, May 4">
+        </div>
+      </div>
+      <label for="vUrl">Video URL</label>
+      <input type="text" id="vUrl" placeholder="https://...">
+    </div>
+
+    <button class="btn" id="generateBtn">Add citation</button>
+  </div>
+
+  <div class="card output-card" id="outputCard">
+    <div class="output-row" style="margin-bottom:10px;">
+      <strong>Your citations</strong>
+      <div style="display:flex;gap:8px;">
+        <button class="btn secondary copy-btn" id="copyAllBtn" style="margin:0;">Copy all</button>
+        <button class="btn secondary copy-btn" id="exportBtn" style="margin:0;">Export list</button>
+      </div>
+    </div>
+    <ul class="output-list" id="outputList"></ul>
+  </div>
+
+  <div class="card output-card show" id="emptyCard">
+    <p class="empty-note">Your generated citations will appear here — add your first source above.</p>
+  </div>
+
+  <article>
+    <h2>Why Citation Style Actually Matters</h2>
+    <p>Every citation style exists to answer the same two questions for a reader: where did this claim come from, and could I find it myself? APA, MLA, and Chicago answer those questions in different orders because they were built for different disciplines with different habits — APA for the sciences and social sciences, where the publication date signals how current the research is; MLA for the humanities, where the author's voice and the work itself matter more than when it was published; and Chicago for history and some social sciences, where footnotes let writers cite extensively without breaking up the prose.</p>
+
+    <h3>APA (American Psychological Association)</h3>
+    <p>APA style puts the author's last name and the publication year right up front, both in the reference list and in-text. That's not an accident — in fields where a five-year-old study can be considered outdated, readers want to know how recent a source is before they even get to the title. If your professor mentions "date-focused" citations or you're writing for psychology, education, nursing, or business, you're almost certainly using APA.</p>
+
+    <h3>MLA (Modern Language Association)</h3>
+    <p>MLA leads with the author's name and the title of the work, and treats the publication date as secondary information tucked toward the end. This reflects the humanities' focus on the text itself — a 1920s novel isn't "outdated" the way a 1920s psychology study would be, so MLA doesn't need to foreground when something was published. English, literature, and language courses almost always require MLA.</p>
+
+    <h3>Chicago (Notes-Bibliography or Author-Date)</h3>
+    <p>Chicago style actually comes in two systems: Notes-Bibliography, which uses numbered footnotes so historians can cite dozens of primary sources without cluttering a paragraph, and Author-Date, which looks closer to APA and is common in the sciences. If your assignment just says "Chicago style" without specifying, ask your instructor which system they want — it changes the format significantly.</p>
+
+    <h2>Common Citation Mistakes That Cost Points</h2>
+    <ul>
+      <li><strong>Mixing styles within one paper:</strong> Using an APA in-text citation with an MLA-formatted reference list confuses readers and reads as careless, even when each citation is individually correct.</li>
+      <li><strong>Forgetting the access date for web sources:</strong> Online content changes or disappears. MLA in particular expects an access date because the page you cited today might read differently tomorrow.</li>
+      <li><strong>Alphabetizing incorrectly:</strong> Reference lists are alphabetized by the author's last name, not the title — a frequent slip when a source has no clear author and gets sorted by its first word instead of skipping articles like "The" or "A."</li>
+      <li><strong>Citing a source you didn't actually read:</strong> If you found a quote inside another paper, that's a secondary source and needs to be cited as such ("as cited in..."), not presented as if you read the original directly.</li>
+    </ul>
+  </article>
+
+</div>
+
+<script>
+(function(){
+  const state = { authors: [''] };
+  let citations = []; // { text, sortKey }
+
+  const authorsList = document.getElementById('authorsList');
+  const addAuthorBtn = document.getElementById('addAuthor');
+  const sourceType = document.getElementById('sourceType');
+  const styletabs = document.querySelectorAll('.styletab');
+  const fieldGroups = {
+    website: document.getElementById('siteFields'),
+    book: document.getElementById('bookFields'),
+    journal: document.getElementById('journalFields'),
+    video: document.getElementById('videoFields')
+  };
+  const outputCard = document.getElementById('outputCard');
+  const emptyCard = document.getElementById('emptyCard');
+  const outputList = document.getElementById('outputList');
+
+  let currentStyle = 'apa';
+
+  function renderAuthors(){
+    authorsList.innerHTML = '';
+    state.authors.forEach((val, i) => {
+      const row = document.createElement('div');
+      row.className = 'author-row';
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Last name, First name';
+      input.value = val;
+      input.addEventListener('input', e => { state.authors[i] = e.target.value; });
+      row.appendChild(input);
+      if (state.authors.length > 1){
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'icon-btn';
+        removeBtn.textContent = '×';
+        removeBtn.addEventListener('click', () => {
+          state.authors.splice(i,1);
+          renderAuthors();
+        });
+        row.appendChild(removeBtn);
+      }
+      authorsList.appendChild(row);
+    });
+  }
+  addAuthorBtn.addEventListener('click', () => {
+    state.authors.push('');
+    renderAuthors();
+  });
+  renderAuthors();
+
+  function showFields(type){
+    Object.keys(fieldGroups).forEach(k => {
+      fieldGroups[k].style.display = (k === type) ? 'block' : 'none';
+    });
+  }
+  sourceType.addEventListener('change', e => showFields(e.target.value));
+  showFields('website');
+
+  styletabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      styletabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentStyle = tab.dataset.style;
+    });
+  });
+
+  function val(id){ return document.getElementById(id).value.trim(); }
+
+  function splitName(full){
+    // returns {last, first}
+    if (full.indexOf(',') > -1){
+      const parts = full.split(',');
+      return { last: parts[0].trim(), first: (parts[1]||'').trim() };
+    }
+    const parts = full.trim().split(' ');
+    if (parts.length === 1) return { last: parts[0], first: '' };
+    const last = parts.pop();
+    return { last, first: parts.join(' ') };
+  }
+
+  function initials(first){
+    return first.split(/\s+/).filter(Boolean).map(p => p[0].toUpperCase() + '.').join(' ');
+  }
+
+  function formatAuthorsAPA(authors){
+    if (!authors.length) return '';
+    const parts = authors.map(a => {
+      const {last, first} = splitName(a);
+      return first ? `${last}, ${initials(first)}` : last;
+    });
+    if (parts.length === 1) return parts[0] + '.';
+    if (parts.length === 2) return parts[0] + ', & ' + parts[1] + '.';
+    return parts.slice(0,-1).join(', ') + ', & ' + parts[parts.length-1] + '.';
+  }
+
+  function formatAuthorsMLA(authors){
+    if (!authors.length) return '';
+    const first = splitName(authors[0]);
+    let out = first.first ? `${first.last}, ${first.first}` : first.last;
+    if (authors.length === 2){
+      const second = splitName(authors[1]);
+      out += `, and ${second.first} ${second.last}`;
+    } else if (authors.length > 2){
+      out += ', et al';
+    }
+    return out + '.';
+  }
+
+  function formatAuthorsChicago(authors){
+    if (!authors.length) return '';
+    const first = splitName(authors[0]);
+    let out = first.first ? `${first.last}, ${first.first}` : first.last;
+    if (authors.length === 2){
+      const second = splitName(authors[1]);
+      out += `, and ${second.first} ${second.last}`;
+    } else if (authors.length > 2){
+      out += ', et al';
+    }
+    return out + '.';
+  }
+
+  function currentSortKey(){
+    const authors = state.authors.map(a => a.trim()).filter(Boolean);
+    const title = val('title');
+    if (authors.length) return splitName(authors[0]).last.toLowerCase();
+    return title.replace(/^(the|a|an)\s+/i,'').toLowerCase();
+  }
+
+  function buildCitation(style){
+    const type = sourceType.value;
+    const authors = state.authors.map(a => a.trim()).filter(Boolean);
+    const title = val('title');
+
+    if (type === 'website'){
+      const siteName = val('siteName');
+      const pubDate = val('pubDate');
+      const url = val('url');
+      const accessDate = val('accessDate');
+
+      if (style === 'apa'){
+        const a = authors.length ? formatAuthorsAPA(authors) + ' ' : '';
+        return `${a}(${pubDate || 'n.d.'}). ${title}. ${siteName ? siteName + '. ' : ''}${url}`;
+      }
+      if (style === 'mla'){
+        const a = authors.length ? formatAuthorsMLA(authors) + ' ' : '';
+        return `${a}"${title}." ${siteName ? siteName + ', ' : ''}${pubDate ? pubDate + ', ' : ''}${url}${accessDate ? '. Accessed ' + accessDate : ''}.`;
+      }
+      // chicago
+      const a = authors.length ? formatAuthorsChicago(authors) + ' ' : '';
+      return `${a}"${title}." ${siteName ? siteName + '. ' : ''}${pubDate ? 'Last modified ' + pubDate + '. ' : ''}${url}.`;
+    }
+
+    if (type === 'book'){
+      const publisher = val('publisher');
+      const year = val('year');
+      const edition = val('edition');
+
+      if (style === 'apa'){
+        const a = authors.length ? formatAuthorsAPA(authors) + ' ' : '';
+        return `${a}(${year || 'n.d.'}). ${title}${edition ? ' (' + edition + ')' : ''}. ${publisher}.`;
+      }
+      if (style === 'mla'){
+        const a = authors.length ? formatAuthorsMLA(authors) + ' ' : '';
+        return `${a}${title}${edition ? ', ' + edition : ''}. ${publisher}, ${year}.`;
+      }
+      const a = authors.length ? formatAuthorsChicago(authors) + ' ' : '';
+      return `${a}${title}${edition ? ', ' + edition : ''}. ${publisher}, ${year}.`;
+    }
+
+    if (type === 'journal'){
+      const journalName = val('journalName');
+      const volume = val('volume');
+      const issue = val('issue');
+      const pages = val('pages');
+      const jYear = val('jYear');
+      const doi = val('doi');
+
+      if (style === 'apa'){
+        const a = authors.length ? formatAuthorsAPA(authors) + ' ' : '';
+        return `${a}(${jYear || 'n.d.'}). ${title}. ${journalName}${volume ? ', ' + volume : ''}${issue ? '(' + issue + ')' : ''}${pages ? ', ' + pages : ''}.${doi ? ' ' + doi : ''}`;
+      }
+      if (style === 'mla'){
+        const a = authors.length ? formatAuthorsMLA(authors) + ' ' : '';
+        return `${a}"${title}." ${journalName}${volume ? ', vol. ' + volume : ''}${issue ? ', no. ' + issue : ''}${jYear ? ', ' + jYear : ''}${pages ? ', pp. ' + pages : ''}.${doi ? ' ' + doi + '.' : ''}`;
+      }
+      const a = authors.length ? formatAuthorsChicago(authors) + ' ' : '';
+      return `${a}"${title}." ${journalName}${volume ? ' ' + volume : ''}${issue ? ', no. ' + issue : ''}${jYear ? ' (' + jYear + ')' : ''}${pages ? ': ' + pages : ''}.${doi ? ' ' + doi + '.' : ''}`;
+    }
+
+    if (type === 'video'){
+      const channel = val('channel');
+      const vDate = val('vDate');
+      const vUrl = val('vUrl');
+
+      if (style === 'apa'){
+        const a = authors.length ? formatAuthorsAPA(authors) + ' ' : (channel ? channel + '. ' : '');
+        return `${a}(${vDate || 'n.d.'}). ${title} [Video]. ${channel ? channel + '. ' : ''}${vUrl}`;
+      }
+      if (style === 'mla'){
+        return `"${title}." YouTube, uploaded by ${channel || 'unknown'}, ${vDate || 'n.d.'}, ${vUrl}.`;
+      }
+      return `${channel ? channel + '. ' : ''}"${title}." Video${vDate ? ', ' + vDate : ''}. ${vUrl}.`;
+    }
+    return '';
+  }
+
+  function refreshEmptyState(){
+    if (citations.length === 0){
+      outputCard.classList.remove('show');
+      emptyCard.classList.add('show');
+    } else {
+      outputCard.classList.add('show');
+      emptyCard.classList.remove('show');
+    }
+  }
+
+  function renderOutput(){
+    outputList.innerHTML = '';
+    citations.forEach((c, i) => {
+      const li = document.createElement('li');
+      li.className = 'output-item';
+      const row = document.createElement('div');
+      row.className = 'output-row';
+      const text = document.createElement('div');
+      text.className = 'output-text';
+      text.textContent = c.text;
+
+      const actions = document.createElement('div');
+      actions.className = 'output-actions';
+
+      const btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.textContent = 'Copy';
+      btn.addEventListener('click', () => {
+        navigator.clipboard.writeText(c.text).then(() => {
+          btn.textContent = 'Copied';
+          btn.classList.add('copied');
+          setTimeout(() => { btn.textContent='Copy'; btn.classList.remove('copied'); }, 1500);
+        });
+      });
+
+      const delBtn = document.createElement('button');
+      delBtn.className = 'del-btn';
+      delBtn.textContent = 'Delete';
+      delBtn.addEventListener('click', () => {
+        citations.splice(i,1);
+        renderOutput();
+      });
+
+      actions.appendChild(btn);
+      actions.appendChild(delBtn);
+      row.appendChild(text);
+      row.appendChild(actions);
+      li.appendChild(row);
+      outputList.appendChild(li);
+    });
+    refreshEmptyState();
+  }
+
+  document.getElementById('generateBtn').addEventListener('click', () => {
+    const citation = buildCitation(currentStyle);
+    if (!citation.replace(/[.\s]/g,'').length){
+      alert('Add at least a title before generating a citation.');
+      return;
+    }
+    citations.push({ text: citation, sortKey: currentSortKey(), style: currentStyle });
+    renderOutput();
+  });
+
+  document.getElementById('copyAllBtn').addEventListener('click', (e) => {
+    navigator.clipboard.writeText(citations.map(c => c.text).join('\n\n')).then(() => {
+      const btn = e.target;
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = orig; }, 1500);
+    });
+  });
+
+  function styleHeading(style){
+    if (style === 'apa') return 'References';
+    if (style === 'mla') return 'Works Cited';
+    return 'Bibliography';
+  }
+
+  document.getElementById('exportBtn').addEventListener('click', () => {
+    if (!citations.length) return;
+    const sorted = [...citations].sort((a,b) => a.sortKey.localeCompare(b.sortKey));
+    const heading = styleHeading(sorted[0].style);
+    const win = window.open('', '_blank');
+    const rows = sorted.map(c =>
+      `<p style="margin:0 0 14px;padding-left:2.4em;text-indent:-2.4em;">${c.text.replace(/</g,'&lt;')}</p>`
+    ).join('');
+    win.document.write(`
+      <!DOCTYPE html><html><head><title>${heading}</title>
+      <meta charset="UTF-8">
+      <style>
+        body{font-family:"Times New Roman",Times,serif;font-size:12pt;line-height:2;max-width:6.5in;margin:1in auto;color:#111;}
+        h1{font-size:12pt;text-align:center;font-weight:400;margin-bottom:24px;}
+        @media print{ body{margin:1in;} }
+      </style></head>
+      <body>
+        <h1>${heading}</h1>
+        ${rows}
+      </body></html>
+    `);
+    win.document.close();
+  });
+
+  refreshEmptyState();
+})();
+</script>
+</body>
+</html>
