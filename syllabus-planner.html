@@ -21,20 +21,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 
-  <link rel="canonical" href="https://study-compass.studycompass.workers.dev/syllabus-planner.html" />
+  <link rel="canonical" href="https://study-compass.pages.dev/syllabus-planner.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Study Compass" />
   <meta property="og:title" content="Syllabus to Calendar Converter — Never Miss a Deadline | Study Compass" />
   <meta property="og:description" content="Free Syllabus to Calendar Converter by Study Compass — paste your syllabus and instantly extract every exam, assignment, and reading deadline. Export straight to Google Calendar, Apple Calendar, or Outlook." />
-  <meta property="og:url" content="https://study-compass.studycompass.workers.dev/syllabus-planner.html" />
-  <meta property="og:image" content="https://study-compass.studycompass.workers.dev/og-images/syllabus-planner.png" />
+  <meta property="og:url" content="https://study-compass.pages.dev/syllabus-planner.html" />
+  <meta property="og:image" content="https://study-compass.pages.dev/og-images/syllabus-planner.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Syllabus to Calendar Converter — Never Miss a Deadline | Study Compass" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Syllabus to Calendar Converter — Never Miss a Deadline | Study Compass" />
   <meta name="twitter:description" content="Free Syllabus to Calendar Converter by Study Compass — paste your syllabus and instantly extract every exam, assignment, and reading deadline. Export straight to Google Calendar, Apple Calendar, or Outlook." />
-  <meta name="twitter:image" content="https://study-compass.studycompass.workers.dev/og-images/syllabus-planner.png" />
+  <meta name="twitter:image" content="https://study-compass.pages.dev/og-images/syllabus-planner.png" />
   <meta name="twitter:image:alt" content="Syllabus to Calendar Converter — Never Miss a Deadline | Study Compass" />
   <meta name="pinterest" content="nohover" />
 
@@ -767,7 +767,7 @@
           if (parts.length !== 3) return;
           const dateStr = parts[0] + parts[1] + parts[2];
           lines.push('BEGIN:VEVENT');
-          lines.push('UID:' + dateStr + '-' + i + '@study-compass.studycompass.workers.dev');
+          lines.push('UID:' + dateStr + '-' + i + '@study-compass.pages.dev');
           lines.push('DTSTAMP:' + stamp);
           lines.push('DTSTART;VALUE=DATE:' + dateStr);
           lines.push('SUMMARY:' + icsEscape('[' + ev.type + '] ' + ev.title));
